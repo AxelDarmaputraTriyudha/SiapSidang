@@ -51,33 +51,59 @@
         <select class="pembimbing2" id="pembimbingList" name="pembimbingList" required>
           <!-- Opsi Default -->
           <option value="" disabled selected>Pilih Nama Pembimbing</option>
-          <option th:each="pembimbing : ${pembimbingList}" 
-          th:value="${pembimbing.id_tpa}" 
-          th:text="${pembimbing.nama}"
-          th:selected="${pembimbing.id_tpa == tpaList}">
+          <option th:each="pb1 : ${pb1}" 
+          th:value="${pb1.nik}" 
+          th:text="${pb1.nama}"
+          th:selected="${pb1.nik == pb1}">
           </option>
         </select> 
         <div class="tempat2">Pembimbing</div>
       </div>
       <div class="anggota-pembimbing">
-        <input class="tempat3">
+        <select class="pembimbing3" id="angPembimbingList" name="angPembimbingList" required>
+          <!-- Opsi Default -->
+          <option value="" disabled selected>Pilih Nama Anggota Pembimbing</option>
+          <option value="-">-</option>
+          <option th:each="pb2 : ${pb2}" 
+          th:value="${pb2.nik}" 
+          th:text="${pb2.nama}"
+          th:selected="${pb2.nik == pb2}">
+          </option>
+        </select> 
         <div class="tempat4">Anggota Pembimbing</div>
       </div>
       <div class="ketua-penguji">
-        <div class="tempat5"></div>
+        <select class="penguji1" id="penguji1List" name="penguji1List" required>
+          <!-- Opsi Default -->
+          <option value="" disabled selected>Pilih Nama Ketua Penguji</option>
+          <option th:each="pu1 : ${pu1}" 
+          th:value="${pu1.nik}" 
+          th:text="${pu1.nama}"
+          th:selected="${pu1.nik == pu1}">
+          </option>
+        </select> 
         <div class="tempat6">Ketua Penguji</div>
       </div>
       <div class="anggota-penguji">
-        <div class="tempat7"></div>
+        <select class="penguji2" id="penguji2List" name="penguji2List" required>
+          <!-- Opsi Default -->
+          <option value="" disabled selected>Pilih Nama Ketua Penguji</option>
+          <option value="-">-</option>
+          <option th:each="pu2 : ${pu2}" 
+          th:value="${pu2.nik}" 
+          th:text="${pu2.nama}"
+          th:selected="${pu2.nik == pu2}">
+          </option>
+        </select> 
         <div class="tempat8">Anggota Penguji</div>
       </div>
       <div class="tombol">
         <a class="cancel" th:href="@{/koord/buatJadwal1}">
           <div class="cancel2">Cancel</div>
         </a>
-        <div class="next">
+        <a class="next" th:href="@{/koord/buatJadwal3}">
           <div class="log-in">Next</div>
-        </div>
+        </a>
       </div>
     </div>
     <div class="step-2-of-3">
