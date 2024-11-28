@@ -158,6 +158,11 @@
   height: 68px;
   position: static;
 }
+.container {
+  position: relative;
+  margin-bottom: 20px; /* Jarak antar frame */
+}
+
 .frame {
   background: #f7f5ed;
   border-radius: 5px;
@@ -166,33 +171,30 @@
   border-width: 0.86px;
   width: 736px;
   height: 59px;
-  position: relative;
   display: flex;
   justify-content: left;
   align-items: center;
 }
+
 .frame a {
   font-size: large;
   margin-top: 0;
   text-decoration: none;
   padding-left: 20px;
 }
+
 .judul {
   color: var(--general-color-2, #004e89);
   text-align: left;
   font-family: "SourceSansPro-SemiBold", sans-serif;
   font-size: 16px;
-  line-height: 8.63px;
   font-weight: 600;
   position: absolute;
   left: 23px;
-  top: -10px;
-  width: 150px;
-  height: 19px;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  background: 10px #f7f5ed;
+  top: -18px; /* Tingkatkan nilai negatif untuk menaikkan posisi */
+  background: #f7f5ed; /* Sesuaikan dengan warna frame */
+  padding: 0 5px; /* Tambahan padding agar rapi */
+  line-height: 1; /* Mengatur line-height agar teks tidak terlalu tinggi */
 }
 .nilai-2 {
   flex-shrink: 0;
