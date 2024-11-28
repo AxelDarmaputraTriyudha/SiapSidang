@@ -42,7 +42,7 @@
     <img class="group-36461" src="/css/koord/DetailJadwal/group-364610.svg" />
     <div class="box-nama-mahasiswa">
       <div class="rectangle-7">
-        <div class="isi">Hello World!</div>
+        <div class="isi" th:text="${data.nama}">Nama</div>
       </div>
       <div class="text"></div>
       <div class="rectangle-38"></div>
@@ -50,21 +50,21 @@
     </div>
     <div class="box-npm">
       <div class="rectangle-35">
-        <div class="isi">Hello World!</div>
+        <div class="isi" th:text="${data.npm}">NPM</div>
       </div>
       <div class="rectangle-39"></div>
       <div class="npm-mahasiswa">NPM Mahasiswa</div>
     </div>
     <div class="box-tanggal">
       <div class="rectangle-36">
-        <div class="isi">Hello World!</div>
+        <div class="isi" th:text="${data.tanggal}">Tanggal</div>
       </div>
       <div class="rectangle-40"></div>
       <div class="tanggal">Tanggal</div>
     </div>
     <div class="box-tempat">
       <div class="rectangle-37">
-        <div class="isi">Hello World!</div>
+        <div class="isi" th:text="${data.tempat}">Tempat</div>
       </div>
       <div class="rectangle-41"></div>
       <div class="tempat">Tempat</div>
@@ -72,28 +72,28 @@
     <img class="group-36462" src="/css/koord/DetailJadwal/group-364620.svg" />
     <div class="box-topik-sidang">
       <div class="rectangle-42">
-        <div class="isi">Hello World!</div>
+        <div class="isi" th:text="${data.judul}">Hello World!</div>
       </div>
       <div class="rectangle-46"></div>
       <div class="topik-sidang">Topik Sidang</div>
     </div>
     <div class="box-penguji-1">
       <div class="rectangle-43">
-        <div class="isi">Hello World!</div>
+        <div class="isi">Nama Penguji 1</div>
       </div>
       <div class="rectangle-47"></div>
       <div class="dosen-penguji-1">Dosen Penguji 1</div>
     </div>
     <div class="box-penguji-2">
       <div class="rectangle-44">
-        <div class="isi">Hello World!</div>
+        <div class="isi">Nama Penguji 2</div>
       </div>
       <div class="rectangle-50"></div>
       <div class="dosen-penguji-2">Dosen Penguji 2</div>
     </div>
     <div class="box-dosen-pembimbing">
       <div class="rectangle-45">
-        <div class="isi">Hello World!</div>
+        <div class="isi">Nama Pembimbing</div>
       </div>
       <div class="rectangle-51"></div>
       <div class="dosen-pembimbing">Dosen Pembimbing</div>
@@ -116,7 +116,8 @@
       <div class="manajemen-bap">Manajemen BAP</div>
     </div>
     <div class="detail-jadwal2">Detail Jadwal</div>
-    <img class="arrow-back" src="/css/koord/DetailJadwal/arrow-back0.svg" />
+    <button th:onclick="'window.location.href=\'/koord/home\''"><img class="arrow-back" src="/css/koord/DetailJadwal/arrow-back0.svg"/></button>
+    
   </div>
   
 </body>

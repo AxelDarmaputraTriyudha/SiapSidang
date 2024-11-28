@@ -1,4 +1,4 @@
-package com.RPL.SiapSidang.Koord.Home;
+package com.RPL.SiapSidang.Koord.DetailJadwal;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -8,14 +8,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-@Repository
-public class JDBCDataSidangImplementation {
-    @Autowired
-    private JdbcTemplate jdbcTemplate;
+import com.RPL.SiapSidang.Koord.Home.DataSidang;
 
-    public List<DataSidang> findAll(){
-        String sql = "SELECT * FROM data_sidang_view";
-        return jdbcTemplate.query(sql, this::mapRowToDataSidang);
+@Repository
+public class JDBCDetailJadwalImplementation {
+    @Autowired
+    JdbcTemplate jdbcTemplate;
+
+    public List<DataSidang> findData(String npm){
+        String sql = "SELECT * FROM data_sidang_view WHERE npm = ?";
+        return jdbcTemplate.query(sql, this::mapRowToDataSidang, npm);
     }
 
     private DataSidang mapRowToDataSidang(ResultSet resultSet, int rowNum) throws SQLException{
@@ -30,10 +32,5 @@ public class JDBCDataSidangImplementation {
             resultSet.getString("tanggal"),
             resultSet.getString("tempat")
         );
-    }
-    
-    public List<DataSidang> findWithFilter(String filter){
-        String sql = "SELECT * FROM data_sidang_view WHERE nama ILIKE ?";
-        return jdbcTemplate.query(sql, this::mapRowToDataSidang, "%"+filter+"%");
     }
 }
