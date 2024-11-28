@@ -22,10 +22,13 @@ public class JDBCDataSidangImplementation {
         return new DataSidang(
             resultSet.getString("jenis"),
             resultSet.getString("nama"),
+            resultSet.getString("judul"),
+            resultSet.getString("npm"),
             resultSet.getString("semester_akd"),
             resultSet.getInt("tahun_akd"),
             resultSet.getString("waktu"),
-            resultSet.getString("tanggal")
+            resultSet.getString("tanggal"),
+            resultSet.getString("tempat")
         );
     }
     
