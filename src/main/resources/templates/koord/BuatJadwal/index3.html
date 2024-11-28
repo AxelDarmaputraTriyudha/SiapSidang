@@ -54,24 +54,12 @@
     <img class="rectangle-2" src="/images/rectangle-20.svg"/>
     <div class="rectangle-3"></div>
     <div class="group-nilai">
-      <!-- <div class="nilai-1">
+      <div th:each="item : ${nilaiList}" class="container">
+        <div class="judul" th:text="${item.deskripsi}">Tata Tulis Laporan</div>
         <div class="frame">
-          <a>test</a>
+            <a th:text="${item.peran}">test</a> <!-- Contoh teks di frame -->
         </div>
-        <div class="judul">Pembimbing</div>
-      </div> -->
-      <div th:each="item : ${nilaiList}" class="nilai-1">
-        <div class="frame"></div> <!-- frame tetap, tidak berubah -->
-        <div class="judul" th:text="${item.deskripsi}">Pembimbing</div> <!-- Data dari database -->
     </div>
-      <!-- <div class="nilai-2">
-        <div class="frame2"></div>
-        <div class="judul2">Pembimbing</div>
-      </div>
-      <div class="nilai-3">
-        <div class="frame3"></div>
-        <div class="judul3">Pembimbing</div>
-      </div> -->
       <div class="tombol">
         <div class="cancel">
           <div class="cancel2">Cancel</div>
