@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="/css/koord/vars.css">
-  <link rel="stylesheet" href="/css/koord/style.css">
+  <link rel="stylesheet" href="/css/koord/Home/vars.css">
+  <link rel="stylesheet" href="/css/koord/Home/style.css">
   
   
   <style>
@@ -35,122 +35,84 @@
        padding: 0;
    }
    </style>
-   
-  <title>Document</title>
+
+  <title>Home page</title>
 </head>
 <body>
-  <div class="html-koord-home-jadwal-1-tabel">
-    <div class="footer">
-      <div class="line-16"></div>
-      <div class="rpl-b-3">RPL-B-3</div>
-    </div>
-    <div class="body">
-      <div class="feature-1">
-        <div class="frame-search">
-          <div class="search">Search...</div>
-        </div>
-        <div class="buttons">
-          <div class="button-2">
-            <div class="buat-jadwal">Buat Jadwal</div>
-          </div>
-          <div class="button-1">
-            <div class="buat-komponen">Buat Komponen</div>
-          </div>
-        </div>
-      </div>
-      <div class="feature-2">
-        <div class="frame-tanggal-awal">
-          <div class="tanggal-awal">Tanggal Awal</div>
-        </div>
-        <div class="frame-tanggal-akhir">
-          <div class="tanggal-akhir">Tanggal Akhir</div>
-        </div>
-        <div class="frame-semester">
-          <div class="dropdown">Dropdown Semester</div>
-        </div>
-        <div class="frame-tahun">
-          <div class="dropdown">Dropdown Tahun</div>
-        </div>
-      </div>
-      <div class="list-jadwal">
-        <div class="header">
-          <div class="no">No</div>
-          <div class="jenis-sidang">Jenis Sidang</div>
-          <div class="mahasiswa">Mahasiswa</div>
-          <div class="semester">Semester</div>
-          <div class="tahun-ajaran">Tahun Ajaran</div>
-          <div class="waktu">Waktu Sidang</div>
-          <div class="tanggal">Tanggal Sidang</div>
-          <div class="detail">Detail</div>
-        </div>
-        <div class="sidang-1">
-          <div class="no2">1</div>
-          <div class="jenis-sidang2">Sidang TA 1</div>
-          <div class="mahasiswa2">Edward Cullen</div>
-          <div class="semester2">Ganjil</div>
-          <div class="tahun-ajaran2">2024/2025</div>
-          <div class="waktu-sidang">10.00-12.00</div>
-          <div class="tanggal-sidang">17 Desember 2024</div>
-          <div class="button">
-            <div class="lihat-detail">Lihat Detail</div>
-          </div>
-        </div>
-        <div class="sidang-2">
-          <div class="no2">2</div>
-          <div class="jenis-sidang2">Sidang TA 1</div>
-          <div class="mahasiswa2">Indrawan Darma</div>
-          <div class="semester2">Ganjil</div>
-          <div class="tahun-ajaran2">2024/2025</div>
-          <div class="waktu-sidang">10.00-12.00</div>
-          <div class="tanggal-sidang">17 Desember 2024</div>
-          <div class="button">
-            <div class="lihat-detail">Lihat Detail</div>
-          </div>
-        </div>
-        <div class="sidang-3">
-          <div class="no2">3</div>
-          <div class="jenis-sidang2">Sidang TA 1</div>
-          <div class="mahasiswa2">Azahra Agatha</div>
-          <div class="semester2">Ganjil</div>
-          <div class="tahun-ajaran2">2024/2025</div>
-          <div class="waktu-sidang">10.00-12.00</div>
-          <div class="tanggal-sidang">17 Desember 2024</div>
-          <div class="button">
-            <div class="lihat-detail">Lihat Detail</div>
-          </div>
-        </div>
-        <div class="sidang-4">
-          <div class="no2">4</div>
-          <div class="jenis-sidang2">Sidang TA 1</div>
-          <div class="mahasiswa2">Vevila Tasya</div>
-          <div class="semester2">Ganjil</div>
-          <div class="tahun-ajaran2">2024/2025</div>
-          <div class="waktu-sidang">10.00-12.00</div>
-          <div class="tanggal-sidang">17 Desember 2024</div>
-          <div class="button">
-            <div class="lihat-detail">Lihat Detail</div>
-          </div>
-        </div>
-        <div class="sidang-5">
-          <div class="no2">5</div>
-          <div class="jenis-sidang2">Sidang TA 1</div>
-          <div class="mahasiswa2">Anna Acha</div>
-          <div class="semester2">Ganjil</div>
-          <div class="tahun-ajaran2">2024/2025</div>
-          <div class="waktu-sidang">10.00-12.00</div>
-          <div class="tanggal-sidang">17 Desember 2024</div>
-          <div class="button">
-            <div class="lihat-detail">Lihat Detail</div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="navbar">
-      <img class="logo" src="logo0.svg" />
-      <div class="siap-sidang">SIAP Sidang</div>
-      <img class="log-out" src="log-out0.svg" />
-    </div>
+  <div class="navbar">
+    <img class="logo" src="/css/koord/Home/logo0.svg" />
+    <div class="siap-sidang">SIAP Sidang</div>
+    <img class="log-out" src="/css/koord/Home/log-out0.svg" />
   </div>
+  <div class="body">
+    <div class="feature-1">
+      <div class="frame-search">
+        <div class="search">
+          <form action="GET" th:action="@{/koord/home}">
+            <input type="text" name="filter" id="search-mhs" th:value="${filter}" placeholder="Masukkan nama mahasiswa">
+          </form>
+        </div>
+      </div>
+      <div class="buttons">
+        <div class="button-2">
+          <div class="buat-jadwal">Buat Jadwal</div>
+        </div>
+        <div class="button-1">
+          <div class="buat-komponen">Buat Komponen</div>
+        </div>
+      </div>
+    </div>
+    <div class="feature-2">
+      <div class="frame-tanggal-awal">
+        <div class="tanggal-awal">Tanggal Awal</div>
+      </div>
+      <div class="frame-tanggal-akhir">
+        <div class="tanggal-akhir">Tanggal Akhir</div>
+      </div>
+      <div class="frame-semester">
+        <div class="dropdown">Dropdown Semester</div>
+      </div>
+      <div class="frame-tahun">
+        <div class="dropdown">Dropdown Tahun</div>
+      </div>
+    </div>
+    <table id="daftar-sidang">
+      <thead>
+        <th>Nomor</th>
+        <th>Jenis Sidang</th>
+        <th>Mahasiswa</th>
+        <th>Semester</th>
+        <th>Tahun Ajaran</th>
+        <th>Waktu Sidang</th>
+        <th>Tanggal Sidang</th>
+        <th>Detail</th>
+      </thead>
+      <tbody th:each="sidang, stat : ${sidang}">
+        <td th:text="${stat.index + 1}"></td>
+        <td th:text="${sidang.jenis}"></td>
+        <td th:text="${sidang.nama}"></td>
+        <td th:text="${sidang.semester}"></td>
+        <td th:text="${sidang.tahun}"></td>
+        <td th:text="${sidang.waktu}"></td>
+        <td th:text="${sidang.tanggal}"></td>
+        <td><button id="detail-jadwal">Lihat detail</button></td>
+      </tbody>
+    </table>
+
+    <footer>
+      <div class="line-16"></div>
+      <p>RPL-B-3</p>
+    </footer>
+
+    <!-- <div class="footer">
+
+    </div> -->
+  </div>
+
+  
+
+  <!-- <div class="html-koord-home-jadwal-1-tabel">
+  </div> -->
   
 </body>
 </html>

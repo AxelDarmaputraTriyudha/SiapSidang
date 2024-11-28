@@ -1,3 +1,9 @@
+html,body{
+  /* height: 100%;
+  width: 100%; */
+  font-family: "Poppins-Regular", sans-serif;
+}
+
 .html-koord-home-jadwal-1-tabel,
 .html-koord-home-jadwal-1-tabel * {
   box-sizing: border-box;
@@ -8,8 +14,11 @@
   position: relative;
   overflow: hidden;
 }
-.footer {
+footer {
   background: var(--general-color-2, #004e89);
+  font-weight: bold;
+  color: white;
+  font-size: 20px;
   border-style: solid;
   border-color: var(
     --radial,
@@ -20,19 +29,20 @@
     )
   );
   border-width: 1px 0px 0px 0px;
-  padding: 46px 120px 72px 120px;
+  padding: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 1440px;
-  height: 86px;
+  width: 100%;
   position: absolute;
   left: 0px;
+  right: 0px;
   bottom: 0px;
 }
 .line-16 {
-  margin-top: -1px;
+  margin-top: 10px;
+  margin-bottom: 20px;
   border-style: solid;
   border-color: var(--grey-grey-3, #dadce2);
   border-width: 1px 0 0 0;
@@ -58,20 +68,21 @@
   font-weight: var(--regular-18px-font-weight, 400);
   position: absolute;
   left: calc(50% - 41px);
-  top: 36px;
+  top: 270px;
   width: 82px;
   height: 27px;
+  z-index: 1;
 }
 .body {
   background: var(--bckground-bg-1, #f7f5ed);
-  padding: 20px 152px 20px 152px;
+  padding-top: 20px;
   display: flex;
   flex-direction: column;
   gap: 25px;
   align-items: center;
   justify-content: flex-start;
-  width: 1440px;
-  height: 828px;
+  width: 100%;
+  height: auto;
   position: absolute;
   left: 0px;
   top: 136px;
@@ -98,7 +109,7 @@
   align-items: center;
   justify-content: flex-start;
   flex-shrink: 0;
-  width: 220px;
+  width: 300px;
   height: 50px;
   position: relative;
 }
@@ -114,6 +125,10 @@
   line-height: var(--regular-16px-line-height, 26px);
   font-weight: var(--regular-16px-font-weight, 400);
   position: relative;
+}
+#search-mhs{
+  width: 250px;
+  height: 40px;
 }
 .buttons {
   flex-shrink: 0;
@@ -299,14 +314,55 @@
   height: 37px;
   position: relative;
 }
-.list-jadwal {
+
+/* CSS Untuk Data Sidang */
+#daftar-sidang{
+  width: 100%;
+  text-align: center;
+  border-collapse: collapse;
+  margin-bottom: 120px;
+}
+
+#daftar-sidang th{
+  border-bottom: 1px solid black;
+  background-color: #004e89;
+  padding: 10px;
+  font-size: 18px;
+  font-weight: bold;
+  color: white;
+}
+
+#daftar-sidang td{
+  padding: 10px;
+  font-size: 16px;
+  font-weight: 400;
+  border-bottom: 1px solid black;
+}
+
+#detail-jadwal{
+  background: #004e89;
+  border-radius: 60px;
+  flex-shrink: 0;
+  width: 175px;
+  height: 50px;
+  position: relative;
+  color: white;
+}
+
+
+
+
+
+
+
+/* .list-jadwal {
   display: flex;
   flex-direction: column;
   gap: 11px;
   align-items: flex-start;
   justify-content: flex-start;
   flex-shrink: 0;
-  width: 1440px;
+  width: auto;
   position: relative;
 }
 .header {
@@ -598,7 +654,7 @@
   align-self: stretch;
   flex-shrink: 0;
   position: relative;
-}
+} */
 .navbar {
   background: var(--general-color-2, #004e89);
   padding: 40px 152px 40px 152px;
@@ -607,7 +663,7 @@
   gap: 1063px;
   align-items: center;
   justify-content: flex-start;
-  width: 1440px;
+  width: 100%;
   position: absolute;
   left: 0px;
   top: 0px;
