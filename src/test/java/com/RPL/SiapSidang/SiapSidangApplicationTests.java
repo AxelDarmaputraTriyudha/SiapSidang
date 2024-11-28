@@ -1,4 +1,4 @@
-package com.example.SiapSidang;
+package com.RPL.SiapSidang;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
