@@ -6,8 +6,8 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class Komponen {
-    private int id_komp;
     private String deskripsi;
-    private String peran;
-    private int bobot;
+    private int bobot_ketua_penguji;
+    private int bobot_anggota_penguji;
+    private int bobot_pembimbing;
 }
