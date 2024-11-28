@@ -58,31 +58,47 @@
     <div class="rectangle-3"></div>
     <div class="group-biodata">
       <div class="nama">
-        <div class="nama2"></div>
+        <input class="nama2" type="text">
         <div class="header-txt">Nama Mahasiswa</div>
       </div>
       <div class="npm">
-        <div class="npm2"></div>
+        <input class="npm2" type="text">
         <div class="npm3">NPM Mahasiswa</div>
       </div>
       <div class="semester-sidang">
-        <div class="npm4"></div>
+        <div class="npm4" type="text">
+          <select id="semester" name="semester" required>
+            <option value="" disabled selected>Pilih Semester</option>
+            <option value="ganjil">Ganjil</option>
+            <option value="genap">Genap</option>
+          </select>
+        </div>
         <div class="npm5">Semester Sidang</div>
       </div>
       <div class="tahun-ajaran">
-        <div class="npm6"></div>
+        <div class="npm6" type="text">
+          <select id="tahun-ajaran" name="tahun-ajaran" required>
+            <option value="" disabled selected>Pilih Tahun Ajaran</option>
+            <option value="2023">2023</option>
+            <option value="2024">2024</option>
+          </select>
+        </div>
         <div class="npm7">Tahun Ajaran Sidang</div>
       </div>
       <div class="tanggal-sidang">
-        <div class="npm8"></div>
+        <div class="npm8">
+          <input type="date" name="tgl_sidang">
+        </div>
         <div class="npm9">Tanggal Sidang</div>
       </div>
       <div class="waktu-sidang">
-        <div class="npm10"></div>
+        <div class="npm10">
+          <input type="time" name="waktu_sidang">
+        </div>
         <div class="npm11">Waktu Sidang</div>
       </div>
       <div class="tempat-sidang">
-        <div class="tempat"></div>
+        <input class="tempat" type="text">
         <div class="tempat2">Tempat Sidang</div>
       </div>
       <div class="tombol">
@@ -95,6 +111,5 @@
       </div>
     </div>
   </div>
-  
 </body>
 </html>

@@ -192,6 +192,8 @@
   position: absolute;
   left: 0px;
   top: 9px;
+  font-size: large;
+  padding-left: 10px;
 }
 .header-txt {
   color: var(--general-color-2, #004e89);
@@ -227,6 +229,8 @@
   position: absolute;
   left: 0px;
   top: 100px;
+  font-size: large;
+  padding-left: 10px;
 }
 .npm3 {
   color: var(--general-color-2, #004e89);
@@ -262,6 +266,8 @@
   position: absolute;
   left: 0px;
   top: 190px;
+  font-size: large;
+  padding-left: 10px;
 }
 .npm5 {
   color: var(--general-color-2, #004e89);
@@ -297,6 +303,15 @@
   position: absolute;
   left: 0px;
   top: 282px;
+  font-size: large;
+  padding-left: 10px;
+}
+select{
+  position: absolute;
+  padding: 20px 20px 20px 0px;
+  height: fit-content;
+  font-size: medium;
+  height: 60px;
 }
 .npm7 {
   color: var(--general-color-2, #004e89);
@@ -332,6 +347,14 @@
   position: absolute;
   left: 0px;
   top: 374px;
+  font-size: large;
+  padding-left: 10px;
+}
+.npm8 input{
+  position: absolute;
+  padding: 20px 20px 20px 0px;
+  height: fit-content;
+  font-size: large;
 }
 .npm9 {
   color: var(--general-color-2, #004e89);
@@ -367,6 +390,13 @@
   position: absolute;
   left: 0px;
   top: 466px;
+  padding-left: 10px;
+}
+.npm10 input{
+  position: absolute;
+  padding: 20px 20px 20px 0px;
+  height: fit-content;
+  font-size: large;
 }
 .npm11 {
   color: var(--general-color-2, #004e89);
@@ -402,6 +432,8 @@
   position: absolute;
   left: 0px;
   top: 559px;
+  font-size: large;
+  padding-left: 10px;
 }
 .tempat2 {
   color: var(--general-color-2, #004e89);
