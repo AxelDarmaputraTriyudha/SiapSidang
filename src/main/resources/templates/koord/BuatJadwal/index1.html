@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="/css/koord/BuatJadwal/style.css">
-  <link rel="stylesheet" href="/css/koord/BuatJadwal/vars.css">
+  <link rel="stylesheet" href="/css/koord/BuatJadwal/style1.css">
+  <link rel="stylesheet" href="/css/koord/BuatJadwal/vars1.css">
   
   
   <style>
@@ -102,12 +102,12 @@
         <div class="tempat2">Tempat Sidang</div>
       </div>
       <div class="tombol">
-        <div class="cancel">
+        <button class="cancel">
           <div class="cancel2">Cancel</div>
-        </div>
-        <div class="next">
+        </button>
+        <a class="next" th:href="@{/koord/buatJadwal2}">
           <div class="log-in">Next</div>
-        </div>
+        </a>
       </div>
     </div>
   </div>
