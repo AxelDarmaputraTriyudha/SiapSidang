@@ -1,0 +1,404 @@
+.html-koord-pembuatan-jadwal-2,
+.html-koord-pembuatan-jadwal-2 * {
+  box-sizing: border-box;
+}
+.html-koord-pembuatan-jadwal-2 {
+  background: #f7f5ed;
+  height: 1050px;
+  position: relative;
+  overflow: hidden;
+}
+.kiri {
+  background: #004e89;
+  width: 524px;
+  height: 1082px;
+  position: absolute;
+  left: 0px;
+  top: -6px;
+}
+.logo-kiri-atas {
+  height: auto;
+  position: absolute;
+  left: 41px;
+  top: 40px;
+  overflow: visible;
+}
+.teks-pembuatan-jadwal {
+  position: absolute;
+  inset: 0;
+}
+.data-penguji-pembimbing {
+  color: var(
+    --primary-primary,
+    radial-gradient(
+      closest-side,
+      rgba(255, 155, 0, 1) 12.5%,
+      rgba(237, 28, 36, 1) 100%
+    )
+  );
+  text-align: left;
+  font-family: var(
+    --medium-48px-font-family,
+    "SpaceGrotesk-Medium",
+    sans-serif
+  );
+  font-size: var(--medium-48px-font-size, 48px);
+  line-height: var(--medium-48px-line-height, 58px);
+  font-weight: var(--medium-48px-font-weight, 500);
+  position: absolute;
+  left: 41px;
+  top: 419px;
+  width: 447px;
+}
+.pembuatan-jadwal {
+  color: var(--general-color-7, #fffbee);
+  text-align: left;
+  font-family: var(
+    --medium-80px-font-family,
+    "SpaceGrotesk-Medium",
+    sans-serif
+  );
+  font-size: var(--medium-80px-font-size, 80px);
+  line-height: var(--medium-80px-line-height, 116px);
+  font-weight: var(--medium-80px-font-weight, 500);
+  position: absolute;
+  left: 38px;
+  top: 164px;
+  width: 447px;
+}
+.pembuatan-jadwal2 {
+  color: #f7f5ed;
+  text-align: left;
+  font-family: var(
+    --medium-80px-font-family,
+    "SpaceGrotesk-Medium",
+    sans-serif
+  );
+  font-size: var(--medium-80px-font-size, 80px);
+  line-height: var(--medium-80px-line-height, 116px);
+  font-weight: var(--medium-80px-font-weight, 500);
+  position: absolute;
+  left: 38px;
+  top: 164px;
+  width: 447px;
+}
+.siap-sidang {
+  color: #ffffff;
+  text-align: left;
+  font-family: var(
+    --regular-16px-font-family,
+    "SpaceGrotesk-Regular",
+    sans-serif
+  );
+  font-size: var(--regular-16px-font-size, 16px);
+  line-height: var(--regular-16px-line-height, 26px);
+  font-weight: var(--regular-16px-font-weight, 400);
+  position: absolute;
+  left: 56px;
+  top: 96px;
+  width: 91px;
+  height: 29px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+.group-biodata {
+  display: flex;
+  flex-direction: column;
+  gap: 27px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  width: 736px;
+  height: 713px;
+  position: absolute;
+  left: 590px;
+  top: 148px;
+}
+.pembimbing {
+  flex-shrink: 0;
+  width: 736px;
+  height: 68px;
+  position: static;
+}
+.pembimbing2 {
+  background: #f7f5ed;
+  border-radius: 5px;
+  border-style: solid;
+  border-color: #004e89;
+  border-width: 0.86px;
+  width: 350px;
+  height: 59px;
+  position: absolute;
+  left: 0px;
+  top: 9px;
+  padding: 0px 20px 0px 10px;
+  font-size: large;
+}
+.tempat2 {
+  color: var(--general-color-2, #004e89);
+  text-align: left;
+  font-family: "SourceSansPro-SemiBold", sans-serif;
+  font-size: 16px;
+  line-height: 8.63px;
+  font-weight: 600;
+  position: absolute;
+  left: 23px;
+  top: 0px;
+  width: 123px;
+  height: 19px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  background: 10px #f7f5ed;
+}
+.anggota-pembimbing {
+  flex-shrink: 0;
+  width: 736px;
+  height: 68px;
+  position: static;
+}
+.pembimbing3 {
+  background: #f7f5ed;
+  border-radius: 5px;
+  border-style: solid;
+  border-color: #004e89;
+  border-width: 0.86px;
+  width: 350px;
+  height: 59px;
+  position: absolute;
+  left: 0px;
+  top: 104px;
+  padding: 0px 20px 0px 10px;
+  font-size: large;
+}
+.tempat4 {
+  color: var(--general-color-2, #004e89);
+  text-align: left;
+  font-family: "SourceSansPro-SemiBold", sans-serif;
+  font-size: 16px;
+  line-height: 8.63px;
+  font-weight: 600;
+  position: absolute;
+  left: 23px;
+  top: 95px;
+  width: 173px;
+  height: 19px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  background: 10px #f7f5ed;
+}
+.ketua-penguji {
+  flex-shrink: 0;
+  width: 736px;
+  height: 68px;
+  position: static;
+}
+.penguji1 {
+  background: #f7f5ed;
+  border-radius: 5px;
+  border-style: solid;
+  border-color: #004e89;
+  border-width: 0.86px;
+  width: 350px;
+  height: 59px;
+  position: absolute;
+  left: 0px;
+  top: 199px;
+  padding: 0px 20px 0px 10px;
+  font-size: large;
+}
+.tempat6 {
+  color: var(--general-color-2, #004e89);
+  text-align: left;
+  font-family: "SourceSansPro-SemiBold", sans-serif;
+  font-size: 16px;
+  line-height: 8.63px;
+  font-weight: 600;
+  position: absolute;
+  left: 23px;
+  top: 190px;
+  width: 123px;
+  height: 19px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  background: 10px #f7f5ed;
+}
+.anggota-penguji {
+  flex-shrink: 0;
+  width: 736px;
+  height: 68px;
+  position: static;
+}
+.penguji2 {
+  background: #f7f5ed;
+  border-radius: 5px;
+  border-style: solid;
+  border-color: #004e89;
+  border-width: 0.86px;
+  width: 350px;
+  height: 59px;
+  position: absolute;
+  left: 0px;
+  top: 294px;
+  padding: 0px 20px 0px 10px;
+  font-size: large;
+}
+.tempat8 {
+  color: var(--general-color-2, #004e89);
+  text-align: left;
+  font-family: "SourceSansPro-SemiBold", sans-serif;
+  font-size: 16px;
+  line-height: 8.63px;
+  font-weight: 600;
+  position: absolute;
+  left: 23px;
+  top: 285px;
+  width: 140px;
+  height: 19px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  background: 10px #f7f5ed;
+}
+.tombol {
+  padding: 260px 0px 260px 0px;
+  display: flex;
+  flex-direction: row;
+  gap: 23px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  align-self: stretch;
+  flex-shrink: 0;
+  height: 372px;
+  position: relative;
+}
+.cancel {
+  border-radius: 60px;
+  border-style: solid;
+  border-color: #000000;
+  border-width: 1px;
+  padding: 24px 32px 24px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 339px;
+  height: 72px;
+  position: relative;
+  box-shadow: 0px 15px 36px 0px rgba(246, 87, 20, 0.3);
+}
+.cancel2 {
+  color: var(--general-color-2, #004e89);
+  text-align: right;
+  font-family: var(
+    --medium-16px-font-family,
+    "SpaceGrotesk-Medium",
+    sans-serif
+  );
+  font-size: var(--medium-16px-font-size, 16px);
+  line-height: var(--medium-16px-line-height, 24px);
+  font-weight: var(--medium-16px-font-weight, 500);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+.next {
+  background: var(
+    --primary-primary,
+    radial-gradient(
+      closest-side,
+      rgba(255, 155, 0, 1) 12.5%,
+      rgba(237, 28, 36, 1) 100%
+    )
+  );
+  border-radius: 60px;
+  padding: 24px 32px 24px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 339px;
+  height: 72px;
+  position: relative;
+  box-shadow: 0px 15px 36px 0px rgba(246, 87, 20, 0.3);
+}
+.log-in {
+  color: var(--general-color-2, #004e89);
+  text-align: right;
+  font-family: var(
+    --medium-16px-font-family,
+    "SpaceGrotesk-Medium",
+    sans-serif
+  );
+  font-size: var(--medium-16px-font-size, 16px);
+  line-height: var(--medium-16px-line-height, 24px);
+  font-weight: var(--medium-16px-font-weight, 500);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+.progres-bar {
+  position: absolute;
+  inset: 0;
+}
+.step-2-of-3 {
+  text-align: right;
+  font-family: "-", sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  position: absolute;
+  left: 1134px;
+  top: 51px;
+}
+.step-2-of-3-span {
+  color: var(
+    --primary-primary,
+    radial-gradient(
+      closest-side,
+      rgba(255, 155, 0, 1) 12.5%,
+      rgba(237, 28, 36, 1) 100%
+    )
+  );
+  font-family: "Inter-Medium", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+}
+.step-2-of-3-span2 {
+  color: var(--black-3, #83898c);
+  font-family: "Inter-Regular", sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+}
+.rectangle-2 {
+  border-radius: 0px;
+  width: 500px;
+  height: 6px;
+  position: absolute;
+  left: 708px;
+  top: 81px;
+  overflow: visible;
+}
+.rectangle-3 {
+  background: var(
+    --primary-primary,
+    radial-gradient(
+      closest-side,
+      rgba(255, 155, 0, 1) 12.5%,
+      rgba(237, 28, 36, 1) 100%
+    )
+  );
+  border-radius: 20px;
+  width: 333px;
+  height: 12px;
+  position: absolute;
+  left: 708px;
+  top: 78px;
+}
