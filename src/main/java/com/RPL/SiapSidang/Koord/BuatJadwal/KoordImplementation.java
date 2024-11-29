@@ -29,16 +29,16 @@ public class KoordImplementation implements KoordRepository{
     }
 
     public List<Komponen> getAllKomponen(String semester, int tahun){
-        String sql = "SELECT id_komp, deskripsi, peran, bobot FROM komponen_nilai WHERE semester_akd = ? AND tahun_akd = ?";
+        String sql = "SELECT deskripsi, bobot_ketua_penguji,  bobot_anggota_penguji, bobot_pembimbing FROM lihat_komponen WHERE semester_akd = ? AND tahun_akd = ?";
         return jdbcTemplate.query(sql, this::mapRowToKomp, semester, tahun);
     }
 
     private Komponen mapRowToKomp(ResultSet resultSet, int rowNum) throws SQLException{
         return new Komponen(
-            resultSet.getInt("id_komp"),
             resultSet.getString("deskripsi"),
-            resultSet.getString("peran"),
-            resultSet.getInt("bobot")
+            resultSet.getInt("bobot_ketua_penguji"),
+            resultSet.getInt("bobot_anggota_penguji"),
+            resultSet.getInt("bobot_pembimbing")
         );
     }
 }

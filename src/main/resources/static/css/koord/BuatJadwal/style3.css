@@ -349,3 +349,30 @@
   align-items: center;
   justify-content: flex-end;
 }
+
+/* STYLE TABLE */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  font-family: "SourceSansPro-SemiBold", sans-serif;
+  color: #004e89;
+}
+
+table, th, td {
+  border: 1px solid #004e89;
+}
+
+th, td {
+  padding: 8px 12px;
+  text-align: center;
+}
+
+th {
+  background-color: #f7f5ed;
+  font-weight: 600;
+}
+
+td {
+  background-color: #fff;
+}
