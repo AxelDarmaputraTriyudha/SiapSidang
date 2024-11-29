@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/koord/BuatJadwal/style3.css">
+  <link rel="stylesheet" href="/css/koord/BuatJadwal/vars3.css">
+  
+  
+  <style>
+   a,
+   button,
+   input,
+   select,
+   h1,
+   h2,
+   h3,
+   h4,
+   h5,
+   * {
+       box-sizing: border-box;
+       margin: 0;
+       padding: 0;
+       border: none;
+       text-decoration: none;
+       background: none;
+   
+       -webkit-font-smoothing: antialiased;
+   }
+   
+   menu, ol, ul {
+       list-style-type: none;
+       margin: 0;
+       padding: 0;
+   }
+   </style>
+  <title>Document</title>
+</head>
+<body>
+  <div class="html-koord-pembuatan-jadwal-3">
+    <div class="kiri">
+      <img class="logo-kiri-atas" src="/images/logo0.svg" />
+      <div class="pembuatan-jadwal">Pembuatan Jadwal</div>
+      <div class="siap-sidang">SIAP Sidang</div>
+      <div class="overview-bobot-nilai">Overview Bobot Nilai</div>
+    </div>
+    <div class="step-3-of-3">
+      <span>
+        <span class="step-3-of-3-span">Step 3</span>
+        <span class="step-3-of-3-span2">of 3</span>
+      </span>
+    </div>
+    <img class="rectangle-2" src="/images/rectangle-20.svg"/>
+    <div class="rectangle-3"></div>
+    <div class="group-nilai">
+      <table>
+        <thead>
+            <tr>
+                <th>No.</th>
+                <th>Nama Komponen</th>
+                <th>Bobot Pembimbing</th>
+                <th>Bobot Anggota Pembimbing</th>
+                <th>Bobot Ketua Penguji</th>
+                <th>Bobot Anggota Penguji</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="nilai, stat : ${nilaiList}">
+                <td th:text="${stat.index + 1}"></td> <!-- Menampilkan nomor urut -->
+                <td th:text="${nilai.deskripsi}">Nama Komponen</td> <!-- Menampilkan nama komponen -->
+                <td th:text="${nilai.bobot_ketua_penguji}">Bobot Ketua Penguji</td> <!-- Menampilkan bobot ketua penguji -->
+                <td th:text="${nilai.bobot_anggota_penguji}">Bobot Anggota Penguji</td> <!-- Menampilkan bobot anggota penguji -->
+                <td th:text="${nilai.bobot_pembimbing}">Bobot Pembimbing</td> <!-- Menampilkan bobot pembimbing -->
+                <!-- <td th:text="${nilai.bobot_anggota_pembimbing}">Bobot Anggota Pembimbing</td> Menampilkan bobot anggota pembimbing -->
+            </tr>
+        </tbody>
+      </table>
+      <div class="tombol">
+        <a class="cancel" th:href="@{/koord/buatJadwal2}">
+          <div class="cancel2">Cancel</div>
+        </a>
+        <a class="next" th:href="@{/koord/home}">
+          <div class="log-in">Next</div>
+        </a>
+      </div>
+      <!-- <div th:each="item : ${nilaiList}" class="container">
+        <div class="judul" th:text="${item.deskripsi}">Tata Tulis Laporan</div>
+        <div class="frame">
+            <a th:text="${item.peran}">test</a> <!-- Contoh teks di frame -->
+    </div> -->
+</body>
+</html>

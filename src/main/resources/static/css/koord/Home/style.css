@@ -1,0 +1,704 @@
+html,body{
+  /* height: 100%;
+  width: 100%; */
+  font-family: "Poppins-Regular", sans-serif;
+}
+
+.html-koord-home-jadwal-1-tabel,
+.html-koord-home-jadwal-1-tabel * {
+  box-sizing: border-box;
+}
+.html-koord-home-jadwal-1-tabel {
+  background: var(--bckground-bg-1, #f7f5ed);
+  height: 1050px;
+  position: relative;
+  overflow: hidden;
+}
+footer {
+  background: var(--general-color-2, #004e89);
+  font-weight: bold;
+  color: white;
+  font-size: 20px;
+  border-style: solid;
+  border-color: var(
+    --radial,
+    radial-gradient(
+      closest-side,
+      rgba(255, 155, 0, 1) 12.5%,
+      rgba(237, 28, 36, 1) 100%
+    )
+  );
+  border-width: 1px 0px 0px 0px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  position: absolute;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+}
+.line-16 {
+  margin-top: 10px;
+  margin-bottom: 20px;
+  border-style: solid;
+  border-color: var(--grey-grey-3, #dadce2);
+  border-width: 1px 0 0 0;
+  opacity: 0.5;
+  flex-shrink: 0;
+  width: 1200px;
+  height: 0px;
+  position: relative;
+  transform-origin: 0 0;
+  transform: rotate(0deg) scale(1, 1);
+}
+.rpl-b-3 {
+  margin: -199px 0 0 0;
+  color: #ffffff;
+  text-align: center;
+  font-family: var(
+    --regular-18px-font-family,
+    "SpaceGrotesk-Regular",
+    sans-serif
+  );
+  font-size: var(--regular-18px-font-size, 18px);
+  line-height: var(--regular-18px-line-height, 28px);
+  font-weight: var(--regular-18px-font-weight, 400);
+  position: absolute;
+  left: calc(50% - 41px);
+  top: 270px;
+  width: 82px;
+  height: 27px;
+  z-index: 1;
+}
+.body {
+  background: var(--bckground-bg-1, #f7f5ed);
+  padding-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  height: auto;
+  position: absolute;
+  left: 0px;
+  top: 136px;
+}
+.feature-1 {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+  width: 1303px;
+  position: relative;
+}
+.frame-search {
+  background: var(--bckground-bg-1, #f7f5ed);
+  border-radius: 16px;
+  border-style: solid;
+  border-color: #000000;
+  border-width: 1px;
+  padding: 32px 28px 32px 28px;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: center;
+  justify-content: flex-start;
+  flex-shrink: 0;
+  width: 300px;
+  height: 50px;
+  position: relative;
+}
+.search {
+  color: var(--font, #0f0d0d);
+  text-align: left;
+  font-family: var(
+    --regular-16px-font-family,
+    "SpaceGrotesk-Regular",
+    sans-serif
+  );
+  font-size: var(--regular-16px-font-size, 16px);
+  line-height: var(--regular-16px-line-height, 26px);
+  font-weight: var(--regular-16px-font-weight, 400);
+  position: relative;
+}
+#search-mhs{
+  width: 250px;
+  height: 40px;
+}
+.buttons {
+  flex-shrink: 0;
+  width: 435px;
+  height: 54px;
+  position: static;
+}
+.button-2 {
+  background: var(
+    --primary-primary,
+    radial-gradient(
+      closest-side,
+      rgba(255, 155, 0, 1) 12.5%,
+      rgba(237, 28, 36, 1) 100%
+    )
+  );
+  border-radius: 60px;
+  padding: 10px 32px 10px 32px;
+  width: 208px;
+  height: 54px;
+  position: absolute;
+  left: 1095px;
+  top: 0px;
+  box-shadow: 0px 15px 36px 0px rgba(246, 87, 20, 0.3);
+}
+.buat-jadwal {
+  color: #000000;
+  text-align: center;
+  font-family: var(
+    --medium-16px-font-family,
+    "SpaceGrotesk-Medium",
+    sans-serif
+  );
+  font-size: var(--medium-16px-font-size, 16px);
+  line-height: var(--medium-16px-line-height, 24px);
+  font-weight: var(--medium-16px-font-weight, 500);
+  position: absolute;
+  left: calc(50% - 85px);
+  top: calc(50% - 12px);
+  width: 157px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.button-1 {
+  background: var(
+    --primary-primary,
+    radial-gradient(
+      closest-side,
+      rgba(255, 155, 0, 1) 12.5%,
+      rgba(237, 28, 36, 1) 100%
+    )
+  );
+  border-radius: 60px;
+  padding: 10px 32px 10px 32px;
+  width: 208px;
+  height: 54px;
+  position: absolute;
+  left: 868px;
+  top: 0px;
+  box-shadow: 0px 15px 36px 0px rgba(246, 87, 20, 0.3);
+}
+.buat-komponen {
+  color: #000000;
+  text-align: center;
+  font-family: var(
+    --medium-16px-font-family,
+    "SpaceGrotesk-Medium",
+    sans-serif
+  );
+  font-size: var(--medium-16px-font-size, 16px);
+  line-height: var(--medium-16px-line-height, 24px);
+  font-weight: var(--medium-16px-font-weight, 500);
+  position: absolute;
+  left: calc(50% - 85px);
+  top: calc(50% - 12px);
+  width: 157px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.feature-2 {
+  display: flex;
+  flex-direction: row;
+  gap: 25px;
+  align-items: center;
+  justify-content: flex-start;
+  flex-shrink: 0;
+  width: 1303px;
+  height: 43px;
+  position: relative;
+}
+.frame-tanggal-awal {
+  background: var(--bckground-bg-1, #f7f5ed);
+  border-radius: 16px;
+  border-style: solid;
+  border-color: #000000;
+  border-width: 1px;
+  padding: 32px 28px 32px 28px;
+  flex-shrink: 0;
+  width: 220px;
+  height: 37px;
+  position: relative;
+}
+.tanggal-awal {
+  color: var(--font, #0f0d0d);
+  text-align: left;
+  font-family: var(
+    --regular-16px-font-family,
+    "SpaceGrotesk-Regular",
+    sans-serif
+  );
+  font-size: var(--regular-16px-font-size, 16px);
+  line-height: var(--regular-16px-line-height, 26px);
+  font-weight: var(--regular-16px-font-weight, 400);
+  position: absolute;
+  left: 28px;
+  top: 5.5px;
+}
+.frame-tanggal-akhir {
+  background: var(--bckground-bg-1, #f7f5ed);
+  border-radius: 16px;
+  border-style: solid;
+  border-color: #000000;
+  border-width: 1px;
+  padding: 32px 28px 32px 28px;
+  flex-shrink: 0;
+  width: 220px;
+  height: 37px;
+  position: relative;
+}
+.tanggal-akhir {
+  color: var(--font, #0f0d0d);
+  text-align: left;
+  font-family: var(
+    --regular-16px-font-family,
+    "SpaceGrotesk-Regular",
+    sans-serif
+  );
+  font-size: var(--regular-16px-font-size, 16px);
+  line-height: var(--regular-16px-line-height, 26px);
+  font-weight: var(--regular-16px-font-weight, 400);
+  position: absolute;
+  left: 28px;
+  top: 5.5px;
+}
+.frame-semester {
+  background: var(--bckground-bg-1, #f7f5ed);
+  border-radius: 16px;
+  border-style: solid;
+  border-color: #000000;
+  border-width: 1px;
+  padding: 32px 28px 32px 28px;
+  flex-shrink: 0;
+  width: 220px;
+  height: 37px;
+  position: relative;
+}
+.dropdown {
+  color: var(--font, #0f0d0d);
+  text-align: left;
+  font-family: var(
+    --regular-16px-font-family,
+    "SpaceGrotesk-Regular",
+    sans-serif
+  );
+  font-size: var(--regular-16px-font-size, 16px);
+  line-height: var(--regular-16px-line-height, 26px);
+  font-weight: var(--regular-16px-font-weight, 400);
+  position: absolute;
+  left: 28px;
+  top: 5.5px;
+}
+.frame-tahun {
+  background: var(--bckground-bg-1, #f7f5ed);
+  border-radius: 16px;
+  border-style: solid;
+  border-color: #000000;
+  border-width: 1px;
+  padding: 32px 28px 32px 28px;
+  flex-shrink: 0;
+  width: 220px;
+  height: 37px;
+  position: relative;
+}
+
+/* CSS Untuk Data Sidang */
+#daftar-sidang{
+  width: 100%;
+  text-align: center;
+  border-collapse: collapse;
+  margin-bottom: 120px;
+}
+
+#daftar-sidang th{
+  border-bottom: 1px solid black;
+  background-color: #004e89;
+  padding: 10px;
+  font-size: 18px;
+  font-weight: bold;
+  color: white;
+}
+
+#daftar-sidang td{
+  padding: 10px;
+  font-size: 16px;
+  font-weight: 400;
+  border-bottom: 1px solid black;
+}
+
+#detail-jadwal{
+  background: #004e89;
+  border-radius: 60px;
+  flex-shrink: 0;
+  width: 175px;
+  height: 50px;
+  position: relative;
+  color: white;
+}
+
+
+
+
+
+
+
+/* .list-jadwal {
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-shrink: 0;
+  width: auto;
+  position: relative;
+}
+.header {
+  background: #004e89;
+  border-style: solid;
+  border-color: #000000;
+  border-width: 1px;
+  padding: 10px 25px 10px 25px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  align-self: stretch;
+  flex-shrink: 0;
+  position: relative;
+}
+.no {
+  color: #ffffff;
+  text-align: center;
+  font-family: "Poppins-Regular", sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  position: relative;
+  width: 124.13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.jenis-sidang {
+  color: #ffffff;
+  text-align: center;
+  font-family: "Poppins-Regular", sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  position: relative;
+  width: 139px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.mahasiswa {
+  color: #ffffff;
+  text-align: center;
+  font-family: "Poppins-Regular", sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  position: relative;
+  width: 124.13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.semester {
+  color: #ffffff;
+  text-align: center;
+  font-family: "Poppins-Regular", sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  position: relative;
+  width: 175px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.tahun-ajaran {
+  color: #ffffff;
+  text-align: center;
+  font-family: "Poppins-Regular", sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  position: relative;
+  width: 175px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.waktu {
+  color: #ffffff;
+  text-align: center;
+  font-family: "Poppins-Regular", sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  position: relative;
+  width: 175px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.tanggal {
+  color: #ffffff;
+  text-align: center;
+  font-family: "Poppins-Regular", sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  position: relative;
+  width: 175px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.detail {
+  color: #ffffff;
+  text-align: center;
+  font-family: "Poppins-Regular", sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  position: relative;
+  width: 175px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.sidang-1 {
+  border-style: solid;
+  border-color: #000000;
+  border-width: 0px 0px 1px 0px;
+  padding: 10px 25px 10px 25px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  align-self: stretch;
+  flex-shrink: 0;
+  position: relative;
+}
+.no2 {
+  color: #000000;
+  text-align: center;
+  font-family: "Poppins-Regular", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  position: relative;
+  width: 124.13px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.jenis-sidang2 {
+  color: #000000;
+  text-align: center;
+  font-family: "Poppins-Regular", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  position: relative;
+  width: 139px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.mahasiswa2 {
+  color: #000000;
+  text-align: center;
+  font-family: "Poppins-Regular", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  position: relative;
+  width: 124.13px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.semester2 {
+  color: #000000;
+  text-align: center;
+  font-family: "Poppins-Regular", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  position: relative;
+  width: 175px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.tahun-ajaran2 {
+  color: #000000;
+  text-align: center;
+  font-family: "Poppins-Regular", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  position: relative;
+  width: 175px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.waktu-sidang {
+  color: #000000;
+  text-align: center;
+  font-family: "Poppins-Regular", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  position: relative;
+  width: 175px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.tanggal-sidang {
+  color: #000000;
+  text-align: center;
+  font-family: "Poppins-Regular", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  position: relative;
+  width: 175px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.button {
+  background: #004e89;
+  border-radius: 60px;
+  padding: 10px 32px 10px 32px;
+  flex-shrink: 0;
+  width: 175px;
+  height: 30px;
+  position: relative;
+}
+.lihat-detail {
+  color: #ffffff;
+  text-align: center;
+  font-family: "Poppins-Regular", sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  position: absolute;
+  left: 15.5px;
+  top: 3px;
+  width: 144px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.sidang-2 {
+  border-style: solid;
+  border-color: #000000;
+  border-width: 0px 0px 1px 0px;
+  padding: 10px 25px 10px 25px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  align-self: stretch;
+  flex-shrink: 0;
+  position: relative;
+}
+.sidang-3 {
+  border-style: solid;
+  border-color: #000000;
+  border-width: 0px 0px 1px 0px;
+  padding: 10px 25px 10px 25px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  align-self: stretch;
+  flex-shrink: 0;
+  position: relative;
+}
+.sidang-4 {
+  border-style: solid;
+  border-color: #000000;
+  border-width: 0px 0px 1px 0px;
+  padding: 10px 25px 10px 25px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  align-self: stretch;
+  flex-shrink: 0;
+  position: relative;
+}
+.sidang-5 {
+  border-style: solid;
+  border-color: #000000;
+  border-width: 0px 0px 1px 0px;
+  padding: 10px 25px 10px 25px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  align-self: stretch;
+  flex-shrink: 0;
+  position: relative;
+} */
+.navbar {
+  background: var(--general-color-2, #004e89);
+  padding: 40px 152px 40px 152px;
+  display: flex;
+  flex-direction: row;
+  gap: 1063px;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+}
+.logo {
+  flex-shrink: 0;
+  width: 122px;
+  height: 55.59px;
+  position: relative;
+  overflow: visible;
+}
+.siap-sidang {
+  color: #ffffff;
+  text-align: left;
+  font-family: var(
+    --regular-16px-font-family,
+    "SpaceGrotesk-Regular",
+    sans-serif
+  );
+  font-size: var(--regular-16px-font-size, 16px);
+  line-height: var(--regular-16px-line-height, 26px);
+  font-weight: var(--regular-16px-font-weight, 400);
+  position: absolute;
+  left: 164px;
+  top: 96px;
+  width: 91px;
+  height: 29px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+.log-out {
+  flex-shrink: 0;
+  width: 54px;
+  height: 51px;
+  position: relative;
+  overflow: visible;
+}
