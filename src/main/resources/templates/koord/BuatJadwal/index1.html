@@ -56,60 +56,60 @@
     </div>
     <img class="rectangle-2" src="/images/rectangle-20.svg" />
     <div class="rectangle-3"></div>
-    <div class="group-biodata">
+    <form class="group-biodata" method="POST" th:action="@{/koord/buatJadwal1}">
       <div class="nama">
-        <input class="nama2" type="text">
+        <input class="nama2" type="text" id="namaMahasiswa" name="namaMahasiswa" th:value="${namaMahasiswa}"required>
         <div class="header-txt">Nama Mahasiswa</div>
       </div>
       <div class="npm">
-        <input class="npm2" type="text">
+        <input class="npm2" type="text" id="npm" name="npm" th:value="${npm}" required>
         <div class="npm3">NPM Mahasiswa</div>
       </div>
       <div class="semester-sidang">
         <div class="npm4" type="text">
           <select id="semester" name="semester" required>
             <option value="" disabled selected>Pilih Semester</option>
-            <option value="ganjil">Ganjil</option>
-            <option value="genap">Genap</option>
+            <option value="Ganjil" id="Ganjil" name="Ganjil">Ganjil</option>
+            <option value="Genap" id="Genap" name="Genap">Genap</option>
           </select>
         </div>
         <div class="npm5">Semester Sidang</div>
       </div>
       <div class="tahun-ajaran">
         <div class="npm6" type="text">
-          <select id="tahun-ajaran" name="tahun-ajaran" required>
+          <select id="tahun" name="tahun" required th:value="${tahun}">
             <option value="" disabled selected>Pilih Tahun Ajaran</option>
-            <option value="2023">2023</option>
-            <option value="2024">2024</option>
+            <option th:value="2023" id="2023" name="2023">2023</option>
+            <option th:value="2024" id="2024" name="2024">2024</option>
           </select>
         </div>
         <div class="npm7">Tahun Ajaran Sidang</div>
       </div>
       <div class="tanggal-sidang">
         <div class="npm8">
-          <input type="date" name="tgl_sidang">
+          <input type="date" name="tgl" value="tgl" id="tgl" th:value="${tgl}" required>
         </div>
         <div class="npm9">Tanggal Sidang</div>
       </div>
       <div class="waktu-sidang">
         <div class="npm10">
-          <input type="time" name="waktu_sidang">
+          <input type="time" name="waktu" value="waktu" id="waktu" th:value="${waktu}" required>
         </div>
         <div class="npm11">Waktu Sidang</div>
       </div>
       <div class="tempat-sidang">
-        <input class="tempat" type="text">
+        <input class="tempat" type="text" name="tempat" id="tempat" th:value="${tempat}" required>
         <div class="tempat2">Tempat Sidang</div>
       </div>
       <div class="tombol">
         <a class="cancel" th:href="@{/koord/home}">
           <div class="cancel2">Cancel</div>
         </a>
-        <a class="next" th:href="@{/koord/buatJadwal2}">
+        <button class="next" type="submit">
           <div class="log-in">Next</div>
-        </a>
+        </button>
       </div>
-    </div>
+    </form>
   </div>
 </body>
 </html>
