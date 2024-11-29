@@ -1,0 +1,122 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #0e4c8c; /* Blue background */
+  color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  overflow: hidden; /* Menghindari scrollbar */
+  position: relative;
+}
+
+.container {
+  display: flex;
+  width: 80%;
+  max-width: 900px;
+  position: relative; /* Untuk memastikan grid overlay */
+  z-index: 1; /* Supaya konten terlihat di atas grid */
+}
+
+/* Grid background */
+body::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(0deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+  background-size: 50px 50px; /* Ukuran grid */
+  z-index: 0; /* Agar berada di belakang konten */
+}
+
+/* Sisanya tetap sama */
+.logo {
+  display: flex;
+  gap: 5px;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+}
+
+.medal {
+  width: 20px;
+  height: 30px;
+  border-radius: 5px;
+}
+
+.medal.red {
+  background-color: #ff4d4d;
+}
+
+.medal.blue {
+  background-color: #3366ff;
+}
+
+.medal.yellow {
+  background-color: #ffcc00;
+}
+
+.left-section h1 {
+  font-size: 60px;
+  font-weight: bold;
+  margin: 0;
+  line-height: 1.2;
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  color: #f8f8f8;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.right-section {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+}
+
+.input-field {
+  margin-bottom: 20px;
+  padding: 15px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  width: 400px;
+}
+
+.login-button {
+  padding: 15px;
+  border: none;
+  border-radius: 25px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #ffffff;
+  background: linear-gradient(90deg, #ff7f50, #ff4500);
+  cursor: pointer;
+  width: 425px;
+}
+
+.login-button:hover {
+  opacity: 0.9;
+}
+
+.eye-icon {
+    position: absolute;
+    right: -160px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #d3d3d3;
+}
