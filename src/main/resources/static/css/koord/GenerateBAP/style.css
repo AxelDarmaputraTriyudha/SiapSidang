@@ -1,8 +1,8 @@
-.html-koord-manajemen-bap,
-.html-koord-manajemen-bap * {
+.html-koord-generate-bap,
+.html-koord-generate-bap * {
   box-sizing: border-box;
 }
-.html-koord-manajemen-bap {
+.html-koord-generate-bap {
   background: #f7f5ed;
   height: 1024px;
   position: relative;
@@ -83,7 +83,7 @@
   left: 0px;
   top: 0px;
 }
-.group {
+.logo-kiri-atas {
   flex-shrink: 0;
   width: 122px;
   height: 55.59px;
@@ -110,7 +110,7 @@
   align-items: center;
   justify-content: flex-start;
 }
-.manajemen-bap {
+.generate-bap {
   color: #004e89;
   text-align: center;
   font-family: var(--bold-80px-font-family, "SpaceGrotesk-Bold", sans-serif);
@@ -118,68 +118,62 @@
   line-height: var(--bold-80px-line-height, 86px);
   font-weight: var(--bold-80px-font-weight, 700);
   position: absolute;
-  left: 425px;
+  left: 426px;
   top: 151px;
+  width: 615px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
-.button-upload {
-  background: var(
-    --primary-primary,
-    radial-gradient(
-      closest-side,
-      rgba(255, 155, 0, 1) 12.5%,
-      rgba(237, 28, 36, 1) 100%
-    )
-  );
-  border-radius: 60px;
-  padding: 16px 24px 16px 24px;
-  display: flex;
-  flex-direction: row;
-  gap: 16px;
-  align-items: center;
-  justify-content: flex-start;
+.file-bap {
   position: absolute;
-  left: 179px;
-  top: 829px;
+  inset: 0;
 }
-.upload {
-  flex-shrink: 0;
-  width: 34px;
-  height: 34px;
-  position: relative;
+.rectangle-4 {
+  background: #004e89;
+  border-radius: 10px;
+  width: 537px;
+  height: 619.41px;
+  position: absolute;
+  left: 474px;
+  top: 301.59px;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+.rectangle-35 {
+  background: #004e89;
+  border-radius: 15px 30px 0px 0px;
+  width: 247px;
+  height: 57.88px;
+  position: absolute;
+  left: 474.03px;
+  top: 252px;
+  transform-origin: 0 0;
+  transform: rotate(0.034deg) scale(1, 1);
+}
+.polygon-7 {
+  width: 33px;
+  height: 45.37px;
+  position: absolute;
+  left: 703px;
+  top: 274.16px;
   overflow: visible;
 }
-.upload-pdf {
-  color: #000000;
-  text-align: left;
-  font-family: var(
-    --regular-21px-font-family,
-    "SpaceGrotesk-Regular",
-    sans-serif
-  );
-  font-size: var(--regular-21px-font-size, 21px);
-  line-height: var(--regular-21px-line-height, 34px);
-  font-weight: var(--regular-21px-font-weight, 400);
-  position: relative;
-}
-.frame-utama {
-  height: auto;
-  position: absolute;
-  left: 451px;
-  top: 253px;
-  overflow: visible;
-}
-.foto-bap {
+.image-266 {
   width: 479px;
   height: 569px;
   position: absolute;
-  left: 480px;
-  top: 328px;
+  left: 503px;
+  top: 327px;
   object-fit: cover;
 }
-.head-koor {
+.head {
+  width: 173px;
+  height: 23px;
+  position: absolute;
+  left: 511px;
+  top: 269px;
+}
+.group-36466 {
   position: absolute;
   inset: 0;
 }
@@ -192,8 +186,8 @@
   width: 173px;
   height: 23px;
   position: absolute;
-  left: 488px;
-  top: 270px;
+  left: 0px;
+  top: 0px;
 }
 .koordinator {
   color: #004e89;
@@ -203,13 +197,13 @@
   line-height: var(--bold-18px-line-height, 28px);
   font-weight: var(--bold-18px-font-weight, 700);
   position: absolute;
-  left: 521px;
-  top: 268px;
+  left: 33px;
+  top: -2px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
-.button-download {
+.button-generate-bap-variant-3 {
   background: var(
     --primary-primary,
     radial-gradient(
@@ -219,33 +213,31 @@
     )
   );
   border-radius: 60px;
-  padding: 16px 24px 16px 24px;
+  padding: 10px 32px 10px 32px;
   display: flex;
-  flex-direction: row;
-  gap: 16px;
-  align-items: center;
-  justify-content: flex-start;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: space-between;
+  width: 208px;
+  height: 54px;
   position: absolute;
-  left: 1032px;
-  top: 831px;
+  left: 1112px;
+  top: 158px;
 }
-.fi-rr-download {
-  flex-shrink: 0;
-  width: 24px;
-  height: 24px;
-  position: relative;
-  overflow: visible;
-}
-.download-pdf {
+.generate {
   color: #000000;
-  text-align: left;
+  text-align: center;
   font-family: var(
-    --regular-21px-font-family,
-    "SpaceGrotesk-Regular",
+    --medium-16px-font-family,
+    "SpaceGrotesk-Medium",
     sans-serif
   );
-  font-size: var(--regular-21px-font-size, 21px);
-  line-height: var(--regular-21px-line-height, 34px);
-  font-weight: var(--regular-21px-font-weight, 400);
+  font-size: var(--medium-16px-font-size, 16px);
+  line-height: var(--medium-16px-line-height, 24px);
+  font-weight: var(--medium-16px-font-weight, 500);
   position: relative;
+  width: 157px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
