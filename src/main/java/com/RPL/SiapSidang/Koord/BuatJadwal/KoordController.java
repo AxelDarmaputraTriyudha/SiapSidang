@@ -29,7 +29,6 @@ public class KoordController {
         model.addAttribute("tgl", session.getAttribute("tgl"));
         model.addAttribute("waktu", session.getAttribute("waktu"));
         model.addAttribute("tempat", session.getAttribute("tempat"));
-        System.out.println(session.getAttribute("namaMahasiswa"));
         return "koord/BuatJadwal/index1";
     }
 
@@ -53,20 +52,50 @@ public class KoordController {
             session.setAttribute("tempat", tempat);
             this.semester = semester;
             this.tahun = Integer.parseInt(tahun);
-            System.out.println(semester + " " + tahun);
-            System.out.println(session.getAttribute("namaMahasiswa"));
             return "redirect:/koord/buatJadwal2";
         }
 
     @GetMapping("/buatJadwal2")
-    public String buatJadwal2(Model model){
+    public String buatJadwal2(HttpSession session, Model model) {
+        // Ambil data dari sesi
+        String pb1 = (String) session.getAttribute("pb1");
+        String pb2 = (String) session.getAttribute("pb2");
+        String pu1 = (String) session.getAttribute("pu1");
+        String pu2 = (String) session.getAttribute("pu2");
+        
+        // Menambahkan data dosen yang diambil dari repositori ke model
         List<Dosen> list = this.repo.getAllDosen();
-        model.addAttribute("pb1", list);
-        model.addAttribute("pb2", list);
-        model.addAttribute("pu1", list);
-        model.addAttribute("pu2", list);
+        model.addAttribute("pb1List", list);
+        model.addAttribute("pb2List", list);
+        model.addAttribute("pu1List",list);
+        model.addAttribute("pu2List", list);
+        
+        // Menambahkan data yang tersimpan di sesi ke model agar tetap ditampilkan di form
+        model.addAttribute("selectedPb1", pb1);
+        model.addAttribute("selectedPb2", pb2);
+        model.addAttribute("selectedPu1",pu1);
+        model.addAttribute("selectedPu2", pu2);
+        
         return "koord/BuatJadwal/index2";
-    }
+    }                
+
+    @PostMapping("/buatJadwal2")
+    public String buatJadwal21(
+        @RequestParam("pb1") String pb1,
+        @RequestParam("pb2") String pb2,
+        @RequestParam("pu1") String pu1,
+        @RequestParam("pu2") String pu2,
+        HttpSession session) {
+        
+        // Menyimpan data yang dipilih ke sesi
+        session.setAttribute("pb1", pb1);
+        session.setAttribute("pb2", pb2);
+        session.setAttribute("pu1", pu1);
+        session.setAttribute("pu2", pu2);
+        
+        // Redirect ke halaman selanjutnya
+        return "redirect:/koord/buatJadwal3";
+    }        
 
     @GetMapping("/buatJadwal3")
     public String buatJadwal3(Model model){
