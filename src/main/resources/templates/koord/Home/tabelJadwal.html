@@ -79,7 +79,6 @@
     <table id="daftar-sidang">
       <thead>
         <th>Nomor</th>
-        <th>Jenis Sidang</th>
         <th>Mahasiswa</th>
         <th>Semester</th>
         <th>Tahun Ajaran</th>
@@ -89,7 +88,6 @@
       </thead>
       <tbody th:each="sidang, stat : ${sidang}">
         <td th:text="${stat.index + 1}"></td>
-        <td th:text="${sidang.jenis}"></td>
         <td th:text="${sidang.nama}"></td>
         <td th:text="${sidang.semester}"></td>
         <td th:text="${sidang.tahun}"></td>
