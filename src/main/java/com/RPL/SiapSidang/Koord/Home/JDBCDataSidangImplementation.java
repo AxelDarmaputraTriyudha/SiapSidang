@@ -14,7 +14,7 @@ public class JDBCDataSidangImplementation {
     private JdbcTemplate jdbcTemplate;
 
     public List<DataSidang> findAll(){
-        String sql = "SELECT * FROM data_sidang_view";
+        String sql = "SELECT * FROM data_sidang_view WHERE peran = 'Koordinator'";
         return jdbcTemplate.query(sql, this::mapRowToDataSidang);
     }
 
@@ -28,12 +28,15 @@ public class JDBCDataSidangImplementation {
             resultSet.getInt("tahun_akd"),
             resultSet.getString("waktu"),
             resultSet.getString("tanggal"),
-            resultSet.getString("tempat")
+            resultSet.getString("tempat"),
+            resultSet.getString("nik"),
+            resultSet.getString("nama_dosen"),
+            resultSet.getString("peran")
         );
     }
     
     public List<DataSidang> findWithFilter(String filter){
-        String sql = "SELECT * FROM data_sidang_view WHERE nama ILIKE ?";
+        String sql = "SELECT * FROM data_sidang_view WHERE nama ILIKE ? AND peran = 'Koordinator'";
         return jdbcTemplate.query(sql, this::mapRowToDataSidang, "%"+filter+"%");
     }
 }
