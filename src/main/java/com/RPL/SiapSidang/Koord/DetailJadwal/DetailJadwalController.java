@@ -1,5 +1,7 @@
 package com.RPL.SiapSidang.Koord.DetailJadwal;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,8 +21,35 @@ public class DetailJadwalController {
     public String index(Model model,
             @RequestParam(required = true) String npm){
 
-        DataSidang data = detailJadwalRepo.findData(npm).get(0);
-        model.addAttribute("data", data);
+        List<DataSidang> data = detailJadwalRepo.findData(npm);
+
+        model.addAttribute("data", data.get(3));
+
+        // list nama dosen
+        String penguji1 = "", penguji2 = "", pembimbing = "";
+        
+        // assign nama dosen sesuai peran
+        for (int i = 0; i<data.size(); i++){
+            DataSidang dataNow = data.get(i);
+            switch (dataNow.getPeran()) {
+                case "PB1":
+                    pembimbing = dataNow.getNama_dosen();
+                    break;
+                case "PU1":
+                    penguji1 = dataNow.getNama_dosen();
+                    break;
+                case "PU2":
+                    penguji2 = dataNow.getNama_dosen();
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        // add nama-nama dosen
+        model.addAttribute("nama_pu1", penguji1);
+        model.addAttribute("nama_pu2", penguji2);
+        model.addAttribute("nama_pb", pembimbing);
         return "/koord/DetailJadwal/index";
     }
 }
