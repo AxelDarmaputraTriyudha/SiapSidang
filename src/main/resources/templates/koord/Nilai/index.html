@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="/css/koord/Nilai/style.css">
   <link rel="stylesheet" href="/css/koord/Nilai/vars.css">
+  <script src="/js/koord/Nilai/scripts.js" defer></script>
   
   
   <style>
@@ -44,19 +45,19 @@
       <div class="siap-sidang">SIAP Sidang</div>
     </div>
     <div class="nilai-mahasiswa">Nilai Mahasiswa</div>
-    <div class="box-nilai">
+    <form class="box-nilai" method="POST" th:action="@{/koord/tambahNilai}">
       <div class="penilaian-kedisiplinan-mahasiswa">
         Penilaian Kedisiplinan Mahasiswa
       </div>
-      <input class="border" type="text" id="nilai" name="nilai" th:value="${nilaiKoord}"required>
+      <input class="border" type="text" id="nilaiKoord" name="nilaiKoord" th:value="${nilaiKoord}"required>
       <div class="nilai2">Nilai</div>
-      <div class="button-edit">
-        <div class="edit">Edit</div>
-      </div>
-      <div class="button-save">
+      <button class="button-save" id="saveBtn" type="submit">
         <div class="save">Save</div>
+      </button>
+      <div id="notification" th:if="${successMessage}" class="notification">
+        <p th:text="${successMessage}"></p>
       </div>
-    </div>
+    </form>
     <img class="icon" src="/images/icon0.svg" />
     <footer>
       <div class="line-16"></div>

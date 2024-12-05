@@ -158,38 +158,6 @@ footer {
   background: 5px var(--general-color-2, #004e89);
   padding-left: 5px;
 }
-.button-edit {
-  background: var(
-    --primary-primary,
-    radial-gradient(
-      closest-side,
-      rgba(255, 155, 0, 1) 12.5%,
-      rgba(237, 28, 36, 1) 100%
-    )
-  );
-  border-radius: 60px;
-  padding: 10px 23px 10px 37px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  justify-content: space-between;
-  width: 11.96%;
-  height: 12.01%;
-  position: absolute;
-  right: 28.93%;
-  left: 59.11%;
-  bottom: 21.1%;
-  top: 66.88%;
-}
-.edit {
-  color: rgba(0, 0, 0, 0.85);
-  text-align: left;
-  font-family: "Inter-Bold", sans-serif;
-  font-size: 14px;
-  font-weight: 700;
-  position: relative;
-  width: 35px;
-}
 .button-save {
   background: var(
     --primary-primary,
@@ -231,4 +199,30 @@ footer {
   bottom: 80.52%;
   top: 17.33%;
   overflow: visible;
+}
+.hidden {
+  display: none;
+}
+.notification {
+  position: fixed;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #3fc17e;
+  color: white;
+  padding: 20px 40px;
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.25);
+  font-family: "Inter-Bold", sans-serif;
+  font-size: 18px;
+  text-align: center;
+  z-index: 1000;
+  opacity: 1;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.notification.hide {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
 }
