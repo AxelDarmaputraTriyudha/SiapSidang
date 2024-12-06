@@ -8,12 +8,16 @@ SELECT
 	tugas_akhir.tahun_akd,
 	sidang_ta.waktu,
 	sidang_ta.tanggal,
-	sidang_ta.tempat
+	sidang_ta.tempat,
+	sidang_ta.nik,
+	dosen.nama AS nama_dosen,
+	sidang_ta.peran	
 FROM
 	tugas_akhir
 	JOIN mahasiswa ON mahasiswa.npm = tugas_akhir.id_mahasiswa
-	JOIN sidang_ta ON sidang_ta.id_ta = tugas_akhir.id_ta;
-
+	JOIN sidang_ta ON sidang_ta.id_ta = tugas_akhir.id_ta
+	JOIN dosen ON dosen.nik = sidang_ta.nik;
+	
 CREATE VIEW lihat_komponen AS
 SELECT
     deskripsi,
