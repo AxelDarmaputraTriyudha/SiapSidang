@@ -15,4 +15,7 @@ public class DataSidang {
     private String waktu;
     private String tanggal;
     private String tempat;
+    private String nik_dosen;
+    private String nama_dosen;
+    private String peran; 
 }

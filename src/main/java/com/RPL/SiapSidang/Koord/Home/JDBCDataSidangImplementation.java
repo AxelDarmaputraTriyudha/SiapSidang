@@ -2,6 +2,8 @@ package com.RPL.SiapSidang.Koord.Home;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,9 +15,41 @@ public class JDBCDataSidangImplementation {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
-    public List<DataSidang> findAll(){
-        String sql = "SELECT * FROM data_sidang_view";
-        return jdbcTemplate.query(sql, this::mapRowToDataSidang);
+    public List<DataSidang> findAll(String filter,
+                                    LocalDate tgl_awal,
+                                    LocalDate tgl_akhir,
+                                    String semester,
+                                    int tahun){
+
+        String sql = "SELECT * FROM data_sidang_view WHERE peran = 'Koordinator'";
+        
+        // kumpulan filter yang digunakan
+        List<Object> filterList = new ArrayList<>();
+
+        // cari filter apa aja yang dimasukkin
+        // kalo filternya ada, tambahin ke query SQL nya
+        if(filter.length() > 0){
+            sql += " AND nama ILIKE ?";
+            filterList.add("%" + filter + "%");
+        }
+        if(tgl_awal != null){
+            sql += " AND tanggal >= ?";
+            filterList.add(tgl_awal);
+        }
+        if(tgl_akhir != null){
+            sql += " AND tanggal <= ?";
+            filterList.add(tgl_akhir);
+        }
+        if(semester.length() > 0){
+            sql += " AND semester_akd = ?";
+            filterList.add(semester);
+        }
+        if(tahun > 0){
+            sql += " AND tahun_akd = ?";
+            filterList.add(tahun);
+        }
+
+        return jdbcTemplate.query(sql, this::mapRowToDataSidang, filterList.toArray());
     }
 
     private DataSidang mapRowToDataSidang(ResultSet resultSet, int rowNum) throws SQLException{
@@ -28,12 +62,10 @@ public class JDBCDataSidangImplementation {
             resultSet.getInt("tahun_akd"),
             resultSet.getString("waktu"),
             resultSet.getString("tanggal"),
-            resultSet.getString("tempat")
+            resultSet.getString("tempat"),
+            resultSet.getString("nik"),
+            resultSet.getString("nama_dosen"),
+            resultSet.getString("peran")
         );
-    }
-    
-    public List<DataSidang> findWithFilter(String filter){
-        String sql = "SELECT * FROM data_sidang_view WHERE nama ILIKE ?";
-        return jdbcTemplate.query(sql, this::mapRowToDataSidang, "%"+filter+"%");
     }
 }

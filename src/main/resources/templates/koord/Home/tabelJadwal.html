@@ -1,43 +1,47 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="/css/koord/Home/vars.css">
   <link rel="stylesheet" href="/css/koord/Home/style.css">
-  
-  
+
+
   <style>
-   a,
-   button,
-   input,
-   select,
-   h1,
-   h2,
-   h3,
-   h4,
-   h5,
-   * {
-       box-sizing: border-box;
-       margin: 0;
-       padding: 0;
-       border: none;
-       text-decoration: none;
-       background: none;
-   
-       -webkit-font-smoothing: antialiased;
-   }
-   
-   menu, ol, ul {
-       list-style-type: none;
-       margin: 0;
-       padding: 0;
-   }
-   </style>
+    a,
+    button,
+    input,
+    select,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      border: none;
+      text-decoration: none;
+      background: none;
+
+      -webkit-font-smoothing: antialiased;
+    }
+
+    menu,
+    ol,
+    ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+    }
+  </style>
 
   <title>Home page</title>
 </head>
+
 <body>
   <div class="navbar">
     <img class="logo" src="/css/koord/Home/logo0.svg" />
@@ -45,41 +49,57 @@
     <img class="log-out" src="/css/koord/Home/log-out0.svg" />
   </div>
   <div class="body">
-    <div class="feature-1">
-      <div class="frame-search">
-        <div class="search">
-          <form action="GET" th:action="@{/koord/home}">
+    <form method="GET" th:action="@{/koord/home}" id="filterForm">
+      <div class="feature-1">
+        <div class="frame-search">
+          <div class="search">
             <input type="text" name="filter" id="search-mhs" th:value="${filter}" placeholder="Masukkan nama mahasiswa">
-          </form>
+          </div>
+        </div>
+        <div class="buttons">
+          <a class="button-2" th:href="@{/koord/buatJadwal1}">
+            <div class="buat-jadwal">Buat Jadwal</div>
+          </a>
+          <div class="button-1">
+            <div class="buat-komponen">Buat Komponen</div>
+          </div>
         </div>
       </div>
-      <div class="buttons">
-        <a class="button-2" th:href="@{/koord/buatJadwal1}">
-          <div class="buat-jadwal">Buat Jadwal</div>
-        </a>
-        <div class="button-1">
-          <div class="buat-komponen">Buat Komponen</div>
+      <div class="feature-2">
+        <div class="frame-tanggal-awal">
+          <div class="tanggal-awal">Tanggal Awal</div>
+          <div>
+            <input type="date" name="tgl_awal" th:value="${tgl_awal}">
+          </div>
+        </div>
+        <div class="frame-tanggal-akhir">
+          <div class="tanggal-akhir">Tanggal Akhir</div>
+          <div>
+            <input type="date" name="tgl_akhir" th:value="${tgl_akhir}" onchange="this.form.submit()">
+          </div>
+        </div>
+        <div class="frame-semester">
+          <div class="dropdown">Dropdown Semester</div>
+          <select name="semester" id="semester" onchange="this.form.submit()">
+            <option value="" th:selected="${semester == ''}">All</option>
+            <option value="ganjil" th:selected="${semester == 'ganjil'}">Ganjil</option>
+            <option value="genap" th:selected="${semester == 'genap'}">Genap</option>
+          </select>
+        </div>
+        <div class="frame-tahun">
+          <div class="dropdown">Dropdown Tahun</div>
+          <select name="tahun" id="tahun" onchange="this.form.submit()">
+            <option value="0" th:selected="${tahun == '0'}">All</option>
+            <option value="2023" th:selected="${tahun == 2023}">2023</option>
+            <option value="2024" th:selected="${tahun == 2024}">2024</option>
+          </select>
         </div>
       </div>
-    </div>
-    <div class="feature-2">
-      <div class="frame-tanggal-awal">
-        <div class="tanggal-awal">Tanggal Awal</div>
-      </div>
-      <div class="frame-tanggal-akhir">
-        <div class="tanggal-akhir">Tanggal Akhir</div>
-      </div>
-      <div class="frame-semester">
-        <div class="dropdown">Dropdown Semester</div>
-      </div>
-      <div class="frame-tahun">
-        <div class="dropdown">Dropdown Tahun</div>
-      </div>
-    </div>
+    </form>
+
     <table id="daftar-sidang">
       <thead>
         <th>Nomor</th>
-        <th>Jenis Sidang</th>
         <th>Mahasiswa</th>
         <th>Semester</th>
         <th>Tahun Ajaran</th>
@@ -89,7 +109,6 @@
       </thead>
       <tbody th:each="sidang, stat : ${sidang}">
         <td th:text="${stat.index + 1}"></td>
-        <td th:text="${sidang.jenis}"></td>
         <td th:text="${sidang.nama}"></td>
         <td th:text="${sidang.semester}"></td>
         <td th:text="${sidang.tahun}"></td>
@@ -108,16 +127,8 @@
       <div class="line-16"></div>
       <p>RPL-B-3</p>
     </footer>
-
-    <!-- <div class="footer">
-
-    </div> -->
   </div>
 
-  
-
-  <!-- <div class="html-koord-home-jadwal-1-tabel">
-  </div> -->
-  
 </body>
+
 </html>
