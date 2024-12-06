@@ -30,3 +30,7 @@ FROM
     komponen_nilai
 GROUP BY
     deskripsi, semester_akd, tahun_akd;
+	JOIN sidang_ta ON sidang_ta.id_ta = tugas_akhir.id_ta;
+
+CREATE VIEW last_id_sidang AS 
+SELECT id_sidang FROM sidang_ta ORDER BY id_sidang DESC LIMIT 1;

@@ -1,9 +1,13 @@
 package com.RPL.SiapSidang.Koord.BuatJadwal;
 
+import java.sql.Time;
 import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cglib.core.Local;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,7 +22,13 @@ public class KoordController {
     @Autowired
     private KoordRepository repo;
     private String semester;
-    private int tahun;
+    private String tahun;
+    private Sidang koord;
+    private Sidang penguji1;
+    private Sidang penguji2;
+    private Sidang pembimbing1;
+    private Sidang pembimbing2;
+    private TA currTA;
     
     @GetMapping("/buatJadwal1")
     public String buatJadwal1(HttpSession session, Model model) {
@@ -50,8 +60,8 @@ public class KoordController {
             session.setAttribute("tgl", tgl);
             session.setAttribute("waktu", waktu);
             session.setAttribute("tempat", tempat);
-            this.semester = semester;
-            this.tahun = Integer.parseInt(tahun);
+            this.semester = (String) session.getAttribute("semester");
+            this.tahun = (String) session.getAttribute("tahun");
             return "redirect:/koord/buatJadwal2";
         }
 
@@ -92,15 +102,74 @@ public class KoordController {
         session.setAttribute("pb2", pb2);
         session.setAttribute("pu1", pu1);
         session.setAttribute("pu2", pu2);
-        
+
         // Redirect ke halaman selanjutnya
         return "redirect:/koord/buatJadwal3";
     }        
 
     @GetMapping("/buatJadwal3")
-    public String buatJadwal3(Model model){
+    public String buatJadwal3(Model model, HttpSession session){
         List<Komponen> list = this.repo.getAllKomponen(this.semester, this.tahun);
         model.addAttribute("nilaiList", list);
+        this.currTA = this.repo.getTA((String) session.getAttribute("npm"));
+        model.addAttribute("npmMahasiswa", currTA.getNpm());
+        model.addAttribute("namaMahasiswa", currTA.getNama());
+        model.addAttribute("judul", currTA.getJudul());
+
         return "koord/BuatJadwal/index3";
+    }
+
+    @PostMapping("/buatJadwal3")
+    public String buatJadwal31(HttpSession session){
+        String waktu = (String) session.getAttribute("waktu") + ":00";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+        LocalTime waktuTime = LocalTime.parse(waktu, formatter);
+
+        this.penguji1 = new Sidang(
+            0, 
+            (String) session.getAttribute("pu1"), 
+            this.currTA.getId_ta(), 
+            "PU1", 
+            "hari", 
+            (LocalDate) session.getAttribute("tgl"), 
+            waktuTime, 
+            (String) session.getAttribute("tempat"));
+
+        this.penguji2 = new Sidang(
+            0, 
+            (String) session.getAttribute("pu2"), 
+            this.currTA.getId_ta(), 
+            "PU2", 
+            "hari", 
+            (LocalDate) session.getAttribute("tgl"), 
+            waktuTime, 
+            (String) session.getAttribute("tempat"));
+
+        this.pembimbing1 = new Sidang(
+            0, 
+            (String) session.getAttribute("pb1"), 
+            this.currTA.getId_ta(), 
+            "PB1", 
+            "hari", 
+            (LocalDate) session.getAttribute("tgl"), 
+            waktuTime, 
+            (String) session.getAttribute("tempat"));
+
+        if (!String.valueOf("-").equals(session.getAttribute("pb2"))){
+            this.pembimbing2 = new Sidang(
+            0, 
+            (String) session.getAttribute("pb2"), 
+            currTA.getId_ta(), 
+            "PB2", 
+            "hari", 
+            (LocalDate) session.getAttribute("tgl"), 
+            waktuTime, 
+            (String) session.getAttribute("tempat"));
+        }
+        this.repo.setJadwal(penguji1, penguji2, pembimbing1, pembimbing2);
+
+        session.invalidate();
+
+        return "redirect:/koord/home";
     }
 }
