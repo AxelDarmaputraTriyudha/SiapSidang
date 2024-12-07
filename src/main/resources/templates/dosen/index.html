@@ -5,8 +5,9 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="/css/koord/Home/vars.css">
-  <link rel="stylesheet" href="/css/koord/Home/style.css">
+  <title>Home page</title>
+  <link rel="stylesheet" href="/css/dosen/Home/vars.css">
+  <link rel="stylesheet" href="/css/dosen/Home/style.css">
 
 
   <style>
@@ -39,14 +40,13 @@
     }
   </style>
 
-  <title>Home page</title>
 </head>
 
 <body>
   <div class="navbar">
-    <img class="logo" src="/css/koord/Home/logo0.svg" />
+    <img class="logo" src="/css/dosen/Home/logo0.svg" />
     <div class="siap-sidang">SIAP Sidang</div>
-    <img class="log-out" src="/css/koord/Home/log-out0.svg" />
+    <img class="log-out" src="/css/dosen/Home/log-out0.svg" />
   </div>
   <div class="body">
     <form method="GET" th:action="@{/dosen/home}" id="filterForm">
@@ -107,7 +107,7 @@
         <td th:text="${sidang.waktu}"></td>
         <td th:text="${sidang.tanggal}"></td>
         <td>
-          <form th:action="@{/dosen/DetailJadwal}">
+          <form th:action=@{/dosen/DetailJadwal}>
             <input type="hidden" name="npm" th:value="${sidang.npm}">
             <input type="hidden" name="peran" th:value="${sidang.peran}">
             <button type="submit" id="detail-jadwal">Lihat detail</button>
