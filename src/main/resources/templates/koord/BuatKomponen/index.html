@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="/css/koord/BuatKomponen/vars.css">
   <link rel="stylesheet" href="/css/koord/BuatKomponen/style.css">
+  <script src="/js/koord/Komponen/scripts.js" defer></script>
   
   
   <style>
@@ -54,40 +55,45 @@
       <div class="tahun">Tahun Ajaran</div>
     </div>
     <div class="frame_semester">
-      <img class="box2" src="/css/koord/BuatKomponen/box1.svg" />
+      <select id="semester" name="semester" class="box2" required>
+        <option value="" disabled th:if="${semester == null}" selected>Pilih Semester</option>
+        <option th:value="Ganjil" th:selected="${semester == 'Ganjil'}">Ganjil</option>
+        <option th:value="Genap" th:selected="${semester == 'Genap'}">Genap</option>
+      </select> 
       <div class="semester">Semester</div>
     </div>
-    <div class="komponen">Komponen</div>
-    <div class="nambah">
-      <div class="log-in">+</div>
-    </div>
-    <div class="header">
-      <div class="no">No.</div>
-      <div class="nama-komponen-atas">Nama Komponen</div>
-      <div class="bobot-penguji">Bobot Penguji</div>
-      <div class="bobot-pembimbing">Bobot Pembimbing</div>
-      <div class="edit">edit</div>
-    </div>
-    <div class="isi">
-      <div class="no2">1.</div>
-      <div class="nama-komponen-atas2">Kesesuaian Topik</div>
-      <div class="bobot-penguji2">15</div>
-      <div class="bobot-pembimbing2">20</div>
-      <div class="edit2">
-        <div class="edit3">Edit</div>
+    <div class="frame_komponen">
+      <div class="komponen">Komponen</div>
+      <div class="nambah">
+        <button class="plus" id="addRowButton">+</button>
       </div>
     </div>
-    <div class="isi2">
-      <div class="nama-komponen-atas3">Total Bobot</div>
-      <div class="bobot-penguji2">15</div>
-      <div class="bobot-pembimbing2">20</div>
-    </div>
-    <div class="back">
-      <div class="back2">Back</div>
-    </div>
-    <div class="next">
-      <div class="log-in2">Save</div>
-    </div>
+    <form method="POST" th:action="@{/koord/buatKomponen}">
+      <table>
+        <thead>
+          <tr>
+            <th>No.</th>
+            <th>Nama Komponen</th>
+            <th>Bobot Penguji</th>
+            <th>Bobot Pembimbing</th>
+          </tr>
+        </thead>
+        <tbody id="nilaiTableBody">
+          <tr th:each="nilai, stat : ${nilaiList}">
+            <td th:text="${stat.index + 1}"></td> <!-- Menampilkan nomor urut -->
+            <td th:text="${nilai.deskripsi}">Nama Komponen</td> <!-- Menampilkan nama komponen -->
+            <td th:text="${nilai.bobotpenguji}">Bobot Penguji</td> <!-- Menampilkan bobot ketua penguji -->
+            <td th:text="${nilai.bobotpembimbing}">Bobot Pembimbing</td> <!-- Menampilkan bobot pembimbing -->
+          </tr>
+        </tbody>
+      </table>
+      <a class="back" th:href="@{/koord/buatKomponen}">
+        <div class="back2">Back</div>
+      </a>
+      <button class="next" type="submit">
+        <div class="log-in2">Save</div>
+      </button>
+    </form>
   </div>
   
 </body>

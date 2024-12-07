@@ -101,6 +101,8 @@
   overflow: visible;
   border: #004e89 solid 3px;
   border-radius: 5px;
+  padding: 5px 10px;
+  font-size: large;
 }
 .tahun {
   color: var(--general-color-2, #004e89);
@@ -131,6 +133,10 @@
   left: 997px;
   top: 120px;
   overflow: visible;
+  border: #004e89 solid 3px;
+  border-radius: 5px;
+  padding: 5px 10px;
+  font-size: large;
 }
 .semester {
   color: var(--general-color-2, #004e89);
@@ -192,7 +198,7 @@
   top: 216px;
   box-shadow: 0px 15px 36px 0px rgba(246, 87, 20, 0.3);
 }
-.log-in {
+.plus {
   color: var(--general-color-2, #004e89);
   text-align: right;
   font-family: var(
@@ -501,4 +507,37 @@
   display: flex;
   align-items: center;
   justify-content: flex-end;
+}
+/* STYLE TABLE */
+table {
+  width: 50%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  font-family: "SourceSansPro-SemiBold", sans-serif;
+  color: #004e89;
+  position: absolute;
+  left: 640px;
+  top: 300px;
+}
+
+table, th, td {
+  border: 1px solid #004e89;
+}
+
+th {
+  text-align: center;
+  padding: 8px 12px;
+  background-color: #f7f5ed;
+  font-weight: 600;
+}
+
+td {
+  padding-left: 10px;
+  background-color: #fff;
+  height: 40px;
+}
+
+input {
+  height: 40px;
+  width: 100%;
 }
