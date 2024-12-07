@@ -14,9 +14,9 @@ public class LoginController {
     @Autowired
     private LoginService loginService;
 
-    @GetMapping
+     @GetMapping
     public String loginPage(HttpSession session){
-        return "/loginRPL/index";
+        return "/login/index";
     }
 
 }
