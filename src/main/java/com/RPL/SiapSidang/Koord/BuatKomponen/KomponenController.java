@@ -6,9 +6,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/koord")
+
 public class KomponenController {
     @GetMapping("/buatKomponen")
     public String index(){
-        return "koord/BuatKomponen/index1";
+        return "koord/BuatKomponen/index";
     }    
 }

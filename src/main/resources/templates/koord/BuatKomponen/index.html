@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/koord/BuatKomponen/vars.css">
+  <link rel="stylesheet" href="/css/koord/BuatKomponen/style.css">
+  
+  
+  <style>
+   a,
+   button,
+   input,
+   select,
+   h1,
+   h2,
+   h3,
+   h4,
+   h5,
+   * {
+       box-sizing: border-box;
+       margin: 0;
+       padding: 0;
+       border: none;
+       text-decoration: none;
+       background: none;
+   
+       -webkit-font-smoothing: antialiased;
+   }
+   
+   menu, ol, ul {
+       list-style-type: none;
+       margin: 0;
+       padding: 0;
+   }
+   </style>
+  <title>Document</title>
+</head>
+<body>
+  <div class="html-koord-pembuatan-komponen">
+    <div class="rectangle-1">
+      <div class="bobot-penilaian-pembimbing">Bobot penilaian pembimbing</div>
+      <div class="pembuatan-komponen">Pembuatan Komponen</div>
+      <div class="siap-sidang">SIAP Sidang</div>
+      <img class="logo-kiri-atas" src="/css/koord/BuatKomponen/logo-kiri-atas0.svg" />
+    </div>
+    <div class="frame_tahun">
+      <select id="tahun" name="tahun" class="box" required>
+        <option value="" disabled th:if="${tahun == null}" selected>Pilih Tahun Ajaran</option>
+        <option th:value="2023" th:selected="${tahun == '2023'}">2023</option>
+        <option th:value="2024" th:selected="${tahun == '2024'}">2024</option>
+      </select>
+      <div class="tahun">Tahun Ajaran</div>
+    </div>
+    <div class="frame_semester">
+      <img class="box2" src="/css/koord/BuatKomponen/box1.svg" />
+      <div class="semester">Semester</div>
+    </div>
+    <div class="komponen">Komponen</div>
+    <div class="nambah">
+      <div class="log-in">+</div>
+    </div>
+    <div class="header">
+      <div class="no">No.</div>
+      <div class="nama-komponen-atas">Nama Komponen</div>
+      <div class="bobot-penguji">Bobot Penguji</div>
+      <div class="bobot-pembimbing">Bobot Pembimbing</div>
+      <div class="edit">edit</div>
+    </div>
+    <div class="isi">
+      <div class="no2">1.</div>
+      <div class="nama-komponen-atas2">Kesesuaian Topik</div>
+      <div class="bobot-penguji2">15</div>
+      <div class="bobot-pembimbing2">20</div>
+      <div class="edit2">
+        <div class="edit3">Edit</div>
+      </div>
+    </div>
+    <div class="isi2">
+      <div class="nama-komponen-atas3">Total Bobot</div>
+      <div class="bobot-penguji2">15</div>
+      <div class="bobot-pembimbing2">20</div>
+    </div>
+    <div class="back">
+      <div class="back2">Back</div>
+    </div>
+    <div class="next">
+      <div class="log-in2">Save</div>
+    </div>
+  </div>
+  
+</body>
+</html>
