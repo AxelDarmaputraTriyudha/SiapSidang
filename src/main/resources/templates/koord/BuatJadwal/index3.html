@@ -54,40 +54,39 @@
     <img class="rectangle-2" src="/images/rectangle-20.svg"/>
     <div class="rectangle-3"></div>
     <div class="group-nilai">
-      <table>
-        <thead>
-            <tr>
-                <th>No.</th>
-                <th>Nama Komponen</th>
-                <th>Bobot Pembimbing</th>
-                <th>Bobot Anggota Pembimbing</th>
-                <th>Bobot Ketua Penguji</th>
-                <th>Bobot Anggota Penguji</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr th:each="nilai, stat : ${nilaiList}">
-                <td th:text="${stat.index + 1}"></td> <!-- Menampilkan nomor urut -->
-                <td th:text="${nilai.deskripsi}">Nama Komponen</td> <!-- Menampilkan nama komponen -->
-                <td th:text="${nilai.bobot_ketua_penguji}">Bobot Ketua Penguji</td> <!-- Menampilkan bobot ketua penguji -->
-                <td th:text="${nilai.bobot_anggota_penguji}">Bobot Anggota Penguji</td> <!-- Menampilkan bobot anggota penguji -->
-                <td th:text="${nilai.bobot_pembimbing}">Bobot Pembimbing</td> <!-- Menampilkan bobot pembimbing -->
-                <!-- <td th:text="${nilai.bobot_anggota_pembimbing}">Bobot Anggota Pembimbing</td> Menampilkan bobot anggota pembimbing -->
-            </tr>
-        </tbody>
-      </table>
-      <div class="tombol">
-        <a class="cancel" th:href="@{/koord/buatJadwal2}">
-          <div class="cancel2">Cancel</div>
-        </a>
-        <a class="next" th:href="@{/koord/home}">
-          <div class="log-in">Next</div>
-        </a>
+      <div class="overview">
+        <a>NPM Mahasiswa: </a> <a th:text="${npmMahasiswa}"></a><br>
+        <a>Nama Mahasiswa: </a> <a th:text="${namaMahasiswa}"></a><br>
+        <a>Judul Tugas Akhir: </a> <a th:text="${judul}"></a>
       </div>
-      <!-- <div th:each="item : ${nilaiList}" class="container">
-        <div class="judul" th:text="${item.deskripsi}">Tata Tulis Laporan</div>
-        <div class="frame">
-            <a th:text="${item.peran}">test</a> <!-- Contoh teks di frame -->
-    </div> -->
+      <form method="POST" th:action="@{/koord/buatJadwal3}">
+        <table>
+          <thead>
+              <tr>
+                  <th>No.</th>
+                  <th>Nama Komponen</th>
+                  <th>Bobot Penguji</th>
+                  <th>Bobot Pembimbing</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr th:each="nilai, stat : ${nilaiList}">
+                  <td th:text="${stat.index + 1}"></td> <!-- Menampilkan nomor urut -->
+                  <td th:text="${nilai.deskripsi}">Nama Komponen</td> <!-- Menampilkan nama komponen -->
+                  <td th:text="${nilai.bobotpenguji}">Bobot Penguji</td> <!-- Menampilkan bobot ketua penguji -->
+                  <td th:text="${nilai.bobotpembimbing}">Bobot Pembimbing</td> <!-- Menampilkan bobot pembimbing -->
+              </tr>
+          </tbody>
+        </table>
+        <div class="tombol">
+          <a class="cancel" th:href="@{/koord/buatJadwal2}">
+            <div class="cancel2">Cancel</div>
+          </a>
+          <button class="next" type="submit">
+            <div class="log-in">Save</div>
+          </button>
+        </div>
+      </form>
+    </div>
 </body>
 </html>

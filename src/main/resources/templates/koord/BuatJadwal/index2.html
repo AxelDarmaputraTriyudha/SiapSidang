@@ -87,7 +87,6 @@
       <div class="anggota-penguji">
           <select class="penguji2" name="pu2" required>
               <option value="" disabled selected>Pilih Nama Anggota Penguji</option>
-              <option value="-">-</option>
               <option th:each="pu2 : ${pu2List}" 
                       th:value="${pu2.nik}" 
                       th:text="${pu2.nama}"

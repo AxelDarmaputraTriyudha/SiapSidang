@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SIAP Sidang</title>
+  <link rel="stylesheet" href="/css/login/style.css">
+</head>
+<body>
+  <!-- <script src="/js/login/script.js"></script> -->
+  <div class="container">
+    <div class="left-section">
+      <div class="logo">
+        <div class="medal red"></div>
+        <div class="medal blue"></div>
+        <div class="medal yellow"></div>
+      </div>
+      <h1>SIAP<br>Sidang</h1>
+    </div>
+    <div class="right-section">
+      <form th:action="@{/login}" method="post" th:object="${loginRequest}">
+        <!-- Status Login -->
+        <div th:if="${status == 'failed'}" class="error-message">
+          <p>Email atau password salah. Silakan coba lagi!</p>
+      </div>
+        <!-- Email -->
+        <label for="email">Email:</label>
+        <input type="email" id="email" th:field="*{email}" placeholder="Masukkan email" class="input-field" name="email" required />
+
+        <!-- Password -->
+        <label for="password">Password:</label>
+        <input type="password" id="password" th:field="*{password}" placeholder="Masukkan password" class="input-field" name="password" required />
+
+
+        <!-- <span class="eye-icon" onclick="togglePassword()">👁️</span> -->
+         
+        <button type="submit"id="login" class="login-button">Log In</button>
+      </form>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,5 +1,6 @@
 package com.RPL.SiapSidang.Koord.Home;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,17 +18,20 @@ public class HomepageController {
 
     @GetMapping("/home")
     public String index(Model model,
-            @RequestParam(required = false, defaultValue = "") String filter){
+            @RequestParam(required = false, defaultValue = "") String filter,
+            @RequestParam(required = false, defaultValue = "") LocalDate tgl_awal,
+            @RequestParam(required = false, defaultValue = "") LocalDate tgl_akhir,
+            @RequestParam(required = false, defaultValue = "") String semester,
+            @RequestParam(required = false, defaultValue = "0") int tahun){
 
-        List<DataSidang> dataSidangList = null;
-        if(filter.length() == 0){
-            dataSidangList = dataSidangRepo.findAll();
-        }
-        else{
-            dataSidangList = dataSidangRepo.findWithFilter(filter);
-        }
+        List<DataSidang> dataSidangList = dataSidangRepo.findAll(filter, tgl_awal, tgl_akhir, semester, tahun);
+
+        model.addAttribute("tgl_awal", tgl_awal);
+        model.addAttribute("tgl_akhir", tgl_akhir);
         model.addAttribute("filter", filter);
         model.addAttribute("sidang", dataSidangList);
+        model.addAttribute("semester", semester);
+        model.addAttribute("tahun", tahun);
         return "/koord/home/tabelJadwal";
     }
 }
