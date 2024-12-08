@@ -100,9 +100,14 @@
       <button class="next" type="submit">
         <div class="log-in2">Save</div>
       </button>
-      <!-- Notifikasi -->
-      <div id="notification" th:if="${errorMessage}" class="notification">
+      <!-- Notifikasi Error -->
+      <div id="notificationError" th:if="${errorMessage}" class="notificationError">
         <p th:text="${errorMessage}"></p>
+      </div>
+
+      <!-- Notifikasi Success -->
+      <div id="notificationSuccess" th:if="${message}" class="notificationSuccess">
+        <p th:text="${message}"></p>
       </div>
     </form>
   </div>

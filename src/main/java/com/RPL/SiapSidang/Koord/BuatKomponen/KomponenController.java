@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -35,7 +36,8 @@ public class KomponenController {
             @RequestParam("deskripsi") List<String> deskripsiList,
             @RequestParam("penguji") List<String> pengujiList,
             @RequestParam("pembimbing") List<String> pembimbingList,
-            Model model, HttpSession session) {
+            Model model, HttpSession session,
+            RedirectAttributes redirectAttributes) {
         
             int sumPenguji = 0;
             int sumPembimbing = 0;
@@ -53,7 +55,7 @@ public class KomponenController {
                 listKomponen.add(komponen);
             }
     
-            if (sumPenguji < 100 || sumPembimbing < 100) {
+            if (sumPenguji != 100 || sumPembimbing != 100) {
                 model.addAttribute("semester", semester);
                 session.setAttribute("semester", semester);
                 model.addAttribute("tahun", tahun);
@@ -67,8 +69,18 @@ public class KomponenController {
                 else if (sumPembimbing < 100){
                     model.addAttribute("errorMessage", "Total bobot pembimbing kurang dari 100!");
                 }
-                else {
+                else if (sumPenguji < 100){
                     model.addAttribute("errorMessage", "Total bobot penguji kurang dari 100!");
+                }
+
+                if (sumPenguji > 100 && sumPembimbing > 100){
+                    model.addAttribute("errorMessage", "Total bobot penguji dan pembimbing lebih dari 100!");
+                }
+                else if (sumPembimbing > 100){
+                    model.addAttribute("errorMessage", "Total bobot pembimbing lebih dari 100!");
+                }
+                else if (sumPenguji > 100){
+                    model.addAttribute("errorMessage", "Total bobot penguji lebih dari 100!");
                 }
                 return "koord/BuatKomponen/index";
             }       
@@ -77,6 +89,7 @@ public class KomponenController {
             for(Komponen komponen : listKomponen){
                 komponenRepo.addKomponen(komponen);
             }
+            redirectAttributes.addFlashAttribute("message", "Komponen berhasil disimpan!");
             session.invalidate();
             return "redirect:/koord/home";
     }
