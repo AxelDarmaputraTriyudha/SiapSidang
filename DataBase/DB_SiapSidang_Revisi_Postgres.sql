@@ -137,14 +137,14 @@ INSERT INTO Mahasiswa (npm, nama, email, password) VALUES
 (6182201049, 'Xavier Rahman', 'xavier.rahman49@gmail.com', 'xavier49pass'),
 (6182201050, 'Yuni Lestari', 'yuni.lestari50@gmail.com', 'yuni50secure');
 
-INSERT INTO Komponen_nilai (id_komp, deskripsi, bobotPenguji, bobotPembimbing, semester, tahun_ajaran) VALUES
-(1, 'Tata Tulis Laporan', 10.00, 10.00, 'Ganjil', '2023'),
-(2, 'Tata Bahasa', 20.00, 20.00, 'Ganjil', '2023'),
-(3, 'Presentasi', 20.00, 20.00, 'Ganjil', '2023'),
-(4, 'Pemahaman Materi', 30.00, 30.00, 'Ganjil', '2023'),
-(5, 'Poster', 10.00, 10.00, 'Ganjil', '2023'),
-(6, 'Poster', 10.00, 10.00, 'Ganjil', '2023'),
-(7, 'Kemampuan Tanya Jawab', 10.00, 10.00, 'Ganjil', '2023');
+INSERT INTO Komponen_nilai (deskripsi, bobotPenguji, bobotPembimbing, semester, tahun_ajaran) VALUES
+('Tata Tulis Laporan', 10.00, 10.00, 'Ganjil', '2023'),
+('Tata Bahasa', 20.00, 20.00, 'Ganjil', '2023'),
+('Presentasi', 20.00, 20.00, 'Ganjil', '2023'),
+('Pemahaman Materi', 30.00, 30.00, 'Ganjil', '2023'),
+('Poster', 10.00, 10.00, 'Ganjil', '2023'),
+('Poster', 10.00, 10.00, 'Ganjil', '2023'),
+('Kemampuan Tanya Jawab', 10.00, 10.00, 'Ganjil', '2023');
 
 INSERT INTO tugas_akhir (id_ta, jenis, judul, semester_akd, tahun_akd, nilai_pb1, nilai_pu1, nilai_pu2, nilai_koord, nilai_akhir, angka_akhir, id_mahasiswa) VALUES
 (1, 'TA2', 'Analisis Sistem Informasi Akademik', 'Ganjil', 2023, 0, 0, 0, 0, 0, '-', 6182201001),

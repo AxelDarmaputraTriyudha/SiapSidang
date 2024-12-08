@@ -1,0 +1,228 @@
+.html-koord-nilai,
+.html-koord-nilai * {
+  box-sizing: border-box;
+}
+.html-koord-nilai {
+  background: #f7f5ed;
+  height: 1024px;
+  position: relative;
+  overflow: hidden;
+}
+footer {
+  background: var(--general-color-2, #004e89);
+  font-weight: bold;
+  color: white;
+  font-size: 20px;
+  border-style: solid;
+  border-color: var(
+    --radial,
+    radial-gradient(
+      closest-side,
+      rgba(255, 155, 0, 1) 12.5%,
+      rgba(237, 28, 36, 1) 100%
+    )
+  );
+  border-width: 1px 0px 0px 0px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  position: absolute;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  font-family: "Inter-Regular", sans-serif;
+}
+.line-16 {
+  margin-top: 10px;
+  margin-bottom: 20px;
+  border-style: solid;
+  border-color: var(--grey-grey-3, #dadce2);
+  border-width: 1px 0 0 0;
+  opacity: 0.5;
+  flex-shrink: 0;
+  width: 1200px;
+  height: 0px;
+  position: relative;
+  transform-origin: 0 0;
+  transform: rotate(0deg) scale(1, 1);
+}
+.header {
+  background: var(--general-color-2, #004e89);
+  padding: 40px 152px 40px 152px;
+  display: flex;
+  flex-direction: row;
+  gap: 43px;
+  align-items: center;
+  justify-content: flex-start;
+  width: 1440px;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+}
+.group {
+  flex-shrink: 0;
+  width: 122px;
+  height: 55.59px;
+  position: relative;
+  overflow: visible;
+}
+.siap-sidang {
+  color: #ffffff;
+  text-align: left;
+  font-family: var(
+    --regular-16px-font-family,
+    "SpaceGrotesk-Regular",
+    sans-serif
+  );
+  font-size: var(--regular-16px-font-size, 16px);
+  line-height: var(--regular-16px-line-height, 26px);
+  font-weight: var(--regular-16px-font-weight, 400);
+  position: absolute;
+  left: 164px;
+  top: 96px;
+  width: 91px;
+  height: 29px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+.nilai-mahasiswa {
+  color: #004e89;
+  text-align: center;
+  font-family: var(--bold-80px-font-family, "SpaceGrotesk-Bold", sans-serif);
+  font-size: var(--bold-80px-font-size, 80px);
+  line-height: var(--bold-80px-line-height, 86px);
+  font-weight: var(--bold-80px-font-weight, 700);
+  position: absolute;
+  left: 412px;
+  top: 181px;
+  width: 615px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.box-nilai {
+  background: #004e89;
+  border-radius: 10px;
+  width: 719px;
+  height: 308px;
+  position: absolute;
+  left: 360px;
+  top: 383px;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+}
+.penilaian-kedisiplinan-mahasiswa {
+  color: #ffffff;
+  text-align: left;
+  font-family: "Inter-SemiBold", sans-serif;
+  font-size: 24px;
+  font-weight: 600;
+  position: absolute;
+  left: 162px;
+  top: 41px;
+}
+.nilai {
+  position: absolute;
+  inset: 0;
+}
+.border {
+  background: #004e89;
+  border-radius: 10px;
+  border-style: solid;
+  border-color: #f6efe7;
+  border-width: 1px;
+  width: 395px;
+  height: 68.82px;
+  position: absolute;
+  left: 162px;
+  top: 107.18px;
+  color: white;
+  font-size: large;
+  padding-left: 10px;
+}
+.nilai2 {
+  color: #ffffff;
+  text-align: left;
+  font-family: "Inter-Regular", sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  position: absolute;
+  left: 178px;
+  top: 100px;
+  width: 37px;
+  height: 13px;
+  background: 5px var(--general-color-2, #004e89);
+  padding-left: 5px;
+}
+.button-save {
+  background: var(
+    --primary-primary,
+    radial-gradient(
+      closest-side,
+      rgba(255, 155, 0, 1) 12.5%,
+      rgba(237, 28, 36, 1) 100%
+    )
+  );
+  border-radius: 60px;
+  padding: 10px 23px 10px 37px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: space-between;
+  width: 11.96%;
+  height: 12.01%;
+  position: absolute;
+  right: 14.88%;
+  left: 73.16%;
+  bottom: 21.1%;
+  top: 66.88%;
+}
+.save {
+  color: rgba(0, 0, 0, 0.85);
+  text-align: left;
+  font-family: "Inter-Bold", sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  position: relative;
+  width: 35px;
+}
+.icon {
+  width: 1.67%;
+  height: 2.15%;
+  position: absolute;
+  right: 95.35%;
+  left: 2.99%;
+  bottom: 80.52%;
+  top: 17.33%;
+  overflow: visible;
+}
+.hidden {
+  display: none;
+}
+.notification {
+  position: fixed;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #3fc17e;
+  color: white;
+  padding: 20px 40px;
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.25);
+  font-family: "Inter-Bold", sans-serif;
+  font-size: 18px;
+  text-align: center;
+  z-index: 1000;
+  opacity: 1;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.notification.hide {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
+}
