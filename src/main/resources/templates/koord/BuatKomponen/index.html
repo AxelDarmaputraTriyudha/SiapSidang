@@ -46,22 +46,6 @@
       <div class="siap-sidang">SIAP Sidang</div>
       <img class="logo-kiri-atas" src="/css/koord/BuatKomponen/logo-kiri-atas0.svg" />
     </div>
-    <div class="frame_tahun">
-      <select id="tahun" name="tahun" class="box" required>
-        <option value="" disabled th:if="${tahun == null}" selected>Pilih Tahun Ajaran</option>
-        <option th:value="2023" th:selected="${tahun == '2023'}">2023</option>
-        <option th:value="2024" th:selected="${tahun == '2024'}">2024</option>
-      </select>
-      <div class="tahun">Tahun Ajaran</div>
-    </div>
-    <div class="frame_semester">
-      <select id="semester" name="semester" class="box2" required>
-        <option value="" disabled th:if="${semester == null}" selected>Pilih Semester</option>
-        <option th:value="Ganjil" th:selected="${semester == 'Ganjil'}">Ganjil</option>
-        <option th:value="Genap" th:selected="${semester == 'Genap'}">Genap</option>
-      </select> 
-      <div class="semester">Semester</div>
-    </div>
     <div class="frame_komponen">
       <div class="komponen">Komponen</div>
       <div class="nambah">
@@ -69,6 +53,23 @@
       </div>
     </div>
     <form method="POST" th:action="@{/koord/buatKomponen}">
+      <div class="frame_tahun">
+        <select id="tahun" name="tahun" class="box" required>
+          <option value="" disabled th:if="${tahun == null}" selected>Pilih Tahun Ajaran</option>
+          <option th:value="2024" th:selected="${tahun == '2024'}">2024</option>
+          <option th:value="2025" th:selected="${tahun == '2025'}">2025</option>
+          <option th:value="2026" th:selected="${tahun == '2026'}">2026</option>
+        </select>
+        <div class="tahun">Tahun Ajaran</div>
+      </div>
+      <div class="frame_semester">
+        <select id="semester" name="semester" class="box2" required>
+          <option value="" disabled th:if="${semester == null}" selected>Pilih Semester</option>
+          <option th:value="Ganjil" th:selected="${semester == 'Ganjil'}">Ganjil</option>
+          <option th:value="Genap" th:selected="${semester == 'Genap'}">Genap</option>
+        </select> 
+        <div class="semester">Semester</div>
+      </div>
       <table>
         <thead>
           <tr>
@@ -80,10 +81,16 @@
         </thead>
         <tbody id="nilaiTableBody">
           <tr th:each="nilai, stat : ${nilaiList}">
-            <td th:text="${stat.index + 1}"></td> <!-- Menampilkan nomor urut -->
-            <td th:text="${nilai.deskripsi}">Nama Komponen</td> <!-- Menampilkan nama komponen -->
-            <td th:text="${nilai.bobotpenguji}">Bobot Penguji</td> <!-- Menampilkan bobot ketua penguji -->
-            <td th:text="${nilai.bobotpembimbing}">Bobot Pembimbing</td> <!-- Menampilkan bobot pembimbing -->
+            <td th:text="${stat.index + 1}"></td>
+            <td>
+                <input type="text" name="deskripsi[]" th:value="${nilai.deskripsi}" />
+            </td>
+            <td>
+                <input type="number" name="penguji[]" th:value="${nilai.penguji}" />
+            </td>
+            <td>
+                <input type="number" name="pembimbing[]" th:value="${nilai.pembimbing}" />
+            </td>
           </tr>
         </tbody>
       </table>
@@ -93,6 +100,10 @@
       <button class="next" type="submit">
         <div class="log-in2">Save</div>
       </button>
+      <!-- Notifikasi -->
+      <div id="notification" th:if="${errorMessage}" class="notification">
+        <p th:text="${errorMessage}"></p>
+      </div>
     </form>
   </div>
   
