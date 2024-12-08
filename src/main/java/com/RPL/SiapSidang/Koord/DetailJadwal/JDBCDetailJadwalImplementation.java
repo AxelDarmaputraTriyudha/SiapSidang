@@ -30,7 +30,10 @@ public class JDBCDetailJadwalImplementation {
             resultSet.getInt("tahun_akd"),
             resultSet.getString("waktu"),
             resultSet.getString("tanggal"),
-            resultSet.getString("tempat")
+            resultSet.getString("tempat"),
+            resultSet.getString("nik"),
+            resultSet.getString("nama_dosen"),
+            resultSet.getString("peran")
         );
     }
 }
