@@ -1,43 +1,47 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="/css/koord/Home/vars.css">
   <link rel="stylesheet" href="/css/koord/Home/style.css">
-  
-  
+
+
   <style>
-   a,
-   button,
-   input,
-   select,
-   h1,
-   h2,
-   h3,
-   h4,
-   h5,
-   * {
-       box-sizing: border-box;
-       margin: 0;
-       padding: 0;
-       border: none;
-       text-decoration: none;
-       background: none;
-   
-       -webkit-font-smoothing: antialiased;
-   }
-   
-   menu, ol, ul {
-       list-style-type: none;
-       margin: 0;
-       padding: 0;
-   }
-   </style>
+    a,
+    button,
+    input,
+    select,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      border: none;
+      text-decoration: none;
+      background: none;
+
+      -webkit-font-smoothing: antialiased;
+    }
+
+    menu,
+    ol,
+    ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+    }
+  </style>
 
   <title>Home page</title>
 </head>
+
 <body>
   <div class="navbar">
     <img class="logo" src="/css/koord/Home/logo0.svg" />
@@ -45,10 +49,10 @@
     <img class="log-out" src="/css/koord/Home/log-out0.svg" />
   </div>
   <div class="body">
-    <div class="feature-1">
-      <div class="frame-search">
-        <div class="search">
-          <form action="GET" th:action="@{/koord/home}">
+    <form method="GET" th:action="@{/koord/home}" id="filterForm">
+      <div class="feature-1">
+        <div class="frame-search">
+          <div class="search">
             <input type="text" name="filter" id="search-mhs" th:value="${filter}" placeholder="Masukkan nama mahasiswa">
           </form>
         </div>
@@ -75,11 +79,11 @@
       <div class="frame-tahun">
         <div class="dropdown">Dropdown Tahun</div>
       </div>
-    </div>
+    </form>
+
     <table id="daftar-sidang">
       <thead>
         <th>Nomor</th>
-        <th>Jenis Sidang</th>
         <th>Mahasiswa</th>
         <th>Semester</th>
         <th>Tahun Ajaran</th>
@@ -89,7 +93,6 @@
       </thead>
       <tbody th:each="sidang, stat : ${sidang}">
         <td th:text="${stat.index + 1}"></td>
-        <td th:text="${sidang.jenis}"></td>
         <td th:text="${sidang.nama}"></td>
         <td th:text="${sidang.semester}"></td>
         <td th:text="${sidang.tahun}"></td>
@@ -108,16 +111,8 @@
       <div class="line-16"></div>
       <p>RPL-B-3</p>
     </footer>
-
-    <!-- <div class="footer">
-
-    </div> -->
   </div>
 
-  
-
-  <!-- <div class="html-koord-home-jadwal-1-tabel">
-  </div> -->
-  
 </body>
+
 </html>
