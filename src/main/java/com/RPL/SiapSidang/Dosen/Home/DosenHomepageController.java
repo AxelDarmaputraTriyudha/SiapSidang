@@ -30,12 +30,7 @@ public class DosenHomepageController {
             @RequestParam(required = false, defaultValue = "0") int tahun,
             HttpSession session){
 
-        // test with dummy session
-        session.setAttribute("nik", "20010002");
-        session.setAttribute("nama", "Keenan");
-
         List<DataSidang> dataSidangList = dosenRepository.findAll(filter, tgl_awal, tgl_akhir, semester, tahun, (String) session.getAttribute("nik"));
-
 
         model.addAttribute("tgl_awal", tgl_awal);
         model.addAttribute("tgl_akhir", tgl_akhir);
