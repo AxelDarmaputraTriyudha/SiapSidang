@@ -56,7 +56,7 @@ public class KoordImplementation implements KoordRepository{
             resultSet.getString("npm"), resultSet.getString("nama"), resultSet.getString("judul"));
     }
 
-    public void setJadwal(Sidang penguji1, Sidang penguji2, Sidang pembimbing1, Sidang pembimbing2){
+    public void setJadwal(Sidang koord, Sidang penguji1, Sidang penguji2, Sidang pembimbing1, Sidang pembimbing2){
         String sql = "SELECT * FROM last_id_sidang;";
         int idTA = jdbcTemplate.queryForObject(sql, Integer.class);
         idTA += 1;
@@ -64,6 +64,18 @@ public class KoordImplementation implements KoordRepository{
         DayOfWeek dayOfWeek = penguji1.getTanggal().getDayOfWeek();
         int dayIndex = dayOfWeek.getValue();
         String hari = listHari[dayIndex % 7];
+
+        sql = "INSERT INTO sidang_ta (id_sidang, nik, id_ta, peran, hari, tanggal, waktu, tempat) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        jdbcTemplate.update(
+            sql, 
+            idTA,
+            koord.getNik(),
+            koord.getId_ta(),
+            koord.getPeran(),
+            hari,
+            koord.getTanggal(),
+            koord.getWaktu(),
+            koord.getTempat());
 
         sql = "INSERT INTO sidang_ta (id_sidang, nik, id_ta, peran, hari, tanggal, waktu, tempat) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         jdbcTemplate.update(
