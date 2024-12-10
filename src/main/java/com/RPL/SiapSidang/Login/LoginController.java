@@ -11,38 +11,53 @@ import org.springframework.web.bind.annotation.RequestParam;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
-@RequestMapping("/login")
+// @RequestMapping("/login")
 public class LoginController {
 
     @Autowired
     private LoginService loginService;
 
-    @GetMapping
+    @GetMapping("/login")
     public String loginPage(){
-        return "login/login";
+        return "login/loginPage";
     }
 
     @PostMapping("/login")
-    public String handleLogin (@RequestParam("email") String email, @RequestParam("password") String password, HttpSession session, Model model ){
+    public String handleLogin (@RequestParam String email, @RequestParam String password, HttpSession session, Model model ){
 
-        String result = loginService.login(email, password, session);
+        User user = loginService.login(email, password);
+        
+        if(user!=null){
+            if(user.getNomor().contains("618") ){
+                session.setAttribute("npm", user.getNomor());
+                session.setAttribute("nama", user.getNama());
+                session.setAttribute("role", "mahasiswa");
+                return "redirect:/mahasiswa/home";
+            }
 
-        if (result.contains("berhasil")) {
-            return "redirect:/dashboard";  // Login berhasil
+            else if( user.getNomor().contains("2001")){
+
+                if(user.getIsKoord()){
+                    session.setAttribute("nik", user.getNomor());
+                    session.setAttribute("nama", user.getNama());
+                    session.setAttribute("kode_nama", user.getKode_nama());
+                    session.setAttribute("role", "koordinator");
+                    return "redirect:/koord/home";
+                }
+                else{
+                    session.setAttribute("nik", user.getNomor());
+                    session.setAttribute("nama", user.getNama());
+                    session.setAttribute("kode_nama", user.getKode_nama());
+                    session.setAttribute("role", "Dosen");
+                    return "redirect:/dosen/home";
+                }
+            }
         }
 
         model.addAttribute("status", "failed");  // Login gagal
-        return "login";  // Kembali ke halaman login
+        return "/login/loginPage";
     }
 
-    // Menampilkan dashboard
-    @GetMapping("/dashboard")
-    public String showDashboard(HttpSession session) {
-        if (session.getAttribute("id") == null) {
-            return "redirect:/login";  // Jika belum login, redirect ke login
-        }
-        return "/koord/Home/tabelJadwal";  // Menampilkan halaman dashboard
-    }
 
     // Logout
     @GetMapping("/logout")

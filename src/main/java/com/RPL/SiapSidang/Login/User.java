@@ -5,9 +5,13 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class MahasiswaLogin {
-    private String npm;
+public class User {
+    private String nomor;
     private String nama;
+    private String kode_nama;
     private String email;
     private String password;
+    private Boolean isKoord;
+    private boolean isMhs;
+    private boolean isDosen;
 }

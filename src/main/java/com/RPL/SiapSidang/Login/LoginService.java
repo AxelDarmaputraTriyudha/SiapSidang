@@ -1,3 +1,8 @@
+/*
+ * 
+ */
+
+
 package com.RPL.SiapSidang.Login;
 
 import java.util.Optional;
@@ -5,38 +10,34 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import jakarta.servlet.http.HttpSession;
 
 @Service
 public class LoginService {
 
     @Autowired
-    private MahasiswaRepo mahasiswaRepo;
+    private UserRepo userRepo;
 
-    @Autowired
-    private DosenRepo dosenRepo;
+    public User login(String email, String password) {
 
-    public String login(String email, String password, HttpSession session) {
-        // Cek login untuk Mahasiswa
-        Optional<MahasiswaLogin> mahasiswaOpt = mahasiswaRepo.findByUsernameMahasiswa(email);
-        if (mahasiswaOpt.isPresent() && mahasiswaOpt.get().getPassword().equals(password)) {
-            MahasiswaLogin mahasiswa = mahasiswaOpt.get();
-            session.setAttribute("id", mahasiswa.getNpm());
-            session.setAttribute("name", mahasiswa.getNama());
-            session.setAttribute("role", "mahasiswa");
-            return "Login berhasil sebagai Mahasiswa";
+        Optional<User> mahasiswaOpt = userRepo.findByUsernameMahasiswa(email);
+        Optional<User> dosenOpt = userRepo.findByUsernameDosen(email);
+
+        if(mahasiswaOpt.isPresent() && mahasiswaOpt.get().getPassword().equals(password)){ // login jika mahasiswa
+            User mhs = mahasiswaOpt.get();
+            return mhs;
         }
-
-         // Cek login untuk Dosen
-         Optional<DosenLogin> dosenOpt = dosenRepo.findByUsernameDosen(email);
-         if (dosenOpt.isPresent() && dosenOpt.get().getPassword().equals(password)) {
-             DosenLogin dosen = dosenOpt.get();
-             session.setAttribute("id", dosen.getNik());
-             session.setAttribute("name", dosen.getNama());
-             session.setAttribute("role", dosen.getIsKoord() ? "koordinator" : "dosen");
-             return "Login berhasil sebagai Dosen";
-         }
- 
-         return "Email atau password salah";
+        else if(dosenOpt.isPresent() && dosenOpt.get().getPassword().equals(password)){
+            if(dosenOpt.get().getIsKoord()){
+                User dosenKoor = dosenOpt.get();
+                return dosenKoor;
+            }
+            else{
+                User dosen = dosenOpt.get();
+                return dosen; 
+            }
+        }
+        else{
+            return null;
+        }
     }
 }
