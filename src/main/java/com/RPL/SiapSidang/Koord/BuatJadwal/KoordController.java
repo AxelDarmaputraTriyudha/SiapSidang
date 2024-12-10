@@ -123,6 +123,18 @@ public class KoordController {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
         LocalTime waktuTime = LocalTime.parse(waktu, formatter);
 
+        // BAGIAN KOORDINATOR
+        this.koord = new Sidang(
+            0, 
+            (String) session.getAttribute("nik"), 
+            this.currTA.getId_ta(), 
+            "Koordinator", 
+            "hari", 
+            (LocalDate) session.getAttribute("tgl"), 
+            waktuTime, 
+            (String) session.getAttribute("tempat"));
+
+        // BAGIAN PENGUJI 1
         this.penguji1 = new Sidang(
             0, 
             (String) session.getAttribute("pu1"), 
@@ -133,6 +145,7 @@ public class KoordController {
             waktuTime, 
             (String) session.getAttribute("tempat"));
 
+        // BAGIAN PENGUJI 2
         this.penguji2 = new Sidang(
             0, 
             (String) session.getAttribute("pu2"), 
@@ -143,6 +156,7 @@ public class KoordController {
             waktuTime, 
             (String) session.getAttribute("tempat"));
 
+        // BAGIAN PEMBIMBING 1
         this.pembimbing1 = new Sidang(
             0, 
             (String) session.getAttribute("pb1"), 
@@ -153,6 +167,7 @@ public class KoordController {
             waktuTime, 
             (String) session.getAttribute("tempat"));
 
+        // BAGIAN PEMBIMBING 2
         if (!String.valueOf("-").equals(session.getAttribute("pb2"))){
             this.pembimbing2 = new Sidang(
             0, 
@@ -164,7 +179,7 @@ public class KoordController {
             waktuTime, 
             (String) session.getAttribute("tempat"));
         }
-        this.repo.setJadwal(penguji1, penguji2, pembimbing1, pembimbing2);
+        this.repo.setJadwal(koord, penguji1, penguji2, pembimbing1, pembimbing2);
 
         session.invalidate();
 
