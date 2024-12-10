@@ -19,7 +19,8 @@ public class DetailSidangDosenController {
 
     @GetMapping("/DetailJadwal")
     public String index(Model model,
-            @RequestParam(required = true) String npm){
+            @RequestParam(required = true) String npm,
+            @RequestParam String peran){
 
         List<DataSidang> data = detailJadwalDosenRepo.findData(npm);
 
@@ -50,6 +51,7 @@ public class DetailSidangDosenController {
         model.addAttribute("nama_pu1", penguji1);
         model.addAttribute("nama_pu2", penguji2);
         model.addAttribute("nama_pb", pembimbing);
+        model.addAttribute("peran", peran);
 
         return "/dosen/DetailJadwal/detailJadwal";
     }
