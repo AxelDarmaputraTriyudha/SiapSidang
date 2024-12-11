@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import com.RPL.SiapSidang.RequiredRole;
+
 import jakarta.servlet.http.HttpSession;
 
 @Controller
@@ -29,6 +32,7 @@ public class KoordController {
     private TA currTA;
     
     @GetMapping("/buatJadwal1")
+    @RequiredRole("koordinator")
     public String buatJadwal1(HttpSession session, Model model) {
         model.addAttribute("namaMahasiswa", session.getAttribute("namaMahasiswa"));
         model.addAttribute("npm", session.getAttribute("npm"));
@@ -41,6 +45,7 @@ public class KoordController {
     }
 
     @PostMapping("/buatJadwal1")
+    @RequiredRole("koordinator")
     public String buatJadwal11(
         @RequestParam("namaMahasiswa") String namaMahasiswa,
         @RequestParam("npm") String npm,
@@ -64,6 +69,7 @@ public class KoordController {
         }
 
     @GetMapping("/buatJadwal2")
+    @RequiredRole("koordinator")
     public String buatJadwal2(HttpSession session, Model model) {
         // Ambil data dari sesi
         String pb1 = (String) session.getAttribute("pb1");
@@ -88,6 +94,7 @@ public class KoordController {
     }                
 
     @PostMapping("/buatJadwal2")
+    @RequiredRole("koordinator")
     public String buatJadwal21(
         @RequestParam("pb1") String pb1,
         @RequestParam("pb2") String pb2,
@@ -106,6 +113,7 @@ public class KoordController {
     }        
 
     @GetMapping("/buatJadwal3")
+    @RequiredRole("koordinator")
     public String buatJadwal3(Model model, HttpSession session){
         List<Komponen> list = this.repo.getAllKomponen(this.semester, this.tahun);
         model.addAttribute("nilaiList", list);
@@ -118,11 +126,24 @@ public class KoordController {
     }
 
     @PostMapping("/buatJadwal3")
+    @RequiredRole("koordinator")
     public String buatJadwal31(HttpSession session){
         String waktu = (String) session.getAttribute("waktu") + ":00";
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
         LocalTime waktuTime = LocalTime.parse(waktu, formatter);
 
+        // BAGIAN KOORDINATOR
+        this.koord = new Sidang(
+            0, 
+            (String) session.getAttribute("nik"), 
+            this.currTA.getId_ta(), 
+            "Koordinator", 
+            "hari", 
+            (LocalDate) session.getAttribute("tgl"), 
+            waktuTime, 
+            (String) session.getAttribute("tempat"));
+
+        // BAGIAN PENGUJI 1
         this.penguji1 = new Sidang(
             0, 
             (String) session.getAttribute("pu1"), 
@@ -133,6 +154,7 @@ public class KoordController {
             waktuTime, 
             (String) session.getAttribute("tempat"));
 
+        // BAGIAN PENGUJI 2
         this.penguji2 = new Sidang(
             0, 
             (String) session.getAttribute("pu2"), 
@@ -143,6 +165,7 @@ public class KoordController {
             waktuTime, 
             (String) session.getAttribute("tempat"));
 
+        // BAGIAN PEMBIMBING 1
         this.pembimbing1 = new Sidang(
             0, 
             (String) session.getAttribute("pb1"), 
@@ -153,6 +176,7 @@ public class KoordController {
             waktuTime, 
             (String) session.getAttribute("tempat"));
 
+        // BAGIAN PEMBIMBING 2
         if (!String.valueOf("-").equals(session.getAttribute("pb2"))){
             this.pembimbing2 = new Sidang(
             0, 
@@ -164,7 +188,7 @@ public class KoordController {
             waktuTime, 
             (String) session.getAttribute("tempat"));
         }
-        this.repo.setJadwal(penguji1, penguji2, pembimbing1, pembimbing2);
+        this.repo.setJadwal(koord, penguji1, penguji2, pembimbing1, pembimbing2);
 
         session.invalidate();
 
