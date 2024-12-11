@@ -46,7 +46,7 @@
   <div class="navbar">
     <img class="logo" src="/css/dosen/Home/logo0.svg" />
     <div class="siap-sidang">SIAP Sidang</div>
-    <img class="log-out" src="/css/dosen/Home/log-out0.svg" />
+    <a th:href="@{/logout}"> <img class="log-out" src="/css/dosen/Home/log-out0.svg" /></a>
   </div>
   <div class="body">
     <form method="GET" th:action="@{/dosen/home}" id="filterForm">
