@@ -46,17 +46,12 @@
   <div class="navbar">
     <img class="logo" src="/css/mahasiswa/Home/logo0.svg" />
     <div class="siap-sidang">SIAP Sidang</div>
-    <img class="log-out" src="/css/mahasiswa/Home/log-out0.svg" />
+    <a th:href="@{/logout}">
+      <img class="log-out" src="/css/mahasiswa/Home/log-out0.svg" />
+    </a>
   </div>
   <div class="body">
     <form method="GET" th:action="@{/mahasiswa/home}" id="filterForm">
-      <div class="feature-1">
-        <div class="frame-search">
-          <div class="search">
-            <input type="text" name="filter" id="search-mhs" th:value="${filter}" placeholder="Masukkan nama mahasiswa">
-          </div>
-        </div>
-      </div>
       <div class="feature-2">
         <div class="frame-tanggal-awal">
           <div class="tanggal-awal">Tanggal Awal</div>
@@ -92,7 +87,7 @@
     <table id="daftar-sidang">
       <thead>
         <th>Nomor</th>
-        <th>Mahasiswa</th>
+        <th>Judul</th>
         <th>Semester</th>
         <th>Tahun Ajaran</th>
         <th>Waktu Sidang</th>
@@ -101,7 +96,7 @@
       </thead>
       <tbody th:each="sidang, stat : ${sidang}">
         <td th:text="${stat.index + 1}"></td>
-        <td th:text="${sidang.nama}"></td>
+        <td th:text="${sidang.judul}"></td>
         <td th:text="${sidang.semester}"></td>
         <td th:text="${sidang.tahun}"></td>
         <td th:text="${sidang.waktu}"></td>
@@ -109,7 +104,6 @@
         <td>
           <form th:action=@{/mahasiswa/DetailJadwal}>
             <input type="hidden" name="npm" th:value="${sidang.npm}">
-            <input type="hidden" name="peran" th:value="${sidang.peran}">
             <button type="submit" id="detail-jadwal">Lihat detail</button>
           </form>
         </td>

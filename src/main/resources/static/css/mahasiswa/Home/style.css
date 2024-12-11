@@ -220,6 +220,7 @@ footer {
   flex-shrink: 0;
   width: 1303px;
   height: 43px;
+  margin-top: 20px;
   position: relative;
 }
 .frame-tanggal-awal {
