@@ -5,13 +5,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import jakarta.servlet.http.HttpSession;
 
 @Controller
-// @RequestMapping("/login")
+
 public class LoginController {
 
     @Autowired
@@ -31,7 +30,7 @@ public class LoginController {
             if(user.getNomor().contains("618") ){
                 session.setAttribute("npm", user.getNomor());
                 session.setAttribute("nama", user.getNama());
-                session.setAttribute("role", "mahasiswa");
+                session.setAttribute("peran", "mahasiswa");
                 return "redirect:/mahasiswa/home";
             }
 
@@ -41,14 +40,14 @@ public class LoginController {
                     session.setAttribute("nik", user.getNomor());
                     session.setAttribute("nama", user.getNama());
                     session.setAttribute("kode_nama", user.getKode_nama());
-                    session.setAttribute("role", "koordinator");
+                    session.setAttribute("peran", "koordinator");
                     return "redirect:/koord/home";
                 }
                 else{
                     session.setAttribute("nik", user.getNomor());
                     session.setAttribute("nama", user.getNama());
                     session.setAttribute("kode_nama", user.getKode_nama());
-                    session.setAttribute("role", "Dosen");
+                    session.setAttribute("peran", "Dosen");
                     return "redirect:/dosen/home";
                 }
             }
