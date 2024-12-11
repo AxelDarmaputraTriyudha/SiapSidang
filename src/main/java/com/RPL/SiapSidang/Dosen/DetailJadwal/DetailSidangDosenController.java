@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.RPL.SiapSidang.RequiredRole;
 import com.RPL.SiapSidang.Koord.Home.DataSidang;
 
 @Controller
@@ -18,6 +19,7 @@ public class DetailSidangDosenController {
     JDBCDetailJadwalDosenImplementation detailJadwalDosenRepo;
 
     @GetMapping("/DetailJadwal")
+    @RequiredRole("Dosen")
     public String index(Model model,
             @RequestParam(required = true) String npm,
             @RequestParam String peran){

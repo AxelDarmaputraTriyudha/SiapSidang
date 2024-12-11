@@ -15,21 +15,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.RPL.SiapSidang.RequiredRole;
+
 import jakarta.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/koord")
-
 public class KomponenController {
     @Autowired
     private JDBCKomponen komponenRepo;
     
         @GetMapping("/buatKomponen")
+        @RequiredRole("koordinator")
         public String index(){
             return "koord/BuatKomponen/index";
         }
         
         @PostMapping("/buatKomponen")
+        @RequiredRole("koordinator")
         public String index2(
             @RequestParam("semester") String semester,
             @RequestParam("tahun") String tahun,
@@ -108,6 +111,7 @@ public class KomponenController {
     }
 
     @ModelAttribute("nilaiList")
+    @RequiredRole("koordinator")
     public List<Map<String, String>> getNilaiList(HttpSession session) {
         @SuppressWarnings("unchecked")
         List<Map<String, String>> nilaiList = (List<Map<String, String>>) session.getAttribute("nilaiList");

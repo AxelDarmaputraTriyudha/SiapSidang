@@ -7,12 +7,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.RPL.SiapSidang.RequiredRole;
+
 import jakarta.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/koord")
 public class NilaiController {
     @GetMapping("/tambahNilai")
+    @RequiredRole("koordinator")
     public String index(HttpSession session, Model model) {
         model.addAttribute("nilaiKoord", session.getAttribute("nilaiKoord"));
         model.addAttribute("successMessage", session.getAttribute("successMessage"));
@@ -21,6 +24,7 @@ public class NilaiController {
     }
 
     @PostMapping("/tambahNilai")
+    @RequiredRole("koordinator")
     public String tambahNilai(
         @RequestParam(value = "nilaiKoord", required = true) Integer nilai,
         HttpSession session, Model model) {
