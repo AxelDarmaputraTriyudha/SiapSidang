@@ -7,16 +7,20 @@ import org.apache.pdfbox.pdmodel.font.PDType1Font;
 import org.apache.pdfbox.pdmodel.graphics.image.PDImageXObject;
 import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
+
+import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 
 @RestController
 public class PDFController {
 
     @GetMapping("/generatePDF")
-    public void generatePdfWithImage(jakarta.servlet.http.HttpServletResponse response) throws IOException {
+    public void generatePdf(jakarta.servlet.http.HttpServletResponse response) throws IOException {
         // Set the response headers for PDF
         response.setContentType("application/pdf");
         response.setHeader("Content-Disposition", "attachment; filename=example_with_image.pdf");
@@ -80,8 +84,8 @@ public class PDFController {
         float[] columnWidths2 = {30, 150, 90, 90, 90}; // Widths for each column
 
         drawRow2(contentStream, 70, tableStartY, tableWidth, columnWidths2, "No", "Peran", "Nilai", "Bobot", "Nilai Akhir", rowHeight);
-        drawRow2(contentStream, 70, tableStartY - rowHeight, tableWidth, columnWidths2, "1", " Ketua Tim Penguji", "00.00", "35.00%", "00.00", rowHeight);
-        drawRow2(contentStream, 70, tableStartY - 2 * rowHeight, tableWidth, columnWidths2, "2", " Anggota Tim Penguji", "00.00", "30.00%", "00.00", rowHeight);
+        drawRow2(contentStream, 70, tableStartY - rowHeight, tableWidth, columnWidths2, "1", "Ketua Tim Penguji", "00.00", "35.00%", "00.00", rowHeight);
+        drawRow2(contentStream, 70, tableStartY - 2 * rowHeight, tableWidth, columnWidths2, "2", "Anggota Tim Penguji", "00.00", "30.00%", "00.00", rowHeight);
         drawRow2(contentStream, 70, tableStartY - 3 * rowHeight, tableWidth, columnWidths2, "3", "Pembimbing", "00.00", "20.00%", "00.00", rowHeight);
         drawRow2(contentStream, 70, tableStartY - 4 * rowHeight, tableWidth, columnWidths2, "4", "Koordinatir Skripsi", "00.00", "10.00%", "00.00", rowHeight);
         drawRow2(contentStream, 70, tableStartY - 5 * rowHeight, tableWidth, columnWidths2, "", "Total", "", "100.00%", "00.00", rowHeight);
@@ -109,9 +113,30 @@ public class PDFController {
         // Close the content stream
         contentStream.close();
 
+        // Save to a temporary file
+        // File tempFile = File.createTempFile("generated_", ".pdf");
+        // document.save(tempFile);
+        // document.close();
+
+        // Return a URL for preview
+        // return "http://localhost:8080/preview/" + tempFile.getName();
+
         // Write the document to the response output stream
         document.save(response.getOutputStream());
         document.close();
+    }
+
+    @GetMapping("/preview/{fileName}")
+    public void previewPdf(@PathVariable String fileName, HttpServletResponse response) throws IOException {
+        File file = new File(System.getProperty("java.io.tmpdir"), fileName);
+        if (file.exists()) {
+            response.setContentType("application/pdf");
+            response.setHeader("Content-Disposition", "inline; filename=" + fileName);
+            Files.copy(file.toPath(), response.getOutputStream());
+            response.getOutputStream().flush();
+        } else {
+            response.sendError(HttpServletResponse.SC_NOT_FOUND, "File not found");
+        }
     }
 
     private static void drawRow(PDPageContentStream contentStream, float startX, float startY, float tableWidth, float[] columnWidths, String col1Text, String col2Text, float rowHeight) throws IOException {

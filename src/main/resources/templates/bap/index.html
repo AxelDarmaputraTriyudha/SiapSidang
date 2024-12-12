@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/bap/vars.css">
+  <link rel="stylesheet" href="/css/bap/style.css">
+  
+  
+  <style>
+   a,
+   button,
+   input,
+   select,
+   h1,
+   h2,
+   h3,
+   h4,
+   h5,
+   * {
+       box-sizing: border-box;
+       margin: 0;
+       padding: 0;
+       border: none;
+       text-decoration: none;
+       background: none;
+   
+       -webkit-font-smoothing: antialiased;
+   }
+   
+   menu, ol, ul {
+       list-style-type: none;
+       margin: 0;
+       padding: 0;
+   }
+   </style>
+  <title>Document</title>
+</head>
+<body>
+  <div class="html-koord-manajemen-bap">
+    <img class="arrow-back" src="/css/bap/arrow-back0.svg" />
+    <div class="header">
+      <img class="group" src="/css/bap/group0.svg" />
+      <div class="siap-sidang">SIAP Sidang</div>
+    </div>
+    <div class="manajemen-bap">BAP Sidang</div>
+    <div class="rectangle-507">
+      <div class="identitas">
+        <p>Nama Mahasiswa: Testing</p>
+        <p>NPM Mahasiswa: test</p>
+        <p>Topik: test</p>
+      </div>
+      <table class="table_bap">
+        <tr>
+          <td>Pembimbing Utama/Tunggal*</td>
+          <td>nama</td>
+        </tr>
+        <tr>
+          <td>Pembimbing Pendamping</td>
+          <td>nama</td>
+        </tr>
+        <tr>
+          <td>Ketua Tim Penguji</td>
+          <td>nama</td>
+        </tr>
+        <tr>
+          <td>Anggota Tim Penguji</td>
+          <td>nama</td>
+        </tr>
+      </table>
+      <p class="identitas">Rekapitulasi Nilai Sidang sebagai berikut: </p>
+      <table class="table_bap">
+        <tr>
+          <th>No</th>
+          <th>Peran</th>
+          <th>Nilai</th>
+          <th>Bobot</th>
+          <th>Nilai Akhir</th>
+        </tr>
+        <tr>
+          <th>1</th>
+          <th>Ketua Tim Penguji</th>
+          <th></th>
+          <th>35.00%</th>
+          <th></th>
+        </tr>
+        <tr>
+          <th>2</th>
+          <th>Anggota Tim Penguji</th>
+          <th></th>
+          <th>30.00%</th>
+          <th></th>
+        </tr>
+        <tr>
+          <th>3</th>
+          <th>Pembimbing</th>
+          <th></th>
+          <th>20.00%</th>
+          <th></th>
+        </tr>
+        <tr>
+          <th>4</th>
+          <th>Koordinatir Skripsi</th>
+          <th></th>
+          <th>10.00%</th>
+          <th></th>
+        </tr>
+        <tr>
+          <th></th>
+          <th>Total</th>
+          <th></th>
+          <th>100.00%</th>
+          <th></th>
+        </tr>
+      </table>
+      <table class="table_bap">
+        <tr style="height: 50px;">
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>Ketua Penguji</td>
+          <td>Anggota Penguji</td>
+          <td>Pembimbing</td>
+          <td>Mahasiswa</td>
+          <td>Koordinator Skripsi</td>
+        </tr>
+      </table>
+    </div>
+    <div class="upload">
+      <img class="upload2" src="/css/bap/upload1.svg" />
+      <div class="upload-pdf">Upload PDF</div>
+    </div>
+    <a class="download" th:href="@{/generatePDF}">
+      <img class="fi-rr-download" src="/css/bap/fi-rr-download0.svg" />
+      <div class="download-pdf">Download PDF</div>
+    </a>
+  </div>
+  
+</body>
+</html>
