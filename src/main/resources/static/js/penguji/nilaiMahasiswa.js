@@ -34,6 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (confirmed) {
           alert("Data berhasil disimpan!");
           // Anda bisa tambahkan logika pengiriman data ke server di sini.
+          
         }
       } else {
         alert("Pastikan semua nilai diisi dengan angka antara 0 hingga 100.");

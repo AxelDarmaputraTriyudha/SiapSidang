@@ -1,8 +1,11 @@
 package com.RPL.SiapSidang.Penguji.NilaiMahasiswa;
 
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+import java.util.List;
 
-@Repository
-public interface PengujiNilaiRepository extends JpaRepository<PengujiNilai, Long> {
+
+public interface PengujiNilaiRepository {
+    List<KomponenNilai> getKomponen();
+    List<Mahasiswa> getDatMahasiswa();
+    List<Bobot> getBobot(String deskripsi);
+    void saveNilaiPenguji(double nilai, int bobot, String npm);
 }

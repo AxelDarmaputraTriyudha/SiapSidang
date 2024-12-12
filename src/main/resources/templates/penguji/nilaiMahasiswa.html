@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Nilai Mahasiswa</title>
   <link rel="stylesheet" href="/css/penguji/NilaiMahasiswa/nilaiMahasiswa.css">
-  <script src="/js/penguji/nilaiMahasiswa.js" defer></script>
+  <!-- <script src="/js/penguji/nilaiMahasiswa.js" defer></script> -->
 </head>
 <body>
   <div class="container">
@@ -16,29 +16,26 @@
       </div>
       <h2>Nilai Mahasiswa</h2>
       <div class="info">
-        <p><strong>Nama</strong><br>Edward Cullen</p>
-        <p><strong>NPM</strong><br>6182201108</p>
-        <p><strong>Topik Tugas Akhir</strong><br>Analisis Kinerja Machine Learning<br>Dalam Deteksi Anomali Jaringan</p>
-      </div>
+        <p><strong>Nama:</strong><br><span th:text="${mahasiswa.nama}"></span></p>
+        <p><strong>NPM:</strong><br><span th:text="${mahasiswa.npm}"></span></p>
+        <p><strong>Judul Tugas Akhir:</strong><br><span th:text="${mahasiswa.judul}"></span></p>
+    </div>
     </div>
     <div class="main">
-      <form>
-        <label>Tata Tulis Laporan</label>
-        <input type="text" value="80">
-        <label>Kelengkapan Materi</label>
-        <input type="text" value="75">
-        <label>Pencapaian Tujuan</label>
-        <input type="text" value="78">
-        <label>Penguasaan Materi</label>
-        <input type="text" value="78">
-        <label>Presentasi</label>
-        <input type="text" value="83">
+      <form th:action="@{/penguji/savenilai}" method="post">
+        <div th:each="komponen, iter : ${komponenNilai}">
+            <label th:text="${komponen.deskripsi}"></label>
+            <input type="hidden" name="deskripsi" th:value="${komponen.deskripsi}" />
+            <input type="text" name="nilai" placeholder="Masukkan nilai mahasiswa" />
+        </div>
         <div class="buttons">
-          <button type="button" class="back-btn">Back</button>
-          <button type="submit" class="save-btn">Save</button>
+            <button type="button" class="back-btn" onclick="history.back()">Back</button>
+            <button type="submit" class="save-btn">Save</button>
         </div>
       </form>
-    </div>
+  </div>
+
+  
   </div>
 </body>
 </html>
