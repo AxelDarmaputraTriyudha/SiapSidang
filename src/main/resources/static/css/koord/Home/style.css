@@ -190,6 +190,7 @@ footer {
   position: absolute;
   left: 868px;
   top: 0px;
+  cursor: pointer;
   box-shadow: 0px 15px 36px 0px rgba(246, 87, 20, 0.3);
 }
 .buat-komponen {
@@ -401,4 +402,5 @@ footer {
   height: 51px;
   position: relative;
   overflow: visible;
+  cursor: pointer;
 }

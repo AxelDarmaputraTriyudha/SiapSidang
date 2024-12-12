@@ -1,0 +1,385 @@
+.html-pembimbing-catatan-sidang,
+.html-pembimbing-catatan-sidang * {
+  box-sizing: border-box;
+}
+.html-pembimbing-catatan-sidang {
+  background: #f7f5ed;
+  height: 1024px;
+  position: relative;
+  overflow: hidden;
+}
+.footer {
+  background: var(--general-color-2, #004e89);
+  border-style: solid;
+  border-color: var(
+    --radial,
+    radial-gradient(
+      closest-side,
+      rgba(255, 155, 0, 1) 12.5%,
+      rgba(237, 28, 36, 1) 100%
+    )
+  );
+  border-width: 1px 0px 0px 0px;
+  padding: 46px 120px 72px 120px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 1440px;
+  height: 86px;
+  position: absolute;
+  left: 0px;
+  bottom: 0px;
+}
+.line-16 {
+  margin-top: -1px;
+  border-style: solid;
+  border-color: var(--grey-grey-3, #dadce2);
+  border-width: 1px 0 0 0;
+  opacity: 0.5;
+  flex-shrink: 0;
+  width: 1200px;
+  height: 0px;
+  position: relative;
+  transform-origin: 0 0;
+  transform: rotate(0deg) scale(1, 1);
+}
+.rpl-b-3 {
+  margin: -199px 0 0 0;
+  color: #ffffff;
+  text-align: center;
+  font-family: var(
+    --regular-18px-font-family,
+    "SpaceGrotesk-Regular",
+    sans-serif
+  );
+  font-size: var(--regular-18px-font-size, 18px);
+  line-height: var(--regular-18px-line-height, 28px);
+  font-weight: var(--regular-18px-font-weight, 400);
+  position: absolute;
+  left: 50%;
+  translate: -50%;
+  top: 36px;
+  width: 82px;
+  height: 27px;
+}
+.arrow-back {
+  width: 36px;
+  height: 33px;
+  position: absolute;
+  left: 43px;
+  top: 151px;
+  overflow: visible;
+}
+.header {
+  background: var(--general-color-2, #004e89);
+  padding: 40px 152px 40px 152px;
+  display: flex;
+  flex-direction: row;
+  gap: 43px;
+  align-items: center;
+  justify-content: flex-start;
+  width: 1440px;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+}
+.group {
+  flex-shrink: 0;
+  width: 122px;
+  height: 55.59px;
+  position: relative;
+  overflow: visible;
+}
+.siap-sidang {
+  color: #ffffff;
+  text-align: left;
+  font-family: var(
+    --regular-16px-font-family,
+    "SpaceGrotesk-Regular",
+    sans-serif
+  );
+  font-size: var(--regular-16px-font-size, 16px);
+  line-height: var(--regular-16px-line-height, 26px);
+  font-weight: var(--regular-16px-font-weight, 400);
+  position: absolute;
+  left: 164px;
+  top: 96px;
+  width: 91px;
+  height: 29px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+.catatan-sidang {
+  color: #004e89;
+  text-align: center;
+  font-family: var(--bold-80px-font-family, "SpaceGrotesk-Bold", sans-serif);
+  font-size: var(--bold-80px-font-size, 80px);
+  line-height: var(--bold-80px-line-height, 86px);
+  font-weight: var(--bold-80px-font-weight, 700);
+  position: absolute;
+  left: 426px;
+  top: 151px;
+  width: 615px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.catatan-sidang2 {
+  position: absolute;
+  inset: 0;
+}
+.field-catatan {
+  background: #ffffff;
+  border-radius: 10px;
+  border-style: solid;
+  border-color: #004e89;
+  border-width: 1px;
+  width: 806px;
+  height: 554px;
+  position: absolute;
+  left: 514px;
+  top: 280px;
+}
+.tulis-catatan-sidang {
+  color: rgba(0, 0, 0, 0.85);
+  text-align: left;
+  font-family: var(
+    --regular-21px-font-family,
+    "SpaceGrotesk-Regular",
+    sans-serif
+  );
+  font-size: var(--regular-21px-font-size, 21px);
+  line-height: var(--regular-21px-line-height, 34px);
+  font-weight: var(--regular-21px-font-weight, 400);
+  position: absolute;
+  left: 549px;
+  top: 310px;
+}
+.box-biodata {
+  position: absolute;
+  inset: 0;
+}
+.garis-bwah-npm {
+  margin-top: -1px;
+  border-style: solid;
+  border-color: #ffffff;
+  border-width: 1px 0 0 0;
+  width: 296px;
+  height: 0px;
+  position: absolute;
+  left: 144px;
+  top: 649px;
+}
+.kotak-bio-data {
+  background: #004e89;
+  border-radius: 10px;
+  width: 350px;
+  height: 395px;
+  position: absolute;
+  left: 120px;
+  top: 359px;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+.nama {
+  color: rgba(247, 245, 237, 0.75);
+  text-align: left;
+  font-family: var(
+    --regular-21px-font-family,
+    "SpaceGrotesk-Regular",
+    sans-serif
+  );
+  font-size: var(--regular-21px-font-size, 21px);
+  line-height: var(--regular-21px-line-height, 34px);
+  font-weight: var(--regular-21px-font-weight, 400);
+  position: absolute;
+  left: 145px;
+  top: 510px;
+}
+.edward-cullen {
+  color: #f7f5ed;
+  text-align: left;
+  font-family: var(
+    --regular-18px-font-family,
+    "SpaceGrotesk-Regular",
+    sans-serif
+  );
+  font-size: var(--regular-18px-font-size, 18px);
+  line-height: var(--regular-18px-line-height, 28px);
+  font-weight: var(--regular-18px-font-weight, 400);
+  position: absolute;
+  left: 145px;
+  top: 544px;
+}
+._6182201108 {
+  color: #f7f5ed;
+  text-align: left;
+  font-family: var(
+    --regular-18px-font-family,
+    "SpaceGrotesk-Regular",
+    sans-serif
+  );
+  font-size: var(--regular-18px-font-size, 18px);
+  line-height: var(--regular-18px-line-height, 28px);
+  font-weight: var(--regular-18px-font-weight, 400);
+  position: absolute;
+  left: 145px;
+  top: 614px;
+}
+.analisis-kinerja-machine-learning-dalam-deteksi-anomali-jaringan {
+  color: #f7f5ed;
+  text-align: left;
+  font-family: var(
+    --regular-18px-font-family,
+    "SpaceGrotesk-Regular",
+    sans-serif
+  );
+  font-size: var(--regular-18px-font-size, 18px);
+  line-height: var(--regular-18px-line-height, 28px);
+  font-weight: var(--regular-18px-font-weight, 400);
+  position: absolute;
+  left: 145px;
+  top: 683px;
+  width: 311px;
+}
+.npm {
+  color: rgba(247, 245, 237, 0.75);
+  text-align: left;
+  font-family: var(
+    --regular-21px-font-family,
+    "SpaceGrotesk-Regular",
+    sans-serif
+  );
+  font-size: var(--regular-21px-font-size, 21px);
+  line-height: var(--regular-21px-line-height, 34px);
+  font-weight: var(--regular-21px-font-weight, 400);
+  position: absolute;
+  left: 145px;
+  top: 580px;
+}
+.topik-tugas-akhir {
+  color: rgba(247, 245, 237, 0.75);
+  text-align: left;
+  font-family: var(
+    --regular-21px-font-family,
+    "SpaceGrotesk-Regular",
+    sans-serif
+  );
+  font-size: var(--regular-21px-font-size, 21px);
+  line-height: var(--regular-21px-line-height, 34px);
+  font-weight: var(--regular-21px-font-weight, 400);
+  position: absolute;
+  left: 144px;
+  top: 649px;
+}
+.kotak-identitas-mhs {
+  background: var(
+    --primary-primary,
+    radial-gradient(
+      closest-side,
+      rgba(255, 155, 0, 1) 12.5%,
+      rgba(237, 28, 36, 1) 100%
+    )
+  );
+  border-radius: 10px 10px 0px 0px;
+  width: 350px;
+  height: 146px;
+  position: absolute;
+  left: 120px;
+  top: 359px;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+.identitas-mahasiswa {
+  color: #ffffff;
+  text-align: center;
+  font-family: var(
+    --medium-36px-font-family,
+    "SpaceGrotesk-Medium",
+    sans-serif
+  );
+  font-size: var(--medium-36px-font-size, 36px);
+  line-height: var(--medium-36px-line-height, 54px);
+  font-weight: var(--medium-36px-font-weight, 500);
+  position: absolute;
+  left: 125px;
+  top: 379px;
+  width: 340px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.garis-bwah-nama {
+  margin-top: -1px;
+  border-style: solid;
+  border-color: #ffffff;
+  border-width: 1px 0 0 0;
+  width: 296px;
+  height: 0px;
+  position: absolute;
+  left: 143px;
+  top: 580px;
+}
+.component-edit-save {
+  width: 180px;
+  height: 37px;
+  position: absolute;
+  left: 1140px;
+  top: 855px;
+}
+.button-edit {
+  background: #dad7d7;
+  border-radius: 60px;
+  padding: 10px 30px 10px 37px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: space-between;
+  width: 47.78%;
+  height: 100%;
+  position: absolute;
+  right: 52.22%;
+  left: 0%;
+  bottom: 0%;
+  top: 0%;
+}
+.edit {
+  color: rgba(0, 0, 0, 0.2);
+  text-align: left;
+  font-family: "Inter-Bold", sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  position: relative;
+}
+.button-save {
+  background: var(
+    --primary-primary,
+    radial-gradient(
+      closest-side,
+      rgba(255, 155, 0, 1) 12.5%,
+      rgba(237, 28, 36, 1) 100%
+    )
+  );
+  border-radius: 60px;
+  padding: 10px 23px 10px 37px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: space-between;
+  width: 47.78%;
+  height: 100%;
+  position: absolute;
+  right: 0%;
+  left: 52.22%;
+  bottom: 0%;
+  top: 0%;
+}
+.save {
+  color: rgba(0, 0, 0, 0.85);
+  text-align: left;
+  font-family: "Inter-Bold", sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  position: relative;
+  width: 35px;
+}

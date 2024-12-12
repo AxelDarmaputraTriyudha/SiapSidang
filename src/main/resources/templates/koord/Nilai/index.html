@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/koord/Nilai/style.css">
+  <link rel="stylesheet" href="/css/koord/Nilai/vars.css">
+  <script src="/js/koord/Nilai/scripts.js" defer></script>
+  
+  
+  <style>
+   a,
+   button,
+   input,
+   select,
+   h1,
+   h2,
+   h3,
+   h4,
+   h5,
+   * {
+       box-sizing: border-box;
+       margin: 0;
+       padding: 0;
+       border: none;
+       text-decoration: none;
+       background: none;
+   
+       -webkit-font-smoothing: antialiased;
+   }
+   
+   menu, ol, ul {
+       list-style-type: none;
+       margin: 0;
+       padding: 0;
+   }
+   </style>
+  <title>Document</title>
+</head>
+<body>
+  <div class="html-koord-nilai">
+    <div class="header">
+      <img class="group" src="/images/logo0.svg" />
+      <div class="siap-sidang">SIAP Sidang</div>
+    </div>
+    <div class="nilai-mahasiswa">Nilai Mahasiswa</div>
+    <form class="box-nilai" method="POST" th:action="@{/koord/tambahNilai}">
+      <div class="penilaian-kedisiplinan-mahasiswa">
+        Penilaian Kedisiplinan Mahasiswa
+      </div>
+      <input class="border" type="text" id="nilaiKoord" name="nilaiKoord" th:value="${nilaiKoord}"required>
+      <div class="nilai2">Nilai</div>
+      <button class="button-save" id="saveBtn" type="submit">
+        <div class="save">Save</div>
+      </button>
+      <div id="notification" th:if="${successMessage}" class="notification">
+        <p th:text="${successMessage}"></p>
+      </div>
+    </form>
+    <img class="icon" src="/images/icon0.svg" />
+    <footer>
+      <div class="line-16"></div>
+      <p>RPL-B-3</p>
+    </footer>
+  </div>
+  
+</body>
+</html>

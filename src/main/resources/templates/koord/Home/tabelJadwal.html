@@ -46,7 +46,7 @@
   <div class="navbar">
     <img class="logo" src="/css/koord/Home/logo0.svg" />
     <div class="siap-sidang">SIAP Sidang</div>
-    <img class="log-out" src="/css/koord/Home/log-out0.svg" />
+    <a th:href="@{/logout}"><img class="log-out" src="/css/koord/Home/log-out0.svg" /></a>
   </div>
   <div class="body">
     <form method="GET" th:action="@{/koord/home}" id="filterForm">
@@ -60,9 +60,9 @@
           <a class="button-2" th:href="@{/koord/buatJadwal1}">
             <div class="buat-jadwal">Buat Jadwal</div>
           </a>
-          <div class="button-1">
+          <a class="button-1" th:href="@{/koord/buatKomponen}">
             <div class="buat-komponen">Buat Komponen</div>
-          </div>
+          </a>
         </div>
       </div>
       <div class="feature-2">

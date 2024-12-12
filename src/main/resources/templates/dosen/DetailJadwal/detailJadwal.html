@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Detail Jadwal</title>
+  <link rel="stylesheet" href="/css/dosen/DetailJadwal/vars.css">
+  <link rel="stylesheet" href="/css/dosen/DetailJadwal/style.css">
+  
+  
+  <style>
+   a,
+   button,
+   input,
+   select,
+   h1,
+   h2,
+   h3,
+   h4,
+   h5,
+   * {
+       box-sizing: border-box;
+       margin: 0;
+       padding: 0;
+       border: none;
+       text-decoration: none;
+       background: none;
+   
+       -webkit-font-smoothing: antialiased;
+   }
+   
+   menu, ol, ul {
+       list-style-type: none;
+       margin: 0;
+       padding: 0;
+   }
+   </style>
+
+</head>
+<body>
+  <div class="html-koord-detail-jadwal">
+    <img class="group-36461" src="/css/dosen/DetailJadwal/group-364610.svg" />
+    <div class="box-nama-mahasiswa">
+      <div class="rectangle-7">
+        <div class="isi" th:text="${data.nama}">Nama</div>
+      </div>
+      <div class="text"></div>
+      <div class="rectangle-38"></div>
+      <div class="nama-mahasiswa">Nama Mahasiswa</div>
+    </div>
+    <div class="box-npm">
+      <div class="rectangle-35">
+        <div class="isi" th:text="${data.npm}">NPM</div>
+      </div>
+      <div class="rectangle-39"></div>
+      <div class="npm-mahasiswa">NPM Mahasiswa</div>
+    </div>
+    <div class="box-tanggal">
+      <div class="rectangle-36">
+        <div class="isi" th:text="${data.tanggal}">Tanggal</div>
+      </div>
+      <div class="rectangle-40"></div>
+      <div class="tanggal">Tanggal</div>
+    </div>
+    <div class="box-tempat">
+      <div class="rectangle-37">
+        <div class="isi" th:text="${data.tempat}">Tempat</div>
+      </div>
+      <div class="rectangle-41"></div>
+      <div class="tempat">Tempat</div>
+    </div>
+    <img class="group-36462" src="/css/dosen/DetailJadwal/group-364620.svg" />
+    <div class="box-topik-sidang">
+      <div class="rectangle-42">
+        <div class="isi" th:text="${data.judul}">Hello World!</div>
+      </div>
+      <div class="rectangle-46"></div>
+      <div class="topik-sidang">Topik Sidang</div>
+    </div>
+    <div class="box-penguji-1">
+      <div class="rectangle-43">
+        <div class="isi" th:text="${nama_pu1}">Nama Penguji 1</div>
+      </div>
+      <div class="rectangle-47"></div>
+      <div class="dosen-penguji-1">Dosen Penguji 1</div>
+    </div>
+    <div class="box-penguji-2">
+      <div class="rectangle-44">
+        <div class="isi" th:text="${nama_pu2}">Nama Penguji 2</div>
+      </div>
+      <div class="rectangle-50"></div>
+      <div class="dosen-penguji-2">Dosen Penguji 2</div>
+    </div>
+    <div class="box-dosen-pembimbing">
+      <div class="rectangle-45">
+        <div class="isi" th:text="${nama_pb}">Nama Pembimbing</div>
+      </div>
+      <div class="rectangle-51"></div>
+      <div class="dosen-pembimbing">Dosen Pembimbing</div>
+    </div>
+    <div class="footer">
+      <div class="line-16"></div>
+      <div>RPL-B-3</div>
+    </div>
+    <div class="header">
+      <img class="logo-kiri-atas" src="/css/dosen/DetailJadwal/logo-kiri-atas0.svg" />
+      <div class="siap-sidang">SIAP Sidang</div>
+    </div>
+
+    <div class="tombolFitur">
+      <div class="button-nilai-mahasiswa" >
+        <div class="nilai-mahasiswa">Nilai Mahasiswa</div>
+      </div>
+      <div class="button-catatan-sidang" th:if="${peran == 'PB1' || peran == 'PB2'}">
+        <div class="catatan-sidang">Catatan Sidang</div>
+      </div>
+      <div class="button-manajemen-bap">
+        <div class="manajemen-bap">Manajemen BAP</div>
+      </div>
+    </div>
+
+    <div class="detail-jadwal2">Detail Jadwal</div>
+    <button th:onclick="'window.location.href=\'/dosen/home\''"><img class="arrow-back" src="/css/dosen/DetailJadwal/arrow-back0.svg"/></button>
+    
+  </div>
+  
+</body>
+</html>

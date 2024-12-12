@@ -69,8 +69,8 @@
         <div class="npm4" type="text">
           <select id="semester" name="semester" required>
             <option value="" disabled th:if="${semester == null}" selected>Pilih Semester</option>
-            <option th:value="Ganjil" th:selected="${tahun == 'Ganjil'}">Ganjil</option>
-            <option th:value="Genap" th:selected="${tahun == 'Genap'}">Genap</option>
+            <option th:value="Ganjil" th:selected="${semester == 'Ganjil'}">Ganjil</option>
+            <option th:value="Genap" th:selected="${semester == 'Genap'}">Genap</option>
           </select> 
         </div>
         <div class="npm5">Semester Sidang</div>
