@@ -36,8 +36,27 @@ public class JDBDNilai implements PengujiNilaiRepository{
         return new Mahasiswa(
             resultSet.getString("npm"), 
             resultSet.getString("nama"), 
-            resultSet.getString("topik"));
+            resultSet.getString("judul"));
     }
+
+    public Mahasiswa getNPM(String npm) {
+        String sql = "SELECT * FROM data_mahasiswa WHERE npm = ?";
+        
+        // Query the database and map the result to a Mahasiswa object
+        List<Mahasiswa> mahasiswaList = jdbcTemplate.query(
+            sql, 
+            ps -> ps.setString(1, npm), 
+            this::mapToRowMahasiswa // Map setiap row ke objek mahasiswa
+        );
+    
+        // cek jika list kosong
+        if (mahasiswaList.isEmpty()) {
+            return null; // tidak mahasiswa dengan npm tertentu
+        } else {
+            return mahasiswaList.get(0); // Return hasil pertama
+        }
+    }
+    
 
     //bobot
     public List<Bobot> getBobot(String deskripsi) {
@@ -50,15 +69,13 @@ public class JDBDNilai implements PengujiNilaiRepository{
     }
 
 
-    public void saveNilaiPenguji(double nilai, int bobot, String npm) {
-          // Hitung nilai akhir berdasarkan bobot
-          double nilaiAkhir = (nilai * bobot) / 100.0;
-  
-          // Query untuk memperbarui kolom nilai penguji
-          String sql = "UPDATE Tugas_akhir SET nilai_pu1 WHERE npm = ?";
-          
-          // Update nilai di database
-          jdbcTemplate.update(sql, nilaiAkhir, npm);
+    public void saveNilaiPenguji(double nilaiAkhir, String npm) {
+        String sql = "UPDATE Tugas_akhir SET nilai_pu1 = ? WHERE id_mahasiswa = ?";
+
+        // Log the query and parameters
+        System.out.println("Executing SQL: " + sql + " with nilaiAkhir=" + nilaiAkhir + " and npm=" + npm);
+    
+        jdbcTemplate.update(sql, nilaiAkhir, npm);
     }
 
  
