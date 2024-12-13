@@ -15,15 +15,26 @@ public class JDBDNilai implements PengujiNilaiRepository{
     JdbcTemplate jdbcTemplate;
 
     //nilai 
-    public List<KomponenNilai> getKomponen(){
-        String sql = "SELECT DISTINCT(kn.deskripsi), ta.nilai_pu1 FROM Tugas_akhir ta JOIN Komponen_nilai kn ON ta.semester_akd = kn.semester AND ta.tahun_akd::VARCHAR = kn.tahun_ajaran;";
-        return jdbcTemplate.query(sql, this::mapToRowKomponen);
+    public List<KomponenNilai> getKomponen(String npm, String peran){
+        String sql ="";
+        if(peran.equals("PU1")){
+             sql = "SELECT deskripsi, nilai_pu1 FROM Tugas_akhir ta JOIN Komponen_nilai kn ON ta.semester_akd = kn.semester AND ta.tahun_akd::VARCHAR = kn.tahun_ajaran WHERE id_mahasiswa ILIKE ?";
+        }else if(peran.equals("PU2")){
+             sql = "SELECT deskripsi, nilai_pu2 FROM Tugas_akhir ta JOIN Komponen_nilai kn ON ta.semester_akd = kn.semester AND ta.tahun_akd::VARCHAR = kn.tahun_ajaran WHERE id_mahasiswa ILIKE ?";
+        }else if(peran.equals("PB1")){
+             sql = "SELECT deskripsi, nilai_pb1 FROM Tugas_akhir ta JOIN Komponen_nilai kn ON ta.semester_akd = kn.semester AND ta.tahun_akd::VARCHAR = kn.tahun_ajaran WHERE id_mahasiswa ILIKE ?";
+        }else{
+            System.out.println("peran salah!");
+        }
+        
+        return jdbcTemplate.query(sql, (rs, rowNum) -> mapToRowKomponen(rs, peran.equals("PB1") ? "nilai_pb1" : "nilai_pu1"), npm);
     }
 
-    private KomponenNilai mapToRowKomponen(ResultSet resultSet, int rowNum) throws SQLException   {
+    private KomponenNilai mapToRowKomponen(ResultSet resultSet, String columnName) throws SQLException   {
         return new KomponenNilai(
             resultSet.getString("deskripsi"),
-            resultSet.getInt("nilai_pu1"));
+            resultSet.getInt(columnName));
+
     }
     
     //data mahasiswa

@@ -143,7 +143,6 @@ INSERT INTO Komponen_nilai (deskripsi, bobotPenguji, bobotPembimbing, semester, 
 ('Presentasi', 20.00, 20.00, 'Ganjil', '2023'),
 ('Pemahaman Materi', 30.00, 30.00, 'Ganjil', '2023'),
 ('Poster', 10.00, 10.00, 'Ganjil', '2023'),
-('Poster', 10.00, 10.00, 'Ganjil', '2023'),
 ('Kemampuan Tanya Jawab', 10.00, 10.00, 'Ganjil', '2023');
 
 INSERT INTO tugas_akhir (id_ta, jenis, judul, semester_akd, tahun_akd, nilai_pb1, nilai_pu1, nilai_pu2, nilai_koord, nilai_akhir, angka_akhir, id_mahasiswa) VALUES
