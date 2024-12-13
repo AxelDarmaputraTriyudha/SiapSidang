@@ -24,10 +24,11 @@
     <div class="main">
       <form th:action="@{/penguji/savenilai}" method="post">
         <input type="hidden" name="npm" th:value="${npm != null ? npm : 'NPM not available'}" />
+        <input type="hidden" name="peran" th:value="${peran != null ? peran : 'PU1'}" />
         <div th:each="komponen, iter : ${komponenNilai}">
-            <label th:text="${komponen.deskripsi}"></label>
-            <input type="hidden" name="deskripsi" th:value="${komponen.deskripsi}" />
-            <input type="text" name="nilai" placeholder="Masukkan nilai mahasiswa" />
+          <label th:text="${komponen.deskripsi}"></label>
+          <input type="hidden" name="deskripsi" th:value="${komponen.deskripsi}" />
+          <input type="text" name="nilai" th:value="${komponen.nilai > 0.00 ? komponen.nilai : 'Masukkan Nilai'}" placeholder="Masukkan nilai mahasiswa" />
         </div>
         <div class="buttons">
             <button type="button" class="back-btn" onclick="history.back()">Back</button>
