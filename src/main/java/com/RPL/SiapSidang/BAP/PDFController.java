@@ -5,6 +5,7 @@ import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
 import org.apache.pdfbox.pdmodel.graphics.image.PDImageXObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,12 +16,52 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
+import java.util.Locale;
 
 @RestController
 public class PDFController {
+    @Autowired
+    private JDBCBAP jdbcbap;
 
-    @GetMapping("/generatePDF")
-    public void generatePdf(jakarta.servlet.http.HttpServletResponse response) throws IOException {
+    @GetMapping("/generatePDF/{npm}")
+    public void generatePdf(@PathVariable String npm, jakarta.servlet.http.HttpServletResponse response) throws IOException {
+        // Make the data of the pdf
+        List<BAP> data = jdbcbap.findData(npm);
+        String penguji1 = "", penguji2 = "", pembimbing1 = "", pembimbing2 = "", koord = "";
+        Double nilaiPU1 = 0.0, nilaiPU2 = 0.0, nilaiPB = 0.0, nilaiKoord = 0.0;
+
+        for (int i = 0; i<data.size(); i++){
+            BAP dataNow = data.get(i);
+            switch (dataNow.getPeran()) {
+                case "PB1":
+                    pembimbing1 = dataNow.getNama_dosen();
+                    nilaiPB = dataNow.getNilai_pb();
+                    break;
+                case "PB2":
+                    pembimbing2 = dataNow.getNama_dosen();
+                    break;
+                case "PU1":
+                    penguji1 = dataNow.getNama_dosen();
+                    nilaiPU1 = dataNow.getNilai_pu1();
+                    break;
+                case "PU2":
+                    penguji2 = dataNow.getNama_dosen();
+                    nilaiPU2 = dataNow.getNilai_pu2();
+                    break;
+                case "Koordinator":
+                    koord = dataNow.getNama_dosen();
+                    nilaiKoord = dataNow.getNilai_pu2();
+                    break;
+                default:
+                    break;
+            }
+        }
+        NilaiBAP nilaiBAP = new NilaiBAP(penguji1, nilaiPU1, (nilaiPU1 * 35/100), penguji2, nilaiPU2, (nilaiPU2 * 30/100), pembimbing1, nilaiPB, (nilaiPB * 20/100), koord, nilaiKoord, (nilaiKoord * 10/100), pembimbing2, 0.0);
+        nilaiBAP.setNilaiAkhir((nilaiPU1 * 35/100) + (nilaiPU2 * 30/100) + (nilaiPB * 20/100) + (nilaiKoord * 10/100));
+
         // Set the response headers for PDF
         response.setContentType("application/pdf");
         response.setHeader("Content-Disposition", "attachment; filename=example_with_image.pdf");
@@ -47,16 +88,20 @@ public class PDFController {
         contentStream.drawImage(image, x, y, imageWidth, imageHeight);
 
         // Add Text Below Image
+        String text = "";
         contentStream.beginText();
         contentStream.setFont(PDType1Font.HELVETICA_BOLD, 12);
         contentStream.newLineAtOffset(50, y - 20);
         contentStream.showText("Telah disediakan Review untuk Sidang Skripsi");
         contentStream.newLineAtOffset(0, -15);
-        contentStream.showText("NPM: 6182201001");
+        text = "NPM: " + data.get(0).getNpm();
+        contentStream.showText(text);
         contentStream.newLineAtOffset(0, -15);
-        contentStream.showText("Nama: Testing");
+        text = "Nama: " + data.get(0).getNama();
+        contentStream.showText(text);
         contentStream.newLineAtOffset(0, -15);
-        contentStream.showText("Topik: Tingkat Kewarasan Mahasiswa Semester 5");
+        text = "Judul: " + data.get(0).getJudul();
+        contentStream.showText(text);
         contentStream.endText();
 
         // Draw Table
@@ -65,10 +110,10 @@ public class PDFController {
         float rowHeight = 20; // Height of each row
         float[] columnWidths = {225, 225}; // Widths for each column
 
-        drawRow(contentStream, 70, tableStartY, tableWidth, columnWidths, "Pembimbing Utama/Tunggal*", "Pembimbing Utama/Tunggal*", rowHeight);
-        drawRow(contentStream, 70, tableStartY - rowHeight, tableWidth, columnWidths, "Pembimbing Pendamping", "Pembimbing Pendamping", rowHeight);
-        drawRow(contentStream, 70, tableStartY - 2 * rowHeight, tableWidth, columnWidths, "Ketua Tim Penguji", "Ketua Tim Penguji", rowHeight);
-        drawRow(contentStream, 70, tableStartY - 3 * rowHeight, tableWidth, columnWidths, "Anggota Tim Penguji", "Anggota Tim Penguji", rowHeight);
+        drawRow(contentStream, 70, tableStartY, tableWidth, columnWidths, "Pembimbing Utama/Tunggal", pembimbing1, rowHeight);
+        drawRow(contentStream, 70, tableStartY - rowHeight, tableWidth, columnWidths, "Pembimbing Pendamping", pembimbing2, rowHeight);
+        drawRow(contentStream, 70, tableStartY - 2 * rowHeight, tableWidth, columnWidths, "Ketua Tim Penguji", penguji1, rowHeight);
+        drawRow(contentStream, 70, tableStartY - 3 * rowHeight, tableWidth, columnWidths, "Anggota Tim Penguji", penguji2, rowHeight);
 
         y = tableStartY - 4 * rowHeight;
         contentStream.beginText();
@@ -84,11 +129,11 @@ public class PDFController {
         float[] columnWidths2 = {30, 150, 90, 90, 90}; // Widths for each column
 
         drawRow2(contentStream, 70, tableStartY, tableWidth, columnWidths2, "No", "Peran", "Nilai", "Bobot", "Nilai Akhir", rowHeight);
-        drawRow2(contentStream, 70, tableStartY - rowHeight, tableWidth, columnWidths2, "1", "Ketua Tim Penguji", "00.00", "35.00%", "00.00", rowHeight);
-        drawRow2(contentStream, 70, tableStartY - 2 * rowHeight, tableWidth, columnWidths2, "2", "Anggota Tim Penguji", "00.00", "30.00%", "00.00", rowHeight);
-        drawRow2(contentStream, 70, tableStartY - 3 * rowHeight, tableWidth, columnWidths2, "3", "Pembimbing", "00.00", "20.00%", "00.00", rowHeight);
-        drawRow2(contentStream, 70, tableStartY - 4 * rowHeight, tableWidth, columnWidths2, "4", "Koordinatir Skripsi", "00.00", "10.00%", "00.00", rowHeight);
-        drawRow2(contentStream, 70, tableStartY - 5 * rowHeight, tableWidth, columnWidths2, "", "Total", "", "100.00%", "00.00", rowHeight);
+        drawRow2(contentStream, 70, tableStartY - rowHeight, tableWidth, columnWidths2, "1", "Ketua Tim Penguji", String.valueOf(nilaiPU1), "35.00%", String.valueOf(nilaiBAP.getNaPenguji1()), rowHeight);
+        drawRow2(contentStream, 70, tableStartY - 2 * rowHeight, tableWidth, columnWidths2, "2", "Anggota Tim Penguji", String.valueOf(nilaiPU2), "30.00%", String.valueOf(nilaiBAP.getNaPenguji2()), rowHeight);
+        drawRow2(contentStream, 70, tableStartY - 3 * rowHeight, tableWidth, columnWidths2, "3", "Pembimbing", String.valueOf(nilaiPB), "20.00%", String.valueOf(nilaiBAP.getNaPembimbing1()), rowHeight);
+        drawRow2(contentStream, 70, tableStartY - 4 * rowHeight, tableWidth, columnWidths2, "4", "Koordinatir Skripsi", String.valueOf(nilaiKoord), "10.00%", String.valueOf(nilaiBAP.getNaKoord()), rowHeight);
+        drawRow2(contentStream, 70, tableStartY - 5 * rowHeight, tableWidth, columnWidths2, "", "Total", "", "100.00%", String.valueOf(nilaiBAP.getNilaiAkhir()), rowHeight);
 
         y = tableStartY - 5 * rowHeight;
         contentStream.beginText();
@@ -97,7 +142,11 @@ public class PDFController {
         double xNew = (630.00 - 242.736) / 2.00;
         x = (float) xNew;
         contentStream.newLineAtOffset(x, y - 50);
-        contentStream.showText("Ditetapkan di Bandung: 12 Desember 2024");
+        LocalDate today = LocalDate.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMMM yyyy", new Locale("id", "ID"));
+        String formattedDate = today.format(formatter);
+        text = "Ditetapkan di Bandung: " + formattedDate;
+        contentStream.showText(text);
         contentStream.endText();
 
         // Draw Table
@@ -109,19 +158,7 @@ public class PDFController {
         drawRow2(contentStream, 70, tableStartY, tableWidth, columnWidths3, "", "", "", "", "", rowHeight);
         drawRow2(contentStream, 70, tableStartY - rowHeight, tableWidth, columnWidths3, "Ketua Penguji", "Anggota Penguji", "Pembimbing", "Mahasiswa", "Koordinator Skripsi", 20);
 
-
-        // Close the content stream
         contentStream.close();
-
-        // Save to a temporary file
-        // File tempFile = File.createTempFile("generated_", ".pdf");
-        // document.save(tempFile);
-        // document.close();
-
-        // Return a URL for preview
-        // return "http://localhost:8080/preview/" + tempFile.getName();
-
-        // Write the document to the response output stream
         document.save(response.getOutputStream());
         document.close();
     }

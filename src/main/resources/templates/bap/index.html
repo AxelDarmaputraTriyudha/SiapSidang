@@ -39,7 +39,9 @@
 </head>
 <body>
   <div class="html-koord-manajemen-bap">
-    <img class="arrow-back" src="/css/bap/arrow-back0.svg" />
+    <a th:href="@{/koord/DetailJadwal(npm=${data.npm})}">
+      <img class="arrow-back" src="/css/bap/arrow-back0.svg"/>
+    </a>
     <div class="header">
       <img class="group" src="/css/bap/group0.svg" />
       <div class="siap-sidang">SIAP Sidang</div>
@@ -47,26 +49,26 @@
     <div class="manajemen-bap">BAP Sidang</div>
     <div class="rectangle-507">
       <div class="identitas">
-        <p>Nama Mahasiswa: Testing</p>
-        <p>NPM Mahasiswa: test</p>
-        <p>Topik: test</p>
+        <p>Nama Mahasiswa: <a th:text="${data.nama}"></a></p>
+        <p>NPM Mahasiswa: <a th:text="${data.npm}"></a></p>
+        <p>Judul: <a th:text="${data.judul}"></a></p>
       </div>
       <table class="table_bap">
         <tr>
-          <td>Pembimbing Utama/Tunggal*</td>
-          <td>nama</td>
+          <td>Pembimbing Utama/Tunggal</td>
+          <td><a th:text="${nilaiBAP.namaPenguji1}"></a></td>
         </tr>
         <tr>
           <td>Pembimbing Pendamping</td>
-          <td>nama</td>
+          <td><a th:text="${nilaiBAP.namaPenguji2}"></a></td>
         </tr>
         <tr>
           <td>Ketua Tim Penguji</td>
-          <td>nama</td>
+          <td><a th:text="${nilaiBAP.namaPembimbing1}"></a></td>
         </tr>
         <tr>
           <td>Anggota Tim Penguji</td>
-          <td>nama</td>
+          <td><a th:text="${nilaiBAP.namaPembimbing2}"></a></td>
         </tr>
       </table>
       <p class="identitas">Rekapitulasi Nilai Sidang sebagai berikut: </p>
@@ -81,37 +83,37 @@
         <tr>
           <th>1</th>
           <th>Ketua Tim Penguji</th>
-          <th></th>
+          <th><a th:text="${nilaiBAP.nilaiPenguji1}"></a></th>
           <th>35.00%</th>
-          <th></th>
+          <th><a th:text="${nilaiBAP.naPenguji1}"></a></th>
         </tr>
         <tr>
           <th>2</th>
           <th>Anggota Tim Penguji</th>
-          <th></th>
+          <th><a th:text="${nilaiBAP.nilaiPenguji2}"></a></th>
           <th>30.00%</th>
-          <th></th>
+          <th><a th:text="${nilaiBAP.naPenguji2}"></a></th>
         </tr>
         <tr>
           <th>3</th>
           <th>Pembimbing</th>
-          <th></th>
+          <th><a th:text="${nilaiBAP.nilaiPembimbing1}"></a></th>
           <th>20.00%</th>
-          <th></th>
+          <th><a th:text="${nilaiBAP.naPembimbing1}"></a></th>
         </tr>
         <tr>
           <th>4</th>
           <th>Koordinatir Skripsi</th>
-          <th></th>
+          <th><a th:text="${nilaiBAP.nilaiKoord}"></a></th>
           <th>10.00%</th>
-          <th></th>
+          <th><a th:text="${nilaiBAP.naKoord}"></a></th>
         </tr>
         <tr>
           <th></th>
           <th>Total</th>
           <th></th>
           <th>100.00%</th>
-          <th></th>
+          <th><a th:text="${nilaiBAP.nilaiAkhir}"></a></th>
         </tr>
       </table>
       <table class="table_bap">
@@ -135,7 +137,7 @@
       <img class="upload2" src="/css/bap/upload1.svg" />
       <div class="upload-pdf">Upload PDF</div>
     </div>
-    <a class="download" th:href="@{/generatePDF}">
+    <a class="download" th:href="@{/generatePDF/{npm}(npm=${data.npm})}">
       <img class="fi-rr-download" src="/css/bap/fi-rr-download0.svg" />
       <div class="download-pdf">Download PDF</div>
     </a>
