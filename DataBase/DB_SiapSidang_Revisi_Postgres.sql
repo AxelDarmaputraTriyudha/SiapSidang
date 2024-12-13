@@ -226,7 +226,6 @@ INSERT INTO Nilai_ta (id_ta, id_komp, nilaiPenguji1, nilaiPenguji2, nilaiPembimb
 (1, 4, 0, 0, 0),
 (1, 5, 0, 0, 0),
 (1, 6, 0, 0, 0),
-(1, 7, 0, 0, 0),
 
 (2, 1, 0, 0, 0),
 (2, 2, 0, 0, 0),
@@ -234,7 +233,6 @@ INSERT INTO Nilai_ta (id_ta, id_komp, nilaiPenguji1, nilaiPenguji2, nilaiPembimb
 (2, 4, 0, 0, 0),
 (2, 5, 0, 0, 0),
 (2, 6, 0, 0, 0),
-(2, 7, 0, 0, 0),
 
 (3, 1, 0, 0, 0),
 (3, 2, 0, 0, 0),
@@ -242,7 +240,6 @@ INSERT INTO Nilai_ta (id_ta, id_komp, nilaiPenguji1, nilaiPenguji2, nilaiPembimb
 (3, 4, 0, 0, 0),
 (3, 5, 0, 0, 0),
 (3, 6, 0, 0, 0),
-(3, 7, 0, 0, 0),
 
 (4, 1, 0, 0, 0),
 (4, 2, 0, 0, 0),
@@ -250,7 +247,6 @@ INSERT INTO Nilai_ta (id_ta, id_komp, nilaiPenguji1, nilaiPenguji2, nilaiPembimb
 (4, 4, 0, 0, 0),
 (4, 5, 0, 0, 0),
 (4, 6, 0, 0, 0),
-(4, 7, 0, 0, 0),
 
 (5, 1, 0, 0, 0),
 (5, 2, 0, 0, 0),
@@ -258,7 +254,6 @@ INSERT INTO Nilai_ta (id_ta, id_komp, nilaiPenguji1, nilaiPenguji2, nilaiPembimb
 (5, 4, 0, 0, 0),
 (5, 5, 0, 0, 0),
 (5, 6, 0, 0, 0),
-(5, 7, 0, 0, 0),
 
 (6, 1, 0, 0, 0),
 (6, 2, 0, 0, 0),
@@ -266,7 +261,6 @@ INSERT INTO Nilai_ta (id_ta, id_komp, nilaiPenguji1, nilaiPenguji2, nilaiPembimb
 (6, 4, 0, 0, 0),
 (6, 5, 0, 0, 0),
 (6, 6, 0, 0, 0),
-(6, 7, 0, 0, 0),
 
 (7, 1, 0, 0, 0),
 (7, 2, 0, 0, 0),
@@ -282,7 +276,6 @@ INSERT INTO Nilai_ta (id_ta, id_komp, nilaiPenguji1, nilaiPenguji2, nilaiPembimb
 (8, 4, 0, 0, 0),
 (8, 5, 0, 0, 0),
 (8, 6, 0, 0, 0),
-(8, 7, 0, 0, 0),
 
 (9, 1, 0, 0, 0),
 (9, 2, 0, 0, 0),
@@ -290,7 +283,6 @@ INSERT INTO Nilai_ta (id_ta, id_komp, nilaiPenguji1, nilaiPenguji2, nilaiPembimb
 (9, 4, 0, 0, 0),
 (9, 5, 0, 0, 0),
 (9, 6, 0, 0, 0),
-(9, 7, 0, 0, 0),
 
 (10, 1, 0, 0, 0),
 (10, 2, 0, 0, 0),
@@ -298,7 +290,6 @@ INSERT INTO Nilai_ta (id_ta, id_komp, nilaiPenguji1, nilaiPenguji2, nilaiPembimb
 (10, 4, 0, 0, 0),
 (10, 5, 0, 0, 0),
 (10, 6, 0, 0, 0),
-(10, 7, 0, 0, 0),
 
 (11, 1, 0, 0, 0),
 (11, 2, 0, 0, 0),
@@ -306,13 +297,11 @@ INSERT INTO Nilai_ta (id_ta, id_komp, nilaiPenguji1, nilaiPenguji2, nilaiPembimb
 (11, 4, 0, 0, 0),
 (11, 5, 0, 0, 0),
 (11, 6, 0, 0, 0),
-(11, 7, 0, 0, 0),
 
 (12, 1, 0, 0, 0),
 (12, 2, 0, 0, 0),
 (12, 3, 0, 0, 0),
 (12, 4, 0, 0, 0),
 (12, 5, 0, 0, 0),
-(12, 6, 0, 0, 0),
-(12, 7, 0, 0, 0);
+(12, 6, 0, 0, 0);
 
