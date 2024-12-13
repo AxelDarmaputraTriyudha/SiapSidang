@@ -54,6 +54,7 @@ public class DetailSidangDosenController {
         model.addAttribute("nama_pu2", penguji2);
         model.addAttribute("nama_pb", pembimbing);
         model.addAttribute("peran", peran);
+        model.addAttribute("npm", npm);
 
         return "/dosen/DetailJadwal/detailJadwal";
     }
