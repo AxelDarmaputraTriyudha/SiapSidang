@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.RPL.SiapSidang.RequiredRole;
 import com.RPL.SiapSidang.Koord.Home.DataSidang;
 
 
@@ -20,8 +21,9 @@ import jakarta.servlet.http.HttpSession;
 public class MahasiswaController {
     @Autowired
     JDBCMahasiswaRepository mahasiswaRepository;
-    
+
     @GetMapping("/home")
+    @RequiredRole("mahasiswa")
     public String index(Model model,
             @RequestParam(required = false, defaultValue = "") String filter,
             @RequestParam(required = false, defaultValue = "") LocalDate tgl_awal,
