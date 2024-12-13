@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nilai Mahasiswa</title>
+  <link rel="stylesheet" href="/css/penguji/NilaiMahasiswa/nilaiMahasiswa.css">
+  <!-- <script src="/js/penguji/nilaiMahasiswa.js" defer></script> -->
+</head>
+<body>
+  <div class="container">
+    <div class="sidebar">
+      <div class="header">
+        <img src="/images/logo0.svg" alt="Logo" class="logo">
+        <h1>SIAP Sidang</h1>
+      </div>
+      <h2>Nilai Mahasiswa</h2>
+      <div class="info">
+        <p><strong>Nama:</strong><br><span th:text="${nama != null ? nama : 'Nama tidak tersedia'}"></span></p>
+        <p><strong>NPM:</strong><br><span th:text="${npm != null ? npm : 'NPM not available'}"></span></p>
+        <p><strong>Topik:</strong><br><span th:text="${judul != null ? judul : 'judul tidak tersedia'}"></span></p>
+    </div>
+    </div>
+    <div class="main">
+      <form th:action="@{/penguji/savenilai}" method="post">
+        <input type="hidden" name="npm" th:value="${npm != null ? npm : 'NPM not available'}" />
+        <input type="hidden" name="peran" th:value="${peran != null ? peran : 'PU1'}" />
+        <div th:each="komponen, iter : ${komponenNilai}">
+          <label th:text="${komponen.deskripsi}"></label>
+          <input type="hidden" name="deskripsi" th:value="${komponen.deskripsi}" />
+          <input type="text" name="nilai" th:value="${komponen.nilai > 0.00 ? komponen.nilai : 'Masukkan Nilai'}" placeholder="Masukkan nilai mahasiswa" />
+        </div>
+        <div class="buttons">
+            <button type="button" class="back-btn" onclick="history.back()">Back</button>
+            <button type="submit" class="save-btn">Save</button>
+        </div>
+      </form>
+  </div>
+
+  
+  </div>
+</body>
+</html>
