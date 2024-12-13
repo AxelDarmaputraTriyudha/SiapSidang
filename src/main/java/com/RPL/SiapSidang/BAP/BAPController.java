@@ -48,7 +48,7 @@ public class BAPController {
                     break;
                 case "Koordinator":
                     koord = dataNow.getNama_dosen();
-                    nilaiKoord = dataNow.getNilai_pu2();
+                    nilaiKoord = dataNow.getNilai_koord();
                     break;
                 default:
                     break;

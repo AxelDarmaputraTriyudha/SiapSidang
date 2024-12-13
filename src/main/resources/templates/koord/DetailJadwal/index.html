@@ -110,9 +110,9 @@
     <a class="button-generate-bap" th:href="@{/koord/generateBAP/{npm}(npm=${data.npm})}">
       <div class="generate-bap">BAP</div>
     </a>  
-    <div class="button-nilai-mahasiswa">
+    <a class="button-nilai-mahasiswa" th:href="@{/koord/tambahNilai/{npm}(npm=${data.npm})}">
       <div class="nilai-mahasiswa">Nilai Mahasiswa</div>
-    </div>
+    </a>
     <div class="detail-jadwal2">Detail Jadwal</div>
     <button th:onclick="'window.location.href=\'/koord/home\''"><img class="arrow-back" src="/css/koord/DetailJadwal/arrow-back0.svg"/></button>
     
