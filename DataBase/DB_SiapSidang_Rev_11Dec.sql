@@ -6,7 +6,7 @@ DROP TABLE IF EXISTS Sidang_ta;
 DROP TABLE IF EXISTS Tugas_akhir;
 
 
-CREATE TABLE  Mahasiswa (
+CREATE TABLE Mahasiswa (
     npm VARCHAR(10) PRIMARY KEY  NOT NULL,
     nama VARCHAR(50) NOT NULL,
     email VARCHAR(60),
@@ -14,8 +14,8 @@ CREATE TABLE  Mahasiswa (
 );
 
 
-CREATE TABLE  Dosen (
-    nik VARCHAR(20) PRIMARY KEY,
+CREATE TABLE Dosen (
+    nik VARCHAR(20) PRIMARY KEY NOT NULL,
     nama VARCHAR(50) NOT NULL,
     kode_nama VARCHAR(5),
     email VARCHAR(60),
@@ -23,8 +23,8 @@ CREATE TABLE  Dosen (
     isKoord BIT
 );
 
-CREATE TABLE  Komponen_nilai (
-    id_komp SERIAL PRIMARY KEY,
+CREATE TABLE Komponen_nilai (
+    id_komp INTEGER PRIMARY KEY NOT NULL,
     deskripsi VARCHAR(100) NOT NULL,
     bobotPenguji NUMERIC(4,2) NOT NULL,
     bobotPembimbing NUMERIC(4,2) NOT NULL,
@@ -32,8 +32,8 @@ CREATE TABLE  Komponen_nilai (
     tahun_ajaran VARCHAR(10)
 );
 
-CREATE TABLE  Tugas_akhir (
-    id_ta SERIAL PRIMARY KEY,
+CREATE TABLE Tugas_akhir (
+    id_ta INTEGER PRIMARY KEY NOT NULL,
     jenis VARCHAR(3) NOT NULL,
     judul VARCHAR(255) NOT NULL,
     semester_akd VARCHAR(6) NOT NULL,
@@ -47,7 +47,7 @@ CREATE TABLE  Tugas_akhir (
     id_mahasiswa VARCHAR(10)
 );
 
-CREATE TABLE  Nilai_ta (
+CREATE TABLE Nilai_ta (
     id_ta INTEGER NOT NULL,
     id_komp INTEGER NOT NULL,
     nilaiPenguji1 NUMERIC(5,2) NOT NULL,
@@ -58,7 +58,7 @@ CREATE TABLE  Nilai_ta (
     FOREIGN KEY (id_ta) REFERENCES Tugas_akhir (id_ta)
 );
 
-CREATE TABLE  Sidang_ta (
+CREATE TABLE Sidang_ta (
     id_sidang INTEGER NOT NULL,
     nik VARCHAR(20),
     id_ta INTEGER,
@@ -67,13 +67,14 @@ CREATE TABLE  Sidang_ta (
     tanggal DATE NOT NULL,
     waktu TIME NOT NULL,
     tempat VARCHAR(15),
+    catatan_sidang VARCHAR(1000),
     PRIMARY KEY (id_sidang,peran),
     FOREIGN KEY (nik) REFERENCES Dosen(nik),
     FOREIGN KEY (id_ta) REFERENCES Tugas_akhir(id_ta)
 );
 
 INSERT INTO Dosen (nik, nama, kode_nama, email, password, isKoord) VALUES
-('20010001', 'Vania Natalie', 'VAN', 'vania.natali@unpar.ac.id', 'password123',B'1'),
+('20010001', 'Vania Natalie', 'VAN', 'vania.natali@unpar.ac.id', 'password123', B'1'),
 ('20010002', 'Keenan', 'KLM', 'keenan.leman@unpar.ac.id', 'password124', B'0'),
 ('20010003', 'Pascal', 'PAN', 'pascal@unpar.ac.id', 'password125', B'0'),
 ('20010004', 'Mariskha', 'MTA', 'mariskha@unpar.ac.id', 'password126', B'0'),
@@ -137,13 +138,14 @@ INSERT INTO Mahasiswa (npm, nama, email, password) VALUES
 (6182201049, 'Xavier Rahman', 'xavier.rahman49@gmail.com', 'xavier49pass'),
 (6182201050, 'Yuni Lestari', 'yuni.lestari50@gmail.com', 'yuni50secure');
 
-INSERT INTO Komponen_nilai (deskripsi, bobotPenguji, bobotPembimbing, semester, tahun_ajaran) VALUES
-('Tata Tulis Laporan', 10.00, 10.00, 'Ganjil', '2023'),
-('Tata Bahasa', 20.00, 20.00, 'Ganjil', '2023'),
-('Presentasi', 20.00, 20.00, 'Ganjil', '2023'),
-('Pemahaman Materi', 30.00, 30.00, 'Ganjil', '2023'),
-('Poster', 10.00, 10.00, 'Ganjil', '2023'),
-('Kemampuan Tanya Jawab', 10.00, 10.00, 'Ganjil', '2023');
+INSERT INTO Komponen_nilai (id_komp, deskripsi, bobotPenguji, bobotPembimbing, semester, tahun_ajaran) VALUES
+(1, 'Tata Tulis Laporan', 10.00, 10.00, 'Ganjil', '2023'),
+(2, 'Tata Bahasa', 20.00, 20.00, 'Ganjil', '2023'),
+(3, 'Presentasi', 20.00, 20.00, 'Ganjil', '2023'),
+(4, 'Pemahaman Materi', 30.00, 30.00, 'Ganjil', '2023'),
+(5, 'Poster', 10.00, 10.00, 'Ganjil', '2023'),
+(6, 'Poster', 10.00, 10.00, 'Ganjil', '2023'),
+(7, 'Kemampuan Tanya Jawab', 10.00, 10.00, 'Ganjil', '2023');
 
 INSERT INTO tugas_akhir (id_ta, jenis, judul, semester_akd, tahun_akd, nilai_pb1, nilai_pu1, nilai_pu2, nilai_koord, nilai_akhir, angka_akhir, id_mahasiswa) VALUES
 (1, 'TA2', 'Analisis Sistem Informasi Akademik', 'Ganjil', 2023, 0, 0, 0, 0, 0, '-', 6182201001),
@@ -170,54 +172,54 @@ INSERT INTO tugas_akhir (id_ta, jenis, judul, semester_akd, tahun_akd, nilai_pb1
 (22, 'TA2', 'Perancangan Aplikasi Manajemen Karyawan', 'Ganjil', 2023, 0, 0, 0, 0, 0, '-', 6182201022);
 
 INSERT INTO Sidang_ta (id_sidang, nik, id_ta, peran, hari, tanggal, waktu, tempat) VALUES
-(1, 20010002, 1, 'PB1', 'Senin', '2023-11-27', '09:00:00', '9018'),
-(1, 20010003, 1, 'PU1', 'Senin', '2023-11-27', '09:00:00', '9018'),
-(1, 20010004, 1, 'PU2', 'Senin', '2023-11-27', '09:00:00', '9018'),
-(1, 20010001, 1, 'Koordinator', 'Senin', '2023-11-27', '09:00:00', '9018'),
-(2, 20010005, 2, 'PB1', 'Selasa', '2023-11-28', '10:00:00', '9019'),
-(2, 20010006, 2, 'PU1', 'Selasa', '2023-11-28', '10:00:00', '9019'),
-(2, 20010007, 2, 'PU2', 'Selasa', '2023-11-28', '10:00:00', '9019'),
-(2, 20010001, 2, 'Koordinator', 'Selasa', '2023-11-28', '10:00:00', '9019'),
-(3, 20010008, 3, 'PB1', 'Rabu', '2023-11-29', '13:00:00', '9020'),
-(3, 20010009, 3, 'PU1', 'Rabu', '2023-11-29', '13:00:00', '9020'),
-(3, 20010010, 3, 'PU2', 'Rabu', '2023-11-29', '13:00:00', '9020'),
-(3, 20010001, 3, 'Koordinator', 'Rabu', '2023-11-29', '13:00:00', '9020'),
-(4, 20010005, 4, 'PB1', 'Kamis', '2023-11-30', '14:00:00', '9021'),
-(4, 20010006, 4, 'PU1', 'Kamis', '2023-11-30', '14:00:00', '9021'),
-(4, 20010002, 4, 'PU2', 'Kamis', '2023-11-30', '14:00:00', '9021'),
-(4, 20010001, 4, 'Koordinator', 'Kamis', '2023-11-30', '14:00:00', '9021'),
-(5, 20010003, 5, 'PB1', 'Jumat', '2023-12-01', '09:00:00', '9018'),
-(5, 20010004, 5, 'PU1', 'Jumat', '2023-12-01', '09:00:00', '9018'),
-(5, 20010005, 5, 'PU2', 'Jumat', '2023-12-01', '09:00:00', '9018'),
-(5, 20010001, 5, 'Koordinator', 'Jumat', '2023-12-01', '09:00:00', '9018'),
-(6, 20010006, 6, 'PB1', 'Senin', '2023-12-04', '10:00:00', '9019'),
-(6, 20010007, 6, 'PU1', 'Senin', '2023-12-04', '10:00:00', '9019'),
-(6, 20010008, 6, 'PU2', 'Senin', '2023-12-04', '10:00:00', '9019'),
-(6, 20010001, 6, 'Koordinator', 'Senin', '2023-12-04', '10:00:00', '9019'),
-(7, 20010009, 7, 'PB1', 'Selasa', '2023-12-05', '13:00:00', '9020'),
-(7, 20010010, 7, 'PU1', 'Selasa', '2023-12-05', '13:00:00', '9020'),
-(7, 20010002, 7, 'PU2', 'Selasa', '2023-12-05', '13:00:00', '9020'),
-(7, 20010001, 7, 'Koordinator', 'Selasa', '2023-12-05', '13:00:00', '9020'),
-(8, 20010003, 8, 'PB1', 'Rabu', '2023-12-06', '14:00:00', '9021'),
-(8, 20010004, 8, 'PU1', 'Rabu', '2023-12-06', '14:00:00', '9021'),
-(8, 20010005, 8, 'PU2', 'Rabu', '2023-12-06', '14:00:00', '9021'),
-(8, 20010001, 8, 'Koordinator', 'Rabu', '2023-12-06', '14:00:00', '9021'),
-(9, 20010006, 9, 'PB1', 'Kamis', '2023-12-07', '09:00:00', '9018'),
-(9, 20010007, 9, 'PU1', 'Kamis', '2023-12-07', '09:00:00', '9018'),
-(9, 20010008, 9, 'PU2', 'Kamis', '2023-12-07', '09:00:00', '9018'),
-(9, 20010001, 9, 'Koordinator', 'Kamis', '2023-12-07', '09:00:00', '9018'),
-(10, 20010002, 10, 'PB1', 'Jumat', '2023-12-08', '10:00:00', '9019'),
-(10, 20010003, 10, 'PU1', 'Jumat', '2023-12-08', '10:00:00', '9019'),
-(10, 20010004, 10, 'PU2', 'Jumat', '2023-12-08', '10:00:00', '9019'),
-(10, 20010001, 10, 'Koordinator', 'Jumat', '2023-12-08', '10:00:00', '9019'),
-(11, 20010005, 11, 'PB1', 'Senin', '2023-12-11', '13:00:00', '9020'),
-(11, 20010006, 11, 'PU1', 'Senin', '2023-12-11', '13:00:00', '9020'),
-(11, 20010007, 11, 'PU2', 'Senin', '2023-12-11', '13:00:00', '9020'),
-(11, 20010001, 11, 'Koordinator', 'Senin', '2023-12-11', '13:00:00', '9020'),
-(12, 20010008, 12, 'PB1', 'Selasa', '2023-12-12', '14:00:00', '9021'),
-(12, 20010009, 12, 'PU1', 'Selasa', '2023-12-12', '14:00:00', '9021'),
-(12, 20010010, 12, 'PU2', 'Selasa', '2023-12-12', '14:00:00', '9021'),
-(12, 20010001, 12, 'Koordinator', 'Selasa', '2023-12-12', '14:00:00', '9021');
+(1, 20010002, 1, 'PB1', 'Senin', '2023-11-27', '09:00:00', '09.00.0018'),
+(1, 20010003, 1, 'PU1', 'Senin', '2023-11-27', '09:00:00', '09.00.0018'),
+(1, 20010004, 1, 'PU2', 'Senin', '2023-11-27', '09:00:00', '09.00.0018'),
+(1, 20010001, 1, 'Koordinator', 'Senin', '2023-11-27', '09:00:00', '09.00.0018'),
+(2, 20010005, 2, 'PB1', 'Selasa', '2023-11-28', '10:00:00', '09.00.0019'),
+(2, 20010006, 2, 'PU1', 'Selasa', '2023-11-28', '10:00:00', '09.00.0019'),
+(2, 20010007, 2, 'PU2', 'Selasa', '2023-11-28', '10:00:00', '09.00.0019'),
+(2, 20010001, 2, 'Koordinator', 'Selasa', '2023-11-28', '10:00:00', '09.00.0019'),
+(3, 20010008, 3, 'PB1', 'Rabu', '2023-11-29', '13:00:00', '09.00.0020'),
+(3, 20010009, 3, 'PU1', 'Rabu', '2023-11-29', '13:00:00', '09.00.0020'),
+(3, 20010010, 3, 'PU2', 'Rabu', '2023-11-29', '13:00:00', '09.00.0020'),
+(3, 20010001, 3, 'Koordinator', 'Rabu', '2023-11-29', '13:00:00', '09.00.0020'),
+(4, 20010005, 4, 'PB1', 'Kamis', '2023-11-30', '14:00:00', '09.00.0021'),
+(4, 20010006, 4, 'PU1', 'Kamis', '2023-11-30', '14:00:00', '09.00.0021'),
+(4, 20010002, 4, 'PU2', 'Kamis', '2023-11-30', '14:00:00', '09.00.0021'),
+(4, 20010001, 4, 'Koordinator', 'Kamis', '2023-11-30', '14:00:00', '09.00.0021'),
+(5, 20010003, 5, 'PB1', 'Jumat', '2023-12-01', '09:00:00', '09.00.0018'),
+(5, 20010004, 5, 'PU1', 'Jumat', '2023-12-01', '09:00:00', '09.00.0018'),
+(5, 20010005, 5, 'PU2', 'Jumat', '2023-12-01', '09:00:00', '09.00.0018'),
+(5, 20010001, 5, 'Koordinator', 'Jumat', '2023-12-01', '09:00:00', '09.00.0018'),
+(6, 20010006, 6, 'PB1', 'Senin', '2023-12-04', '10:00:00', '09.00.0019'),
+(6, 20010007, 6, 'PU1', 'Senin', '2023-12-04', '10:00:00', '09.00.0019'),
+(6, 20010008, 6, 'PU2', 'Senin', '2023-12-04', '10:00:00', '09.00.0019'),
+(6, 20010001, 6, 'Koordinator', 'Senin', '2023-12-04', '10:00:00', '09.00.0019'),
+(7, 20010009, 7, 'PB1', 'Selasa', '2023-12-05', '13:00:00', '09.00.0020'),
+(7, 20010010, 7, 'PU1', 'Selasa', '2023-12-05', '13:00:00', '09.00.0020'),
+(7, 20010002, 7, 'PU2', 'Selasa', '2023-12-05', '13:00:00', '09.00.0020'),
+(7, 20010001, 7, 'Koordinator', 'Selasa', '2023-12-05', '13:00:00', '09.00.0020'),
+(8, 20010003, 8, 'PB1', 'Rabu', '2023-12-06', '14:00:00', '09.00.0021'),
+(8, 20010004, 8, 'PU1', 'Rabu', '2023-12-06', '14:00:00', '09.00.0021'),
+(8, 20010005, 8, 'PU2', 'Rabu', '2023-12-06', '14:00:00', '09.00.0021'),
+(8, 20010001, 8, 'Koordinator', 'Rabu', '2023-12-06', '14:00:00', '09.00.0021'),
+(9, 20010006, 9, 'PB1', 'Kamis', '2023-12-07', '09:00:00', '09.00.0018'),
+(9, 20010007, 9, 'PU1', 'Kamis', '2023-12-07', '09:00:00', '09.00.0018'),
+(9, 20010008, 9, 'PU2', 'Kamis', '2023-12-07', '09:00:00', '09.00.0018'),
+(9, 20010001, 9, 'Koordinator', 'Kamis', '2023-12-07', '09:00:00', '09.00.0018'),
+(10, 20010002, 10, 'PB1', 'Jumat', '2023-12-08', '10:00:00', '09.00.0019'),
+(10, 20010003, 10, 'PU1', 'Jumat', '2023-12-08', '10:00:00', '09.00.0019'),
+(10, 20010004, 10, 'PU2', 'Jumat', '2023-12-08', '10:00:00', '09.00.0019'),
+(10, 20010001, 10, 'Koordinator', 'Jumat', '2023-12-08', '10:00:00', '09.00.0019'),
+(11, 20010005, 11, 'PB1', 'Senin', '2023-12-11', '13:00:00', '09.00.0020'),
+(11, 20010006, 11, 'PU1', 'Senin', '2023-12-11', '13:00:00', '09.00.0020'),
+(11, 20010007, 11, 'PU2', 'Senin', '2023-12-11', '13:00:00', '09.00.0020'),
+(11, 20010001, 11, 'Koordinator', 'Senin', '2023-12-11', '13:00:00', '09.00.0020'),
+(12, 20010008, 12, 'PB1', 'Selasa', '2023-12-12', '14:00:00', '09.00.0021'),
+(12, 20010009, 12, 'PU1', 'Selasa', '2023-12-12', '14:00:00', '09.00.0021'),
+(12, 20010010, 12, 'PU2', 'Selasa', '2023-12-12', '14:00:00', '09.00.0021'),
+(12, 20010001, 12, 'Koordinator', 'Selasa', '2023-12-12', '14:00:00', '09.00.0021');
 
 INSERT INTO Nilai_ta (id_ta, id_komp, nilaiPenguji1, nilaiPenguji2, nilaiPembimbing1) VALUES
 (1, 1, 0, 0, 0),
