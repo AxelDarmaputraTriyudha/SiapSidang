@@ -48,7 +48,7 @@
       <input type="hidden" name="npm" th:value="${npm}"/>
       <input type="hidden" name="peran" th:value="${peran}"/>
       <a>
-        <img class="arrow-back" src="/css/dosen/DetailJadwal/arrow-back0.svg" />
+        <img class="arrow-back" src="/css/dosen/DetailJadwal/arrow-back0.svg" onclick="history.back()"/>
       </a>  
       <div class="header">
         <img class="group" src="/css/pembimbing/CatatanSidang/logo-kiri-atas0.svg" />
@@ -78,13 +78,32 @@
       </div>
       
       <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-      <script th:if="${showAlert}">
-          Swal.fire({
-              icon: 'error',
-              title: 'Oops...',
-              text: '${alertMessage}'
+      <script>
+        document.addEventListener("DOMContentLoaded", function () {
+          const form = document.querySelector("form");
+          const saveButton = document.querySelector("#saveButton");
+
+          form.addEventListener("submit", function (event) {
+            // Tampilkan alert
+            Swal.fire({
+              icon: "success",
+              title: "Berhasil",
+              text: "Catatan Berhasil Tersimpan",
+              timer: 2000, // Alert akan otomatis hilang setelah 2 detik
+              showConfirmButton: false,
+            });
+
+            // Form tetap disubmit setelah alert selesai
+            setTimeout(() => {
+              form.submit();
+            }, 2000);
+
+            // Mencegah submit langsung
+            event.preventDefault();
           });
-      </script>  
+        });
+      </script>
+
   </body>
 
 </html>
