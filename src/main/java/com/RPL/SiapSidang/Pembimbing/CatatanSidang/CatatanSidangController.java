@@ -1,7 +1,6 @@
 package com.RPL.SiapSidang.Pembimbing.CatatanSidang;
 
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,79 +9,73 @@ import org.springframework.web.bind.annotation.*;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
-@RequestMapping("/pembimbing")
+@RequestMapping("/dosen")
 public class CatatanSidangController {
 
     @Autowired
     private PembimbingCatatanRepo pembimbingCatatanRepo;
 
-    @Autowired
-    private JDBCCatatan jdbcCatatan;
-
     // Menampilkan halaman catatan sidang mahasiswa
     @GetMapping("/CatatanSidang/catatan")
-    public String showCatatanPage(Model model, HttpSession session,
-                              @RequestParam(value = "npm", required = false) String npm,
-                              @RequestParam(value = "peran", required = false) String peran) {
-    
+    public String showCatatanPage(Model model,
+                            @RequestParam(value = "npm") String npm,
+                            @RequestParam(value = "peran") String peran,
+                            HttpSession session) {
+
         if (npm == null || peran == null) {
             throw new IllegalArgumentException("NPM atau Peran tidak ditemukan");
         }
 
         // Mengambil data mahasiswa berdasarkan NPM
-        Mahasiswa mahasiswa = jdbcCatatan.getMahasiswaByNpm(npm);
+        Mahasiswa mahasiswa = pembimbingCatatanRepo.getMahasiswaByNpm(npm);
         if (mahasiswa != null) {
             model.addAttribute("nama", mahasiswa.getNama());
             model.addAttribute("judul", mahasiswa.getJudul());
             model.addAttribute("npm", npm);
+            model.addAttribute("peran", peran);
+
+            session.setAttribute("npm", npm);
+            session.setAttribute("peran", peran);
         }
 
-        System.out.println("Model attributes: ");
-        System.out.println("Nama: " + model.getAttribute("nama"));
-        System.out.println("NPM: " + model.getAttribute("npm"));
-        System.out.println("Judul: " + model.getAttribute("judul"));
-
+        // Ambil semua catatan sidang
         List<CatatanSidang> catatanSidang = pembimbingCatatanRepo.getCatatan(npm);
         model.addAttribute("catatanSidang", catatanSidang);
+
+        // Jika ada catatan sidang, ambil catatan terakhir
+        if (!catatanSidang.isEmpty()) {
+            String lastCatatan = catatanSidang.get(catatanSidang.size() - 1).getCatatan(); // Catatan terakhir
+            model.addAttribute("lastCatatanSidang", lastCatatan);
+        } else {
+            model.addAttribute("lastCatatanSidang", ""); // Jika tidak ada catatan
+        }
+
+        System.out.println(session.getAttribute("peran"));
 
         return "pembimbing/CatatanSidang/catatan";
     }
 
     @PostMapping("/CatatanSidang/save")
     public String saveCatatan(
-            @RequestParam("catatan") String catatan,
-            @RequestParam(value = "npm", required = false) String npm,
-            @RequestParam(value = "peran", required = false) String peran,
-            Model model,
-            HttpSession session) {
+            @RequestParam("catatanSidang") String catatan,
+            Model model, HttpSession session) {
     
-        // Simpan npm dan peran ke session jika ada
-        if (npm != null) {
-            session.setAttribute("npm", npm);
-        }
-        if (peran != null) {
-            session.setAttribute("peran", peran);
-        }
+        String npm = (String) session.getAttribute("npm");
+        String peran = (String) session.getAttribute("peran");
+
+        System.out.println("Catatan: " + catatan);
+        System.out.println("NPM: " + npm);
     
-        // Ambil npm dan peran dari session
-        npm = (String) session.getAttribute("npm");
-        peran = (String) session.getAttribute("peran");
+        pembimbingCatatanRepo.saveCatatanSidang(npm, catatan);
     
-        // Validasi npm dan peran
-        if (npm == null || peran == null) {
-            model.addAttribute("showAlert", true);
-            model.addAttribute("alertMessage", "NPM atau peran tidak ditemukan.");
-            return "redirect:/pembimbing/CatatanSidang/catatan?npm=" + npm + "&peran=" + peran;
-        } else if (catatan == null || catatan.isEmpty()) {
-            model.addAttribute("showAlert", true);
-            model.addAttribute("alertMessage", "Catatan sidang tidak boleh kosong.");
-            return "redirect:/pembimbing/CatatanSidang/catatan?npm=" + npm + "&peran=" + peran;
-        } else {
-            // Simpan catatan sidang
-            jdbcCatatan.saveCatatanSidang(npm, catatan);
-        }
+        return "redirect:/dosen/CatatanSidang/catatan?npm=" + npm + "&peran=" + peran;
+    }
     
-        // Redirect ke halaman catatan sidang dengan npm dan peran sebagai query parameters
-        return "redirect:/pembimbing/CatatanSidang/catatan?npm=" + npm + "&peran=" + peran;
+    @PostMapping("/back")
+    public String back(HttpSession session){
+        String npm = (String) session.getAttribute("npm");
+        String peran = (String) session.getAttribute("peran");
+        
+        return "redirect:/dosen/DetailJadwal?npm=" + npm + "&peran=" + peran;
     }
 }

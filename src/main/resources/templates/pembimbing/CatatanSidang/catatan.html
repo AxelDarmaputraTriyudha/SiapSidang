@@ -45,42 +45,46 @@
         <div class="line-16"></div>
         <div class="rpl-b-3">RPL-B-3</div>
       </div>
-      <a href="/dashboard">
-        <img class="arrow-back" src="/css/pembimbing/CatatanSidang/arrow-back0.svg" />
-      </a>
+      <input type="hidden" name="npm" th:value="${npm}"/>
+      <input type="hidden" name="peran" th:value="${peran}"/>
+      <a>
+        <img class="arrow-back" src="/css/dosen/DetailJadwal/arrow-back0.svg" />
+      </a>  
       <div class="header">
         <img class="group" src="/css/pembimbing/CatatanSidang/logo-kiri-atas0.svg" />
         <div class="siap-sidang">SIAP Sidang</div>
       </div>
       <div class="catatan-sidang">Catatan Sidang</div>
-      <form class="field-catatan" method="POST" action="/pembimbing/CatatanSidang/save">
-        <textarea id="catatan" name="catatan" placeholder="Tulis catatan sidang..."></textarea>
-        <input type="hidden" name="npm" value="${npm}" />
-        <input type="hidden" name="peran" value="${peran}" />
-        <button type="submit" class="button-save" id="saveButton">Simpan</button>
-    </form>    
-      <div class="kotak-bio-data"></div>
-      <div class="nama">Nama</div>
-      <!-- Menampilkan nama mahasiswa -->
-      <div class="nama-value" th:text="${nama != null ? nama : 'Nama tidak tersedia'}"></div>     
-      <div class="npm">NPM</div>
-      <!-- Menampilkan NPM mahasiswa -->
-      <div class="npm-value" th:text="${npm != null ? npm : 'NPM tidak tersedia'}"></div>      
-      <div class="topik-tugas-akhir">Topik Tugas Akhir</div>
-      <!-- Menampilkan judul tugas akhir mahasiswa -->
-      <div class="judul-value" th:text="${judul != null ? judul : 'Judul tidak tersedia'}"></div>
-      <!-- <div class="component-edit-save">
-        <button type="submit" class="button-save" id="saveButton">Simpan</button>
-      </div> -->
+      <form method="POST" action="/dosen/CatatanSidang/save">
+        <!-- Textarea untuk catatan sidang -->
+        <textarea class="field-catatan" name="catatanSidang" 
+                  th:text="${lastCatatanSidang}" 
+                  placeholder="Tulis catatan sidang..."></textarea>
+        
+        <div class="component-edit-save">
+            <button type="submit" class="button-save" id="saveButton">Simpan</button>
+        </div>
+      </form>
+      <div class="kotak-bio-data">
+        <div class="nama">Nama</div>
+        <!-- Menampilkan nama mahasiswa -->
+        <div class="nama-value" th:text="${nama != null ? nama : 'Nama tidak tersedia'}"></div>     
+        <div class="npm">NPM</div>
+        <!-- Menampilkan NPM mahasiswa -->
+        <div class="npm-value" th:text="${npm != null ? npm : 'NPM tidak tersedia'}"></div>      
+        <div class="topik-tugas-akhir">Topik Tugas Akhir</div>
+        <!-- Menampilkan judul tugas akhir mahasiswa -->
+        <div class="judul-value" th:text="${judul != null ? judul : 'Judul tidak tersedia'}"></div>
+      </div>
+      
       <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
       <script th:if="${showAlert}">
           Swal.fire({
               icon: 'error',
               title: 'Oops...',
               text: '${alertMessage}'
           });
-      </script>
+      </script>  
   </body>
 
 </html>
