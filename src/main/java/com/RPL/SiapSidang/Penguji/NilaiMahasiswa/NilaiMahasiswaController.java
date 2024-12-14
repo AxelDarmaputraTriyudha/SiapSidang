@@ -24,16 +24,19 @@ public class NilaiMahasiswaController {
 
     @Autowired
     private JDBDNilai jdbdNilai; 
-    // Menampilkan halaman nilai mahasiswa
+    // tampilkan halaman nilai mahasiswa
     @GetMapping("/nilaiMahasiswa")
     public String showPage(Model model, HttpSession session, 
                            @RequestParam(value = "npm", required = false) String npm, 
                            @RequestParam(value = "peran", required = false) String peran) {
      
-          
+        model.addAttribute("peran", peran);
+        System.out.println(peran);
+
         if (peran == null) {
             throw new IllegalArgumentException("Peran cannot be null");
         }
+        
         // mengambil informasi mahasiswa berdasarakn npm 
         if (npm != null) {
             Mahasiswa mahasiswa = jdbdNilai.getNPM(npm); 
@@ -47,123 +50,68 @@ public class NilaiMahasiswaController {
             model.addAttribute("npm", npm);
         }
 
-        if (peran != null) {
-            session.setAttribute("peran", peran);
-            model.addAttribute("peran", peran);
-            System.out.println(peran);
-        }
 
-
-        // Daftar komponen nilai
+        // daftar komponen nilai
         List<KomponenNilai> komponenNilai = pengujiNilaiRepository.getKomponen(npm,peran);
         model.addAttribute("komponenNilai", komponenNilai);
+        System.out.println(komponenNilai);
 
         return "penguji/nilaiMahasiswa"; 
     }
 
-    // @PostMapping("/savenilai")
-    // public String saveNilai(
-    //         @RequestParam("deskripsi") List<String> deskripsiList,
-    //         @RequestParam("nilai") List<String> nilaiList) {
-    
-    //     // Debugging: Tampilkan data yang diterima
-    //     for (int i = 0; i < deskripsiList.size(); i++) {
-    //         System.out.println(deskripsiList.get(i) + ", Nilai: " + nilaiList.get(i));
-    //     }
-    
-    //     // Tambahkan logika untuk menyimpan data di database jika diperlukan
-        
-    //     return "redirect:/penguji/nilaiMahasiswa";
-    // }      
-
-    // @PostMapping("/savenilai")
-    // public String saveNilai(
-    //         @RequestParam("deskripsi") List<String> deskripsiList,
-    //         @RequestParam("nilai") List<Double> nilaiList,
-    //         HttpSession session, Model model) {
-
-    //        String npm = (String) session.getAttribute("npm");
-
-    //     // Loop melalui setiap deskripsi dan nilai
-    //     for (int i = 0; i < deskripsiList.size(); i++) {
-    //         String deskripsi = deskripsiList.get(i);
-    //         double nilai = nilaiList.get(i);
-    //         // Ambil bobot berdasarkan deskripsi
-    //         List<Bobot> bobotList = pengujiNilaiRepository.getBobot(deskripsi);
-    
-    //         // Pastikan bobot ditemukan
-    //         if (bobotList.isEmpty()) {
-    //             throw new IllegalArgumentException("Bobot tidak ditemukan untuk deskripsi: " + deskripsi);
-    //         }
-    
-    //         // Hitung total bobot
-    //         int totalBobot = bobotList.stream().mapToInt(Bobot::getBobot).sum();
-    
-    //         // Simpan nilai penguji
-    //         pengujiNilaiRepository.saveNilaiPenguji(nilai, totalBobot, npm);
-    //     }
-    
-    //     return "redirect:/penguji/nilaiMahasiswa";
-    // }
-
-
-    // Method untuk menyimpan nilai mahasiswa
+    // menyimpan nilai mahasiswa
     @PostMapping("/savenilai")
-    public String saveNilai(@RequestParam("deskripsi") List<String> deskripsi,
-                            @RequestParam("nilai") List<Double> nilai,
-                            @RequestParam(value = "npm", required = false) String npm,
-                            @RequestParam(value = "peran", required = false) String peran,
-                            Model model,HttpSession session ) {
+        public String saveNilai(@RequestParam("deskripsi") List<String> deskripsi,
+                                @RequestParam("nilai") List<Double> nilai,
+                                @RequestParam(value = "npm", required = false) String npm,
+                                @RequestParam(value = "peran", required = false) String peran,
+                                @RequestParam(value ="id_ta", required = false) int id_ta,
+                                @RequestParam(value ="id_komp", required = false) int id_komp,
+                                Model model, HttpSession session ) {
+            
 
-        // ambil 'npm' from session
-        if (npm != null) {
-            session.setAttribute("npm", npm);
-            model.addAttribute("npm", npm);
-        } else {
-            model.addAttribute("message", "NPM tidak ditemukan.");
-            return "errorPage"; // Handle case where NPM is not available
-        }
+            double totalNilaiAkhir = 0.0;
+            System.out.println(deskripsi.size());
 
-         // ambil 'peran' from session
-         if (peran != null) {
-            session.setAttribute("peran", peran);
-            model.addAttribute("peran", peran);
-            System.out.println(peran);
-        }else{
-            System.out.println("peran tidak ditemukan");
-        }
-        
-        if (deskripsi.size() != nilai.size()) {
-            throw new IllegalArgumentException("Jumlah deskripsi dan nilai tidak cocok");
-        }
+            for (int i = 0; i < deskripsi.size(); i++) {
+                String komponenDeskripsi = deskripsi.get(i);
+                double nilaiInput = nilai.get(i);
+                double nilaiAkhir = 0.0;
 
-        double totalNilaiAkhir = 0.0;
+                // ngambil bobot berdasarkan deskripsi dan peran
+                List<Bobot> bobotList = jdbdNilai.getBobot(komponenDeskripsi, peran);
 
-        for (int i = 0; i < deskripsi.size(); i++) {
-            String komponenDeskripsi = deskripsi.get(i);
-            double nilaiInput = nilai.get(i);
+                if (!bobotList.isEmpty()) {
+                    int bobot = bobotList.get(0).getBobot();
+                    System.out.println(komponenDeskripsi + " Bobot: " + bobot);
 
-            // Ambil bobot berdasarkan deskripsi
-            List<Bobot> bobotList = jdbdNilai.getBobot(komponenDeskripsi);
-            if (!bobotList.isEmpty()) {
-                int bobot = bobotList.get(0).getBobot();
+                    // ngambil id_komp untuk setiap deskripsi
+                    List<Integer> idKompList = jdbdNilai.getIdKompList(id_ta);
 
-                // Hitung nilai akhir untuk komponen ini
-                double nilaiAkhir = (nilaiInput * bobot) / 100.0;
+                    if (i < idKompList.size()) {
+                        id_komp = idKompList.get(i);
+                        System.out.println("id_komp untuk deskripsi " + komponenDeskripsi + ": " + id_komp);
 
-                // Tambahkan ke total nilai akhir
-                totalNilaiAkhir += nilaiAkhir;
+                        nilaiAkhir = nilaiInput * bobot / 100.0;
+
+                        // simpan nilai ke tabel nilai_ta
+                        jdbdNilai.saveNilaiToNilai_TA(jdbdNilai.getIdTa(npm),id_komp, peran, nilaiAkhir);
+
+                        // tambah nilai akhir ke total
+                        totalNilaiAkhir += nilaiAkhir;
+                    } else {
+                        System.out.println("Id komponen tidak ditemukan untuk deskripsi: " + komponenDeskripsi);
+                    }
+                }
             }
-        }
 
-        // Simpan nilai total ke database
-        jdbdNilai.saveNilaiPenguji(totalNilaiAkhir, npm);
+            // simpan total nilai akhir ke tabel tugas_akhir
+            jdbdNilai.saveNilaiPenguji(totalNilaiAkhir, npm, peran);
 
-        // Redirect atau tampilkan halaman sukses
-        model.addAttribute("message", "Nilai berhasil disimpan.");
-        return "redirect:/penguji/nilaiMahasiswa?npm=" + npm + "&peran=" + peran;
-
+            model.addAttribute("message", "Nilai berhasil disimpan.");
+            return "redirect:/dosen/DetailJadwal?npm=" + npm + "&peran=" + peran;
     }
+
 }
     
 
