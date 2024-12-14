@@ -55,3 +55,14 @@ ON
     ms.npm = ta.id_mahasiswa
     AND ms.npm::VARCHAR = ta.id_mahasiswa;
 
+CREATE VIEW view_sidang_mahasiswa AS
+SELECT 
+    m.npm,
+    m.nama,
+    ta.id_ta,
+	ta.judul,
+    s.id_sidang,
+    s.catatan_sidang
+FROM mahasiswa m
+JOIN tugas_akhir ta ON m.npm = ta.id_mahasiswa
+JOIN sidang_ta s ON ta.id_ta = s.id_ta;
