@@ -54,7 +54,7 @@ JOIN
 ON 
     ms.npm = ta.id_mahasiswa
     AND ms.npm::VARCHAR = ta.id_mahasiswa;
-
+    
 CREATE VIEW bap_view AS
 SELECT
 	tugas_akhir.jenis,
@@ -78,3 +78,15 @@ FROM
 	JOIN mahasiswa ON mahasiswa.npm = tugas_akhir.id_mahasiswa
 	JOIN sidang_ta ON sidang_ta.id_ta = tugas_akhir.id_ta
 	JOIN dosen ON dosen.nik = sidang_ta.nik;
+  
+CREATE VIEW view_sidang_mahasiswa AS
+SELECT 
+    m.npm,
+    m.nama,
+    ta.id_ta,
+	ta.judul,
+    s.id_sidang,
+    s.catatan_sidang
+FROM mahasiswa m
+JOIN tugas_akhir ta ON m.npm = ta.id_mahasiswa
+JOIN sidang_ta s ON ta.id_ta = s.id_ta;

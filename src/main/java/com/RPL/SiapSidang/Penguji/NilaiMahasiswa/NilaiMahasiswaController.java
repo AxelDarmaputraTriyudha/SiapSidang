@@ -30,6 +30,10 @@ public class NilaiMahasiswaController {
                            @RequestParam(value = "npm", required = false) String npm, 
                            @RequestParam(value = "peran", required = false) String peran) {
      
+          
+        if (peran == null) {
+            throw new IllegalArgumentException("Peran cannot be null");
+        }
         // mengambil informasi mahasiswa berdasarakn npm 
         if (npm != null) {
             Mahasiswa mahasiswa = jdbdNilai.getNPM(npm); 
@@ -46,11 +50,12 @@ public class NilaiMahasiswaController {
         if (peran != null) {
             session.setAttribute("peran", peran);
             model.addAttribute("peran", peran);
+            System.out.println(peran);
         }
 
 
         // Daftar komponen nilai
-        List<KomponenNilai> komponenNilai = pengujiNilaiRepository.getKomponen();
+        List<KomponenNilai> komponenNilai = pengujiNilaiRepository.getKomponen(npm,peran);
         model.addAttribute("komponenNilai", komponenNilai);
 
         return "penguji/nilaiMahasiswa"; 
@@ -107,16 +112,26 @@ public class NilaiMahasiswaController {
     public String saveNilai(@RequestParam("deskripsi") List<String> deskripsi,
                             @RequestParam("nilai") List<Double> nilai,
                             @RequestParam(value = "npm", required = false) String npm,
+                            @RequestParam(value = "peran", required = false) String peran,
                             Model model,HttpSession session ) {
 
-          // Retrieve 'npm' from session
-    if (npm != null) {
-        session.setAttribute("npm", npm);
-        model.addAttribute("npm", npm);
-    } else {
-        model.addAttribute("message", "NPM tidak ditemukan.");
-        return "errorPage"; // Handle case where NPM is not available
-    }
+        // ambil 'npm' from session
+        if (npm != null) {
+            session.setAttribute("npm", npm);
+            model.addAttribute("npm", npm);
+        } else {
+            model.addAttribute("message", "NPM tidak ditemukan.");
+            return "errorPage"; // Handle case where NPM is not available
+        }
+
+         // ambil 'peran' from session
+         if (peran != null) {
+            session.setAttribute("peran", peran);
+            model.addAttribute("peran", peran);
+            System.out.println(peran);
+        }else{
+            System.out.println("peran tidak ditemukan");
+        }
         
         if (deskripsi.size() != nilai.size()) {
             throw new IllegalArgumentException("Jumlah deskripsi dan nilai tidak cocok");
@@ -141,14 +156,13 @@ public class NilaiMahasiswaController {
             }
         }
 
-
-
         // Simpan nilai total ke database
         jdbdNilai.saveNilaiPenguji(totalNilaiAkhir, npm);
 
         // Redirect atau tampilkan halaman sukses
         model.addAttribute("message", "Nilai berhasil disimpan.");
-        return "redirect:/penguji/nilaiMahasiswa?npm=" + npm;
+        return "redirect:/penguji/nilaiMahasiswa?npm=" + npm + "&peran=" + peran;
+
     }
 }
     
