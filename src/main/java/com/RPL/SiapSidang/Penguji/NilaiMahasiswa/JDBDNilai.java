@@ -34,7 +34,6 @@ public class JDBDNilai implements PengujiNilaiRepository{
         return new KomponenNilai(
             resultSet.getString("deskripsi"),
             resultSet.getInt(columnName));
-
     }
     
     //data mahasiswa
