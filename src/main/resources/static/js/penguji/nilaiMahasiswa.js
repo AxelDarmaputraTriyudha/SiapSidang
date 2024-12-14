@@ -15,7 +15,5 @@ document.addEventListener("DOMContentLoaded", () => {
         input.style.borderColor = "#CCCCCC"; // Reset border color if valid
       }
     });
-    return isValid;
   };
-  
-});
+})
