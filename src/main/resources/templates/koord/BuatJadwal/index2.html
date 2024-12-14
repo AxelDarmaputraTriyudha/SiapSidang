@@ -58,20 +58,18 @@
           </select>
           <div class="tempat2">Pembimbing</div>
       </div>
-      
       <div class="anggota-pembimbing">
           <select class="pembimbing3" name="pb2" required>
-              <option value="" disabled selected>Pilih Dosen Pembimbing</option>
+              <option value="" disabled selected>Pilih Anggota Dosen Pembimbing</option>
               <option value="-" th:selected="${selectedPb2 == '-'}">-</option>
-              <option th:each="dosen : ${pb2List}" 
-                      th:value="${dosen.nik}" 
-                      th:text="${dosen.nama}" 
-                      th:selected="${dosen.nik == $selectedPb2}">
+              <option th:each="pb2 : ${pb2List}" 
+                      th:value="${pb2.nik}" 
+                      th:text="${pb2.nama}" 
+                      th:selected="${pb2.nik == selectedPb2}">
               </option>
           </select>      
           <div class="tempat4">Anggota Pembimbing</div>
       </div>
-  
       <div class="ketua-penguji">
           <select class="penguji1" name="pu1" required>
               <option value="" disabled selected>Pilih Nama Ketua Penguji</option>

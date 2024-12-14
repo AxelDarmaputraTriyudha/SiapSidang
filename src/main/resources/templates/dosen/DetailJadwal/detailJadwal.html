@@ -40,7 +40,7 @@
 </head>
 <body>
   <div class="html-koord-detail-jadwal">
-    <img class="group-36461" src="/css/dosen/DetailJadwal/group-364610.svg" />
+    <img class="group-36461" src="/css/dosen/DetailJadwal/group-364610.svg" onclick="history.back()"/>
     <div class="box-nama-mahasiswa">
       <div class="rectangle-7">
         <div class="isi" th:text="${data.nama}">Nama</div>
@@ -112,9 +112,9 @@
       <a class="button-nilai-mahasiswa" th:href="@{/penguji/nilaiMahasiswa(npm=${npm}, peran=${peran})}">
         <div class="nilai-mahasiswa">Nilai Mahasiswa ini</div>
       </a>
-      <div class="button-catatan-sidang" th:if="${peran == 'PB1' || peran == 'PB2'}">
+      <a class="button-catatan-sidang" th:if="${peran == 'PB1' || peran == 'PB2'}" th:href="@{/dosen/CatatanSidang/catatan(npm=${npm}, peran=${peran})}">
         <div class="catatan-sidang">Catatan Sidang</div>
-      </div>
+      </a>   
       <div class="button-manajemen-bap">
         <div class="manajemen-bap">Manajemen BAP</div>
       </div>
