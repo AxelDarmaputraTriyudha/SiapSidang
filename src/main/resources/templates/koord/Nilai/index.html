@@ -45,20 +45,35 @@
       <div class="siap-sidang">SIAP Sidang</div>
     </div>
     <div class="nilai-mahasiswa">Nilai Mahasiswa</div>
-    <form class="box-nilai" method="POST" th:action="@{/koord/tambahNilai}">
+    <form class="box-nilai" method="POST" th:href="@{/koord/tambahNilai/{npm}(npm=${npm})}">
       <div class="penilaian-kedisiplinan-mahasiswa">
         Penilaian Kedisiplinan Mahasiswa
       </div>
-      <input class="border" type="text" id="nilaiKoord" name="nilaiKoord" th:value="${nilaiKoord}"required>
+      <input class="border" type="number" id="nilaiKoord" name="nilaiKoord" th:value="${nilaiKoord}"  
+       min="0.00" max="100.00" step="0.01" required>
       <div class="nilai2">Nilai</div>
       <button class="button-save" id="saveBtn" type="submit">
         <div class="save">Save</div>
       </button>
-      <div id="notification" th:if="${successMessage}" class="notification">
+      <div id="notification" th:if="${successMessage}" class="notification" name="successMessage">
         <p th:text="${successMessage}"></p>
       </div>
+      <script>
+        // Tunggu hingga halaman selesai dimuat
+        document.addEventListener('DOMContentLoaded', function () {
+            const notification = document.getElementById('notification');
+            if (notification) {
+                // Sembunyikan notifikasi setelah 3 detik
+                setTimeout(() => {
+                    notification.style.display = 'none';
+                }, 3000); // 3000 ms = 3 detik
+            }
+        });
+      </script> 
     </form>
-    <img class="icon" src="/images/icon0.svg" />
+    <a th:href="@{/koord/DetailJadwal(npm=${npm})}">
+      <img class="icon" src="/images/icon0.svg"/>
+    </a>
     <footer>
       <div class="line-16"></div>
       <p>RPL-B-3</p>

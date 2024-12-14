@@ -10,4 +10,6 @@ public class TA {
     private String npm;
     private String nama;
     private String judul;
+    private String semester;
+    private int tahun;
 }

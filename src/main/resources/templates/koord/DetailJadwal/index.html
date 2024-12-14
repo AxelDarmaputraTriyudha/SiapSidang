@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="/css/koord/DetailJadwal/vars.css">
   <link rel="stylesheet" href="/css/koord/DetailJadwal/style.css">
+  <script src="/js/koord/Detail/scripts.js" defer></script>
   
   
   <style>
@@ -106,18 +107,14 @@
       <img class="logo-kiri-atas" src="/css/koord/DetailJadwal/logo-kiri-atas0.svg" />
       <div class="siap-sidang">SIAP Sidang</div>
     </div>
-    <div class="button-generate-bap">
-      <div class="generate-bap">Generate BAP</div>
-    </div>
-    <div class="button-nilai-mahasiswa">
+    <a class="button-generate-bap" th:href="@{/koord/generateBAP/{npm}(npm=${data.npm})}">
+      <div class="generate-bap">BAP</div>
+    </a>  
+    <a class="button-nilai-mahasiswa" th:href="@{/koord/tambahNilai/{npm}(npm=${data.npm})}">
       <div class="nilai-mahasiswa">Nilai Mahasiswa</div>
-    </div>
-    <div class="button-manajemen-bap">
-      <div class="manajemen-bap">Manajemen BAP</div>
-    </div>
+    </a>
     <div class="detail-jadwal2">Detail Jadwal</div>
     <button th:onclick="'window.location.href=\'/koord/home\''"><img class="arrow-back" src="/css/koord/DetailJadwal/arrow-back0.svg"/></button>
-    
   </div>
   
 </body>
