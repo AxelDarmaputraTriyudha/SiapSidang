@@ -38,7 +38,6 @@ body::before {
   display: flex;
   gap: 5px;
   position: absolute;
-  top: 20px;
   left: 20px;
 }
 
@@ -119,4 +118,8 @@ body::before {
     transform: translateY(-50%);
     cursor: pointer;
     color: #d3d3d3;
+}
+.p{
+  font-size: 20px;
+  color: #ff4500;
 }
