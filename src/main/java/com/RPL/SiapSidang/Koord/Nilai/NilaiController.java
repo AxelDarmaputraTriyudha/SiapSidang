@@ -22,6 +22,12 @@ public class NilaiController {
     @GetMapping("/tambahNilai/{npm}")
     @RequiredRole("koordinator")
     public String index(HttpSession session, Model model, @PathVariable String npm) {
+        // Tambahkan nilai dari database ke model
+        NilaiKoord nilai = jdbcNilai.getNilai(npm);
+        if (nilai != null) {
+            model.addAttribute("nilaiKoord", nilai.getNilai_koord());
+        }
+
         // Tambahkan successMessage ke model jika ada
         String successMessage = (String) session.getAttribute("successMessage");
         if (successMessage != null) {
@@ -29,7 +35,6 @@ public class NilaiController {
             session.removeAttribute("successMessage"); // Hapus setelah diambil
         }
 
-        model.addAttribute("nilaiKoord", session.getAttribute("nilaiKoord"));
         return "koord/Nilai/index";
     }
 

@@ -23,7 +23,7 @@ public class KoordController {
     @Autowired
     private KoordRepository repo;
     private String semester;
-    private String tahun;
+    private int tahun;
     private Sidang koord;
     private Sidang penguji1;
     private Sidang penguji2;
@@ -36,8 +36,6 @@ public class KoordController {
     public String buatJadwal1(HttpSession session, Model model) {
         model.addAttribute("namaMahasiswa", session.getAttribute("namaMahasiswa"));
         model.addAttribute("npm", session.getAttribute("npm"));
-        model.addAttribute("semester", session.getAttribute("semester"));
-        model.addAttribute("tahun", session.getAttribute("tahun"));
         model.addAttribute("tgl", session.getAttribute("tgl"));
         model.addAttribute("waktu", session.getAttribute("waktu"));
         model.addAttribute("tempat", session.getAttribute("tempat"));
@@ -49,8 +47,6 @@ public class KoordController {
     public String buatJadwal11(
         @RequestParam("namaMahasiswa") String namaMahasiswa,
         @RequestParam("npm") String npm,
-        @RequestParam("semester") String semester,
-        @RequestParam("tahun") String tahun,
         @RequestParam("tgl") LocalDate tgl,
         @RequestParam("waktu") String waktu,
         @RequestParam("tempat") String tempat, 
@@ -58,13 +54,13 @@ public class KoordController {
         ){
             session.setAttribute("namaMahasiswa", namaMahasiswa);
             session.setAttribute("npm", npm);
-            session.setAttribute("semester", semester);
-            session.setAttribute("tahun", tahun);
             session.setAttribute("tgl", tgl);
             session.setAttribute("waktu", waktu);
             session.setAttribute("tempat", tempat);
-            this.semester = (String) session.getAttribute("semester");
-            this.tahun = (String) session.getAttribute("tahun");
+
+            this.currTA = this.repo.getTA((String) session.getAttribute("npm"));
+            this.semester = currTA.getSemester();
+            this.tahun = currTA.getTahun();
             return "redirect:/koord/buatJadwal2";
         }
 
@@ -87,7 +83,7 @@ public class KoordController {
         // Menambahkan data yang tersimpan di sesi ke model agar tetap ditampilkan di form
         model.addAttribute("selectedPb1", pb1);
         model.addAttribute("selectedPb2", pb2);
-        model.addAttribute("selectedPu1",pu1);
+        model.addAttribute("selectedPu1", pu1);
         model.addAttribute("selectedPu2", pu2);
         
         return "koord/BuatJadwal/index2";

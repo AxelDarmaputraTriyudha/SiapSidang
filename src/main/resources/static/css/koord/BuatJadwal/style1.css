@@ -306,7 +306,7 @@
   font-size: large;
   padding-left: 10px;
 }
-select{
+input#tgl, input#waktu{
   position: absolute;
   padding: 20px 20px 20px 0px;
   height: fit-content;

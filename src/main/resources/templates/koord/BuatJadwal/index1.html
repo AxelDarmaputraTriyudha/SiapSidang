@@ -65,7 +65,7 @@
         <input class="npm2" type="text" id="npm" name="npm" th:value="${npm}" required>
         <div class="npm3">NPM Mahasiswa</div>
       </div>
-      <div class="semester-sidang">
+      <!-- <div class="semester-sidang">
         <div class="npm4" type="text">
           <select id="semester" name="semester" required>
             <option value="" disabled th:if="${semester == null}" selected>Pilih Semester</option>
@@ -74,8 +74,8 @@
           </select> 
         </div>
         <div class="npm5">Semester Sidang</div>
-      </div>
-      <div class="tahun-ajaran">
+      </div> -->
+      <!-- <div class="tahun-ajaran">
         <div class="npm6" type="text">
           <select id="tahun" name="tahun" required>
             <option value="" disabled th:if="${tahun == null}" selected>Pilih Tahun Ajaran</option>
@@ -84,22 +84,22 @@
           </select>        
         </div>
         <div class="npm7">Tahun Ajaran Sidang</div>
-      </div>
+      </div> -->
       <div class="tanggal-sidang">
-        <div class="npm8">
+        <div class="npm4">
           <input type="date" name="tgl" value="tgl" id="tgl" th:value="${tgl}" required>
         </div>
-        <div class="npm9">Tanggal Sidang</div>
+        <div class="npm5">Tanggal Sidang</div>
       </div>
       <div class="waktu-sidang">
-        <div class="npm10">
+        <div class="npm6">
           <input type="time" name="waktu" value="waktu" id="waktu" th:value="${waktu}" required>
         </div>
-        <div class="npm11">Waktu Sidang</div>
+        <div class="npm7">Waktu Sidang</div>
       </div>
       <div class="tempat-sidang">
-        <input class="tempat" type="text" name="tempat" id="tempat" th:value="${tempat}" required>
-        <div class="tempat2">Tempat Sidang</div>
+        <input class="npm8" type="text" name="tempat" id="tempat" th:value="${tempat}" required>
+        <div class="npm9">Tempat Sidang</div>
       </div>
       <div class="tombol">
         <a class="cancel" th:href="@{/koord/home}">
