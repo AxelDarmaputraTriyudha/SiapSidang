@@ -40,6 +40,7 @@ public class JDBDNilai implements PengujiNilaiRepository{
             resultSet.getInt("id_ta"),
             resultSet.getString("deskripsi"),
             resultSet.getInt(columnName));
+
     }
     
     //data mahasiswa
