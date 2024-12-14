@@ -64,7 +64,8 @@ public class PDFController {
 
         // Set the response headers for PDF
         response.setContentType("application/pdf");
-        response.setHeader("Content-Disposition", "attachment; filename=example_with_image.pdf");
+        String fileName = "BAP_" + npm;
+        response.setHeader("Content-Disposition", "attachment; filename=" + fileName+".pdf");
 
         // Create a new PDF document
         PDDocument document = new PDDocument();

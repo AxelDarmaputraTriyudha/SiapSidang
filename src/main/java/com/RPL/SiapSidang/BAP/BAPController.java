@@ -1,13 +1,32 @@
 package com.RPL.SiapSidang.BAP;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.UrlResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
+
+import com.RPL.SiapSidang.RequiredRole;
 
 @Controller
 @RequestMapping("/koord")
@@ -60,5 +79,93 @@ public class BAPController {
         model.addAttribute("nilaiBAP", nilaiBAP);
 
         return "/bap/index";
+    }
+
+    @Value("${file.upload-dir}")
+    private String uploadDir;
+
+    @PostMapping("/uploadBAP/{npm}")
+    @RequiredRole("koordinator")
+    public String uploadPDF(
+            @PathVariable String npm,
+            @RequestParam("file") MultipartFile file,
+            RedirectAttributes redirectAttributes) {
+
+        try {
+            // Validasi file
+            if (file.isEmpty() || !file.getOriginalFilename().endsWith(".pdf")) {
+                redirectAttributes.addFlashAttribute("errorMessage", "File harus berupa PDF!");
+                return "redirect:/koord/generateBAP/" + npm; // Redirect ke halaman sebelumnya
+            }
+
+            // Membuat nama file dengan format BAP_NPM_timestamp.pdf
+            String timestamp = String.valueOf(System.currentTimeMillis());
+            String fileName = "BAP_" + npm + "_" + timestamp + ".pdf";
+
+            // Mendefinisikan direktori penyimpanan (root folder 'upload')
+            String uploadDir = "upload";
+            Path uploadPath = Paths.get(uploadDir);
+
+            // Membuat direktori jika belum ada
+            if (!Files.exists(uploadPath)) {
+                Files.createDirectories(uploadPath);
+            }
+
+            // Menyimpan file ke direktori dengan nama baru
+            Path filePath = uploadPath.resolve(fileName);
+            Files.copy(file.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
+
+            // Redirect ke halaman sebelumnya dengan notifikasi sukses
+            redirectAttributes.addFlashAttribute("successMessage", "PDF berhasil diunggah.");
+            return "redirect:/koord/generateBAP/" + npm;
+        } catch (IOException e) {
+            e.printStackTrace();
+            redirectAttributes.addFlashAttribute("errorMessage", "Terjadi kesalahan saat mengunggah file!");
+            return "redirect:/koord/generateBAP/" + npm;
+        }
+    }
+
+    @PostMapping("/downloadBAP/{npm}")
+    @RequiredRole("koordinator")
+    public ResponseEntity<Resource> downloadBAP(@PathVariable String npm) {
+        try {
+            // Lokasi folder upload
+            String uploadDir = "upload";
+            Path uploadPath = Paths.get(uploadDir);
+
+            // Pastikan direktori ada
+            if (!Files.exists(uploadPath)) {
+                throw new RuntimeException("Direktori upload tidak ditemukan");
+            }
+
+            // Cari file terbaru berdasarkan NPM
+            Optional<Path> latestFile = Files.list(uploadPath)
+                    .filter(file -> file.getFileName().toString().startsWith("BAP_" + npm + "_")) // Filter berdasarkan nama
+                    .filter(file -> file.getFileName().toString().endsWith(".pdf"))              // Hanya file PDF
+                    .max(Comparator.comparingLong(file -> file.toFile().lastModified()));        // Ambil file terbaru
+
+            if (latestFile.isEmpty()) {
+                throw new RuntimeException("Tidak ada file untuk NPM " + npm);
+            }
+
+            // Ambil file terbaru
+            Path filePath = latestFile.get();
+            Resource resource = new UrlResource(filePath.toUri());
+
+            if (!resource.exists() || !resource.isReadable()) {
+                throw new RuntimeException("File tidak ditemukan atau tidak dapat diakses");
+            }
+
+            // Tetapkan nama file baru untuk unduhan (tanpa timestamp)
+            String downloadFileName = "BAP_" + npm + ".pdf";
+
+            // Kembalikan file sebagai respons download dengan nama baru
+            return ResponseEntity.ok()
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + downloadFileName + "\"")
+                    .body(resource);
+
+        } catch (Exception e) {
+            throw new RuntimeException("Terjadi kesalahan saat mengunduh file: " + e.getMessage(), e);
+        }
     }
 }

@@ -6,7 +6,30 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="/css/bap/vars.css">
   <link rel="stylesheet" href="/css/bap/style.css">
+  <script>
+    function showUploadPopup() {
+      document.getElementById('uploadPopup').style.display = 'block';
+    }
+    
+    function closeUploadPopup() {
+      document.getElementById('uploadPopup').style.display = 'none';
+    }   
+    
+    window.addEventListener('load', function () {
+      const notifikasi = document.getElementById('notifikasiUpload');
   
+      // Cek apakah elemen notifikasi memiliki konten
+      if (notifikasi && notifikasi.innerText.trim() !== '') {
+          // Tampilkan notifikasi
+          notifikasi.style.display = 'block';
+  
+          // Hilangkan notifikasi setelah 3 detik
+          setTimeout(() => {
+              notifikasi.style.display = 'none';
+          }, 3000);
+      }
+    });  
+  </script>
   
   <style>
    a,
@@ -133,15 +156,44 @@
         </tr>
       </table>
     </div>
-    <div class="upload">
-      <img class="upload2" src="/css/bap/upload1.svg" />
-      <div class="upload-pdf">Upload PDF</div>
+
+    <div>
+      <a class="upload" onclick="showUploadPopup()">
+        <img class="upload2" src="/css/bap/upload1.svg" />
+        <div class="upload-pdf">Upload PDF</div>
+      </a>
     </div>
-    <a class="download" th:href="@{/generatePDF/{npm}(npm=${data.npm})}">
-      <img class="fi-rr-download" src="/css/bap/fi-rr-download0.svg" />
-      <div class="download-pdf">Download PDF</div>
+    <div id="uploadPopup" class="popup">
+      <div class="popup-content">
+        <h2>Pop Upload BAP</h2>
+        <form th:action="@{/koord/uploadBAP/{npm}(npm=${data.npm})}" method="post" enctype="multipart/form-data">
+          <label for="file">Upload PDF:</label>
+          <input type="file" id="file" name="file" accept="application/pdf" required />
+          <button class="submitPDF" type="submit">Upload</button>
+        </form>
+        <button onclick="closeUploadPopup()">Close</button>
+      </div>
+    </div> 
+    <!-- NOTIFIKASI BERHASIL UPLOAD -->
+    <div class="notifikasiUpload" id="notifikasiUpload" style="display: none;">
+      <!-- Menampilkan pesan sukses -->
+      <p th:if="${successMessage}" class="success-message">
+          [[${successMessage}]]
+      </p>
+      <!-- Menampilkan pesan error -->
+      <p th:if="${errorMessage}" class="error-message">
+          [[${errorMessage}]]
+      </p>
+    </div>  
+    <a class="download" th:href="@{/generatePDF/{npm}(npm=${data.npm})}" style="top: 140px;">
+      <div class="download-pdf">Generate BAP</div>
     </a>
-  </div>
-  
+    <form th:action="@{/koord/downloadBAP/{npm}(npm=${data.npm})}" method="post" enctype="multipart/form-data">
+      <button class="download" type="submit">
+        <img class="fi-rr-download" src="/css/bap/fi-rr-download0.svg" />
+        <div class="download-pdf">Download PDF</div>
+      </button>
+    </form>
+  </div>  
 </body>
 </html>
