@@ -50,7 +50,8 @@ public class KoordController {
         @RequestParam("tgl") LocalDate tgl,
         @RequestParam("waktu") String waktu,
         @RequestParam("tempat") String tempat, 
-        HttpSession session
+        HttpSession session,
+        Model model
         ){
             session.setAttribute("namaMahasiswa", namaMahasiswa);
             session.setAttribute("npm", npm);
@@ -61,6 +62,15 @@ public class KoordController {
             this.currTA = this.repo.getTA((String) session.getAttribute("npm"));
             this.semester = currTA.getSemester();
             this.tahun = currTA.getTahun();
+
+            // Ambil data mahasiswa berdasarkan npm
+            this.currTA = this.repo.getTA(npm);
+
+            if (!this.currTA.getNama().equalsIgnoreCase(namaMahasiswa)) {
+                model.addAttribute("alertMessage", "Nama Mahasiswa tidak sesuai dengan data!");
+                return "koord/BuatJadwal/index1"; // Tetap di halaman ini
+            }
+
             return "redirect:/koord/buatJadwal2";
         }
 

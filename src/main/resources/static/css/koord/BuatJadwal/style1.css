@@ -532,3 +532,12 @@ input#tgl, input#waktu{
   align-items: center;
   justify-content: flex-end;
 }
+.notification {
+  background-color: #f8d7da; /* Warna merah muda untuk notifikasi error */
+  color: #721c24; /* Warna teks merah gelap */
+  padding: 10px;
+  border: 1px solid #f5c6cb;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  text-align: center;
+}
