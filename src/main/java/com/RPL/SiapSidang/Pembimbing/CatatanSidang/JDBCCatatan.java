@@ -46,13 +46,7 @@ public class JDBCCatatan implements PembimbingCatatanRepo {
     // Menyimpan atau memperbarui catatan sidang ke tabel asli
     @Override
     public void saveCatatanSidang(String npm, String catatan) {
-        String sql = """
-        INSERT INTO sidang_ta (id_ta, catatan_sidang)
-        SELECT ta.id_ta, ?
-        FROM tugas_akhir ta
-        JOIN mahasiswa m ON ta.id_mahasiswa = m.npm
-        WHERE m.npm = ?;
-        """;
+        String sql = "INSERT INTO sidang_ta (id_ta, catatan_sidang) SELECT ta.id_ta, ? FROM tugas_akhir ta JOIN mahasiswa m ON ta id_mahasiswa = m.npm WHERE m.npm = ?";
 
         jdbcTemplate.update(sql, npm, catatan);
     }
