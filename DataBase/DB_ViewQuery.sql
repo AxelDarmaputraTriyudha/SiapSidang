@@ -46,7 +46,7 @@ ON
 
 CREATE VIEW data_mahasiswa AS
 SELECT 
-    ms.npm, ms.nama, ta.judul
+    ms.npm, ms.nama, ta.judul, ta.id_ta
 FROM 
     Mahasiswa ms
 JOIN 

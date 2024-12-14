@@ -13,11 +13,14 @@ public class JDBCCatatan implements PembimbingCatatanRepo {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
-    // Mengambil semua data mahasiswa dari view
     @Override
-    public List<Mahasiswa> getDataMahasiswa() {
-        String sql = "SELECT npm, nama, judul FROM view_sidang_mahasiswa";
-        return jdbcTemplate.query(sql, this::mapToRowMahasiswa);
+    public int getIdSidang(String npm) {
+        String sql = "SELECT npm, nama, judul, id_ta FROM view_sidang_mahasiswa WHERE npm = ?";
+        List<Mahasiswa> list = jdbcTemplate.query(sql, this::mapToRowMahasiswa, npm);
+        if (list.isEmpty()) {
+            throw new RuntimeException("Data mahasiswa dengan NPM " + npm + " tidak ditemukan.");
+        }
+        return list.get(0).getId_ta();
     }
 
     // Mapping Mahasiswa dari ResultSet
@@ -25,7 +28,8 @@ public class JDBCCatatan implements PembimbingCatatanRepo {
         return new Mahasiswa(
             resultSet.getString("npm"),
             resultSet.getString("nama"),
-            resultSet.getString("judul")
+            resultSet.getString("judul"),
+            resultSet.getInt("id_ta")
         );
     }
 
@@ -46,28 +50,19 @@ public class JDBCCatatan implements PembimbingCatatanRepo {
     // Menyimpan atau memperbarui catatan sidang ke tabel asli
     @Override
     public void saveCatatanSidang(String npm, String catatan) {
-        String sql = "INSERT INTO sidang_ta (id_ta, catatan_sidang) SELECT ta.id_ta, ? FROM tugas_akhir ta JOIN mahasiswa m ON ta id_mahasiswa = m.npm WHERE m.npm = ?";
-
-        jdbcTemplate.update(sql, npm, catatan);
+        int id_ta = this.getIdSidang(npm);
+        String sql = "UPDATE sidang_ta SET catatan_sidang = ? WHERE id_ta = ?";
+        jdbcTemplate.update(sql, catatan, id_ta);
     }
 
     // Mengambil data mahasiswa berdasarkan NPM dari view
     public Mahasiswa getMahasiswaByNpm(String npm) {
         String sql = "SELECT * FROM data_mahasiswa WHERE npm = ?";
-        
-        // Query the database and map the result to a Mahasiswa object
-        List<Mahasiswa> mahasiswaList = jdbcTemplate.query(
-            sql, 
-            ps -> ps.setString(1, npm), 
-            this::mapToRowMahasiswa // Map setiap row ke objek mahasiswa
-        );
-    
-        // cek jika list kosong
-        if (mahasiswaList.isEmpty()) {
-            return null; // tidak mahasiswa dengan npm tertentu
-        } else {
-            return mahasiswaList.get(0); // Return hasil pertama
+        List<Mahasiswa> list = jdbcTemplate.query(sql, this::mapToRowMahasiswa, npm);
+        if (list.isEmpty()) {
+            throw new RuntimeException("Mahasiswa dengan NPM " + npm + " tidak ditemukan.");
         }
-    }
+        return list.get(0);
+    }    
     
 }

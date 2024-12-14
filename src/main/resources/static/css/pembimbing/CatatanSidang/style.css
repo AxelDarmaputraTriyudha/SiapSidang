@@ -25,7 +25,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 1440px;
+  width: 100%;
   height: 86px;
   position: absolute;
   left: 0px;
@@ -59,7 +59,7 @@
   position: absolute;
   left: 50%;
   translate: -50%;
-  top: 36px;
+  top: 280px;
   width: 82px;
   height: 27px;
 }
@@ -79,7 +79,7 @@
   gap: 43px;
   align-items: center;
   justify-content: flex-start;
-  width: 1440px;
+  width: 100%;
   position: absolute;
   left: 0px;
   top: 0px;
@@ -141,6 +141,18 @@
   position: absolute;
   left: 514px;
   top: 280px;
+  padding-left: 10px;
+  padding-top: 10px;
+  text-align: left;
+  font-family: var(
+    --regular-18px-font-family,
+    "SpaceGrotesk-Regular",
+    sans-serif
+  );
+  font-size: var(--regular-18px-font-size, 18px);
+  line-height: var(--regular-18px-line-height, 28px);
+  font-weight: var(--regular-18px-font-weight, 400);
+  color: black;
 }
 .tulis-catatan-sidang {
   color: rgba(0, 0, 0, 0.85);
@@ -176,11 +188,15 @@
   background: #004e89;
   border-radius: 10px;
   width: 350px;
-  height: 395px;
+  height: 300px;
   position: absolute;
   left: 120px;
   top: 359px;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  padding-left: 20px;
+  justify-content: center;
 }
 .nama {
   color: rgba(247, 245, 237, 0.75);
@@ -193,9 +209,6 @@
   font-size: var(--regular-21px-font-size, 21px);
   line-height: var(--regular-21px-line-height, 34px);
   font-weight: var(--regular-21px-font-weight, 400);
-  position: absolute;
-  left: 145px;
-  top: 510px;
 }
 .nama-value {
   color: #f7f5ed;
@@ -208,9 +221,6 @@
   font-size: var(--regular-18px-font-size, 18px);
   line-height: var(--regular-18px-line-height, 28px);
   font-weight: var(--regular-18px-font-weight, 400);
-  position: absolute;
-  left: 145px;
-  top: 544px;
 }
 .npm-value {
   color: #f7f5ed;
@@ -223,9 +233,6 @@
   font-size: var(--regular-18px-font-size, 18px);
   line-height: var(--regular-18px-line-height, 28px);
   font-weight: var(--regular-18px-font-weight, 400);
-  position: absolute;
-  left: 145px;
-  top: 614px;
 }
 .judul-value {
   color: #f7f5ed;
@@ -238,10 +245,6 @@
   font-size: var(--regular-18px-font-size, 18px);
   line-height: var(--regular-18px-line-height, 28px);
   font-weight: var(--regular-18px-font-weight, 400);
-  position: absolute;
-  left: 145px;
-  top: 683px;
-  width: 311px;
 }
 .npm {
   color: rgba(247, 245, 237, 0.75);
@@ -254,9 +257,6 @@
   font-size: var(--regular-21px-font-size, 21px);
   line-height: var(--regular-21px-line-height, 34px);
   font-weight: var(--regular-21px-font-weight, 400);
-  position: absolute;
-  left: 145px;
-  top: 580px;
 }
 .topik-tugas-akhir {
   color: rgba(247, 245, 237, 0.75);
@@ -269,56 +269,6 @@
   font-size: var(--regular-21px-font-size, 21px);
   line-height: var(--regular-21px-line-height, 34px);
   font-weight: var(--regular-21px-font-weight, 400);
-  position: absolute;
-  left: 144px;
-  top: 649px;
-}
-.kotak-identitas-mhs {
-  background: var(
-    --primary-primary,
-    radial-gradient(
-      closest-side,
-      rgba(255, 155, 0, 1) 12.5%,
-      rgba(237, 28, 36, 1) 100%
-    )
-  );
-  border-radius: 10px 10px 0px 0px;
-  width: 350px;
-  height: 146px;
-  position: absolute;
-  left: 120px;
-  top: 359px;
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-}
-.identitas-mahasiswa {
-  color: #ffffff;
-  text-align: center;
-  font-family: var(
-    --medium-36px-font-family,
-    "SpaceGrotesk-Medium",
-    sans-serif
-  );
-  font-size: var(--medium-36px-font-size, 36px);
-  line-height: var(--medium-36px-line-height, 54px);
-  font-weight: var(--medium-36px-font-weight, 500);
-  position: absolute;
-  left: 125px;
-  top: 379px;
-  width: 340px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.garis-bwah-nama {
-  margin-top: -1px;
-  border-style: solid;
-  border-color: #ffffff;
-  border-width: 1px 0 0 0;
-  width: 296px;
-  height: 0px;
-  position: absolute;
-  left: 143px;
-  top: 580px;
 }
 .component-edit-save {
   width: 180px;
@@ -326,30 +276,6 @@
   position: absolute;
   left: 1140px;
   top: 855px;
-}
-.button-edit {
-  background: #dad7d7;
-  border-radius: 60px;
-  padding: 10px 30px 10px 37px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  justify-content: space-between;
-  width: 47.78%;
-  height: 100%;
-  position: absolute;
-  right: 52.22%;
-  left: 0%;
-  bottom: 0%;
-  top: 0%;
-}
-.edit {
-  color: rgba(0, 0, 0, 0.2);
-  text-align: left;
-  font-family: "Inter-Bold", sans-serif;
-  font-size: 14px;
-  font-weight: 700;
-  position: relative;
 }
 .button-save {
   background: var(

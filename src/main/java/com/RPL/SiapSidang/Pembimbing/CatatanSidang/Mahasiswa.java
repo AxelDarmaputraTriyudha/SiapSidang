@@ -9,4 +9,5 @@ public class Mahasiswa {
     private String npm;
     private String nama;
     private String judul;
+    private int id_ta;
 }
