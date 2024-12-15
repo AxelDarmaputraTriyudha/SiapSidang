@@ -82,7 +82,7 @@ footer {
   align-items: center;
   justify-content: flex-start;
   width: 100%;
-  height: 100vh;
+  height: auto;
   position: absolute;
   left: 0px;
   top: 136px;
