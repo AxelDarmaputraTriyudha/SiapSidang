@@ -19,8 +19,6 @@ import jakarta.servlet.http.HttpSession;
 @Controller
 @RequestMapping("/mahasiswa")
 public class MahasiswaController {
-
-
     @Autowired
     JDBCMahasiswaRepository mahasiswaRepository;
 
@@ -91,8 +89,61 @@ public class MahasiswaController {
 
     @GetMapping("/nilai")
     @RequiredRole("mahasiswa")
-    public String nilaiView(){
+    public String nilaiView(Model model,
+                            HttpSession session){
 
+        String npm = (String)session.getAttribute("npm");
+        List<DataSidang> data = mahasiswaRepository.findDetail(npm);
+
+        // list nama dosen
+        String koordinator = "", penguji1 = "", penguji2 = "", pb1 = "", pb2 = "-";
+        
+        // assign nama dosen sesuai peran
+        for (int i = 0; i<data.size(); i++){
+            DataSidang dataNow = data.get(i);
+            switch (dataNow.getPeran()) {
+                case "Koordinator":
+                    koordinator = dataNow.getNama_dosen();
+                    break;
+                case "PB1":
+                    pb1 = dataNow.getNama_dosen();
+                    break;
+                case "PB2":
+                    pb2 = dataNow.getNama_dosen();
+                    break;
+                case "PU1":
+                    penguji1 = dataNow.getNama_dosen();
+                    break;
+                case "PU2":
+                    penguji2 = dataNow.getNama_dosen();
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        // add nama-nama dosen
+        model.addAttribute("koordinator", koordinator);
+        model.addAttribute("nama_pu1", penguji1);
+        model.addAttribute("nama_pu2", penguji2);
+        model.addAttribute("nama_pb1", pb1);
+        model.addAttribute("nama_pb2", pb2);
+        model.addAttribute("npm", npm);
+
+
+        // add nilai
+        NilaiMahasiswa nilaiMahasiswaList = mahasiswaRepository.findNilai(npm).get(0);
+        model.addAttribute("nilaiMahasiswaList", nilaiMahasiswaList);
+
+        double koordAkhir = nilaiMahasiswaList.getNilaiAkhirKoordinator()*0.1;
+        double pengujiAkhir = nilaiMahasiswaList.getNilaiAkhirPU1()*0.35;
+        double anggotaPengujiAkhir = nilaiMahasiswaList.getNilaiAkhirPU2()*0.35;
+        double pembimbingAkhir = nilaiMahasiswaList.getNilaiAkhirPembimbing1()*0.2;
+
+        model.addAttribute("koordAkhir", koordAkhir);
+        model.addAttribute("pengujiAkhir", pengujiAkhir);
+        model.addAttribute("anggotaPengujiAkhir", anggotaPengujiAkhir);
+        model.addAttribute("pembimbingAkhir", pembimbingAkhir);
         return "/mahasiswa/nilai/nilaiMhs";
     }
 }

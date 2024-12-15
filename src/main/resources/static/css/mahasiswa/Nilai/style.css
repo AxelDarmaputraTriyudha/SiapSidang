@@ -25,7 +25,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 1440px;
+  width: 100%;
   height: 86px;
   position: absolute;
   left: 0px;
@@ -79,7 +79,7 @@
   gap: 43px;
   align-items: center;
   justify-content: flex-start;
-  width: 1440px;
+  width: 100%;
   position: absolute;
   left: 0px;
   top: 0px;
@@ -270,7 +270,7 @@
   left: 757px;
   top: 483px;
   width: 137px;
-  height: 12px;
+  height: 40px;
 }
 ._80 {
   color: #8a8a8a;
@@ -803,6 +803,8 @@
   height: 12px;
 }
 .salsa-nabila {
+  display: flex;
+  align-items: center;
   color: #3c3c3c;
   text-align: left;
   font-family: "Inter-Medium", sans-serif;
@@ -811,9 +813,9 @@
   font-weight: 500;
   position: absolute;
   left: 483px;
-  top: 600px;
+  top: 592px;
   width: 137px;
-  height: 12px;
+  height: 40px;
 }
 .box-pembimbing2 {
   width: 334px;
@@ -833,6 +835,8 @@
   top: 647px;
 }
 .alberto-graciano {
+  display: flex;
+  align-items: center;
   color: #3c3c3c;
   text-align: left;
   font-family: "Inter-Medium", sans-serif;
@@ -841,9 +845,9 @@
   font-weight: 500;
   position: absolute;
   left: 483px;
-  top: 654px;
+  top: 652px;
   width: 137px;
-  height: 12px;
+  height: 40px;
 }
 ._42 {
   color: #3c3c3c;
@@ -912,9 +916,11 @@
   left: 350px;
   top: 712px;
   width: 137px;
-  height: 12px;
+  height: 40px;
 }
 .karen {
+  display: flex;
+  align-items: center;
   color: #3c3c3c;
   text-align: left;
   font-family: "Inter-Medium", sans-serif;
@@ -923,9 +929,9 @@
   font-weight: 500;
   position: absolute;
   left: 483px;
-  top: 721px;
+  top: 712px;
   width: 137px;
-  height: 12px;
+  height: 40px;
 }
 .box-penguji2 {
   width: 334px;
@@ -968,9 +974,11 @@
   left: 350px;
   top: 540px;
   width: 137px;
-  height: 12px;
+  height: 40px;
 }
 .william-sitohang {
+  display: flex;
+  align-items: center;
   color: #3c3c3c;
   text-align: left;
   font-family: "Inter-Medium", sans-serif;
@@ -981,7 +989,7 @@
   left: 483px;
   top: 531px;
   width: 137px;
-  height: 12px;
+  height: 40px;
 }
 .box-koordinator2 {
   width: 334px;
@@ -1024,9 +1032,11 @@
   left: 350px;
   top: 480px;
   width: 137px;
-  height: 12px;
+  height: 40px;
 }
 .ghatar-muham {
+  display: flex;
+  align-items: center;
   color: #3c3c3c;
   text-align: left;
   font-family: "Inter-Medium", sans-serif;
@@ -1035,7 +1045,7 @@
   font-weight: 500;
   position: absolute;
   left: 483px;
-  top: 480px;
+  top: 470px;
   width: 137px;
-  height: 12px;
+  height: 40px;
 }

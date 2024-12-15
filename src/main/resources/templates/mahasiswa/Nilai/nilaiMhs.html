@@ -35,7 +35,7 @@
        padding: 0;
    }
    </style>
-  <title>Document</title>
+  <title>Nilai Mahasiswa</title>
 </head>
 <body>
   <div class="html-mahasiswa-nilai-mahasiswa">
@@ -43,7 +43,9 @@
       <div class="line-16"></div>
       <div class="rpl-b-3">RPL-B-3</div>
     </div>
-    <img class="arrow-back" src="/css/mahasiswa/Nilai/arrow-back0.svg" />
+    <a th:href="@{/mahasiswa/DetailJadwal(npm=${npm})}">
+      <img class="arrow-back" src="/css/mahasiswa/Nilai/arrow-back0.svg" />
+    </a>
     <div class="header">
       <img class="group" src="/css/mahasiswa/Nilai/group0.svg" />
       <div class="siap-sidang">SIAP Sidang</div>
@@ -52,6 +54,7 @@
     <div class="rectangle-503"></div>
     <div class="nilai-mahasiswa2">
       <div class="rectangle-505"></div>
+      <div class="header-nilai"></div>
       <div class="no">No.</div>
       <div class="peran">Peran</div>
       <div class="nilai">Nilai</div>
@@ -59,33 +62,33 @@
       <div class="nilai-akhir">Nilai Akhir</div>
       <div class="box-penguji">
         <div class="rectangle-502"></div>
-        <div class="_1">1.</div>
+        <div class="_1">2.</div>
         <div class="penguji">Penguji</div>
-        <div class="_80">80</div>
-        <div class="_30">30%</div>
-        <div class="_24">24</div>
+        <div class="_80" th:text="${nilaiMahasiswaList.nilaiAkhirPU1}">80</div>
+        <div class="_30">35%</div>
+        <div class="_24" th:text="${#numbers.formatDecimal(pengujiAkhir,1,2)}">24</div>
       </div>
       <div class="box-koordinator">
         <div class="rectangle-5022"></div>
         <div class="_12">1.</div>
         <div class="koordinator">Koordinator</div>
-        <div class="_78">78</div>
-        <div class="_20">20%</div>
-        <div class="_15-6">15.6</div>
+        <div class="_78" th:text="${nilaiMahasiswaList.nilaiAkhirKoordinator}">78</div>
+        <div class="_20" >10%</div>
+        <div class="_15-6" th:text="${#numbers.formatDecimal(koordAkhir,1,2)}">15.6</div>
       </div>
       <div class="box-anggota-penguji">
         <div class="anggota-penguji">
           <div class="ap">
             <div class="rectangle-5023"></div>
-            <div class="_2">2.</div>
+            <div class="_2">3.</div>
             <div class="anggota-penguji2">
               Anggota
               <br />
               Penguji
             </div>
-            <div class="_81">81</div>
-            <div class="_10">10%</div>
-            <div class="_8-1">8.1</div>
+            <div class="_81" th:text="${nilaiMahasiswaList.nilaiAkhirPU2}">81</div>
+            <div class="_10">35%</div>
+            <div class="_8-1" th:text="${#numbers.formatDecimal(anggotaPengujiAkhir,1,2)}">8.1</div>
           </div>
         </div>
       </div>
@@ -93,30 +96,18 @@
         <div class="pembimbing">
           <div class="staff">
             <div class="rectangle-5024"></div>
-            <div class="_3">3.</div>
+            <div class="_3">4.</div>
             <div class="pembimbing2">Pembimbing</div>
-            <div class="_79">79</div>
-            <div class="_302">30%</div>
-            <div class="_23-7">23.7</div>
-          </div>
-        </div>
-      </div>
-      <div class="box-anggota-pembimbing">
-        <div class="anggota">
-          <div class="anggota-pembimbing">
-            <div class="rectangle-5025"></div>
-            <div class="_4">4.</div>
-            <div class="anggota-pembimbing2">Anggota Pembimbing</div>
-            <div class="_782">78</div>
-            <div class="_102">10%</div>
-            <div class="_7-8">7.8</div>
+            <div class="_79" th:text="${nilaiMahasiswaList.nilaiAkhirPembimbing1}">79</div>
+            <div class="_302">20%</div>
+            <div class="_23-7" th:text="${#numbers.formatDecimal(pembimbingAkhir,1,2)}">23.7</div>
           </div>
         </div>
       </div>
     </div>
     <div class="angka-akhir">
       <div class="rectangle-504"></div>
-      <div class="angka-akhir-79-2">Angka Akhir: 79.2</div>
+      <div class="angka-akhir-79-2">Angka Akhir: <span th:text="${nilaiMahasiswaList.nilaiAkhir}"></span></div>
     </div>
     <div class="nama-dosen">
       <div class="rectangle-506"></div>
@@ -131,11 +122,11 @@
           <br />
           Penguji
         </div>
-        <div class="salsa-nabila">Salsa Nabila</div>
+        <div class="salsa-nabila" th:text="${nama_pu2}"></div>
       </div>
       <div class="box-pembimbing2">
         <div class="rectangle-5027"></div>
-        <div class="alberto-graciano">Alberto Graciano</div>
+        <div class="alberto-graciano" th:text="${nama_pb1}"></div>
         <div class="_42">4.</div>
         <div class="pembimbing3">Pembimbing</div>
       </div>
@@ -147,19 +138,19 @@
           <br />
           Pembimbing
         </div>
-        <div class="karen">Karen</div>
+        <div class="karen" th:text="${nama_pb2}">Karen</div>
       </div>
       <div class="box-penguji2">
         <div class="rectangle-5029"></div>
         <div class="_22">2.</div>
         <div class="penguji2">Penguji</div>
-        <div class="william-sitohang">William Sitohang</div>
+        <div class="william-sitohang" th:text="${nama_pu1}">William Sitohang</div>
       </div>
       <div class="box-koordinator2">
         <div class="rectangle-50210"></div>
         <div class="_13">1.</div>
         <div class="koordinator2">Koordinator</div>
-        <div class="ghatar-muham">Ghatar Muham</div>
+        <div class="ghatar-muham" th:text="${koordinator}">Ghatar Muham</div>
       </div>
     </div>
   </div>

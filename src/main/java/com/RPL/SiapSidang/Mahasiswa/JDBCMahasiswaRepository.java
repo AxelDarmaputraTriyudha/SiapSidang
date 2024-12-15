@@ -72,4 +72,22 @@ public class JDBCMahasiswaRepository {
         String sql = "SELECT * FROM data_sidang_view WHERE npm = ?";
         return jdbcTemplate.query(sql, this::mapRowToDataSidang, npm);
     }
+
+    public List<NilaiMahasiswa> findNilai(String npm){
+        String sql = "SELECT * FROM tugas_akhir WHERE id_mahasiswa = ?";
+        return jdbcTemplate.query(sql, this::mapRowToNilaiMahasiswa, npm);
+    }
+
+    private NilaiMahasiswa mapRowToNilaiMahasiswa(ResultSet resultSet, int rowNum) throws SQLException {
+        return new NilaiMahasiswa(
+            resultSet.getInt("id_ta"),
+            resultSet.getString("id_mahasiswa"), 
+            resultSet.getString("judul"),
+            resultSet.getDouble("nilai_pb1"),
+            resultSet.getDouble("nilai_pu1"),
+            resultSet.getDouble("nilai_pu2"),
+            resultSet.getDouble("nilai_koord"), 
+            resultSet.getDouble("nilai_akhir")
+        );
+    }
 }
