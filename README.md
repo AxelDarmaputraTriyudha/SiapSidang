@@ -41,6 +41,13 @@ Tugas besar RPL : Siap Sidang
 2. Gradle versi 8.0 atau terbaru
 3. Database PostgreSQL
 
+## Penggunaan  
+Clone proyek SiapSidang 
+```
+git clone https://github.com/AxelDarmaputraTriyudha/SiapSidang.git
+```
+Pindah ke dalam direktori proyek SiapSidang
+
 # Instalasi dan Pengaturan
 ## 1. Persiapan Database 
 1. Masuk ke dalam PostgreSQL menggunakan terminal atau pgAdmin
