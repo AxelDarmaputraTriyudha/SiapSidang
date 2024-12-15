@@ -37,7 +37,7 @@ Tugas besar RPL : Siap Sidang
 - **Spring Boot** - framework untuk membangun aplikasi berbasis java
 
 ## Persyaratan Sistem 
-1. Java 17 
+1. Java versi 17 
 2. Gradle versi 8.0 atau terbaru
 3. Database PostgreSQL
 
@@ -65,3 +65,10 @@ Setelah proses build berhasil, Anda bisa menjalankan aplikasi di dalam direktori
 ./gradlew bootRun
 ```
 Aplikasi akan berjalan dan bisa akses melalui browser pada alamat `http://localhost:8080/login`. Anda akan langsung diarahakan pada halaman login dari aplikasi SiapSidang. 
+
+# Pengujian 
+Untuk menjalankan pengujian unit dan integrasi, gunakan perintah berikut:
+```
+./gradlew test
+```
+Ini akan menjalankan pengujian `SetJadwalTest` yang telah disiapkan di dalam proyek.
