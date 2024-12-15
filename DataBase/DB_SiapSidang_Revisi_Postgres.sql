@@ -1,3 +1,12 @@
+DO $$ 
+BEGIN
+    EXECUTE (
+        SELECT string_agg('DROP VIEW IF EXISTS "' || schemaname || '"."' || viewname || '" CASCADE;', ' ')
+        FROM pg_views
+        WHERE schemaname NOT IN ('pg_catalog', 'information_schema') -- Exclude system schemas
+    );
+END $$;
+
 DROP TABLE IF EXISTS Nilai_ta;
 DROP TABLE IF EXISTS Komponen_nilai;
 DROP TABLE IF EXISTS Sidang_ta;
@@ -14,7 +23,7 @@ CREATE TABLE  Mahasiswa (
 );
 
 
-CREATE TABLE  Dosen (
+CREATE TABLE Dosen (
     nik VARCHAR(20) PRIMARY KEY,
     nama VARCHAR(50) NOT NULL,
     kode_nama VARCHAR(5),
@@ -23,7 +32,7 @@ CREATE TABLE  Dosen (
     isKoord BIT
 );
 
-CREATE TABLE  Komponen_nilai (
+CREATE TABLE Komponen_nilai (
     id_komp SERIAL PRIMARY KEY,
     deskripsi VARCHAR(100) NOT NULL,
     bobotPenguji NUMERIC(4,2) NOT NULL,
@@ -68,6 +77,7 @@ CREATE TABLE  Sidang_ta (
     waktu TIME NOT NULL,
     tempat VARCHAR(15),
     catatan_sidang VARCHAR(100),
+    status_bap BOOLEAN,
     PRIMARY KEY (id_sidang,peran),
     FOREIGN KEY (nik) REFERENCES Dosen(nik),
     FOREIGN KEY (id_ta) REFERENCES Tugas_akhir(id_ta)

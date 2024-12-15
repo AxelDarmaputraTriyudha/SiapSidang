@@ -110,9 +110,9 @@
 </head>
 <body>
   <div class="html-koord-manajemen-bap">
-    <a th:href="@{/koord/DetailJadwal(npm=${data.npm})}">
-      <img class="arrow-back" src="/css/bap/arrow-back0.svg"/>
-    </a>
+    <a>
+      <img class="arrow-back" src="/css/dosen/DetailJadwal/arrow-back0.svg" onclick="history.back()"/>
+    </a> 
     <div class="header">
       <img class="group" src="/css/bap/group0.svg" />
       <div class="siap-sidang">SIAP Sidang</div>
@@ -124,6 +124,8 @@
         <p>NPM Mahasiswa: <a th:text="${data.npm}"></a></p>
         <p>Judul: <a th:text="${data.judul}"></a></p>
         <input type="hidden" th:value="${statusBAP ?: false}">
+        <input type="hidden" th:value="${peran}">
+        <input type="hidden" th:value="${npm}">
       </div>
       <table class="table_bap">
         <tr>
@@ -215,7 +217,7 @@
     <div id="uploadPopup" class="popup">
       <div class="popup-content">
         <h2>Pop Upload BAP</h2>
-        <form th:action="@{/koord/uploadBAP/{npm}(npm=${data.npm})}" method="post" enctype="multipart/form-data">
+        <form th:action="@{/dosen/uploadBAP/{npm}(npm=${data.npm})}" method="post" enctype="multipart/form-data">
           <label for="file">Upload PDF:</label>
           <input type="file" id="file" name="file" accept="application/pdf" required />
           <button class="submitPDF" type="submit">Upload</button>
@@ -235,20 +237,7 @@
       </p>
     </div>  
 
-    <a class="download" 
-        th:href="@{/generatePDF/{npm}(npm=${data.npm})}" 
-        th:attr="disabled=${statusBAP}" 
-        style="top: 140px;"
-        th:if="${!statusBAP}">
-        <div class="download-pdf">Generate BAP</div>
-    </a>
-    <a class="download disabled"
-        style="top: 140px;" 
-        th:if="${statusBAP}">
-        <div class="download-pdf">BAP Sudah Digenerate</div>
-    </a>
-
-    <form th:action="@{/koord/downloadBAP/{npm}(npm=${data.npm})}" method="post" enctype="multipart/form-data" onsubmit="handleDownload(event)">
+    <form th:action="@{/dosen/downloadBAP/{npm}(npm=${data.npm})}" method="post" enctype="multipart/form-data" onsubmit="handleDownload(event)">
       <button class="download" type="submit">
           <img class="fi-rr-download" src="/css/bap/fi-rr-download0.svg" />
           <div class="download-pdf">Download PDF</div>

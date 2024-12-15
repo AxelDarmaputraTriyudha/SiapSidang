@@ -115,9 +115,9 @@
       <a class="button-catatan-sidang" th:if="${peran == 'PB1' || peran == 'PB2'}" th:href="@{/dosen/CatatanSidang/catatan(npm=${npm}, peran=${peran})}">
         <div class="catatan-sidang">Catatan Sidang</div>
       </a>   
-      <div class="button-manajemen-bap">
+      <a class="button-manajemen-bap" th:href="@{/dosen/generateBAP/{npm}(npm=${data.npm})}">
         <div class="manajemen-bap">Manajemen BAP</div>
-      </div>
+      </a>
     </div>
 
     <div class="detail-jadwal2">Detail Jadwal</div>
