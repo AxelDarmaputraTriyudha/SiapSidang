@@ -27,13 +27,13 @@ import org.springframework.core.io.Resource;
 import com.RPL.SiapSidang.RequiredRole;
 
 @Controller
-@RequestMapping ("/dosen")
-public class DosenBAPController {
+@RequestMapping ("/mahasiswa")
+public class MahasiswaBAPController {
     @Autowired
     private JDBCBAP jdbcbap;
 
     @GetMapping("/generateBAP/{npm}")
-    @RequiredRole("Dosen")
+    @RequiredRole("mahasiswa")
     public String index(@PathVariable String npm, Model model){
         model.addAttribute("npm", npm);
 
@@ -79,14 +79,14 @@ public class DosenBAPController {
 
         model.addAttribute("statusBAP", data.get(0).getStatus_bap());
 
-        return "/bap/dosen";
+        return "/bap/mahasiswa";
     }
 
     @Value("${file.upload-dir}")
     private String uploadDir;
 
     @PostMapping("/uploadBAP/{npm}")
-    @RequiredRole("Dosen")
+    @RequiredRole("mahasiswa")
     public String uploadPDF(
             @PathVariable String npm,
             @RequestParam("file") MultipartFile file,
@@ -96,7 +96,7 @@ public class DosenBAPController {
             // Validasi file kalau salah format
             if (file.isEmpty() || !file.getOriginalFilename().endsWith(".pdf")) {
                 redirectAttributes.addFlashAttribute("errorMessage", "File harus berupa PDF!");
-                return "redirect:/dosen/generateBAP/" + npm; // Redirect ke halaman sebelumnya
+                return "redirect:/mahasiswa/generateBAP/" + npm; // Redirect ke halaman sebelumnya
             }
 
             // Membuat nama file dengan format BAP_NPM_timestamp.pdf
@@ -118,16 +118,16 @@ public class DosenBAPController {
 
             // Redirect ke halaman sebelumnya dengan notifikasi sukses
             redirectAttributes.addFlashAttribute("successMessage", "PDF berhasil diunggah.");
-            return "redirect:/dosen/generateBAP/" + npm;
+            return "redirect:/mahasiswa/generateBAP/" + npm;
         } catch (IOException e) {
             e.printStackTrace();
             redirectAttributes.addFlashAttribute("errorMessage", "Terjadi kesalahan saat mengunggah file!");
-            return "redirect:/dosen/generateBAP/" + npm;
+            return "redirect:/mahasiswa/generateBAP/" + npm;
         }
     }
 
     @PostMapping("/downloadBAP/{npm}")
-    @RequiredRole("Dosen")
+    @RequiredRole("mahasiswa")
     public ResponseEntity<?> downloadBAP(@PathVariable String npm) {
         try {
             String uploadDir = "upload";

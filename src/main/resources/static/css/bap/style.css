@@ -11,10 +11,8 @@
 .arrow-back {
   width: 36px;
   height: 33px;
-  position: absolute;
-  left: 43px;
-  top: 151px;
   overflow: visible;
+  margin-left: 10px;
 }
 .header {
   background: var(--general-color-2, #004e89);
@@ -29,6 +27,25 @@
   left: 0px;
   top: 0px;
 }
+.containerBody {
+  display: flex;
+  flex-direction: column;
+  margin-top: 140px;
+}
+.topBody {
+  display: flex;
+  flex-direction: row;
+  column-gap: 550px;
+  margin-left: 10px;
+}
+.bottomBody {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: center;
+  column-gap: 50px;
+}
+
 .group {
   flex-shrink: 0;
   width: 122px;
@@ -63,12 +80,6 @@
   font-size: var(--bold-80px-font-size, 80px);
   line-height: var(--bold-80px-line-height, 86px);
   font-weight: var(--bold-80px-font-weight, 700);
-  position: absolute;
-  left: 600px;
-  top: 151px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 .rectangle-507 {
   border-style: solid;
@@ -76,9 +87,6 @@
   border-width: 1px;
   width: 736px;
   height: 750px;
-  position: absolute;
-  left: 450px;
-  top: 252px;
   display: flex;
   flex-direction: column;
   padding-left: 10px;
@@ -130,9 +138,6 @@
   gap: 16px;
   align-items: center;
   justify-content: flex-start;
-  position: absolute;
-  left: 79px;
-  top: 829px;
 }
 .upload2 {
   flex-shrink: 0;
@@ -170,9 +175,6 @@
   gap: 16px;
   align-items: center;
   justify-content: flex-start;
-  position: absolute;
-  left: 1300px;
-  top: 829px;
 }
 .fi-rr-download {
   flex-shrink: 0;
