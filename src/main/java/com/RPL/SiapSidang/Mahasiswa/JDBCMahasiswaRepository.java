@@ -90,4 +90,14 @@ public class JDBCMahasiswaRepository {
             resultSet.getDouble("nilai_akhir")
         );
     }
+
+    public void updateNilaiAkhir(double nilaiAkhir, int id_ta){
+        String sql = "UPDATE tugas_akhir SET nilai_akhir = ? WHERE id_ta = ?";
+        jdbcTemplate.update(sql, nilaiAkhir, id_ta);
+    }
+
+    public void updateAngkaAkhir(String angkaAkhir, int id_ta){
+        String sql = "UPDATE tugas_akhir SET angka_akhir = ? WHERE id_ta = ?";
+        jdbcTemplate.update(sql, angkaAkhir, id_ta);
+    }
 }
