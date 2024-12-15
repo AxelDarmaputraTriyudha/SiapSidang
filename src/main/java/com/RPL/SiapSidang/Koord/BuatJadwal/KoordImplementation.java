@@ -2,7 +2,9 @@ package com.RPL.SiapSidang.Koord.BuatJadwal;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Time;
 import java.time.DayOfWeek;
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,6 +58,15 @@ public class KoordImplementation implements KoordRepository{
             resultSet.getInt("id_ta"),
             resultSet.getString("npm"), resultSet.getString("nama"), resultSet.getString("judul"),
             resultSet.getString("semester_akd"), resultSet.getInt("tahun_akd"));
+    }
+
+    public List<Jadwal> getJadwal(LocalDate tanggal, Time waktu, String tempat){
+        String sql = "SELECT tanggal, waktu, tempat FROM sidang_ta WHERE tanggal = ? AND waktu = ? AND tempat = ?";
+        return jdbcTemplate.query(sql, this::mapRowToJadwal, tanggal, waktu, tempat);
+    }
+
+    private Jadwal mapRowToJadwal(ResultSet resultSet, int rowNum) throws SQLException{
+        return new Jadwal(resultSet.getDate("tanggal"), resultSet.getTime("waktu"), resultSet.getString("tempat"));
     }
 
     public void setJadwal(Sidang koord, Sidang penguji1, Sidang penguji2, Sidang pembimbing1, Sidang pembimbing2){

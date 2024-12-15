@@ -115,7 +115,7 @@
       <a class="button-catatan-sidang" th:href="@{/mahasiswa/catatanSidang}">
         <div class="catatan-sidang">Catatan Sidang</div>
       </a>
-      <a class="button-manajemen-bap">
+      <a class="button-manajemen-bap" th:href="@{/mahasiswa/generateBAP/{npm}(npm=${data.npm})}">
         <div class="manajemen-bap">Manajemen BAP</div>
       </a>
     </div>
