@@ -22,7 +22,7 @@
     </div>
     </div>
     <div class="main">
-      <form th:action="@{/penguji/savenilai}" method="post">
+      <form th:action="@{/dosen/savenilai}" method="post">
         <input type="hidden" name="npm" th:value="${npm != null ? npm : 'NPM not available'}" />
         <input type="hidden" name="peran" th:value="${peran != null ? peran : 'PU1'}" />
         <input type="hidden" name="id_ta" th:value="${id_ta != null ? id_ta : '1'}" />

@@ -109,8 +109,8 @@
     </div>
 
     <div class="tombolFitur">
-      <a class="button-nilai-mahasiswa" th:href="@{/penguji/nilaiMahasiswa(npm=${npm}, peran=${peran})}">
-        <div class="nilai-mahasiswa">Nilai Mahasiswa ini</div>
+      <a class="button-nilai-mahasiswa" th:href="@{/dosen/nilaiMahasiswa(npm=${npm}, peran=${peran})}">
+        <div class="nilai-mahasiswa">Nilai Mahasiswa</div>
       </a>
       <a class="button-catatan-sidang" th:if="${peran == 'PB1' || peran == 'PB2'}" th:href="@{/dosen/CatatanSidang/catatan(npm=${npm}, peran=${peran})}">
         <div class="catatan-sidang">Catatan Sidang</div>

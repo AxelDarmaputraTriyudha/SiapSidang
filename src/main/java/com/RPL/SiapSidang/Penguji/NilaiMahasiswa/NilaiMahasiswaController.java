@@ -17,7 +17,7 @@ import com.RPL.SiapSidang.Koord.BuatJadwal.Dosen;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
-@RequestMapping("/penguji")
+@RequestMapping("/dosen")
 public class NilaiMahasiswaController {
     @Autowired
     private PengujiNilaiRepository pengujiNilaiRepository;
