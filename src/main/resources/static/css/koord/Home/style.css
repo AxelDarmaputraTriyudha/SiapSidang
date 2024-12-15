@@ -35,6 +35,10 @@ footer {
   align-items: center;
   justify-content: center;
   width: 100%;
+  position: absolute;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
 }
 .line-16 {
   margin-top: 10px;
@@ -82,7 +86,6 @@ footer {
   position: absolute;
   left: 0px;
   top: 136px;
-  flex: 1;
 }
 .feature-1 {
   display: flex;
@@ -319,7 +322,7 @@ footer {
   width: 100%;
   text-align: center;
   border-collapse: collapse;
-  margin-bottom: 120px;
+  margin-bottom: 41vh;
 }
 
 #daftar-sidang th{
