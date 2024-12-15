@@ -144,8 +144,8 @@ public class JDBDNilai implements PengujiNilaiRepository{
 
     //ambil id komponen
     public List<Integer> getIdKompList(int idTa) {
-        String sql = "SELECT id_komp FROM nilai_ta WHERE id_ta = ?";
-    
+        String sql = "SELECT id_komp FROM nilai_ta WHERE id_ta = ? ORDER BY id_komp";
+        
         return jdbcTemplate.query(
             sql,
             ps -> ps.setInt(1, idTa),
