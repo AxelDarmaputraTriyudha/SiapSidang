@@ -1,44 +1,50 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const form = document.querySelector("form");
-    const inputs = document.querySelectorAll("input[type='text']");
-    const saveButton = document.querySelector(".save-btn");
-    
-    // Validasi input angka (0-100)
+  const form = document.querySelector("form");
+  const inputs = document.querySelectorAll("input[type='text']");
+  const saveButton = document.querySelector(".save-btn");
+
+  // Validate input values (0-100)
+  const validateInputs = () => {
+    let isValid = true;
     inputs.forEach((input) => {
-      input.addEventListener("input", () => {
-        let value = parseInt(input.value);
-        if (isNaN(value) || value < 0 || value > 100) {
-          input.style.borderColor = "red";
-        } else {
-          input.style.borderColor = "#CCCCCC";
-        }
-      });
-    });
-  
-    // Aksi saat klik tombol simpan
-    saveButton.addEventListener("click", (event) => {
-      event.preventDefault();
-  
-      let isValid = true;
-  
-      inputs.forEach((input) => {
-        let value = parseInt(input.value);
-        if (isNaN(value) || value < 0 || value > 100) {
-          isValid = false;
-        }
-      });
-  
-      if (isValid) {
-        // Konfirmasi penyimpanan
-        const confirmed = confirm("Apakah Anda yakin ingin menyimpan data ini?");
-        if (confirmed) {
-          alert("Data berhasil disimpan!");
-          // Anda bisa tambahkan logika pengiriman data ke server di sini.
-          
-        }
+      let value = parseInt(input.value);
+      if (isNaN(value) || value < 0 || value > 100) {
+        input.style.borderColor = "red"; // Highlight invalid inputs
+        isValid = false;
       } else {
-        alert("Pastikan semua nilai diisi dengan angka antara 0 hingga 100.");
+        input.style.borderColor = "#CCCCCC"; // Reset border color if valid
       }
     });
+    return isValid;
+  };
+
+  // handle form submission
+  form.addEventListener("submit", (event) => {
+    if (!validateInputs()) {
+      event.preventDefault(); // stop submission if validation fails
+      alert("Harap periksa kembali nilai yang dimasukkan (0-100).");
+      return;
+    }
+
+    // display success message, redirect logic
+    event.preventDefault(); 
+    const formData = new FormData(form);
+
+    fetch(form.action, {
+      method: "POST",
+      body: formData,
+    })
+      .then((response) => {
+        if (response.ok) {
+          alert("Nilai berhasil disimpan!"); // Success message
+          window.location.href = `/dosen/DetailJadwal?npm=${formData.get("npm")}&peran=${formData.get("peran")}`;
+        } else {
+          alert("Terjadi kesalahan. Silakan coba lagi.");
+        }
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+        alert("Terjadi kesalahan pada jaringan. Silakan coba lagi.");
+      });
   });
-  
+});

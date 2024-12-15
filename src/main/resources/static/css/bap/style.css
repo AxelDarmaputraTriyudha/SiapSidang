@@ -1,0 +1,344 @@
+.html-koord-manajemen-bap,
+.html-koord-manajemen-bap * {
+  box-sizing: border-box;
+}
+.html-koord-manajemen-bap {
+  background: #f7f5ed;
+  height: 1024px;
+  position: relative;
+  overflow: hidden;
+}
+.arrow-back {
+  width: 36px;
+  height: 33px;
+  position: absolute;
+  left: 43px;
+  top: 151px;
+  overflow: visible;
+}
+.header {
+  background: var(--general-color-2, #004e89);
+  padding: 40px 152px 40px 152px;
+  display: flex;
+  flex-direction: row;
+  gap: 43px;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+}
+.group {
+  flex-shrink: 0;
+  width: 122px;
+  height: 55.59px;
+  position: relative;
+  overflow: visible;
+}
+.siap-sidang {
+  color: #ffffff;
+  text-align: left;
+  font-family: var(
+    --regular-16px-font-family,
+    "SpaceGrotesk-Regular",
+    sans-serif
+  );
+  font-size: var(--regular-16px-font-size, 16px);
+  line-height: var(--regular-16px-line-height, 26px);
+  font-weight: var(--regular-16px-font-weight, 400);
+  position: absolute;
+  left: 164px;
+  top: 96px;
+  width: 91px;
+  height: 29px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+.manajemen-bap {
+  color: #004e89;
+  text-align: center;
+  font-family: var(--bold-80px-font-family, "SpaceGrotesk-Bold", sans-serif);
+  font-size: var(--bold-80px-font-size, 80px);
+  line-height: var(--bold-80px-line-height, 86px);
+  font-weight: var(--bold-80px-font-weight, 700);
+  position: absolute;
+  left: 600px;
+  top: 151px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.rectangle-507 {
+  border-style: solid;
+  border-color: #000000;
+  border-width: 1px;
+  width: 736px;
+  height: 750px;
+  position: absolute;
+  left: 450px;
+  top: 252px;
+  display: flex;
+  flex-direction: column;
+  padding-left: 10px;
+  padding-right: 10px;
+  row-gap: 20px;
+}
+.identitas {
+  font-family: var(
+    --regular-21px-font-family,
+    "SpaceGrotesk-Regular",
+    sans-serif
+  );
+  font-size: var(--regular-18px-font-size, 18px);
+  line-height: var(--regular-21px-line-height, 34px);
+  font-weight: var(--regular-21px-font-weight, 400);
+}
+.table_bap {
+  font-family: "SpaceGrotesk-Regular", sans-serif;
+  font-size: 18px;
+  line-height: 20px;
+  font-weight: 560;
+  text-align: left;
+  /* width: 100%; Membuat tabel memenuhi lebar kontainer */
+  border-collapse: collapse; /* Menghilangkan jarak antar border */
+}
+.table_bap tr th {
+  border: 1px solid #959595; /* Warna border header */
+  padding: 8px; /* Jarak teks dengan border */
+  text-align: center; /* Teks rata tengah */
+}
+.table_bap tr td{
+  border: 1px solid #959595; /* Border untuk setiap sel */
+  padding: 8px; /* Jarak teks dengan border */
+  text-align: left; /* Teks rata tengah */
+}
+.upload {
+  background: var(
+    --primary-primary,
+    radial-gradient(
+      closest-side,
+      rgba(255, 155, 0, 1) 12.5%,
+      rgba(237, 28, 36, 1) 100%
+    )
+  );
+  border-radius: 60px;
+  padding: 16px 24px 16px 24px;
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  align-items: center;
+  justify-content: flex-start;
+  position: absolute;
+  left: 79px;
+  top: 829px;
+}
+.upload2 {
+  flex-shrink: 0;
+  width: 34px;
+  height: 34px;
+  position: relative;
+  overflow: visible;
+}
+.upload-pdf {
+  color: #000000;
+  text-align: left;
+  font-family: var(
+    --regular-21px-font-family,
+    "SpaceGrotesk-Regular",
+    sans-serif
+  );
+  font-size: var(--regular-21px-font-size, 21px);
+  line-height: var(--regular-21px-line-height, 34px);
+  font-weight: var(--regular-21px-font-weight, 400);
+  position: relative;
+}
+.download {
+  background: var(
+    --primary-primary,
+    radial-gradient(
+      closest-side,
+      rgba(255, 155, 0, 1) 12.5%,
+      rgba(237, 28, 36, 1) 100%
+    )
+  );
+  border-radius: 60px;
+  padding: 16px 24px 16px 24px;
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  align-items: center;
+  justify-content: flex-start;
+  position: absolute;
+  left: 1300px;
+  top: 829px;
+}
+.fi-rr-download {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  position: relative;
+  overflow: visible;
+}
+.download-pdf {
+  color: #000000;
+  text-align: left;
+  font-family: var(
+    --regular-21px-font-family,
+    "SpaceGrotesk-Regular",
+    sans-serif
+  );
+  font-size: var(--regular-21px-font-size, 21px);
+  line-height: var(--regular-21px-line-height, 34px);
+  font-weight: var(--regular-21px-font-weight, 400);
+  position: relative;
+}
+.footer {
+  background: var(--general-color-2, #004e89);
+  border-style: solid;
+  border-color: var(
+    --radial,
+    radial-gradient(
+      closest-side,
+      rgba(255, 155, 0, 1) 12.5%,
+      rgba(237, 28, 36, 1) 100%
+    )
+  );
+  border-width: 1px 0px 0px 0px;
+  padding: 46px 120px 72px 120px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 86px;
+  position: absolute;
+  left: 0px;
+  bottom: 0px;
+}
+.line-16 {
+  margin-top: -1px;
+  border-style: solid;
+  border-color: var(--grey-grey-3, #dadce2);
+  border-width: 1px 0 0 0;
+  opacity: 0.5;
+  flex-shrink: 0;
+  width: 1200px;
+  height: 0px;
+  position: relative;
+  transform-origin: 0 0;
+  transform: rotate(0deg) scale(1, 1);
+}
+.rpl-b-3 {
+  margin: -199px 0 0 0;
+  color: #ffffff;
+  text-align: center;
+  font-family: var(
+    --regular-18px-font-family,
+    "SpaceGrotesk-Regular",
+    sans-serif
+  );
+  font-size: var(--regular-18px-font-size, 18px);
+  line-height: var(--regular-18px-line-height, 28px);
+  font-weight: var(--regular-18px-font-weight, 400);
+  position: absolute;
+  left: 50%;
+  translate: -50%;
+  top: 36px;
+  width: 82px;
+  height: 27px;
+}
+/* Tombol Upload */
+.upload:hover .upload-pdf {
+  background-color: #b1becc;
+}
+
+.upload img {
+  width: 40px;
+  height: 40px;
+  margin-bottom: 10px;
+}
+
+/* Popup */
+.popup {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+}
+
+.popup-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  row-gap: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.submitPDF {
+  background-color: #004e89;
+  color: #ffffff;
+  border-radius: 10px;
+  padding: 10px 20px 10px 20px;
+}
+
+.notifikasiUpload {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 20px 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  z-index: 1000;
+  font-family: Arial, sans-serif;
+}
+
+/* Gaya untuk pesan sukses */
+.success-message {
+  color: #155724;
+  background-color: #d4edda;
+  border: 1px solid #c3e6cb;
+  padding: 10px;
+  border-radius: 5px;
+  margin: 0;
+}
+
+/* Gaya untuk pesan error */
+.error-message {
+  color: #721c24;
+  background-color: #f8d7da;
+  border: 1px solid #f5c6cb;
+  padding: 10px;
+  border-radius: 5px;
+  margin: 0;
+}
+.notifikasi-error {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  padding: 15px 20px;
+  background-color: #f8d7da; /* Warna merah muda untuk error */
+  color: #721c24; /* Warna teks merah */
+  border: 1px solid #f5c6cb;
+  border-radius: 5px;
+  font-size: 14px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  display: none;
+}

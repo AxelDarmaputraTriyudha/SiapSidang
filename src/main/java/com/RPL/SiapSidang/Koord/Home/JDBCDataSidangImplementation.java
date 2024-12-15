@@ -48,6 +48,7 @@ public class JDBCDataSidangImplementation {
             sql += " AND tahun_akd = ?";
             filterList.add(tahun);
         }
+        sql += " ORDER BY npm";
 
         return jdbcTemplate.query(sql, this::mapRowToDataSidang, filterList.toArray());
     }

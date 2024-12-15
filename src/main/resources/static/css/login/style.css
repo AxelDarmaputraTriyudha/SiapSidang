@@ -35,11 +35,18 @@ body::before {
 
 /* Sisanya tetap sama */
 .logo {
-  display: flex;
-  gap: 5px;
-  position: absolute;
+  position: fixed; /* Tetap di posisi kiri atas meskipun halaman di-scroll */
   top: 20px;
-  left: 20px;
+  left: 30px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  z-index: 10; /* Pastikan berada di atas elemen lainnya */
+}
+
+.logo img {
+  width: 100px; /* Atur ukuran logo sesuai kebutuhan */
+  height: auto;
 }
 
 .medal {
@@ -119,4 +126,8 @@ body::before {
     transform: translateY(-50%);
     cursor: pointer;
     color: #d3d3d3;
+}
+.p{
+  font-size: 20px;
+  color: #ff4500;
 }

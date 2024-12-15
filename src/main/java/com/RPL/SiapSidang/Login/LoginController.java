@@ -56,6 +56,31 @@ public class LoginController {
         model.addAttribute("status", "failed");  // Login gagal
         return "/login/loginPage";
     }
+    
+
+    @GetMapping("/loginRequired")
+    public String errorLoginRequired (){
+        return "/ErrorLogin/errorLoginPage";
+    }
+
+    @GetMapping("/wrongRole")
+    public String errorWrongRole () {
+        return "/ErrorLogin/errorWrong";
+    }
+
+    @GetMapping("/directHome")
+    public String goHome (HttpSession session){
+        String peran = (String) session.getAttribute("peran");
+        if(peran.contains("koordinator")){
+            return "redirect:/koord/home";
+        }
+        else if(peran.contains("Dosen")){
+            return "redirect:/dosen/home";
+        }
+        else{
+            return "redirect:/mahasiswa/home";
+        }
+    }
 
 
     // Logout

@@ -30,9 +30,10 @@ public class KoordImplementation implements KoordRepository{
         );
     }
 
-    public List<Komponen> getAllKomponen(String semester, String tahun){
+    public List<Komponen> getAllKomponen(String semester, int tahun){
+        String tahunString = String.valueOf(tahun);
         String sql = "SELECT deskripsi, bobotpenguji,  bobotpembimbing FROM komponen_nilai WHERE semester ILIKE ? AND tahun_ajaran ILIKE ?";
-        return jdbcTemplate.query(sql, this::mapRowToKomp, semester, tahun);
+        return jdbcTemplate.query(sql, this::mapRowToKomp, semester, tahunString);
     }
 
     private Komponen mapRowToKomp(ResultSet resultSet, int rowNum) throws SQLException{
@@ -44,7 +45,7 @@ public class KoordImplementation implements KoordRepository{
     }
 
     public TA getTA (String npm){
-        String sql = "SELECT id_ta, npm, nama, judul FROM tugas_akhir JOIN mahasiswa ON mahasiswa.npm = tugas_akhir.id_mahasiswa WHERE id_mahasiswa = ?";
+        String sql = "SELECT id_ta, npm, nama, judul, semester_akd, tahun_akd FROM tugas_akhir JOIN mahasiswa ON mahasiswa.npm = tugas_akhir.id_mahasiswa WHERE id_mahasiswa = ?";
 
         List<TA> lisTA = jdbcTemplate.query(sql, this::mapRowToTA, npm);
         return lisTA.get(0);
@@ -53,7 +54,8 @@ public class KoordImplementation implements KoordRepository{
     private TA mapRowToTA(ResultSet resultSet, int rowNum) throws SQLException{
         return new TA(
             resultSet.getInt("id_ta"),
-            resultSet.getString("npm"), resultSet.getString("nama"), resultSet.getString("judul"));
+            resultSet.getString("npm"), resultSet.getString("nama"), resultSet.getString("judul"),
+            resultSet.getString("semester_akd"), resultSet.getInt("tahun_akd"));
     }
 
     public void setJadwal(Sidang koord, Sidang penguji1, Sidang penguji2, Sidang pembimbing1, Sidang pembimbing2){

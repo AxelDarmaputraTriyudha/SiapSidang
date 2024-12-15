@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/bap/vars.css">
+  <link rel="stylesheet" href="/css/bap/style.css">
+  <script>
+    function showUploadPopup() {
+      document.getElementById('uploadPopup').style.display = 'block';
+    }
+    
+    function closeUploadPopup() {
+      document.getElementById('uploadPopup').style.display = 'none';
+    }   
+    
+    window.addEventListener('load', function () {
+      const notifikasi = document.getElementById('notifikasiUpload');
+  
+      // Cek apakah elemen notifikasi memiliki konten
+      if (notifikasi && notifikasi.innerText.trim() !== '') {
+          // Tampilkan notifikasi
+          notifikasi.style.display = 'block';
+  
+          // Hilangkan notifikasi setelah 3 detik
+          setTimeout(() => {
+              notifikasi.style.display = 'none';
+          }, 3000);
+      }
+    });  
+
+    async function handleDownload(event) {
+      event.preventDefault(); // Mencegah pengiriman form secara default
+  
+      const form = event.target;
+      const url = form.getAttribute("action");
+  
+      try {
+          const response = await fetch(url, {
+              method: "POST",
+          });
+  
+          if (!response.ok) {
+              // Jika ada error dari server
+              const errorMessage = await response.text();
+              showNotification(errorMessage, true);
+              return;
+          }
+  
+          // Jika sukses, unduh file
+          const blob = await response.blob();
+          const downloadUrl = window.URL.createObjectURL(blob);
+          const a = document.createElement("a");
+          a.href = downloadUrl;
+          a.download = "BAP.pdf"; // Nama default file
+          a.click();
+          window.URL.revokeObjectURL(downloadUrl);
+      } catch (error) {
+          showNotification("Terjadi kesalahan: " + error.message, true);
+      }
+    }
+    
+    function showNotification(message, isError = false) {
+        const notifikasi = document.getElementById("notifikasi");
+        const pesan = document.getElementById("notifikasiPesan");
+    
+        pesan.textContent = message;
+        notifikasi.style.display = "block";
+    
+        // Tambahkan gaya berdasarkan jenis notifikasi
+        notifikasi.style.backgroundColor = isError ? "#f8d7da" : "#d4edda";
+        notifikasi.style.color = isError ? "#721c24" : "#155724";
+    
+        // Sembunyikan notifikasi setelah 3 detik
+        setTimeout(() => {
+            notifikasi.style.display = "none";
+        }, 3000);
+    }  
+  </script>
+  
+  <style>
+   a,
+   button,
+   input,
+   select,
+   h1,
+   h2,
+   h3,
+   h4,
+   h5,
+   * {
+       box-sizing: border-box;
+       margin: 0;
+       padding: 0;
+       border: none;
+       text-decoration: none;
+       background: none;
+   
+       -webkit-font-smoothing: antialiased;
+   }
+   
+   menu, ol, ul {
+       list-style-type: none;
+       margin: 0;
+       padding: 0;
+   }
+   </style>
+  <title>Document</title>
+</head>
+<body>
+  <div class="html-koord-manajemen-bap">
+    <a>
+      <img class="arrow-back" src="/css/dosen/DetailJadwal/arrow-back0.svg" onclick="history.back()"/>
+    </a> 
+    <div class="header">
+      <img class="group" src="/css/bap/group0.svg" />
+      <div class="siap-sidang">SIAP Sidang</div>
+    </div>
+    <div class="manajemen-bap">BAP Sidang</div>
+    <div class="rectangle-507">
+      <div class="identitas">
+        <p>Nama Mahasiswa: <a th:text="${data.nama}"></a></p>
+        <p>NPM Mahasiswa: <a th:text="${data.npm}"></a></p>
+        <p>Judul: <a th:text="${data.judul}"></a></p>
+        <input type="hidden" th:value="${statusBAP ?: false}">
+        <input type="hidden" th:value="${peran}">
+        <input type="hidden" th:value="${npm}">
+      </div>
+      <table class="table_bap">
+        <tr>
+          <td>Pembimbing Utama/Tunggal</td>
+          <td><a th:text="${nilaiBAP.namaPembimbing1}"></a></td>
+        </tr>
+        <tr>
+          <td>Pembimbing Pendamping</td>
+          <td><a th:text="${nilaiBAP.namaPembimbing2}"></a></td>
+        </tr>
+        <tr>
+          <td>Ketua Tim Penguji</td>
+          <td><a th:text="${nilaiBAP.namaPenguji1}"></a></td>
+        </tr>
+        <tr>
+          <td>Anggota Tim Penguji</td>
+          <td><a th:text="${nilaiBAP.namaPenguji2}"></a></td>
+        </tr>
+      </table>
+      <p class="identitas">Rekapitulasi Nilai Sidang sebagai berikut: </p>
+      <table class="table_bap">
+        <tr>
+          <th>No</th>
+          <th>Peran</th>
+          <th>Nilai</th>
+          <th>Bobot</th>
+          <th>Nilai Akhir</th>
+        </tr>
+        <tr>
+          <th>1</th>
+          <th>Ketua Tim Penguji</th>
+          <th><a th:text="${nilaiBAP.nilaiPenguji1}"></a></th>
+          <th>35.00%</th>
+          <th><a th:text="${nilaiBAP.naPenguji1}"></a></th>
+        </tr>
+        <tr>
+          <th>2</th>
+          <th>Anggota Tim Penguji</th>
+          <th><a th:text="${nilaiBAP.nilaiPenguji2}"></a></th>
+          <th>30.00%</th>
+          <th><a th:text="${nilaiBAP.naPenguji2}"></a></th>
+        </tr>
+        <tr>
+          <th>3</th>
+          <th>Pembimbing</th>
+          <th><a th:text="${nilaiBAP.nilaiPembimbing1}"></a></th>
+          <th>20.00%</th>
+          <th><a th:text="${nilaiBAP.naPembimbing1}"></a></th>
+        </tr>
+        <tr>
+          <th>4</th>
+          <th>Koordinatir Skripsi</th>
+          <th><a th:text="${nilaiBAP.nilaiKoord}"></a></th>
+          <th>10.00%</th>
+          <th><a th:text="${nilaiBAP.naKoord}"></a></th>
+        </tr>
+        <tr>
+          <th></th>
+          <th>Total</th>
+          <th></th>
+          <th>100.00%</th>
+          <th><a th:text="${nilaiBAP.nilaiAkhir}"></a></th>
+        </tr>
+      </table>
+      <table class="table_bap">
+        <tr style="height: 65px;">
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td style="text-align: center;">Ketua Penguji</td>
+          <td style="text-align: center;">Anggota Penguji</td>
+          <td style="text-align: center;">Pembimbing</td>
+          <td style="text-align: center;">Mahasiswa</td>
+          <td style="text-align: center;">Koordinator Skripsi</td>
+        </tr>
+      </table>
+    </div>
+
+    <div>
+      <a class="upload" onclick="showUploadPopup()">
+        <img class="upload2" src="/css/bap/upload1.svg" />
+        <div class="upload-pdf">Upload PDF</div>
+      </a>
+    </div>
+    <div id="uploadPopup" class="popup">
+      <div class="popup-content">
+        <h2>Pop Upload BAP</h2>
+        <form th:action="@{/dosen/uploadBAP/{npm}(npm=${data.npm})}" method="post" enctype="multipart/form-data">
+          <label for="file">Upload PDF:</label>
+          <input type="file" id="file" name="file" accept="application/pdf" required />
+          <button class="submitPDF" type="submit">Upload</button>
+        </form>
+        <button onclick="closeUploadPopup()">Close</button>
+      </div>
+    </div> 
+    <!-- NOTIFIKASI BERHASIL UPLOAD -->
+    <div class="notifikasiUpload" id="notifikasiUpload" style="display: none;">
+      <!-- Menampilkan pesan sukses -->
+      <p th:if="${successMessage}" class="success-message">
+          [[${successMessage}]]
+      </p>
+      <!-- Menampilkan pesan error -->
+      <p th:if="${errorMessage}" class="error-message">
+          [[${errorMessage}]]
+      </p>
+    </div>  
+
+    <form th:action="@{/dosen/downloadBAP/{npm}(npm=${data.npm})}" method="post" enctype="multipart/form-data" onsubmit="handleDownload(event)">
+      <button class="download" type="submit">
+          <img class="fi-rr-download" src="/css/bap/fi-rr-download0.svg" />
+          <div class="download-pdf">Download PDF</div>
+      </button>
+    </form>
+  
+    <!-- NOTIFIKASI -->
+    <div id="notifikasi" style="display: none;" class="notifikasi-error">
+        <p id="notifikasiPesan"></p>
+    </div>  
+  </div>  
+</body>
+</html>
