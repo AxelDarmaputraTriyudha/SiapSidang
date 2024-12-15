@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.RPL.SiapSidang.RequiredRole;
 import com.RPL.SiapSidang.Koord.Home.DataSidang;
-
+import com.RPL.SiapSidang.Pembimbing.CatatanSidang.CatatanSidang;
+import com.RPL.SiapSidang.Pembimbing.CatatanSidang.Mahasiswa;
+import com.RPL.SiapSidang.Pembimbing.CatatanSidang.PembimbingCatatanRepo;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -21,6 +23,9 @@ import jakarta.servlet.http.HttpSession;
 public class MahasiswaController {
     @Autowired
     JDBCMahasiswaRepository mahasiswaRepository;
+
+    @Autowired
+    private PembimbingCatatanRepo pembimbingCatatanRepo;
 
     @GetMapping("/home")
     @RequiredRole("mahasiswa")
@@ -130,20 +135,82 @@ public class MahasiswaController {
         model.addAttribute("nama_pb2", pb2);
         model.addAttribute("npm", npm);
 
-
         // add nilai
         NilaiMahasiswa nilaiMahasiswaList = mahasiswaRepository.findNilai(npm).get(0);
-        model.addAttribute("nilaiMahasiswaList", nilaiMahasiswaList);
 
+        // cari nilai akhir
         double koordAkhir = nilaiMahasiswaList.getNilaiAkhirKoordinator()*0.1;
         double pengujiAkhir = nilaiMahasiswaList.getNilaiAkhirPU1()*0.35;
         double anggotaPengujiAkhir = nilaiMahasiswaList.getNilaiAkhirPU2()*0.35;
         double pembimbingAkhir = nilaiMahasiswaList.getNilaiAkhirPembimbing1()*0.2;
+        double nilaiAkhir = koordAkhir + pengujiAkhir + anggotaPengujiAkhir + pembimbingAkhir;
+
+        nilaiMahasiswaList.setNilaiAkhir(nilaiAkhir);
+
+        int id_ta = nilaiMahasiswaList.getId_ta();
+        model.addAttribute("nilaiMahasiswaList", nilaiMahasiswaList);
+
+        // update nilai akhir dan angka akhir di database
+        if(koordAkhir > 0 && pengujiAkhir > 0 && anggotaPengujiAkhir > 0 && pembimbingAkhir > 0){
+            // update nilai akhir mahasiswa
+            mahasiswaRepository.updateNilaiAkhir(nilaiAkhir, id_ta);
+
+            // update angka akhir
+            String angkaAkhir = convertNilai(nilaiAkhir);
+            mahasiswaRepository.updateAngkaAkhir(angkaAkhir, id_ta);
+        }
 
         model.addAttribute("koordAkhir", koordAkhir);
         model.addAttribute("pengujiAkhir", pengujiAkhir);
         model.addAttribute("anggotaPengujiAkhir", anggotaPengujiAkhir);
         model.addAttribute("pembimbingAkhir", pembimbingAkhir);
+        model.addAttribute("a", nilaiMahasiswaList);
         return "/mahasiswa/nilai/nilaiMhs";
+    }
+
+    @GetMapping("/catatanSidang")
+    @RequiredRole("mahasiswa")
+    public String viewCatatan(HttpSession session, Model model){
+        String npm = (String) session.getAttribute("npm");
+        Mahasiswa mahasiswa = pembimbingCatatanRepo.getMahasiswaByNpm(npm);
+
+        if (mahasiswa != null) {
+            model.addAttribute("nama", mahasiswa.getNama());
+            model.addAttribute("judul", mahasiswa.getJudul());
+            model.addAttribute("npm", npm);
+        }
+
+        CatatanSidang catatanSidang = pembimbingCatatanRepo.getCatatan(npm).get(0);
+        if(catatanSidang == null){
+            model.addAttribute("lastCatatanSidang", "");
+        }
+        else{
+            model.addAttribute("lastCatatanSidang", catatanSidang.getCatatan());
+        }
+        return "/mahasiswa/Catatan/catatanSidang";
+    }
+
+    private String convertNilai(double score){
+        if (score >= 80 && score <= 100) {
+            return "A";
+        } else if (score >= 77 && score <= 79) {
+            return "A-";
+        } else if (score >= 73 && score <= 76) {
+            return "B+";
+        } else if (score >= 70 && score <= 72) {
+            return "B";
+        } else if (score >= 67 && score <= 69) {
+            return "B-";
+        } else if (score >= 63 && score <= 66) {
+            return "C+";
+        } else if (score >= 60 && score <= 62) {
+            return "C";
+        } else if (score >= 50 && score <= 59) {
+            return "D";
+        } else if (score >= 0 && score <= 49) {
+            return "E";
+        } else {
+            return "Invalid";
+        }
     }
 }
