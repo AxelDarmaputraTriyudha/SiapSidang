@@ -210,7 +210,7 @@ public class MahasiswaController {
         } else if (score >= 0 && score <= 49) {
             return "E";
         } else {
-            return "Invalid"; // For scores outside valid range
+            return "Invalid";
         }
     }
 }
