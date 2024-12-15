@@ -1,3 +1,4 @@
+-- UNTUK MEMASTIKAN BAHWA TIDAK ADA VIEW DAN TABEL DENGAN NAMA YANG SAMA
 DO $$ 
 BEGIN
     EXECUTE (
@@ -15,7 +16,7 @@ DROP TABLE IF EXISTS Mahasiswa;
 DROP TABLE IF EXISTS Tugas_akhir;
 
 
-CREATE TABLE  Mahasiswa (
+CREATE TABLE Mahasiswa (
     npm VARCHAR(10) PRIMARY KEY  NOT NULL,
     nama VARCHAR(50) NOT NULL,
     email VARCHAR(60),
@@ -41,7 +42,7 @@ CREATE TABLE Komponen_nilai (
     tahun_ajaran VARCHAR(10)
 );
 
-CREATE TABLE  Tugas_akhir (
+CREATE TABLE Tugas_akhir (
     id_ta SERIAL PRIMARY KEY,
     jenis VARCHAR(3) NOT NULL,
     judul VARCHAR(255) NOT NULL,
@@ -56,7 +57,7 @@ CREATE TABLE  Tugas_akhir (
     id_mahasiswa VARCHAR(10)
 );
 
-CREATE TABLE  Nilai_ta (
+CREATE TABLE Nilai_ta (
     id_ta INTEGER NOT NULL,
     id_komp INTEGER NOT NULL,
     nilaiPenguji1 NUMERIC(5,2) NOT NULL,
@@ -67,7 +68,7 @@ CREATE TABLE  Nilai_ta (
     FOREIGN KEY (id_ta) REFERENCES Tugas_akhir (id_ta)
 );
 
-CREATE TABLE  Sidang_ta (
+CREATE TABLE Sidang_ta (
     id_sidang INTEGER NOT NULL,
     nik VARCHAR(20),
     id_ta INTEGER,
