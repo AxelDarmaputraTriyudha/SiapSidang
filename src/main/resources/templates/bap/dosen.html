@@ -39,121 +39,139 @@
 </head>
 <body>
   <div class="html-koord-manajemen-bap">
-    <a>
-      <img class="arrow-back" src="/css/dosen/DetailJadwal/arrow-back0.svg" onclick="history.back()"/>
-    </a> 
     <div class="header">
       <img class="group" src="/css/bap/group0.svg" />
       <div class="siap-sidang">SIAP Sidang</div>
     </div>
-    <div class="manajemen-bap">BAP Sidang</div>
-    <div class="rectangle-507">
-      <div class="identitas">
-        <p>Nama Mahasiswa: <a th:text="${data.nama}"></a></p>
-        <p>NPM Mahasiswa: <a th:text="${data.npm}"></a></p>
-        <p>Judul: <a th:text="${data.judul}"></a></p>
-        <input type="hidden" th:value="${statusBAP ?: false}">
-        <input type="hidden" th:value="${peran}">
-        <input type="hidden" th:value="${npm}">
+    <div class="containerBody">
+      <div class="topBody">
+        <a>
+          <img class="arrow-back" src="/css/dosen/DetailJadwal/arrow-back0.svg" onclick="history.back()"/>
+        </a> 
+        <div class="manajemen-bap">BAP Sidang</div>
       </div>
-      <table class="table_bap">
-        <tr>
-          <td>Pembimbing Utama/Tunggal</td>
-          <td><a th:text="${nilaiBAP.namaPembimbing1}"></a></td>
-        </tr>
-        <tr>
-          <td>Pembimbing Pendamping</td>
-          <td><a th:text="${nilaiBAP.namaPembimbing2}"></a></td>
-        </tr>
-        <tr>
-          <td>Ketua Tim Penguji</td>
-          <td><a th:text="${nilaiBAP.namaPenguji1}"></a></td>
-        </tr>
-        <tr>
-          <td>Anggota Tim Penguji</td>
-          <td><a th:text="${nilaiBAP.namaPenguji2}"></a></td>
-        </tr>
-      </table>
-      <p class="identitas">Rekapitulasi Nilai Sidang sebagai berikut: </p>
-      <table class="table_bap">
-        <tr>
-          <th>No</th>
-          <th>Peran</th>
-          <th>Nilai</th>
-          <th>Bobot</th>
-          <th>Nilai Akhir</th>
-        </tr>
-        <tr>
-          <th>1</th>
-          <th>Ketua Tim Penguji</th>
-          <th><a th:text="${nilaiBAP.nilaiPenguji1}"></a></th>
-          <th>35.00%</th>
-          <th><a th:text="${nilaiBAP.naPenguji1}"></a></th>
-        </tr>
-        <tr>
-          <th>2</th>
-          <th>Anggota Tim Penguji</th>
-          <th><a th:text="${nilaiBAP.nilaiPenguji2}"></a></th>
-          <th>30.00%</th>
-          <th><a th:text="${nilaiBAP.naPenguji2}"></a></th>
-        </tr>
-        <tr>
-          <th>3</th>
-          <th>Pembimbing</th>
-          <th><a th:text="${nilaiBAP.nilaiPembimbing1}"></a></th>
-          <th>20.00%</th>
-          <th><a th:text="${nilaiBAP.naPembimbing1}"></a></th>
-        </tr>
-        <tr>
-          <th>4</th>
-          <th>Koordinatir Skripsi</th>
-          <th><a th:text="${nilaiBAP.nilaiKoord}"></a></th>
-          <th>10.00%</th>
-          <th><a th:text="${nilaiBAP.naKoord}"></a></th>
-        </tr>
-        <tr>
-          <th></th>
-          <th>Total</th>
-          <th></th>
-          <th>100.00%</th>
-          <th><a th:text="${nilaiBAP.nilaiAkhir}"></a></th>
-        </tr>
-      </table>
-      <table class="table_bap">
-        <tr style="height: 65px;">
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr>
-          <td style="text-align: center;">Ketua Penguji</td>
-          <td style="text-align: center;">Anggota Penguji</td>
-          <td style="text-align: center;">Pembimbing</td>
-          <td style="text-align: center;">Mahasiswa</td>
-          <td style="text-align: center;">Koordinator Skripsi</td>
-        </tr>
-      </table>
-    </div>
+      <div class="bottomBody">
+        <div class="groupUploadBAP">
+          <div>
+            <a class="upload" onclick="showUploadPopup()">
+              <img class="upload2" src="/css/bap/upload1.svg" />
+              <div class="upload-pdf">Upload PDF</div>
+            </a>
+          </div>
+          <div id="uploadPopup" class="popup">
+            <div class="popup-content">
+              <h2>Pop Upload BAP</h2>
+              <form th:action="@{/dosen/uploadBAP/{npm}(npm=${data.npm})}" method="post" enctype="multipart/form-data">
+                <label for="file">Upload PDF:</label>
+                <input type="file" id="file" name="file" accept="application/pdf" required />
+                <button class="submitPDF" type="submit">Upload</button>
+              </form>
+              <button onclick="closeUploadPopup()">Close</button>
+            </div>
+          </div>
+        </div>
 
-    <div>
-      <a class="upload" onclick="showUploadPopup()">
-        <img class="upload2" src="/css/bap/upload1.svg" />
-        <div class="upload-pdf">Upload PDF</div>
-      </a>
-    </div>
-    <div id="uploadPopup" class="popup">
-      <div class="popup-content">
-        <h2>Pop Upload BAP</h2>
-        <form th:action="@{/dosen/uploadBAP/{npm}(npm=${data.npm})}" method="post" enctype="multipart/form-data">
-          <label for="file">Upload PDF:</label>
-          <input type="file" id="file" name="file" accept="application/pdf" required />
-          <button class="submitPDF" type="submit">Upload</button>
-        </form>
-        <button onclick="closeUploadPopup()">Close</button>
+        <div class="rectangle-507">
+          <div class="identitas">
+            <p>Nama Mahasiswa: <a th:text="${data.nama}"></a></p>
+            <p>NPM Mahasiswa: <a th:text="${data.npm}"></a></p>
+            <p>Judul: <a th:text="${data.judul}"></a></p>
+            <input type="hidden" th:value="${statusBAP ?: false}">
+            <input type="hidden" th:value="${peran}">
+            <input type="hidden" th:value="${npm}">
+          </div>
+          <table class="table_bap">
+            <tr>
+              <td>Pembimbing Utama/Tunggal</td>
+              <td><a th:text="${nilaiBAP.namaPembimbing1}"></a></td>
+            </tr>
+            <tr>
+              <td>Pembimbing Pendamping</td>
+              <td><a th:text="${nilaiBAP.namaPembimbing2}"></a></td>
+            </tr>
+            <tr>
+              <td>Ketua Tim Penguji</td>
+              <td><a th:text="${nilaiBAP.namaPenguji1}"></a></td>
+            </tr>
+            <tr>
+              <td>Anggota Tim Penguji</td>
+              <td><a th:text="${nilaiBAP.namaPenguji2}"></a></td>
+            </tr>
+          </table>
+          <p class="identitas">Rekapitulasi Nilai Sidang sebagai berikut: </p>
+          <table class="table_bap">
+            <tr>
+              <th>No</th>
+              <th>Peran</th>
+              <th>Nilai</th>
+              <th>Bobot</th>
+              <th>Nilai Akhir</th>
+            </tr>
+            <tr>
+              <th>1</th>
+              <th>Ketua Tim Penguji</th>
+              <th><a th:text="${nilaiBAP.nilaiPenguji1}"></a></th>
+              <th>35.00%</th>
+              <th><a th:text="${nilaiBAP.naPenguji1}"></a></th>
+            </tr>
+            <tr>
+              <th>2</th>
+              <th>Anggota Tim Penguji</th>
+              <th><a th:text="${nilaiBAP.nilaiPenguji2}"></a></th>
+              <th>30.00%</th>
+              <th><a th:text="${nilaiBAP.naPenguji2}"></a></th>
+            </tr>
+            <tr>
+              <th>3</th>
+              <th>Pembimbing</th>
+              <th><a th:text="${nilaiBAP.nilaiPembimbing1}"></a></th>
+              <th>20.00%</th>
+              <th><a th:text="${nilaiBAP.naPembimbing1}"></a></th>
+            </tr>
+            <tr>
+              <th>4</th>
+              <th>Koordinatir Skripsi</th>
+              <th><a th:text="${nilaiBAP.nilaiKoord}"></a></th>
+              <th>10.00%</th>
+              <th><a th:text="${nilaiBAP.naKoord}"></a></th>
+            </tr>
+            <tr>
+              <th></th>
+              <th>Total</th>
+              <th></th>
+              <th>100.00%</th>
+              <th><a th:text="${nilaiBAP.nilaiAkhir}"></a></th>
+            </tr>
+          </table>
+          <table class="table_bap">
+            <tr style="height: 65px;">
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td style="text-align: center;">Ketua Penguji</td>
+              <td style="text-align: center;">Anggota Penguji</td>
+              <td style="text-align: center;">Pembimbing</td>
+              <td style="text-align: center;">Mahasiswa</td>
+              <td style="text-align: center;">Koordinator Skripsi</td>
+            </tr>
+          </table>
+        </div>
+
+        <div class="groupDownloadBAP">
+          <form th:action="@{/dosen/downloadBAP/{npm}(npm=${data.npm})}" method="post" enctype="multipart/form-data" onsubmit="handleDownload(event)">
+            <button class="download" type="submit">
+                <img class="fi-rr-download" src="/css/bap/fi-rr-download0.svg" />
+                <div class="download-pdf">Download PDF</div>
+            </button>
+          </form>
+        </div>
       </div>
-    </div> 
+    </div>
+     
     <!-- NOTIFIKASI BERHASIL UPLOAD -->
     <div class="notifikasiUpload" id="notifikasiUpload" style="display: none;">
       <!-- Menampilkan pesan sukses -->
@@ -164,18 +182,6 @@
       <p th:if="${errorMessage}" class="error-message">
           [[${errorMessage}]]
       </p>
-    </div>  
-
-    <form th:action="@{/dosen/downloadBAP/{npm}(npm=${data.npm})}" method="post" enctype="multipart/form-data" onsubmit="handleDownload(event)">
-      <button class="download" type="submit">
-          <img class="fi-rr-download" src="/css/bap/fi-rr-download0.svg" />
-          <div class="download-pdf">Download PDF</div>
-      </button>
-    </form>
-  
-    <!-- NOTIFIKASI -->
-    <div id="notifikasi" style="display: none;" class="notifikasi-error">
-        <p id="notifikasiPesan"></p>
     </div>  
   </div>  
 </body>

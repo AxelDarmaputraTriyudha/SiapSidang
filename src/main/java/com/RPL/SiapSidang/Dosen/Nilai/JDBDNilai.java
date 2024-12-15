@@ -1,4 +1,4 @@
-package com.RPL.SiapSidang.Penguji.NilaiMahasiswa;
+package com.RPL.SiapSidang.Dosen.Nilai;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 
 
 @Repository
-public class JDBDNilai implements PengujiNilaiRepository{
+public class JDBDNilai implements NilaiRepository{
     @Autowired
     JdbcTemplate jdbcTemplate;
 
@@ -103,7 +103,7 @@ public class JDBDNilai implements PengujiNilaiRepository{
     
 
     //method save nilai ke tabel tugas akhir
-    public void saveNilaiPenguji(double nilaiAkhir, String npm, String peran) {
+    public void saveNilai(double nilaiAkhir, String npm, String peran) {
         String sql = "";
 
         if(peran.equals("PU1")){
