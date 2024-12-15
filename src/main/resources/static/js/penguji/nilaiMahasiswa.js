@@ -17,5 +17,34 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     return isValid;
   };
-  
+
+  // handle form submission
+  form.addEventListener("submit", (event) => {
+    if (!validateInputs()) {
+      event.preventDefault(); // stop submission if validation fails
+      alert("Harap periksa kembali nilai yang dimasukkan (0-100).");
+      return;
+    }
+
+    // display success message, redirect logic
+    event.preventDefault(); 
+    const formData = new FormData(form);
+
+    fetch(form.action, {
+      method: "POST",
+      body: formData,
+    })
+      .then((response) => {
+        if (response.ok) {
+          alert("Nilai berhasil disimpan!"); // Success message
+          window.location.href = `/dosen/DetailJadwal?npm=${formData.get("npm")}&peran=${formData.get("peran")}`;
+        } else {
+          alert("Terjadi kesalahan. Silakan coba lagi.");
+        }
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+        alert("Terjadi kesalahan pada jaringan. Silakan coba lagi.");
+      });
+  });
 });
