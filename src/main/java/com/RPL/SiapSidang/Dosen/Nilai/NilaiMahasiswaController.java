@@ -1,18 +1,14 @@
-package com.RPL.SiapSidang.Penguji.NilaiMahasiswa;
+package com.RPL.SiapSidang.Dosen.Nilai;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import com.RPL.SiapSidang.Koord.BuatJadwal.Dosen;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -20,7 +16,7 @@ import jakarta.servlet.http.HttpSession;
 @RequestMapping("/dosen")
 public class NilaiMahasiswaController {
     @Autowired
-    private PengujiNilaiRepository pengujiNilaiRepository;
+    private NilaiRepository pengujiNilaiRepository;
 
     @Autowired
     private JDBDNilai jdbdNilai; 
@@ -56,7 +52,7 @@ public class NilaiMahasiswaController {
         model.addAttribute("komponenNilai", komponenNilai);
         System.out.println(komponenNilai);
 
-        return "penguji/nilaiMahasiswa"; 
+        return "dosen/nilaiMahasiswa"; 
     }
 
     // menyimpan nilai mahasiswa
@@ -106,7 +102,7 @@ public class NilaiMahasiswaController {
             }
 
             // simpan total nilai akhir ke tabel tugas_akhir
-            jdbdNilai.saveNilaiPenguji(totalNilaiAkhir, npm, peran);
+            jdbdNilai.saveNilai(totalNilaiAkhir, npm, peran);
 
             model.addAttribute("message", "Nilai berhasil disimpan.");
             return "redirect:/dosen/DetailJadwal?npm=" + npm + "&peran=" + peran;

@@ -1,4 +1,4 @@
-package com.RPL.SiapSidang.Penguji.NilaiMahasiswa;
+package com.RPL.SiapSidang.Dosen.Nilai;
 
 import lombok.Data;
 import lombok.AllArgsConstructor;
