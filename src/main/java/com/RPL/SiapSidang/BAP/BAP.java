@@ -22,4 +22,6 @@ public class BAP {
     private Double nilai_pu1;
     private Double nilai_pu2;
     private Double nilai_koord;
+    private Boolean status_bap;
+    private int id_sidang;
 }

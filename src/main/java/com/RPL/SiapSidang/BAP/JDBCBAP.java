@@ -35,7 +35,16 @@ public class JDBCBAP {
             resultSet.getDouble("nilai_pb1"),
             resultSet.getDouble("nilai_pu1"),
             resultSet.getDouble("nilai_pu2"),
-            resultSet.getDouble("nilai_koord")
+            resultSet.getDouble("nilai_koord"),
+            resultSet.getBoolean("status_bap"),
+            resultSet.getInt("id_sidang")
         );
+    }
+
+    public void setStatusBAP(String npm){
+        int id_sidang = findData(npm).get(0).getId_sidang();
+        String sql = "UPDATE sidang_ta SET status_bap = TRUE WHERE id_sidang = ?";
+
+        jdbcTemplate.update(sql, id_sidang);
     }
 }

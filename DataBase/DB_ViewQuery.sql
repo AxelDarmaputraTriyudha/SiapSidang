@@ -72,7 +72,9 @@ SELECT
 	tugas_akhir.nilai_pb1,
 	tugas_akhir.nilai_pu1,
 	tugas_akhir.nilai_pu2,
-	tugas_akhir.nilai_koord
+	tugas_akhir.nilai_koord,
+	sidang_ta.status_bap,
+	sidang_ta.id_sidang
 FROM
 	tugas_akhir
 	JOIN mahasiswa ON mahasiswa.npm = tugas_akhir.id_mahasiswa

@@ -6,12 +6,11 @@ import org.apache.pdfbox.pdmodel.PDPageContentStream;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
 import org.apache.pdfbox.pdmodel.graphics.image.PDImageXObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
-
-import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.File;
 import java.io.IOException;
@@ -27,7 +26,7 @@ public class PDFController {
     private JDBCBAP jdbcbap;
 
     @GetMapping("/generatePDF/{npm}")
-    public void generatePdf(@PathVariable String npm, jakarta.servlet.http.HttpServletResponse response) throws IOException {
+    public void generatePdf(@PathVariable String npm, jakarta.servlet.http.HttpServletResponse response, Model model) throws IOException {
         // Make the data of the pdf
         List<BAP> data = jdbcbap.findData(npm);
         String penguji1 = "", penguji2 = "", pembimbing1 = "", pembimbing2 = "", koord = "";
@@ -62,10 +61,15 @@ public class PDFController {
         NilaiBAP nilaiBAP = new NilaiBAP(penguji1, nilaiPU1, (nilaiPU1 * 35/100), penguji2, nilaiPU2, (nilaiPU2 * 30/100), pembimbing1, nilaiPB, (nilaiPB * 20/100), koord, nilaiKoord, (nilaiKoord * 10/100), pembimbing2, 0.0);
         nilaiBAP.setNilaiAkhir((nilaiPU1 * 35/100) + (nilaiPU2 * 30/100) + (nilaiPB * 20/100) + (nilaiKoord * 10/100));
 
+        // set status dari bap nya
+        jdbcbap.setStatusBAP(npm);
+        model.addAttribute("statusBAP", data.get(0).getStatus_bap());
+
         // Set the response headers for PDF
+        String fileName = "BAP_" + npm + ".pdf";
         response.setContentType("application/pdf");
-        String fileName = "BAP_" + npm;
-        response.setHeader("Content-Disposition", "attachment; filename=" + fileName+".pdf");
+        response.setHeader("Content-Disposition", "attachment; filename=" + fileName);
+        response.getOutputStream().flush();
 
         // Create a new PDF document
         PDDocument document = new PDDocument();
@@ -162,19 +166,6 @@ public class PDFController {
         contentStream.close();
         document.save(response.getOutputStream());
         document.close();
-    }
-
-    @GetMapping("/preview/{fileName}")
-    public void previewPdf(@PathVariable String fileName, HttpServletResponse response) throws IOException {
-        File file = new File(System.getProperty("java.io.tmpdir"), fileName);
-        if (file.exists()) {
-            response.setContentType("application/pdf");
-            response.setHeader("Content-Disposition", "inline; filename=" + fileName);
-            Files.copy(file.toPath(), response.getOutputStream());
-            response.getOutputStream().flush();
-        } else {
-            response.sendError(HttpServletResponse.SC_NOT_FOUND, "File not found");
-        }
     }
 
     private static void drawRow(PDPageContentStream contentStream, float startX, float startY, float tableWidth, float[] columnWidths, String col1Text, String col2Text, float rowHeight) throws IOException {

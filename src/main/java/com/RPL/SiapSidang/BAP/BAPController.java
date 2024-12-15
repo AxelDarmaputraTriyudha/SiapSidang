@@ -24,15 +24,19 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.core.io.Resource;
-import org.springframework.core.io.UrlResource;
 
 import com.RPL.SiapSidang.RequiredRole;
+
+import jakarta.servlet.http.HttpServletResponse;
 
 @Controller
 @RequestMapping("/koord")
 public class BAPController {
     @Autowired
     private JDBCBAP jdbcbap;
+
+    @Autowired
+    private PDFController pdfController;
 
     @GetMapping("/generateBAP/{npm}")
     public String index(@PathVariable String npm, Model model){
@@ -77,6 +81,9 @@ public class BAPController {
         NilaiBAP nilaiBAP = new NilaiBAP(penguji1, nilaiPU1, (nilaiPU1 * 35/100), penguji2, nilaiPU2, (nilaiPU2 * 30/100), pembimbing1, nilaiPB, (nilaiPB * 20/100), koord, nilaiKoord, (nilaiKoord * 10/100), pembimbing2, 0.0);
         nilaiBAP.setNilaiAkhir((nilaiPU1 * 35/100) + (nilaiPU2 * 30/100) + (nilaiPB * 20/100) + (nilaiKoord * 10/100));
         model.addAttribute("nilaiBAP", nilaiBAP);
+
+        model.addAttribute("statusBAP", data.get(0).getStatus_bap());
+        System.out.println(model.getAttribute("statusBAP"));
 
         return "/bap/index";
     }
@@ -127,7 +134,7 @@ public class BAPController {
 
     @PostMapping("/downloadBAP/{npm}")
     @RequiredRole("koordinator")
-    public ResponseEntity<Resource> downloadBAP(@PathVariable String npm) {
+    public ResponseEntity<?> downloadBAP(@PathVariable String npm, HttpServletResponse response, Model model) {
         try {
             // Lokasi folder upload
             String uploadDir = "upload";
@@ -135,17 +142,25 @@ public class BAPController {
 
             // Pastikan direktori ada
             if (!Files.exists(uploadPath)) {
-                throw new RuntimeException("Direktori upload tidak ditemukan");
+                Files.createDirectories(uploadPath);
+            }
+
+            // Cek status dari BAP apakah sudah di-generate
+            BAP currBAP = jdbcbap.findData(npm).get(0);
+            if (currBAP.getStatus_bap() == null || !currBAP.getStatus_bap()) {
+                return ResponseEntity.badRequest().body("BAP belum di-generate!");
             }
 
             // Cari file terbaru berdasarkan NPM
             Optional<Path> latestFile = Files.list(uploadPath)
-                    .filter(file -> file.getFileName().toString().startsWith("BAP_" + npm + "_")) // Filter berdasarkan nama
-                    .filter(file -> file.getFileName().toString().endsWith(".pdf"))              // Hanya file PDF
-                    .max(Comparator.comparingLong(file -> file.toFile().lastModified()));        // Ambil file terbaru
+                    .filter(file -> file.getFileName().toString().startsWith("BAP_" + npm))
+                    .filter(file -> file.getFileName().toString().endsWith(".pdf"))
+                    .max(Comparator.comparingLong(file -> file.toFile().lastModified()));
 
+            // Jika file tidak ditemukan, kirimkan pesan error
             if (latestFile.isEmpty()) {
-                throw new RuntimeException("Tidak ada file untuk NPM " + npm);
+                pdfController.generatePdf(npm, response, model);
+                return null;
             }
 
             // Ambil file terbaru
@@ -153,19 +168,72 @@ public class BAPController {
             Resource resource = new UrlResource(filePath.toUri());
 
             if (!resource.exists() || !resource.isReadable()) {
-                throw new RuntimeException("File tidak ditemukan atau tidak dapat diakses");
+                return ResponseEntity.badRequest().body("File tidak dapat diakses!");
             }
 
-            // Tetapkan nama file baru untuk unduhan (tanpa timestamp)
+            // Tetapkan nama file baru untuk unduhan
             String downloadFileName = "BAP_" + npm + ".pdf";
 
-            // Kembalikan file sebagai respons download dengan nama baru
+            // Kembalikan file sebagai respons download
             return ResponseEntity.ok()
                     .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + downloadFileName + "\"")
                     .body(resource);
 
         } catch (Exception e) {
-            throw new RuntimeException("Terjadi kesalahan saat mengunduh file: " + e.getMessage(), e);
+            // Tangkap error lainnya dan kembalikan pesan error
+            return ResponseEntity.internalServerError().body("Terjadi kesalahan saat mengunduh file: " + e.getMessage());
         }
     }
+
+    // @PostMapping("/downloadBAP/{npm}")
+    // @RequiredRole("koordinator")
+    // public ResponseEntity<Resource> downloadBAP(@PathVariable String npm, HttpServletResponse response, RedirectAttributes redirectAttributes) {
+    //     try {
+    //         // Lokasi folder upload
+    //         String uploadDir = "upload";
+    //         Path uploadPath = Paths.get(uploadDir);
+
+    //         // Pastikan direktori ada
+    //         if (!Files.exists(uploadPath)) {
+    //             throw new RuntimeException("Direktori upload tidak ditemukan");
+    //         }
+
+    //         // Cek status dari BAP nya udah di generate apa belum
+    //         BAP currBAP = jdbcbap.findData(npm).get(0);
+    //         if(!currBAP.getStatus_bap() || currBAP.getStatus_bap() == null){
+    //             System.out.println("masuk sini");
+    //             redirectAttributes.addFlashAttribute("errorMessage", "BAP Belum di Generate!");
+    //         }
+
+    //         // Cari file terbaru berdasarkan NPM
+    //         Optional<Path> latestFile = Files.list(uploadPath)
+    //                 .filter(file -> file.getFileName().toString().startsWith("BAP_" + npm + "_")) // Filter berdasarkan nama
+    //                 .filter(file -> file.getFileName().toString().endsWith(".pdf"))              // Hanya file PDF
+    //                 .max(Comparator.comparingLong(file -> file.toFile().lastModified()));        // Ambil file terbaru
+
+    //         if (latestFile.isEmpty()) {
+    //             pdfController.generatePdf(npm, response);
+    //             return null;
+    //         }
+
+    //         // Ambil file terbaru
+    //         Path filePath = latestFile.get();
+    //         Resource resource = new UrlResource(filePath.toUri());
+
+    //         if (!resource.exists() || !resource.isReadable()) {
+    //             throw new RuntimeException("File tidak ditemukan atau tidak dapat diakses");
+    //         }
+
+    //         // Tetapkan nama file baru untuk unduhan (tanpa timestamp)
+    //         String downloadFileName = "BAP_" + npm + ".pdf";
+
+    //         // Kembalikan file sebagai respons download dengan nama baru
+    //         return ResponseEntity.ok()
+    //                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + downloadFileName + "\"")
+    //                 .body(resource);
+
+    //     } catch (Exception e) {
+    //         throw new RuntimeException("Terjadi kesalahan saat mengunduh file: " + e.getMessage(), e);
+    //     }
+    // }
 }
