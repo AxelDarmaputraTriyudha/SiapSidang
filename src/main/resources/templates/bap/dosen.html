@@ -6,78 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="/css/bap/vars.css">
   <link rel="stylesheet" href="/css/bap/style.css">
-  <script>
-    function showUploadPopup() {
-      document.getElementById('uploadPopup').style.display = 'block';
-    }
-    
-    function closeUploadPopup() {
-      document.getElementById('uploadPopup').style.display = 'none';
-    }   
-    
-    window.addEventListener('load', function () {
-      const notifikasi = document.getElementById('notifikasiUpload');
-  
-      // Cek apakah elemen notifikasi memiliki konten
-      if (notifikasi && notifikasi.innerText.trim() !== '') {
-          // Tampilkan notifikasi
-          notifikasi.style.display = 'block';
-  
-          // Hilangkan notifikasi setelah 3 detik
-          setTimeout(() => {
-              notifikasi.style.display = 'none';
-          }, 3000);
-      }
-    });  
-
-    async function handleDownload(event) {
-      event.preventDefault(); // Mencegah pengiriman form secara default
-  
-      const form = event.target;
-      const url = form.getAttribute("action");
-  
-      try {
-          const response = await fetch(url, {
-              method: "POST",
-          });
-  
-          if (!response.ok) {
-              // Jika ada error dari server
-              const errorMessage = await response.text();
-              showNotification(errorMessage, true);
-              return;
-          }
-  
-          // Jika sukses, unduh file
-          const blob = await response.blob();
-          const downloadUrl = window.URL.createObjectURL(blob);
-          const a = document.createElement("a");
-          a.href = downloadUrl;
-          a.download = "BAP.pdf"; // Nama default file
-          a.click();
-          window.URL.revokeObjectURL(downloadUrl);
-      } catch (error) {
-          showNotification("Terjadi kesalahan: " + error.message, true);
-      }
-    }
-    
-    function showNotification(message, isError = false) {
-        const notifikasi = document.getElementById("notifikasi");
-        const pesan = document.getElementById("notifikasiPesan");
-    
-        pesan.textContent = message;
-        notifikasi.style.display = "block";
-    
-        // Tambahkan gaya berdasarkan jenis notifikasi
-        notifikasi.style.backgroundColor = isError ? "#f8d7da" : "#d4edda";
-        notifikasi.style.color = isError ? "#721c24" : "#155724";
-    
-        // Sembunyikan notifikasi setelah 3 detik
-        setTimeout(() => {
-            notifikasi.style.display = "none";
-        }, 3000);
-    }  
-  </script>
+  <script src="/js/bap/scripts.js" defer></script>
   
   <style>
    a,

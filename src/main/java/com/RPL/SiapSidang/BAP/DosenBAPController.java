@@ -93,7 +93,7 @@ public class DosenBAPController {
             RedirectAttributes redirectAttributes) {
 
         try {
-            // Validasi file
+            // Validasi file kalau salah format
             if (file.isEmpty() || !file.getOriginalFilename().endsWith(".pdf")) {
                 redirectAttributes.addFlashAttribute("errorMessage", "File harus berupa PDF!");
                 return "redirect:/dosen/generateBAP/" + npm; // Redirect ke halaman sebelumnya
@@ -137,11 +137,13 @@ public class DosenBAPController {
                 Files.createDirectories(uploadPath);
             }
 
+            // Mengambil file yang paling terakhir dengan mengurutkan berdasarkan timestamp dan NPM yang sesuai
             Optional<Path> latestFile = Files.list(uploadPath)
                     .filter(file -> file.getFileName().toString().startsWith("BAP_" + npm))
                     .filter(file -> file.getFileName().toString().endsWith(".pdf"))
                     .max(Comparator.comparingLong(file -> file.toFile().lastModified()));
 
+            // Kalau belum ada yang upload sama sekali
             if (latestFile.isEmpty()) {
                 return ResponseEntity.badRequest().body("BAP belum diupload oleh Koordinator");
             }
@@ -153,9 +155,8 @@ public class DosenBAPController {
                 return ResponseEntity.badRequest().body("File tidak dapat diakses!");
             }
 
+            // Proses download file BAP yang terbaru
             String downloadFileName = "BAP_" + npm + ".pdf";
-            System.out.println("Nama file yang dikirim: " + downloadFileName);
-
             return ResponseEntity.ok()
             .contentType(MediaType.APPLICATION_PDF) // Tetapkan Content-Type
             .header("Content-Disposition", "attachment; filename=" + downloadFileName)
