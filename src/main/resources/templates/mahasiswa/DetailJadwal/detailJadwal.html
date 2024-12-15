@@ -1,11 +1,12 @@
-<!-- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="/css/koord/DetailJadwal/vars.css">
-  <link rel="stylesheet" href="/css/koord/DetailJadwal/style.css">
+  <title>Detail Jadwal</title>
+  <link rel="stylesheet" href="/css/mahasiswa/DetailJadwal/vars.css">
+  <link rel="stylesheet" href="/css/mahasiswa/DetailJadwal/style.css">
   
   
   <style>
@@ -35,11 +36,11 @@
        padding: 0;
    }
    </style>
-  <title>Document</title>
+
 </head>
 <body>
   <div class="html-koord-detail-jadwal">
-    <img class="group-36461" src="/css/koord/DetailJadwal/group-364610.svg" />
+    <img class="group-36461" src="/css/mahasiswa/DetailJadwal/group-364610.svg" />
     <div class="box-nama-mahasiswa">
       <div class="rectangle-7">
         <div class="isi" th:text="${data.nama}">Nama</div>
@@ -69,7 +70,7 @@
       <div class="rectangle-41"></div>
       <div class="tempat">Tempat</div>
     </div>
-    <img class="group-36462" src="/css/koord/DetailJadwal/group-364620.svg" />
+    <img class="group-36462" src="/css/mahasiswa/DetailJadwal/group-364620.svg" />
     <div class="box-topik-sidang">
       <div class="rectangle-42">
         <div class="isi" th:text="${data.judul}">Hello World!</div>
@@ -103,22 +104,26 @@
       <div>RPL-B-3</div>
     </div>
     <div class="header">
-      <img class="logo-kiri-atas" src="/css/koord/DetailJadwal/logo-kiri-atas0.svg" />
+      <img class="logo-kiri-atas" src="/css/mahasiswa/DetailJadwal/logo-kiri-atas0.svg" />
       <div class="siap-sidang">SIAP Sidang</div>
     </div>
-    <div class="button-generate-bap">
-      <div class="generate-bap">Generate BAP</div>
+
+    <div class="tombolFitur">
+      <a class="button-nilai-mahasiswa" th:href="@{/mahasiswa/nilai}">
+        <div class="nilai-mahasiswa">Nilai Mahasiswa</div>
+      </a>
+      <a class="button-catatan-sidang">
+        <div class="catatan-sidang">Catatan Sidang</div>
+      </a>
+      <a class="button-manajemen-bap">
+        <div class="manajemen-bap">Manajemen BAP</div>
+      </a>
     </div>
-    <a class="button-nilai-mahasiswa">
-      <div class="nilai-mahasiswa">Nilai Mahasiswa ini</div>
-    </a>
-    <div class="button-manajemen-bap">
-      <div class="manajemen-bap">Manajemen BAP</div>
-    </div>
+
     <div class="detail-jadwal2">Detail Jadwal</div>
-    <button th:onclick="'window.location.href=\'/koord/home\''"><img class="arrow-back" src="/css/koord/DetailJadwal/arrow-back0.svg"/></button>
+    <button th:onclick="'window.location.href=\'/mahasiswa/home\''"><img class="arrow-back" src="/css/mahasiswa/DetailJadwal/arrow-back0.svg"/></button>
     
   </div>
   
 </body>
-</html> -->
+</html>

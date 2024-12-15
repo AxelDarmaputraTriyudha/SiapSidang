@@ -23,7 +23,7 @@ public class JDBCMahasiswaRepository {
                                     int tahun,
                                     String npm){
 
-        String sql = "SELECT * FROM data_sidang_view WHERE npm = ?";
+        String sql = "SELECT * FROM data_sidang_view WHERE npm = ? AND peran = 'PB1'";
         
         // kumpulan filter yang digunakan
         List<Object> filterList = new ArrayList<>();
@@ -48,8 +48,6 @@ public class JDBCMahasiswaRepository {
             filterList.add(tahun);
         }
 
-        sql += " LIMIT 1";
-
         return jdbcTemplate.query(sql, this::mapRowToDataSidang, filterList.toArray());
     }
 
@@ -68,5 +66,10 @@ public class JDBCMahasiswaRepository {
             resultSet.getString("nama_dosen"),
             resultSet.getString("peran")
         );
+    }
+
+    public List<DataSidang> findDetail(String npm){
+        String sql = "SELECT * FROM data_sidang_view WHERE npm = ?";
+        return jdbcTemplate.query(sql, this::mapRowToDataSidang, npm);
     }
 }

@@ -19,6 +19,8 @@ import jakarta.servlet.http.HttpSession;
 @Controller
 @RequestMapping("/mahasiswa")
 public class MahasiswaController {
+
+
     @Autowired
     JDBCMahasiswaRepository mahasiswaRepository;
 
@@ -40,6 +42,57 @@ public class MahasiswaController {
         model.addAttribute("sidang", dataSidangList);
         model.addAttribute("semester", semester);
         model.addAttribute("tahun", tahun);
+
+        // logging
+        System.out.println(session.getAttribute("npm") + " " + session.getAttribute("nama") + " " + session.getAttribute("peran"));
         return "/mahasiswa/index";
+    }
+
+    @GetMapping("/DetailJadwal")
+    @RequiredRole("mahasiswa")
+    public String index(Model model,
+            @RequestParam(required = true) String npm,
+            HttpSession session){
+
+        System.out.println((String) session.getAttribute("peran"));
+        List<DataSidang> data = mahasiswaRepository.findDetail(npm);
+
+        model.addAttribute("data", data.get(3));
+
+        // list nama dosen
+        String penguji1 = "", penguji2 = "", pembimbing = "";
+        
+        // assign nama dosen sesuai peran
+        for (int i = 0; i<data.size(); i++){
+            DataSidang dataNow = data.get(i);
+            switch (dataNow.getPeran()) {
+                case "PB1":
+                    pembimbing = dataNow.getNama_dosen();
+                    break;
+                case "PU1":
+                    penguji1 = dataNow.getNama_dosen();
+                    break;
+                case "PU2":
+                    penguji2 = dataNow.getNama_dosen();
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        // add nama-nama dosen
+        model.addAttribute("nama_pu1", penguji1);
+        model.addAttribute("nama_pu2", penguji2);
+        model.addAttribute("nama_pb", pembimbing);
+        model.addAttribute("npm", npm);
+
+        return "/mahasiswa/DetailJadwal/detailJadwal";
+    }
+
+    @GetMapping("/nilai")
+    @RequiredRole("mahasiswa")
+    public String nilaiView(){
+
+        return "/mahasiswa/nilai/nilaiMhs";
     }
 }
