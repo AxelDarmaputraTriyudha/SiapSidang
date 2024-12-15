@@ -107,7 +107,7 @@
     </div>
     <div class="angka-akhir">
       <div class="rectangle-504"></div>
-      <div class="angka-akhir-79-2">Angka Akhir: <span th:text="${nilaiMahasiswaList.nilaiAkhir}"></span></div>
+      <div class="angka-akhir-79-2">Angka Akhir: <span th:text="${#numbers.formatDecimal(nilaiMahasiswaList.nilaiAkhir,1,2)}"></span></div>
     </div>
     <div class="nama-dosen">
       <div class="rectangle-506"></div>
