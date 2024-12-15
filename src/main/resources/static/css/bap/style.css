@@ -4,9 +4,10 @@
 }
 .html-koord-manajemen-bap {
   background: #f7f5ed;
-  height: 1024px;
+  height: 100%;
   position: relative;
   overflow: hidden;
+  padding-bottom: 10px;
 }
 .arrow-back {
   width: 36px;
@@ -37,6 +38,14 @@
   flex-direction: row;
   column-gap: 550px;
   margin-left: 10px;
+}
+.topBody2 {
+  display: flex;
+  flex-direction: row;
+  margin-left: 10px;
+  margin-right: 10px;
+  justify-content: space-between;
+  align-items: center;
 }
 .bottomBody {
   display: flex;
@@ -80,6 +89,17 @@
   font-size: var(--bold-80px-font-size, 80px);
   line-height: var(--bold-80px-line-height, 86px);
   font-weight: var(--bold-80px-font-weight, 700);
+  width: 400px;
+}
+.manajemen-bap2 {
+  color: #004e89;
+  text-align: center;
+  font-family: var(--bold-80px-font-family, "SpaceGrotesk-Bold", sans-serif);
+  font-size: var(--bold-80px-font-size, 80px);
+  line-height: var(--bold-80px-line-height, 86px);
+  font-weight: var(--bold-80px-font-weight, 700);
+  width: 600px;
+  text-align: right;
 }
 .rectangle-507 {
   border-style: solid;
@@ -194,7 +214,23 @@
   font-size: var(--regular-21px-font-size, 21px);
   line-height: var(--regular-21px-line-height, 34px);
   font-weight: var(--regular-21px-font-weight, 400);
-  position: relative;
+}
+.generate-bap{
+  background: var(
+    --primary-primary,
+    radial-gradient(
+      closest-side,
+      rgba(255, 155, 0, 1) 12.5%,
+      rgba(237, 28, 36, 1) 100%
+    )
+  );
+  border-radius: 60px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  height: 66px;
+  width: 250px;
 }
 .footer {
   background: var(--general-color-2, #004e89);
