@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/pembimbing/CatatanSidang/vars.css" />
+    <link rel="stylesheet" href="/css/pembimbing/CatatanSidang/style.css" />
+    <script src="/js/pembimbing/CatatanSidang/script.js" defer></script>
+
+    <style>
+        a,
+        button,
+        input,
+        select,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            border: none;
+            text-decoration: none;
+            background: none;
+
+            -webkit-font-smoothing: antialiased;
+        }
+
+        menu,
+        ol,
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+    <title>Catatan Sidang</title>
+</head>
+
+<body>
+    <div class="html-pembimbing-catatan-sidang">
+        <div class="footer">
+            <div class="line-16"></div>
+            <div class="rpl-b-3">RPL-B-3</div>
+        </div>
+        <input type="hidden" name="npm" th:value="${npm}" />
+        <input type="hidden" name="peran" th:value="${peran}" />
+        <a href="#" onclick="history.back()">
+            <img class="arrow-back" src="/css/dosen/DetailJadwal/arrow-back0.svg"/>
+        </a>
+        <div class="header">
+            <img class="group" src="/css/pembimbing/CatatanSidang/logo-kiri-atas0.svg" />
+            <div class="siap-sidang">SIAP Sidang</div>
+        </div>
+        <div class="catatan-sidang">Catatan Sidang</div>
+        <!-- Textarea untuk catatan sidang -->
+        <div class="field-catatan" th:text="${lastCatatanSidang}"></div>
+        <div class="kotak-bio-data">
+            <div class="nama">Nama</div>
+            <!-- Menampilkan nama mahasiswa -->
+            <div class="nama-value" th:text="${nama != null ? nama : 'Nama tidak tersedia'}"></div>
+            <div class="npm">NPM</div>
+            <!-- Menampilkan NPM mahasiswa -->
+            <div class="npm-value" th:text="${npm != null ? npm : 'NPM tidak tersedia'}"></div>
+            <div class="topik-tugas-akhir">Topik Tugas Akhir</div>
+            <!-- Menampilkan judul tugas akhir mahasiswa -->
+            <div class="judul-value" th:text="${judul != null ? judul : 'Judul tidak tersedia'}"></div>
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const form = document.querySelector("form");
+                const saveButton = document.querySelector("#saveButton");
+
+                form.addEventListener("submit", function (event) {
+                    // Tampilkan alert
+                    Swal.fire({
+                        icon: "success",
+                        title: "Berhasil",
+                        text: "Catatan Berhasil Tersimpan",
+                        timer: 2000, // Alert akan otomatis hilang setelah 2 detik
+                        showConfirmButton: false,
+                    });
+
+                    // Form tetap disubmit setelah alert selesai
+                    setTimeout(() => {
+                        form.submit();
+                    }, 2000);
+
+                    // Mencegah submit langsung
+                    event.preventDefault();
+                });
+            });
+        </script>
+
+</body>
+
+</html>

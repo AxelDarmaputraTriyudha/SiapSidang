@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.RPL.SiapSidang.RequiredRole;
 import com.RPL.SiapSidang.Koord.Home.DataSidang;
-
+import com.RPL.SiapSidang.Pembimbing.CatatanSidang.CatatanSidang;
+import com.RPL.SiapSidang.Pembimbing.CatatanSidang.Mahasiswa;
+import com.RPL.SiapSidang.Pembimbing.CatatanSidang.PembimbingCatatanRepo;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -21,6 +23,9 @@ import jakarta.servlet.http.HttpSession;
 public class MahasiswaController {
     @Autowired
     JDBCMahasiswaRepository mahasiswaRepository;
+
+    @Autowired
+    private PembimbingCatatanRepo pembimbingCatatanRepo;
 
     @GetMapping("/home")
     @RequiredRole("mahasiswa")
@@ -145,5 +150,27 @@ public class MahasiswaController {
         model.addAttribute("anggotaPengujiAkhir", anggotaPengujiAkhir);
         model.addAttribute("pembimbingAkhir", pembimbingAkhir);
         return "/mahasiswa/nilai/nilaiMhs";
+    }
+
+    @GetMapping("/catatanSidang")
+    @RequiredRole("mahasiswa")
+    public String viewCatatan(HttpSession session, Model model){
+        String npm = (String) session.getAttribute("npm");
+        Mahasiswa mahasiswa = pembimbingCatatanRepo.getMahasiswaByNpm(npm);
+
+        if (mahasiswa != null) {
+            model.addAttribute("nama", mahasiswa.getNama());
+            model.addAttribute("judul", mahasiswa.getJudul());
+            model.addAttribute("npm", npm);
+        }
+
+        CatatanSidang catatanSidang = pembimbingCatatanRepo.getCatatan(npm).get(0);
+        if(catatanSidang == null){
+            model.addAttribute("lastCatatanSidang", "");
+        }
+        else{
+            model.addAttribute("lastCatatanSidang", catatanSidang.getCatatan());
+        }
+        return "/mahasiswa/Catatan/catatanSidang";
     }
 }
