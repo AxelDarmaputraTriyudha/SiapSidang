@@ -34,8 +34,8 @@ public class CatatanSidangController {
             model.addAttribute("npm", npm);
             model.addAttribute("peran", peran);
 
-            session.setAttribute("npm", npm);
-            session.setAttribute("peran", peran);
+            session.setAttribute("npmCatatan", npm);
+            session.setAttribute("peranCatatan", peran);
         }
 
         // Ambil semua catatan sidang
@@ -60,8 +60,8 @@ public class CatatanSidangController {
             @RequestParam("catatanSidang") String catatan,
             Model model, HttpSession session) {
     
-        String npm = (String) session.getAttribute("npm");
-        String peran = (String) session.getAttribute("peran");
+        String npm = (String) session.getAttribute("npmCatatan");
+        String peran = (String) session.getAttribute("peranCatatan");
 
         System.out.println("Catatan: " + catatan);
         System.out.println("NPM: " + npm);
@@ -73,8 +73,8 @@ public class CatatanSidangController {
     
     @PostMapping("/back")
     public String back(HttpSession session){
-        String npm = (String) session.getAttribute("npm");
-        String peran = (String) session.getAttribute("peran");
+        String npm = (String) session.getAttribute("npmCatatan");
+        String peran = (String) session.getAttribute("peranCatatan");
         
         return "redirect:/dosen/DetailJadwal?npm=" + npm + "&peran=" + peran;
     }
