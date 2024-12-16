@@ -5,6 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.text.DecimalFormat;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
@@ -73,8 +74,17 @@ public class DosenBAPController {
             }
         }
 
-        NilaiBAP nilaiBAP = new NilaiBAP(penguji1, nilaiPU1, (nilaiPU1 * 35/100), penguji2, nilaiPU2, (nilaiPU2 * 30/100), pembimbing1, nilaiPB, (nilaiPB * 20/100), koord, nilaiKoord, (nilaiKoord * 10/100), pembimbing2, 0.0);
-        nilaiBAP.setNilaiAkhir((nilaiPU1 * 35/100) + (nilaiPU2 * 30/100) + (nilaiPB * 20/100) + (nilaiKoord * 10/100));
+        DecimalFormat df = new DecimalFormat("#.00");
+        double naPU1 = Double.parseDouble(df.format((nilaiPU1 * 35/100)));
+        double naPU2 = Double.parseDouble(df.format((nilaiPU2 * 35/100)));
+        double naPB = Double.parseDouble(df.format((nilaiPB * 20/100)));
+        double naKoord = Double.parseDouble(df.format((nilaiKoord * 10/100)));
+
+        NilaiBAP nilaiBAP = new NilaiBAP(penguji1, nilaiPU1, naPU1, penguji2, nilaiPU2, naPU2, pembimbing1, nilaiPB, naPB, koord, nilaiKoord, naKoord, pembimbing2, 0.0);
+        double tempNA = naPU1 + naPU2 + naPB + naKoord;
+        double naAkhir = Double.parseDouble(df.format(tempNA));
+        
+        nilaiBAP.setNilaiAkhir(naAkhir);
         model.addAttribute("nilaiBAP", nilaiBAP);
 
         model.addAttribute("statusBAP", data.get(0).getStatus_bap());
