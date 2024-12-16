@@ -55,6 +55,9 @@ public class KoordImplementation implements KoordRepository{
         String sql = "SELECT id_ta, npm, nama, judul, semester_akd, tahun_akd FROM tugas_akhir JOIN mahasiswa ON mahasiswa.npm = tugas_akhir.id_mahasiswa WHERE id_mahasiswa = ?";
 
         List<TA> lisTA = jdbcTemplate.query(sql, this::mapRowToTA, npm);
+        if(lisTA.size() == 0){
+            return null;
+        }
         return lisTA.get(0);
     }
 

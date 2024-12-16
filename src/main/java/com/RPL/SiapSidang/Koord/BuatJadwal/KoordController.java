@@ -67,7 +67,7 @@ public class KoordController {
 
         // Jika data tugas akhir tidak ditemukan
         if (this.currTA == null) {
-            model.addAttribute("alertMessage", "Tidak dapat membuat jadwal sidang karena mahasiswa tidak tercatat di tugas akhir.");
+            model.addAttribute("alertMessage", "Gagal membuat jadwal karena mahasiswa tidak tercatat di tugas akhir.");
             return "koord/BuatJadwal/index1"; // Tetap di halaman buatJadwal1 dengan pesan alert
         }
 
