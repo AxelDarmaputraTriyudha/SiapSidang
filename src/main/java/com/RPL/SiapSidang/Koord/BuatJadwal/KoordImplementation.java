@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.sql.Time;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +23,7 @@ public class KoordImplementation implements KoordRepository{
     }
 
     private static String[] listHari = {"Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"};
-    private List<Integer> listIdKomp;
+    private List<Integer> listIdKomp = new ArrayList<>();
 
     public List<Dosen> getAllDosen(){
         String sql = "SELECT * FROM dosen";
