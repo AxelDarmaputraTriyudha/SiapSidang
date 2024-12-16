@@ -22,20 +22,22 @@ public class JDBDNilai implements NilaiRepository{
         } else if (peran.equals("PU2")) {
             sql = "SELECT nilai_ta.id_ta, nilai_ta.id_komp, kn.deskripsi, ROUND((nilaipenguji2 * 100.0) / bobotpenguji, 2) AS nilai FROM nilai_ta JOIN komponen_nilai kn ON kn.id_komp = nilai_ta.id_komp JOIN tugas_akhir ta ON ta.id_ta = nilai_ta.id_ta WHERE id_mahasiswa ILIKE ?";
         } else if (peran.equals("PB1")) {
-            sql = "SELECT nilai_ta.id_ta, nilai_ta.id_komp, kn.deskripsi, ROUND((nilaipembimbing1 * 100.0) / bobotpembimbing, 2) AS nilai FROM nilai_ta JOIN komponen_nilai kn ON kn.id_komp = nilai_ta.id_komp JOIN tugas_akhir ta ON ta.id_ta = nilai_ta.id_ta WHERE id_mahasiswa ILIKE ?";
+            sql = "SELECT nilai_ta.id_ta, nilai_ta.id_komp, kn.deskripsi, (nilaipembimbing1 * 100.0) / bobotpembimbing AS nilai FROM nilai_ta JOIN komponen_nilai kn ON kn.id_komp = nilai_ta.id_komp JOIN tugas_akhir ta ON ta.id_ta = nilai_ta.id_ta WHERE id_mahasiswa ILIKE ?";
         } else {
             throw new IllegalArgumentException("Invalid role: " + peran);
         }
 
+        List<KomponenNilai> list = jdbcTemplate.query(sql, this::mapToRowKomponen, npm);
+        System.out.println("ini list: " + list);
         return jdbcTemplate.query(sql, this::mapToRowKomponen, npm);
     }
 
     private KomponenNilai mapToRowKomponen(ResultSet resultSet, int rowNum) throws SQLException   {
         return new KomponenNilai(
-            resultSet.getInt("id_komp"),
             resultSet.getInt("id_ta"),
+            resultSet.getInt("id_komp"),
             resultSet.getString("deskripsi"),
-            resultSet.getInt("nilai"));
+            resultSet.getDouble("nilai"));
     }
     
     //data mahasiswa

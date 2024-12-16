@@ -9,5 +9,5 @@ public class KomponenNilai {
     private int id_ta;
     private int id_komp;
     private String deskripsi;
-    private int nilai;
+    private Double nilai;
 }

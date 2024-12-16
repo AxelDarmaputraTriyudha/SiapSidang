@@ -92,8 +92,8 @@ public class KoordImplementation implements KoordRepository{
 
     public void setJadwal(Sidang koord, Sidang penguji1, Sidang penguji2, Sidang pembimbing1, Sidang pembimbing2){
         String sql = "SELECT * FROM last_id_sidang;";
-        int idTA = jdbcTemplate.queryForObject(sql, Integer.class);
-        idTA += 1;
+        int id_sidang = jdbcTemplate.queryForObject(sql, Integer.class);
+        id_sidang += 1;
         
         DayOfWeek dayOfWeek = penguji1.getTanggal().getDayOfWeek();
         int dayIndex = dayOfWeek.getValue();
@@ -102,7 +102,7 @@ public class KoordImplementation implements KoordRepository{
         sql = "INSERT INTO sidang_ta (id_sidang, nik, id_ta, peran, hari, tanggal, waktu, tempat) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         jdbcTemplate.update(
             sql, 
-            idTA,
+            id_sidang,
             koord.getNik(),
             koord.getId_ta(),
             koord.getPeran(),
@@ -114,7 +114,7 @@ public class KoordImplementation implements KoordRepository{
         sql = "INSERT INTO sidang_ta (id_sidang, nik, id_ta, peran, hari, tanggal, waktu, tempat) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         jdbcTemplate.update(
             sql, 
-            idTA,
+            id_sidang,
             penguji1.getNik(),
             penguji1.getId_ta(),
             penguji1.getPeran(),
@@ -126,7 +126,7 @@ public class KoordImplementation implements KoordRepository{
         sql = "INSERT INTO sidang_ta (id_sidang, nik, id_ta, peran, hari, tanggal, waktu, tempat) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         jdbcTemplate.update(
             sql, 
-            idTA,
+            id_sidang,
             penguji2.getNik(),
             penguji2.getId_ta(),
             penguji2.getPeran(),
@@ -138,7 +138,7 @@ public class KoordImplementation implements KoordRepository{
         sql = "INSERT INTO sidang_ta (id_sidang, nik, id_ta, peran, hari, tanggal, waktu, tempat) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         jdbcTemplate.update(
             sql, 
-            idTA,
+            id_sidang,
             pembimbing1.getNik(),
             pembimbing1.getId_ta(),
             pembimbing1.getPeran(),
@@ -151,7 +151,7 @@ public class KoordImplementation implements KoordRepository{
             sql = "INSERT INTO sidang_ta (id_sidang, nik, id_ta, peran, hari, tanggal, waktu, tempat) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
             jdbcTemplate.update(
             sql, 
-            idTA,
+            id_sidang,
             pembimbing2.getNik(),
             pembimbing2.getId_ta(),
             pembimbing2.getPeran(),
@@ -161,7 +161,7 @@ public class KoordImplementation implements KoordRepository{
             pembimbing2.getTempat());
         }
 
-        this.insertNilaiTa(this.listIdKomp, idTA);
+        this.insertNilaiTa(this.listIdKomp, pembimbing1.getId_ta());
     }
 
     public void insertNilaiTa(List<Integer> idKompList, int idTa) {
