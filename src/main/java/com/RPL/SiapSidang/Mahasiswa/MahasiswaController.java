@@ -140,6 +140,9 @@ public class MahasiswaController {
         double pembimbingAkhir = nilaiMahasiswaList.getNilaiAkhirPembimbing1()*0.2;
         double nilaiAkhir = koordAkhir + pengujiAkhir + anggotaPengujiAkhir + pembimbingAkhir;
 
+        // log nilai akhir
+        System.out.println("Nilai akhir: " + nilaiAkhir);
+
         nilaiMahasiswaList.setNilaiAkhir(nilaiAkhir);
 
         int id_ta = nilaiMahasiswaList.getId_ta();
@@ -152,6 +155,8 @@ public class MahasiswaController {
 
             // update angka akhir
             String angkaAkhir = convertNilai(nilaiAkhir);
+            // log angka akhir
+            System.out.println("Angka akhir: "+ angkaAkhir);
             mahasiswaRepository.updateAngkaAkhir(angkaAkhir, id_ta);
         }
 
@@ -188,24 +193,24 @@ public class MahasiswaController {
     private String convertNilai(double score){
         if (score >= 80 && score <= 100) {
             return "A";
-        } else if (score >= 77 && score <= 79) {
+        } else if (score >= 77 && score < 80) {
             return "A-";
-        } else if (score >= 73 && score <= 76) {
+        } else if (score >= 73 && score < 77) {
             return "B+";
-        } else if (score >= 70 && score <= 72) {
+        } else if (score >= 70 && score < 73) {
             return "B";
-        } else if (score >= 67 && score <= 69) {
+        } else if (score >= 67 && score < 70) {
             return "B-";
-        } else if (score >= 63 && score <= 66) {
+        } else if (score >= 63 && score < 67) {
             return "C+";
-        } else if (score >= 60 && score <= 62) {
+        } else if (score >= 60 && score < 63) {
             return "C";
-        } else if (score >= 50 && score <= 59) {
+        } else if (score >= 50 && score < 60) {
             return "D";
-        } else if (score >= 0 && score <= 49) {
+        } else if (score >= 0 && score < 50) {
             return "E";
         } else {
-            return "Invalid";
+            return "-";
         }
     }
 }
