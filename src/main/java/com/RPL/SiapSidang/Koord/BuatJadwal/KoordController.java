@@ -78,7 +78,6 @@ public class KoordController {
             Time sqlTime = Time.valueOf(localTime);
 
             List<Jadwal> listJadwal = this.repo.getJadwal(tgl, sqlTime, tempat);
-            System.out.println(tgl + " " + sqlTime + " " + tempat);
             if(listJadwal.size() > 0){
                 model.addAttribute("alertMessage", "Sudah ada jadwal sidang lain!");
                 return "koord/BuatJadwal/index1";
