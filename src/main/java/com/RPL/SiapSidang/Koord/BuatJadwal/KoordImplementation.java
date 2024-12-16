@@ -15,6 +15,11 @@ import org.springframework.stereotype.Repository;
 public class KoordImplementation implements KoordRepository{
     @Autowired
     JdbcTemplate jdbcTemplate;
+    
+    public KoordImplementation(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+    }
+
     private static String[] listHari = {"Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"};
 
     public List<Dosen> getAllDosen(){

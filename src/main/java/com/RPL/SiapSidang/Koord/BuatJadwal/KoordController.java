@@ -208,8 +208,6 @@ public class KoordController {
         }
         this.repo.setJadwal(koord, penguji1, penguji2, pembimbing1, pembimbing2);
 
-        session.invalidate();
-
         return "redirect:/koord/home";
     }
 }
