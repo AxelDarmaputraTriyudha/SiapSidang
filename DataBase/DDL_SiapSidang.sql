@@ -1,13 +1,3 @@
--- UNTUK MEMASTIKAN BAHWA TIDAK ADA VIEW DAN TABEL DENGAN NAMA YANG SAMA
-DO $$ 
-BEGIN
-    EXECUTE (
-        SELECT string_agg('DROP VIEW IF EXISTS "' || schemaname || '"."' || viewname || '" CASCADE;', ' ')
-        FROM pg_views
-        WHERE schemaname NOT IN ('pg_catalog', 'information_schema') -- Exclude system schemas
-    );
-END $$;
-
 DROP TABLE IF EXISTS Nilai_ta;
 DROP TABLE IF EXISTS Komponen_nilai;
 DROP TABLE IF EXISTS Sidang_ta;
