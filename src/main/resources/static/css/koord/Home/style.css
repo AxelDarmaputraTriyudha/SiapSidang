@@ -79,11 +79,10 @@ footer {
   align-items: center;
   justify-content: flex-start;
   width: 100%;
-  height: 100%;
+  height: auto;
   position: absolute;
   left: 0px;
   top: 136px;
-  overflow: auto;
 }
 .feature-1 {
   display: flex;
@@ -317,11 +316,12 @@ footer {
 
 /* CSS Untuk Data Sidang */
 .table-sidang{
-  height: 120vh;
+  height: auto;
   width: 100%;
   text-align: center;
   border-collapse: collapse;
   background: var(--bckground-bg-1, #f7f5ed);
+  margin-bottom: 50vh;
 }
 #daftar-sidang{
   width: 100%;
