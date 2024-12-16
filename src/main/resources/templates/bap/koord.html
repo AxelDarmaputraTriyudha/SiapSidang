@@ -44,12 +44,26 @@
       <div class="siap-sidang">SIAP Sidang</div>
     </div>
     <div class="containerBody">
-      <div class="topBody">
-        <a>
-          <img class="arrow-back" src="/css/dosen/DetailJadwal/arrow-back0.svg" onclick="history.back()"/>
-        </a> 
-        <div class="manajemen-bap">BAP Sidang</div>
+      <div class="topBody2">
+        <a th:href="@{/koord/DetailJadwal(npm=${data.npm})}">
+          <img class="arrow-back" src="/css/bap/arrow-back0.svg"/>
+        </a>
+        <div class="manajemen-bap2">BAP Sidang</div>
+
+        <a class="generate-bap" 
+        th:href="@{/generatePDF/{npm}(npm=${data.npm})}" 
+        th:attr="disabled=${statusBAP}" 
+        style="top: 140px;"
+        th:if="${!statusBAP}">
+        <div class="download-pdf">Generate BAP</div>
+        </a>
+        <a class="generate-bap disabled"
+            style="top: 140px;" 
+            th:if="${statusBAP}">
+            <div class="download-pdf">BAP Sudah Digenerate</div>
+        </a>
       </div>
+
       <div class="bottomBody">
         <div class="groupUploadBAP">
           <div>
@@ -61,14 +75,14 @@
           <div id="uploadPopup" class="popup">
             <div class="popup-content">
               <h2>Pop Upload BAP</h2>
-              <form th:action="@{/dosen/uploadBAP/{npm}(npm=${data.npm})}" method="post" enctype="multipart/form-data">
+              <form th:action="@{/koord/uploadBAP/{npm}(npm=${data.npm})}" method="post" enctype="multipart/form-data">
                 <label for="file">Upload PDF:</label>
                 <input type="file" id="file" name="file" accept="application/pdf" required />
                 <button class="submitPDF" type="submit">Upload</button>
               </form>
               <button onclick="closeUploadPopup()">Close</button>
             </div>
-          </div>
+          </div> 
         </div>
 
         <div class="rectangle-507">
@@ -77,8 +91,6 @@
             <p>NPM Mahasiswa: <a th:text="${data.npm}"></a></p>
             <p>Judul: <a th:text="${data.judul}"></a></p>
             <input type="hidden" th:value="${statusBAP ?: false}">
-            <input type="hidden" th:value="${peran}">
-            <input type="hidden" th:value="${npm}">
           </div>
           <table class="table_bap">
             <tr>
@@ -162,7 +174,7 @@
         </div>
 
         <div class="groupDownloadBAP">
-          <form th:action="@{/dosen/downloadBAP/{npm}(npm=${data.npm})}" method="post" enctype="multipart/form-data" onsubmit="handleDownload(event)">
+          <form th:action="@{/koord/downloadBAP/{npm}(npm=${data.npm})}" method="post" enctype="multipart/form-data">
             <button class="download" type="submit">
                 <img class="fi-rr-download" src="/css/bap/fi-rr-download0.svg" />
                 <div class="download-pdf">Download PDF</div>
@@ -171,7 +183,7 @@
         </div>
       </div>
     </div>
-     
+    
     <!-- NOTIFIKASI BERHASIL UPLOAD -->
     <div class="notifikasiUpload" id="notifikasiUpload" style="display: none;">
       <!-- Menampilkan pesan sukses -->
@@ -182,6 +194,11 @@
       <p th:if="${errorMessage}" class="error-message">
           [[${errorMessage}]]
       </p>
+    </div>  
+    
+    <!-- NOTIFIKASI DOWNLOAD BAP -->
+    <div id="notifikasi" style="display: none;" class="notifikasi-error">
+        <p id="notifikasiPesan"></p>
     </div>  
   </div>  
 </body>

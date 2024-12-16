@@ -84,9 +84,8 @@ public class KoordBAPController {
         model.addAttribute("nilaiBAP", nilaiBAP);
 
         model.addAttribute("statusBAP", data.get(0).getStatus_bap());
-        System.out.println(model.getAttribute("statusBAP"));
 
-        return "/bap/index";
+        return "/bap/koord";
     }
 
     @Value("${file.upload-dir}")
@@ -127,6 +126,7 @@ public class KoordBAPController {
             redirectAttributes.addFlashAttribute("successMessage", "PDF berhasil diunggah.");
             return "redirect:/koord/generateBAP/" + npm;
         } catch (IOException e) {
+            // Error lainnya dan kembalikan pesan error
             e.printStackTrace();
             redirectAttributes.addFlashAttribute("errorMessage", "Terjadi kesalahan saat mengunggah file!");
             return "redirect:/koord/generateBAP/" + npm;
@@ -135,13 +135,13 @@ public class KoordBAPController {
 
     @PostMapping("/downloadBAP/{npm}")
     @RequiredRole("koordinator")
-    public ResponseEntity<?> downloadBAP(@PathVariable String npm, HttpServletResponse response, Model model) {
+    public ResponseEntity<?> downloadBAP(@PathVariable String npm, HttpServletResponse response, Model model, RedirectAttributes redirectAttributes) {
         try {
             // Lokasi folder upload
             String uploadDir = "upload";
             Path uploadPath = Paths.get(uploadDir);
 
-            // Pastikan direktori ada
+            // Cek direktori ada
             if (!Files.exists(uploadPath)) {
                 Files.createDirectories(uploadPath);
             }
@@ -181,7 +181,7 @@ public class KoordBAPController {
                     .body(resource);
 
         } catch (Exception e) {
-            // Tangkap error lainnya dan kembalikan pesan error
+            // Error lainnya dan kembalikan pesan error
             return ResponseEntity.internalServerError().body("Terjadi kesalahan saat mengunduh file: " + e.getMessage());
         }
     }

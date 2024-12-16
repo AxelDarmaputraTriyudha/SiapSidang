@@ -38,16 +38,16 @@
   <title>Document</title>
 </head>
 <body>
-  <div class="html-koord-manajemen-bap">
+  <div class="html-koord-manajemen-bap"> 
     <div class="header">
       <img class="group" src="/css/bap/group0.svg" />
       <div class="siap-sidang">SIAP Sidang</div>
     </div>
     <div class="containerBody">
       <div class="topBody">
-        <a>
-          <img class="arrow-back" src="/css/dosen/DetailJadwal/arrow-back0.svg" onclick="history.back()"/>
-        </a> 
+        <a th:href="@{/mahasiswa/DetailJadwal(npm=${npm})}">
+          <img class="arrow-back" src="/css/dosen/DetailJadwal/arrow-back0.svg"/>
+        </a>
         <div class="manajemen-bap">BAP Sidang</div>
       </div>
       <div class="bottomBody">
@@ -61,16 +61,15 @@
           <div id="uploadPopup" class="popup">
             <div class="popup-content">
               <h2>Pop Upload BAP</h2>
-              <form th:action="@{/dosen/uploadBAP/{npm}(npm=${data.npm})}" method="post" enctype="multipart/form-data">
+              <form th:action="@{/mahasiswa/uploadBAP/{npm}(npm=${data.npm})}" method="post" enctype="multipart/form-data">
                 <label for="file">Upload PDF:</label>
                 <input type="file" id="file" name="file" accept="application/pdf" required />
                 <button class="submitPDF" type="submit">Upload</button>
               </form>
               <button onclick="closeUploadPopup()">Close</button>
             </div>
-          </div>
+          </div> 
         </div>
-
         <div class="rectangle-507">
           <div class="identitas">
             <p>Nama Mahasiswa: <a th:text="${data.nama}"></a></p>
@@ -160,9 +159,8 @@
             </tr>
           </table>
         </div>
-
         <div class="groupDownloadBAP">
-          <form th:action="@{/dosen/downloadBAP/{npm}(npm=${data.npm})}" method="post" enctype="multipart/form-data" onsubmit="handleDownload(event)">
+          <form th:action="@{/mahasiswa/downloadBAP/{npm}(npm=${data.npm})}" method="post" enctype="multipart/form-data" onsubmit="handleDownload(event)">
             <button class="download" type="submit">
                 <img class="fi-rr-download" src="/css/bap/fi-rr-download0.svg" />
                 <div class="download-pdf">Download PDF</div>
@@ -171,7 +169,7 @@
         </div>
       </div>
     </div>
-     
+
     <!-- NOTIFIKASI BERHASIL UPLOAD -->
     <div class="notifikasiUpload" id="notifikasiUpload" style="display: none;">
       <!-- Menampilkan pesan sukses -->

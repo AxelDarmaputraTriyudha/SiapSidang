@@ -5,9 +5,9 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Home page</title>
-  <link rel="stylesheet" href="/css/dosen/Home/vars.css">
-  <link rel="stylesheet" href="/css/dosen/Home/style.css">
+  <title>SiapSidang - Mahasiswa</title>
+  <link rel="stylesheet" href="/css/mahasiswa/Home/vars.css">
+  <link rel="stylesheet" href="/css/mahasiswa/Home/style.css">
 
 
   <style>
@@ -44,19 +44,14 @@
 
 <body>
   <div class="navbar">
-    <img class="logo" src="/css/dosen/Home/logo0.svg" />
+    <img class="logo" src="/css/mahasiswa/Home/logo0.svg" />
     <div class="siap-sidang">SIAP Sidang</div>
-    <a th:href="@{/logout}"> <img class="log-out" src="/css/dosen/Home/log-out0.svg" /></a>
+    <a th:href="@{/logout}">
+      <img class="log-out" src="/css/mahasiswa/Home/log-out0.svg" />
+    </a>
   </div>
   <div class="body">
-    <form method="GET" th:action="@{/dosen/home}" id="filterForm">
-      <div class="feature-1">
-        <div class="frame-search">
-          <div class="search">
-            <input type="text" name="filter" id="search-mhs" th:value="${filter}" placeholder="Masukkan nama mahasiswa">
-          </div>
-        </div>
-      </div>
+    <form method="GET" th:action="@{/mahasiswa/home}" id="filterForm">
       <div class="feature-2">
         <div class="frame-tanggal-awal">
           <div class="tanggal-awal">Tanggal Awal</div>
@@ -92,7 +87,7 @@
     <table id="daftar-sidang">
       <thead>
         <th>Nomor</th>
-        <th>Mahasiswa</th>
+        <th>Judul</th>
         <th>Semester</th>
         <th>Tahun Ajaran</th>
         <th>Waktu Sidang</th>
@@ -101,15 +96,14 @@
       </thead>
       <tbody th:each="sidang, stat : ${sidang}">
         <td th:text="${stat.index + 1}"></td>
-        <td th:text="${sidang.nama}"></td>
+        <td th:text="${sidang.judul}"></td>
         <td th:text="${sidang.semester}"></td>
         <td th:text="${sidang.tahun}"></td>
         <td th:text="${sidang.waktu}"></td>
         <td th:text="${sidang.tanggal}"></td>
         <td>
-          <form th:action=@{/dosen/DetailJadwal}>
+          <form th:action=@{/mahasiswa/DetailJadwal}>
             <input type="hidden" name="npm" th:value="${sidang.npm}">
-            <input type="hidden" name="peran" th:value="${sidang.peran}">
             <button type="submit" id="detail-jadwal">Lihat detail</button>
           </form>
         </td>

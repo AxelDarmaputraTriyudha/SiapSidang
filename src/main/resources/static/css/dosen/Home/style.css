@@ -82,7 +82,7 @@ footer {
   align-items: center;
   justify-content: flex-start;
   width: 100%;
-  height: auto;
+  height: 100vh;
   position: absolute;
   left: 0px;
   top: 136px;
@@ -321,7 +321,7 @@ footer {
   width: 100%;
   text-align: center;
   border-collapse: collapse;
-  margin-bottom: 120px;
+  margin-bottom: 37vh;
 }
 
 #daftar-sidang th{

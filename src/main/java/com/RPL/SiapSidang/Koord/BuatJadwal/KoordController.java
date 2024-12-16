@@ -1,5 +1,6 @@
 package com.RPL.SiapSidang.Koord.BuatJadwal;
 
+import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -34,6 +35,7 @@ public class KoordController {
     @GetMapping("/buatJadwal1")
     @RequiredRole("koordinator")
     public String buatJadwal1(HttpSession session, Model model) {
+        // Set model dari session yang sudah ada
         model.addAttribute("namaMahasiswa", session.getAttribute("namaMahasiswa"));
         model.addAttribute("npm", session.getAttribute("npm"));
         model.addAttribute("tgl", session.getAttribute("tgl"));
@@ -53,22 +55,33 @@ public class KoordController {
         HttpSession session,
         Model model
         ){
+            // Set session dari input yang baru dimasukkan 
             session.setAttribute("namaMahasiswa", namaMahasiswa);
             session.setAttribute("npm", npm);
             session.setAttribute("tgl", tgl);
             session.setAttribute("waktu", waktu);
             session.setAttribute("tempat", tempat);
 
+            // Mengambil deskripsi tugas akhir dan data mahasiswa dari npm yang dimasukkan
             this.currTA = this.repo.getTA((String) session.getAttribute("npm"));
             this.semester = currTA.getSemester();
             this.tahun = currTA.getTahun();
 
-            // Ambil data mahasiswa berdasarkan npm
-            this.currTA = this.repo.getTA(npm);
-
+            // Pengecekan jika NPM dan nama tidak sama
             if (!this.currTA.getNama().equalsIgnoreCase(namaMahasiswa)) {
                 model.addAttribute("alertMessage", "Nama Mahasiswa tidak sesuai dengan data!");
-                return "koord/BuatJadwal/index1"; // Tetap di halaman ini
+                return "koord/BuatJadwal/index1";
+            }
+
+            // Pengecekan jika di tanggal, jam, dan ruangan yang sudah dipilih ada sidang lain
+            LocalTime localTime = LocalTime.parse(waktu);
+            Time sqlTime = Time.valueOf(localTime);
+
+            List<Jadwal> listJadwal = this.repo.getJadwal(tgl, sqlTime, tempat);
+            System.out.println(tgl + " " + sqlTime + " " + tempat);
+            if(listJadwal.size() > 0){
+                model.addAttribute("alertMessage", "Sudah ada jadwal sidang lain!");
+                return "koord/BuatJadwal/index1";
             }
 
             return "redirect:/koord/buatJadwal2";
