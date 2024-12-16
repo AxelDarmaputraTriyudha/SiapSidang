@@ -300,6 +300,31 @@
   bottom: 0%;
   top: 0%;
 }
+.button-edit {
+  background: var(
+    --primary-primary,
+    radial-gradient(
+      closest-side,
+      rgba(255, 155, 0, 1) 12.5%,
+      rgba(237, 28, 36, 1) 100%
+    )
+  );
+  border-radius: 60px;
+  padding: 10px 23px 10px 37px;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Menyelaraskan konten secara horizontal */
+  justify-content: center; /* Menyelaraskan konten secara vertikal */
+  width: 47.78%;
+  height: 100%;
+  position: absolute;
+  right: 52.22%; /* Menyesuaikan posisi ke kiri dari tombol save */
+  bottom: 0%;
+  top: 0%;
+  text-align: center; /* Menjamin teks tetap di tengah jika multiline */
+}
+
+
 .save {
   color: rgba(0, 0, 0, 0.85);
   text-align: left;
