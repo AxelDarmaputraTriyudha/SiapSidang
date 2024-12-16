@@ -55,16 +55,19 @@
         <div class="siap-sidang">SIAP Sidang</div>
       </div>
       <div class="catatan-sidang">Catatan Sidang</div>
-      <form method="POST" action="/dosen/CatatanSidang/save">
+      <form method="POST" action="/dosen/CatatanSidang/save" id="catatanForm">
         <!-- Textarea untuk catatan sidang -->
         <textarea class="field-catatan" name="catatanSidang" 
+                  id="catatanTextarea" 
                   th:text="${lastCatatanSidang}" 
                   placeholder="Tulis catatan sidang..."></textarea>
         
         <div class="component-edit-save">
-            <button type="submit" class="button-save" id="saveButton">Simpan</button>
+            <button type="button" class="button-edit" id="editButton">Edit</button>
+            <button type="submit" class="button-save" id="saveButton" disabled>Simpan</button>
         </div>
       </form>
+      
       <div class="kotak-bio-data">
         <div class="nama">Nama</div>
         <!-- Menampilkan nama mahasiswa -->
@@ -80,29 +83,67 @@
       <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
       <script>
         document.addEventListener("DOMContentLoaded", function () {
-          const form = document.querySelector("form");
+          const form = document.querySelector("#catatanForm");
           const saveButton = document.querySelector("#saveButton");
-
+          const editButton = document.querySelector("#editButton");
+          const catatanTextarea = document.querySelector("#catatanTextarea");
+          const originalValue = catatanTextarea.value.trim();
+      
+          // Disable tombol save di awal
+          saveButton.disabled = true;
+      
+          // Logika untuk tombol edit
+          editButton.addEventListener("click", function () {
+            if (!editButton.disabled) {
+              catatanTextarea.removeAttribute("readonly"); // Aktifkan textarea
+              saveButton.disabled = true; // Matikan save button awalnya
+              editButton.disabled = true; // Nonaktifkan tombol edit setelah sekali klik
+            }
+          });
+      
+          // Logika untuk mendeteksi perubahan di textarea
+          catatanTextarea.addEventListener("input", function () {
+            if (catatanTextarea.value.trim() !== originalValue) {
+              saveButton.disabled = false; // Aktifkan save button jika ada perubahan
+            } else {
+              saveButton.disabled = true; // Matikan save button jika tidak ada perubahan
+            }
+          });
+      
+          // Handle form submission
           form.addEventListener("submit", function (event) {
-            // Tampilkan alert
-            Swal.fire({
-              icon: "success",
-              title: "Berhasil",
-              text: "Catatan Berhasil Tersimpan",
-              timer: 2000, // Alert akan otomatis hilang setelah 2 detik
-              showConfirmButton: false,
-            });
-
-            // Form tetap disubmit setelah alert selesai
-            setTimeout(() => {
-              form.submit();
-            }, 2000);
-
-            // Mencegah submit langsung
-            event.preventDefault();
+            if (catatanTextarea.value.trim() === "") {
+              Swal.fire({
+                icon: "error",
+                title: "Error",
+                text: "Tambahkan catatan Anda!",
+                timer: 2000,
+                showConfirmButton: false,
+              });
+              event.preventDefault(); // Cegah pengiriman form
+            } else {
+              // Tampilkan alert sukses
+              Swal.fire({
+                icon: "success",
+                title: "Berhasil",
+                text: "Catatan Berhasil Tersimpan",
+                timer: 2000,
+                showConfirmButton: false,
+              });
+      
+              // Submit form setelah alert selesai
+              setTimeout(() => {
+                editButton.disabled = false; // Aktifkan kembali tombol edit setelah save
+                form.submit();
+              }, 2000);
+      
+              event.preventDefault(); // Cegah pengiriman form langsung
+            }
           });
         });
       </script>
+      
+      
 
   </body>
 

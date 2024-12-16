@@ -59,17 +59,23 @@ public class CatatanSidangController {
     public String saveCatatan(
             @RequestParam("catatanSidang") String catatan,
             Model model, HttpSession session) {
-    
+
         String npm = (String) session.getAttribute("npmCatatan");
         String peran = (String) session.getAttribute("peranCatatan");
 
-        System.out.println("Catatan: " + catatan);
-        System.out.println("NPM: " + npm);
-    
+        List<CatatanSidang> catatanSidang = pembimbingCatatanRepo.getCatatan(npm);
+        String lastCatatan = catatanSidang.isEmpty() ? "" : catatanSidang.get(catatanSidang.size() - 1).getCatatan();
+
+        if (catatan.trim().equals(lastCatatan)) {
+            model.addAttribute("errorMessage", "Catatan tidak berubah!");
+            return "redirect:/dosen/CatatanSidang/catatan?npm=" + npm + "&peran=" + peran;
+        }
+
         pembimbingCatatanRepo.saveCatatanSidang(npm, catatan);
-    
+
         return "redirect:/dosen/CatatanSidang/catatan?npm=" + npm + "&peran=" + peran;
     }
+
     
     @PostMapping("/back")
     public String back(HttpSession session){
