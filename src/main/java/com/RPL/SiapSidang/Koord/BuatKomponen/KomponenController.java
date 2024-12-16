@@ -93,7 +93,6 @@ public class KomponenController {
                 komponenRepo.addKomponen(komponen);
             }
             redirectAttributes.addFlashAttribute("message", "Komponen berhasil disimpan!");
-            session.invalidate();
             return "redirect:/koord/home";
     }
     
