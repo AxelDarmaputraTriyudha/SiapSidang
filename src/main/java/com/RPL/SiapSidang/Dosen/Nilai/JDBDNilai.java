@@ -18,29 +18,24 @@ public class JDBDNilai implements NilaiRepository{
     public List<KomponenNilai> getKomponen(String npm, String peran) {
         String sql = "";
         if (peran.equals("PU1")) {
-            sql = "SELECT ta.id_ta, id_komp, deskripsi, nilai_pu1 FROM Tugas_akhir ta JOIN Komponen_nilai kn ON ta.semester_akd = kn.semester AND ta.tahun_akd::VARCHAR = kn.tahun_ajaran WHERE id_mahasiswa ILIKE ?";
+            sql = "SELECT nilai_ta.id_ta, nilai_ta.id_komp, kn.deskripsi, ROUND((nilaipenguji1 * 100.0) / bobotpenguji, 2) AS nilai FROM nilai_ta JOIN komponen_nilai kn ON kn.id_komp = nilai_ta.id_komp JOIN tugas_akhir ta ON ta.id_ta = nilai_ta.id_ta WHERE id_mahasiswa ILIKE ?";
         } else if (peran.equals("PU2")) {
-            sql = "SELECT ta.id_ta, id_komp, deskripsi, nilai_pu2 FROM Tugas_akhir ta JOIN Komponen_nilai kn ON ta.semester_akd = kn.semester AND ta.tahun_akd::VARCHAR = kn.tahun_ajaran WHERE id_mahasiswa ILIKE ?";
+            sql = "SELECT nilai_ta.id_ta, nilai_ta.id_komp, kn.deskripsi, ROUND((nilaipenguji2 * 100.0) / bobotpenguji, 2) AS nilai FROM nilai_ta JOIN komponen_nilai kn ON kn.id_komp = nilai_ta.id_komp JOIN tugas_akhir ta ON ta.id_ta = nilai_ta.id_ta WHERE id_mahasiswa ILIKE ?";
         } else if (peran.equals("PB1")) {
-            sql = "SELECT ta.id_ta, id_komp, deskripsi, nilai_pb1 FROM Tugas_akhir ta JOIN Komponen_nilai kn ON ta.semester_akd = kn.semester AND ta.tahun_akd::VARCHAR = kn.tahun_ajaran WHERE id_mahasiswa ILIKE ?";
+            sql = "SELECT nilai_ta.id_ta, nilai_ta.id_komp, kn.deskripsi, ROUND((nilaipembimbing1 * 100.0) / bobotpembimbing, 2) AS nilai FROM nilai_ta JOIN komponen_nilai kn ON kn.id_komp = nilai_ta.id_komp JOIN tugas_akhir ta ON ta.id_ta = nilai_ta.id_ta WHERE id_mahasiswa ILIKE ?";
         } else {
             throw new IllegalArgumentException("Invalid role: " + peran);
         }
-        
-        return jdbcTemplate.query(
-            sql,
-            ps -> ps.setString(1, npm), // Set the parameter for the query
-            (rs, rowNum) -> mapToRowKomponen(rs, peran.equals("PB1") ? "nilai_pb1" : (peran.equals("PU2") ? "nilai_pu2" : "nilai_pu1"))
-        );
+
+        return jdbcTemplate.query(sql, this::mapToRowKomponen, npm);
     }
 
-    private KomponenNilai mapToRowKomponen(ResultSet resultSet, String columnName) throws SQLException   {
+    private KomponenNilai mapToRowKomponen(ResultSet resultSet, int rowNum) throws SQLException   {
         return new KomponenNilai(
             resultSet.getInt("id_komp"),
             resultSet.getInt("id_ta"),
             resultSet.getString("deskripsi"),
-            resultSet.getInt(columnName));
-
+            resultSet.getInt("nilai"));
     }
     
     //data mahasiswa
@@ -75,8 +70,6 @@ public class JDBDNilai implements NilaiRepository{
     }
     public List<Bobot> getBobot(String deskripsi, String peran) {
         String sql = "";
-        
-        // Declare and initialize the final variable directly
         final String columnName;
     
         if (peran.equals("PU1") || peran.equals("PU2")) {
@@ -84,24 +77,17 @@ public class JDBDNilai implements NilaiRepository{
         } else if (peran.equals("PB1")) {
             columnName = "bobotpembimbing";  
         } else {
-            throw new IllegalArgumentException("Invalid role: " + peran); // Handle invalid role
+            throw new IllegalArgumentException("Invalid role: " + peran);
         }
     
-        sql = "SELECT " + columnName + " FROM Komponen_nilai WHERE deskripsi ILIKE ?";
-        System.out.println("Executing SQL: " + sql + " with deskripsi=" + deskripsi);
-        
+        sql = "SELECT " + columnName + " FROM Komponen_nilai WHERE deskripsi ILIKE ?";        
         return jdbcTemplate.query(sql, (rs, rowNum) -> mapToRowBobot(rs, columnName), deskripsi);
     }
     
-    
-    
-
-
     private Bobot mapToRowBobot(ResultSet resultSet, String columnName) throws SQLException {
-        return new Bobot(resultSet.getInt(columnName)); // Use the dynamic column name
+        return new Bobot(resultSet.getInt(columnName)); 
     }
     
-
     //method save nilai ke tabel tugas akhir
     public void saveNilai(double nilaiAkhir, String npm, String peran) {
         String sql = "";
@@ -115,8 +101,6 @@ public class JDBDNilai implements NilaiRepository{
        }else{
            System.out.println("peran salah!");
        }
-
-        System.out.println("Executing SQL: " + sql + " with nilaiAkhir=" + nilaiAkhir + " and npm=" + npm);
     
         jdbcTemplate.update(sql, nilaiAkhir, npm);
     }
@@ -132,7 +116,7 @@ public class JDBDNilai implements NilaiRepository{
                 try {
                     return rs.getInt("id_ta"); 
                 } catch (SQLException e) {
-                    System.err.println("Error retrieving id_ta: " + e.getMessage()); // Log any SQL exceptions
+                    System.err.println("Error retrieving id_ta: " + e.getMessage());
                     return null;
                 }
             }
@@ -154,7 +138,6 @@ public class JDBDNilai implements NilaiRepository{
     }
     
 
-
     //method simpan nilai ke tabel nilai_ta  
     public void saveNilaiToNilai_TA(int id_ta, int id_komp, String peran, double nilaiAkhir) {
         String sql = "";
@@ -168,15 +151,8 @@ public class JDBDNilai implements NilaiRepository{
        }else{
            System.out.println("peran salah!");
        }
-
-        // debug
-        System.out.println("Executing SQL: " + sql + " with nilaiAkhir=" + nilaiAkhir + " id_ta=" + id_ta + "id_komp=" + id_komp);
     
         jdbcTemplate.update(sql, nilaiAkhir, id_ta, id_komp);
     }
 
-
-
-
-    
 }

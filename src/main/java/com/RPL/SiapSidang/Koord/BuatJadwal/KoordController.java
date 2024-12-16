@@ -54,38 +54,51 @@ public class KoordController {
         @RequestParam("tempat") String tempat, 
         HttpSession session,
         Model model
-        ){
-            // Set session dari input yang baru dimasukkan 
-            session.setAttribute("namaMahasiswa", namaMahasiswa);
-            session.setAttribute("npm", npm);
-            session.setAttribute("tgl", tgl);
-            session.setAttribute("waktu", waktu);
-            session.setAttribute("tempat", tempat);
+    ) {
+        // Set session dari input yang baru dimasukkan 
+        session.setAttribute("namaMahasiswa", namaMahasiswa);
+        session.setAttribute("npm", npm);
+        session.setAttribute("tgl", tgl);
+        session.setAttribute("waktu", waktu);
+        session.setAttribute("tempat", tempat);
 
-            // Mengambil deskripsi tugas akhir dan data mahasiswa dari npm yang dimasukkan
-            this.currTA = this.repo.getTA((String) session.getAttribute("npm"));
-            this.semester = currTA.getSemester();
-            this.tahun = currTA.getTahun();
+        // Mengambil deskripsi tugas akhir dan data mahasiswa dari npm yang dimasukkan
+        this.currTA = this.repo.getTA(npm);
 
-            // Pengecekan jika NPM dan nama tidak sama
-            if (!this.currTA.getNama().equalsIgnoreCase(namaMahasiswa)) {
-                model.addAttribute("alertMessage", "Nama Mahasiswa tidak sesuai dengan data!");
-                return "koord/BuatJadwal/index1";
-            }
-
-            // Pengecekan jika di tanggal, jam, dan ruangan yang sudah dipilih ada sidang lain
-            LocalTime localTime = LocalTime.parse(waktu);
-            Time sqlTime = Time.valueOf(localTime);
-
-            List<Jadwal> listJadwal = this.repo.getJadwal(tgl, sqlTime, tempat);
-            System.out.println(tgl + " " + sqlTime + " " + tempat);
-            if(listJadwal.size() > 0){
-                model.addAttribute("alertMessage", "Sudah ada jadwal sidang lain!");
-                return "koord/BuatJadwal/index1";
-            }
-
-            return "redirect:/koord/buatJadwal2";
+        // Jika data tugas akhir tidak ditemukan
+        if (this.currTA == null) {
+            model.addAttribute("alertMessage", "Gagal membuat jadwal karena mahasiswa tidak tercatat di tugas akhir.");
+            return "koord/BuatJadwal/index1"; // Tetap di halaman buatJadwal1 dengan pesan alert
         }
+
+        this.semester = currTA.getSemester();
+        this.tahun = currTA.getTahun();
+
+        // Pengecekan jika NPM dan nama tidak sama
+        if (!this.currTA.getNama().equalsIgnoreCase(namaMahasiswa)) {
+            model.addAttribute("alertMessage", "Mahasiswa tidak tercatat sedang mengambil tugas akhir!");
+            return "koord/BuatJadwal/index1";
+        }
+        
+        // Pengecekan jika mahasiswa sudah terdaftar di sidang 
+        if (this.repo.getIdSidangByIdTa(currTA.getId_ta()) != -1){
+            model.addAttribute("alertMessage", "Mahasiswa sudah terdaftar sidang!");
+            return "koord/BuatJadwal/index1";
+        }
+
+        // Pengecekan jika di tanggal, jam, dan ruangan yang sudah dipilih ada sidang lain
+        LocalTime localTime = LocalTime.parse(waktu);
+        Time sqlTime = Time.valueOf(localTime);
+
+        List<Jadwal> listJadwal = this.repo.getJadwal(tgl, sqlTime, tempat);
+        if (listJadwal.size() > 0) {
+            model.addAttribute("alertMessage", "Sudah ada jadwal sidang lain!");
+            return "koord/BuatJadwal/index1";
+        }
+
+        return "redirect:/koord/buatJadwal2";
+    }
+
 
     @GetMapping("/buatJadwal2")
     @RequiredRole("koordinator")
@@ -208,8 +221,6 @@ public class KoordController {
             (String) session.getAttribute("tempat"));
         }
         this.repo.setJadwal(koord, penguji1, penguji2, pembimbing1, pembimbing2);
-
-        session.invalidate();
 
         return "redirect:/koord/home";
     }

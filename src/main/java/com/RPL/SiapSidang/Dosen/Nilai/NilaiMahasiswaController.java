@@ -27,8 +27,6 @@ public class NilaiMahasiswaController {
                            @RequestParam(value = "peran", required = false) String peran) {
      
         model.addAttribute("peran", peran);
-        System.out.println(peran);
-
         if (peran == null) {
             throw new IllegalArgumentException("Peran cannot be null");
         }
@@ -39,8 +37,6 @@ public class NilaiMahasiswaController {
             if (mahasiswa != null) {
                 model.addAttribute("nama", mahasiswa.getNama());
                 model.addAttribute("judul", mahasiswa.getJudul());
-                System.out.println("Nama: " + mahasiswa.getNama() + ", Judul: " + mahasiswa.getJudul()); // Debugging
-
             }
             session.setAttribute("npm", npm);
             model.addAttribute("npm", npm);
@@ -50,8 +46,6 @@ public class NilaiMahasiswaController {
         // daftar komponen nilai
         List<KomponenNilai> komponenNilai = pengujiNilaiRepository.getKomponen(npm,peran);
         model.addAttribute("komponenNilai", komponenNilai);
-        System.out.println(komponenNilai);
-
         return "dosen/nilaiMahasiswa"; 
     }
 
@@ -67,8 +61,6 @@ public class NilaiMahasiswaController {
             
 
             double totalNilaiAkhir = 0.0;
-            System.out.println(deskripsi.size());
-
             for (int i = 0; i < deskripsi.size(); i++) {
                 String komponenDeskripsi = deskripsi.get(i);
                 double nilaiInput = nilai.get(i);
@@ -79,15 +71,12 @@ public class NilaiMahasiswaController {
 
                 if (!bobotList.isEmpty()) {
                     int bobot = bobotList.get(0).getBobot();
-                    System.out.println(komponenDeskripsi + " Bobot: " + bobot);
 
                     // ngambil id_komp untuk setiap deskripsi
                     List<Integer> idKompList = jdbdNilai.getIdKompList(id_ta);
 
                     if (i < idKompList.size()) {
                         id_komp = idKompList.get(i);
-                        System.out.println("id_komp untuk deskripsi " + komponenDeskripsi + ": " + id_komp);
-
                         nilaiAkhir = nilaiInput * bobot / 100.0;
 
                         // simpan nilai ke tabel nilai_ta

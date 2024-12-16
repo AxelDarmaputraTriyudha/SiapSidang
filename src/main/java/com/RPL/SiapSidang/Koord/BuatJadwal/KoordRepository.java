@@ -10,4 +10,5 @@ public interface KoordRepository {
     TA getTA(String npm);
     void setJadwal(Sidang koord, Sidang penguji1, Sidang penguji2, Sidang pembimbing1, Sidang pembimbing2);
     List<Jadwal> getJadwal(LocalDate tanggal, Time waktu, String tempat);
+    int getIdSidangByIdTa(int id_ta);
 }
