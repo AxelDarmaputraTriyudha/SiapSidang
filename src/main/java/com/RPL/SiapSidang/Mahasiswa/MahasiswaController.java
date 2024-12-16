@@ -45,9 +45,6 @@ public class MahasiswaController {
         model.addAttribute("sidang", dataSidangList);
         model.addAttribute("semester", semester);
         model.addAttribute("tahun", tahun);
-
-        // logging
-        System.out.println(session.getAttribute("npm") + " " + session.getAttribute("nama") + " " + session.getAttribute("peran"));
         return "/mahasiswa/index";
     }
 
@@ -56,8 +53,6 @@ public class MahasiswaController {
     public String index(Model model,
             @RequestParam(required = true) String npm,
             HttpSession session){
-
-        System.out.println((String) session.getAttribute("peran"));
         List<DataSidang> data = mahasiswaRepository.findDetail(npm);
 
         model.addAttribute("data", data.get(3));
