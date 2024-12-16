@@ -60,7 +60,7 @@ CREATE TABLE Tugas_akhir (
 CREATE TABLE Nilai_ta (
     id_ta INTEGER NOT NULL,
     id_komp INTEGER NOT NULL,
-    nilaiPenguji1 NUMERIC(5,2) NOT NULL,
+    nilaiPelnguji1 NUMERIC(5,2) NOT NULL,
     nilaiPenguji2 NUMERIC(5,2) NOT NULL,
     nilaiPembimbing1 NUMERIC(5,2) NOT NULL,
     PRIMARY KEY (id_ta, id_komp),
