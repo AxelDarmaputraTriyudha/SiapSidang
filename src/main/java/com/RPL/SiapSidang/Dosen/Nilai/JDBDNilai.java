@@ -18,29 +18,24 @@ public class JDBDNilai implements NilaiRepository{
     public List<KomponenNilai> getKomponen(String npm, String peran) {
         String sql = "";
         if (peran.equals("PU1")) {
-            sql = "SELECT ta.id_ta, id_komp, deskripsi, nilai_pu1 FROM Tugas_akhir ta JOIN Komponen_nilai kn ON ta.semester_akd = kn.semester AND ta.tahun_akd::VARCHAR = kn.tahun_ajaran WHERE id_mahasiswa ILIKE ?";
+            sql = "SELECT nilai_ta.id_ta, nilai_ta.id_komp, kn.deskripsi, ROUND((nilaipenguji1 * 100.0) / bobotpenguji, 2) AS nilai FROM nilai_ta JOIN komponen_nilai kn ON kn.id_komp = nilai_ta.id_komp JOIN tugas_akhir ta ON ta.id_ta = nilai_ta.id_ta WHERE id_mahasiswa ILIKE ?";
         } else if (peran.equals("PU2")) {
-            sql = "SELECT ta.id_ta, id_komp, deskripsi, nilai_pu2 FROM Tugas_akhir ta JOIN Komponen_nilai kn ON ta.semester_akd = kn.semester AND ta.tahun_akd::VARCHAR = kn.tahun_ajaran WHERE id_mahasiswa ILIKE ?";
+            sql = "SELECT nilai_ta.id_ta, nilai_ta.id_komp, kn.deskripsi, ROUND((nilaipenguji2 * 100.0) / bobotpenguji, 2) AS nilai FROM nilai_ta JOIN komponen_nilai kn ON kn.id_komp = nilai_ta.id_komp JOIN tugas_akhir ta ON ta.id_ta = nilai_ta.id_ta WHERE id_mahasiswa ILIKE ?";
         } else if (peran.equals("PB1")) {
-            sql = "SELECT ta.id_ta, id_komp, deskripsi, nilai_pb1 FROM Tugas_akhir ta JOIN Komponen_nilai kn ON ta.semester_akd = kn.semester AND ta.tahun_akd::VARCHAR = kn.tahun_ajaran WHERE id_mahasiswa ILIKE ?";
+            sql = "SELECT nilai_ta.id_ta, nilai_ta.id_komp, kn.deskripsi, ROUND((nilaipembimbing1 * 100.0) / bobotpembimbing, 2) AS nilai FROM nilai_ta JOIN komponen_nilai kn ON kn.id_komp = nilai_ta.id_komp JOIN tugas_akhir ta ON ta.id_ta = nilai_ta.id_ta WHERE id_mahasiswa ILIKE ?";
         } else {
             throw new IllegalArgumentException("Invalid role: " + peran);
         }
-        
-        return jdbcTemplate.query(
-            sql,
-            ps -> ps.setString(1, npm),
-            (rs, rowNum) -> mapToRowKomponen(rs, peran.equals("PB1") ? "nilai_pb1" : (peran.equals("PU2") ? "nilai_pu2" : "nilai_pu1"))
-        );
+
+        return jdbcTemplate.query(sql, this::mapToRowKomponen, npm);
     }
 
-    private KomponenNilai mapToRowKomponen(ResultSet resultSet, String columnName) throws SQLException   {
+    private KomponenNilai mapToRowKomponen(ResultSet resultSet, int rowNum) throws SQLException   {
         return new KomponenNilai(
             resultSet.getInt("id_komp"),
             resultSet.getInt("id_ta"),
             resultSet.getString("deskripsi"),
-            resultSet.getInt(columnName));
-
+            resultSet.getInt("nilai"));
     }
     
     //data mahasiswa

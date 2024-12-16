@@ -8,6 +8,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -21,6 +22,7 @@ public class KoordImplementation implements KoordRepository{
     }
 
     private static String[] listHari = {"Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"};
+    private List<Integer> listIdKomp;
 
     public List<Dosen> getAllDosen(){
         String sql = "SELECT * FROM dosen";
@@ -37,9 +39,20 @@ public class KoordImplementation implements KoordRepository{
         );
     }
 
+    public int getIdSidangByIdTa(int idTa) {
+        String sql = "SELECT id_sidang FROM sidang_ta WHERE id_ta = ? LIMIT 1";
+        try {
+            return jdbcTemplate.queryForObject(sql, Integer.class, idTa);
+        } catch (EmptyResultDataAccessException e) {
+            return -1;
+        }
+    }    
+
     public List<Komponen> getAllKomponen(String semester, int tahun){
         String tahunString = String.valueOf(tahun);
-        String sql = "SELECT deskripsi, bobotpenguji,  bobotpembimbing FROM komponen_nilai WHERE semester ILIKE ? AND tahun_ajaran ILIKE ?";
+        String sql = "SELECT deskripsi, bobotpenguji, bobotpembimbing FROM komponen_nilai WHERE semester ILIKE ? AND tahun_ajaran ILIKE ?";
+
+        this.listIdKomp = this.getIdKompList(semester, tahun);
         return jdbcTemplate.query(sql, this::mapRowToKomp, semester, tahunString);
     }
 
@@ -147,6 +160,21 @@ public class KoordImplementation implements KoordRepository{
             pembimbing2.getWaktu(),
             pembimbing2.getTempat());
         }
-        
+
+        this.insertNilaiTa(this.listIdKomp, idTA);
     }
+
+    public void insertNilaiTa(List<Integer> idKompList, int idTa) {
+        String sql = "INSERT INTO nilai_ta VALUES (?, ?, 0, 0, 0)";
+    
+        for (Integer idKomp : idKompList) {
+            jdbcTemplate.update(sql, idTa, idKomp);
+        }
+    }    
+
+    public List<Integer> getIdKompList(String semester, int tahunAjaran) {
+        String tahun = String.valueOf(tahunAjaran);
+        String sql = "SELECT id_komp FROM komponen_nilai WHERE semester ILIKE ? AND tahun_ajaran ILIKE ?";
+        return jdbcTemplate.query(sql, (rs, rowNum) -> rs.getInt("id_komp"), semester, tahun);
+    }    
 }

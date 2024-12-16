@@ -79,6 +79,12 @@ public class KoordController {
             model.addAttribute("alertMessage", "Mahasiswa tidak tercatat sedang mengambil tugas akhir!");
             return "koord/BuatJadwal/index1";
         }
+        
+        // Pengecekan jika mahasiswa sudah terdaftar di sidang 
+        if (this.repo.getIdSidangByIdTa(currTA.getId_ta()) != -1){
+            model.addAttribute("alertMessage", "Mahasiswa sudah terdaftar sidang!");
+            return "koord/BuatJadwal/index1";
+        }
 
         // Pengecekan jika di tanggal, jam, dan ruangan yang sudah dipilih ada sidang lain
         LocalTime localTime = LocalTime.parse(waktu);
