@@ -8,6 +8,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -37,6 +38,15 @@ public class KoordImplementation implements KoordRepository{
             resultSet.getString("password")
         );
     }
+
+    public int getIdSidangByIdTa(int idTa) {
+        String sql = "SELECT id_sidang FROM sidang_ta WHERE id_ta = ? LIMIT 1";
+        try {
+            return jdbcTemplate.queryForObject(sql, Integer.class, idTa);
+        } catch (EmptyResultDataAccessException e) {
+            return -1;
+        }
+    }    
 
     public List<Komponen> getAllKomponen(String semester, int tahun){
         String tahunString = String.valueOf(tahun);
