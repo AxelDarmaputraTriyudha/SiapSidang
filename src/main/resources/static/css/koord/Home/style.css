@@ -34,11 +34,8 @@ footer {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 100%;
-  position: absolute;
-  left: 0px;
-  right: 0px;
-  bottom: 0px;
+  width: 103%;
+  position: static;
 }
 .line-16 {
   margin-top: 10px;
@@ -75,17 +72,18 @@ footer {
 }
 .body {
   background: var(--bckground-bg-1, #f7f5ed);
-  padding: 20px;
+  padding: 20px 20px 0px 20px;
   display: flex;
   flex-direction: column;
   gap: 25px;
   align-items: center;
   justify-content: flex-start;
   width: 100%;
-  height: auto;
+  height: 100%;
   position: absolute;
   left: 0px;
   top: 136px;
+  overflow: auto;
 }
 .feature-1 {
   display: flex;
@@ -318,11 +316,17 @@ footer {
 }
 
 /* CSS Untuk Data Sidang */
+.table-sidang{
+  height: 120vh;
+  width: 100%;
+  text-align: center;
+  border-collapse: collapse;
+  background: var(--bckground-bg-1, #f7f5ed);
+}
 #daftar-sidang{
   width: 100%;
   text-align: center;
   border-collapse: collapse;
-  margin-bottom: 41vh;
 }
 
 #daftar-sidang th{
