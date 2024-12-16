@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -57,8 +58,17 @@ public class PDFController {
                     break;
             }
         }
-        NilaiBAP nilaiBAP = new NilaiBAP(penguji1, nilaiPU1, (nilaiPU1 * 35/100), penguji2, nilaiPU2, (nilaiPU2 * 30/100), pembimbing1, nilaiPB, (nilaiPB * 20/100), koord, nilaiKoord, (nilaiKoord * 10/100), pembimbing2, 0.0);
-        nilaiBAP.setNilaiAkhir((nilaiPU1 * 35/100) + (nilaiPU2 * 30/100) + (nilaiPB * 20/100) + (nilaiKoord * 10/100));
+        DecimalFormat df = new DecimalFormat("#.00");
+        double naPU1 = Double.parseDouble(df.format((nilaiPU1 * 35/100)));
+        double naPU2 = Double.parseDouble(df.format((nilaiPU2 * 35/100)));
+        double naPB = Double.parseDouble(df.format((nilaiPB * 20/100)));
+        double naKoord = Double.parseDouble(df.format((nilaiKoord * 10/100)));
+
+        NilaiBAP nilaiBAP = new NilaiBAP(penguji1, nilaiPU1, naPU1, penguji2, nilaiPU2, naPU2, pembimbing1, nilaiPB, naPB, koord, nilaiKoord, naKoord, pembimbing2, 0.0);
+        double tempNA = naPU1 + naPU2 + naPB + naKoord;
+        double naAkhir = Double.parseDouble(df.format(tempNA));
+        
+        nilaiBAP.setNilaiAkhir(naAkhir);
 
         // Set status dari bap nya jadi true
         jdbcbap.setStatusBAP(npm);
@@ -134,7 +144,7 @@ public class PDFController {
 
         drawRow2(contentStream, 70, tableStartY, tableWidth, columnWidths2, "No", "Peran", "Nilai", "Bobot", "Nilai Akhir", rowHeight);
         drawRow2(contentStream, 70, tableStartY - rowHeight, tableWidth, columnWidths2, "1", "Ketua Tim Penguji", String.valueOf(nilaiPU1), "35.00%", String.valueOf(nilaiBAP.getNaPenguji1()), rowHeight);
-        drawRow2(contentStream, 70, tableStartY - 2 * rowHeight, tableWidth, columnWidths2, "2", "Anggota Tim Penguji", String.valueOf(nilaiPU2), "30.00%", String.valueOf(nilaiBAP.getNaPenguji2()), rowHeight);
+        drawRow2(contentStream, 70, tableStartY - 2 * rowHeight, tableWidth, columnWidths2, "2", "Anggota Tim Penguji", String.valueOf(nilaiPU2), "35.00%", String.valueOf(nilaiBAP.getNaPenguji2()), rowHeight);
         drawRow2(contentStream, 70, tableStartY - 3 * rowHeight, tableWidth, columnWidths2, "3", "Pembimbing", String.valueOf(nilaiPB), "20.00%", String.valueOf(nilaiBAP.getNaPembimbing1()), rowHeight);
         drawRow2(contentStream, 70, tableStartY - 4 * rowHeight, tableWidth, columnWidths2, "4", "Koordinatir Skripsi", String.valueOf(nilaiKoord), "10.00%", String.valueOf(nilaiBAP.getNaKoord()), rowHeight);
         drawRow2(contentStream, 70, tableStartY - 5 * rowHeight, tableWidth, columnWidths2, "", "Total", "", "100.00%", String.valueOf(nilaiBAP.getNilaiAkhir()), rowHeight);
